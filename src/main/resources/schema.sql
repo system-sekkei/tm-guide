@@ -1,0 +1,141 @@
+DROP SCHEMA IF EXISTS 地域 CASCADE;
+CREATE SCHEMA 地域;
+
+CREATE TABLE 地域.地域
+(
+    地域コード CHARACTER(10) PRIMARY KEY
+);
+
+DROP SCHEMA IF EXISTS 倉庫 CASCADE;
+CREATE SCHEMA 倉庫;
+
+CREATE TABLE 倉庫.倉庫
+(
+    倉庫コード CHARACTER(10) PRIMARY KEY
+);
+
+CREATE TABLE 倉庫.地域_倉庫_対照表
+(
+    倉庫コード CHARACTER(10) NOT NULL REFERENCES 倉庫.倉庫(倉庫コード),
+    地域コード CHARACTER(10) PRIMARY KEY REFERENCES 地域.地域(地域コード)
+);
+
+DROP SCHEMA IF EXISTS 顧客 CASCADE;
+CREATE SCHEMA 顧客;
+
+CREATE TABLE 顧客.顧客
+(
+    顧客番号 CHARACTER(10) PRIMARY KEY,
+    顧客名称 VARCHAR(10) NOT NULL,
+    個人法人区分 CHARACTER(2) NOT NULL,
+    顧客住所 CHARACTER(11) NOT NULL,
+    顧客電話番号 VARCHAR(11) NOT NULL
+);
+
+CREATE TABLE 顧客.個人顧客
+(
+    顧客番号 CHARACTER(10) PRIMARY KEY REFERENCES 顧客.顧客(顧客番号)
+);
+
+CREATE TABLE 顧客.法人顧客
+(
+    顧客番号 CHARACTER(10) PRIMARY KEY REFERENCES 顧客.顧客(顧客番号)
+);
+
+-- TM書籍内では「顧客区分」
+CREATE TABLE 顧客.会員区分
+(
+    会員区分コード CHARACTER(2) PRIMARY KEY
+);
+
+CREATE TABLE 顧客.顧客_x_顧客区分
+(
+    顧客番号 CHARACTER(10) PRIMARY KEY REFERENCES 顧客.顧客(顧客番号),
+    会員区分コード CHARACTER(2) NOT NULL REFERENCES 顧客.会員区分(会員区分コード)
+);
+
+
+CREATE TABLE 顧客.地域_顧客_対照表
+(
+    顧客番号 CHARACTER(10) PRIMARY KEY REFERENCES 顧客.顧客(顧客番号),
+    地域コード CHARACTER(10) NOT NULL REFERENCES 地域.地域(地域コード)
+);
+
+
+DROP SCHEMA IF EXISTS 商品 CASCADE;
+CREATE SCHEMA 商品;
+
+CREATE TABLE 商品.商品
+(
+    商品番号 CHARACTER(10) PRIMARY KEY,
+    商品名称 CHARACTER(10) NOT NULL,
+    商品単価 int NOT NULL
+);
+
+
+DROP SCHEMA IF EXISTS 受注 CASCADE;
+CREATE SCHEMA 受注;
+
+CREATE TABLE 受注.受注
+(
+    受注番号 CHARACTER(10) PRIMARY KEY,
+    顧客番号 CHARACTER(10) NOT NULL REFERENCES 顧客.顧客(顧客番号),
+    商品番号 CHARACTER(10) NOT NULL REFERENCES 商品.商品(商品番号),
+    受注日 TIMESTAMP NOT NULL,
+    受注数 int NOT NULL,
+    作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+
+DROP SCHEMA IF EXISTS 運送業者 CASCADE;
+CREATE SCHEMA 運送業者;
+
+CREATE TABLE 運送業者.便
+(
+    便番号 CHARACTER(10) PRIMARY KEY
+);
+
+CREATE TABLE 運送業者.運送業者
+(
+    運送業者コード CHARACTER(10) PRIMARY KEY,
+    運送業者名称 VARCHAR(10) NOT NULL
+);
+
+CREATE TABLE 運送業者.代替運送業者
+(
+    代替運送業者コード CHARACTER(10) NOT NULL REFERENCES 運送業者.運送業者(運送業者コード),
+    代替対象運送業者コード CHARACTER(10) NOT NULL REFERENCES 運送業者.運送業者(運送業者コード),
+    PRIMARY KEY (代替対象運送業者コード, 代替対象運送業者コード)
+);
+
+CREATE TABLE 運送業者.運送業者_便_対照表
+(
+    便番号 CHARACTER(10) PRIMARY KEY REFERENCES 運送業者.便(便番号),
+    運送業者コード CHARACTER(10) NOT NULL REFERENCES 運送業者.運送業者(運送業者コード)
+);
+
+CREATE TABLE 運送業者.地域_運送業者_対照表
+(
+    運送業者コード CHARACTER(10) NOT NULL REFERENCES 運送業者.運送業者(運送業者コード),
+    地域コード CHARACTER(10) NOT NULL REFERENCES 地域.地域(地域コード)
+);
+
+
+DROP SCHEMA IF EXISTS 出荷 CASCADE;
+CREATE SCHEMA 出荷;
+
+CREATE TABLE 出荷.出荷
+(
+    出荷伝票番号 CHARACTER(10) PRIMARY KEY,
+    便番号 CHARACTER(10) NOT NULL REFERENCES 運送業者.便(便番号),
+    運送業者コード CHARACTER(10) NOT NULL REFERENCES 運送業者.運送業者(運送業者コード),
+    出荷日 TIMESTAMP NOT NULL,
+    作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE 出荷.受注_出荷_対応表
+(
+    出荷伝票番号 CHARACTER(10) PRIMARY KEY REFERENCES 出荷.出荷(出荷伝票番号),
+    受注番号 CHARACTER(10) NOT NULL REFERENCES 受注.受注(受注番号),
+    作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
