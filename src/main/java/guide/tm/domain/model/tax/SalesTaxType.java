@@ -1,4 +1,4 @@
-package guide.tm.domain.model;
+package guide.tm.domain.model.tax;
 
 /**
  * 消費税計算種別
