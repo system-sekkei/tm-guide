@@ -1,4 +1,4 @@
-package guide.tm.domain.primitive;
+package guide.tm.domain.model.primitive;
 
 import java.math.BigDecimal;
 

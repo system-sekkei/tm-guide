@@ -1,6 +1,4 @@
-package guide.tm.domain.primitive;
-
-import guide.tm.domain.model.tax.TaxRate;
+package guide.tm.domain.model.primitive;
 
 import java.math.BigDecimal;
 
@@ -14,7 +12,7 @@ public class Amount {
         this(BigDecimal.ZERO);
     }
 
-    public Amount(BigDecimal value) {
+    Amount(BigDecimal value) {
         this.value = value;
     }
 
@@ -27,11 +25,11 @@ public class Amount {
     }
 
     /**
-     * 税額を計算する
+     * 率を乗算した金額を計算する
      * 金額 x 税率
      */
-    public Amount multiply(TaxRate taxRate) {
-        return new Amount(value.multiply(taxRate.decimalValue()));
+    public Amount multiply(Rate rate) {
+        return new Amount(value.multiply(rate.value));
     }
 
     public Amount add(Amount other) {
