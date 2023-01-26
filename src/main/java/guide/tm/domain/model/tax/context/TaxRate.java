@@ -1,4 +1,4 @@
-package guide.tm.domain.model.tax;
+package guide.tm.domain.model.tax.context;
 
 import guide.tm.domain.model.primitive.Rate;
 
@@ -11,5 +11,9 @@ public class TaxRate {
 
     public Rate rate() {
         return rate;
+    }
+
+    public Rate includingTaxRate() {
+        return Rate.ONE.add(rate);
     }
 }

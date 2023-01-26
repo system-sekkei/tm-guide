@@ -22,7 +22,7 @@ public class TotalAmount {
     /**
      * それぞれに率を掛け合わせて合計金額を算出する
      */
-    public Amount totalOfEach(Rate rate) {
+    public Amount taxOfEach(Rate rate) {
         return set.stream()
                 .map(amount -> amount.multiply(rate))
                 .reduce(Amount::add).orElse(new Amount());

@@ -2,7 +2,7 @@ package guide.tm.domain.model.sales;
 
 import guide.tm.domain.model.primitive.Amount;
 import guide.tm.domain.model.primitive.TotalAmount;
-import guide.tm.domain.model.tax.TaxContext;
+import guide.tm.domain.model.tax.context.TaxContext;
 
 import java.util.List;
 import java.util.stream.Collectors;

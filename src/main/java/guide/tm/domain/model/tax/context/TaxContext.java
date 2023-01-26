@@ -1,4 +1,4 @@
-package guide.tm.domain.model.tax;
+package guide.tm.domain.model.tax.context;
 
 import guide.tm.domain.model.primitive.Amount;
 import guide.tm.domain.model.primitive.TotalAmount;
@@ -14,9 +14,10 @@ public class TaxContext {
      * 消費税の適用条件に合わせて、税額を算出する
      */
     public Amount includingTaxOf(TotalAmount totalAmount) {
-        if (taxSumType.is総額計算()) {
-            return totalAmount.total().multiply(taxRate.rate());
-        }
-        return totalAmount.totalOfEach(taxRate.rate);
+        return taxSumType.taxOf(totalAmount, taxRate.includingTaxRate());
+    }
+
+    public Amount taxOf(TotalAmount totalAmount) {
+        return taxSumType.taxOf(totalAmount, taxRate.rate);
     }
 }
