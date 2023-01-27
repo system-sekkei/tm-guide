@@ -9,7 +9,7 @@
         VALUES (
                 #{salesOrderNumber.value},
                 #{saleOrderItemNumber},
-                #{salesOrderItem.product.productCode.value},
+                #{salesOrderItem.product.code.value},
                 #{salesOrderItem.quantity.value}
                 )
     </insert>

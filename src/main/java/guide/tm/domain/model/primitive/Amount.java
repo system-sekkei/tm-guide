@@ -12,7 +12,7 @@ public class Amount {
         this(BigDecimal.ZERO);
     }
 
-    Amount(BigDecimal value) {
+    public Amount(BigDecimal value) {
         this.value = value;
     }
 

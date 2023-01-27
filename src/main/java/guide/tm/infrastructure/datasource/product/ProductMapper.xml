@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guide.tm.infrastructure.datasource.product.ProductMapper">
+
+    <insert id="register">
+        INSERT INTO 商品.商品 (商品コード, 商品名称, 商品単価)
+        VALUES (
+                #{product.code.value},
+                #{product.name.value},
+                #{product.unitPrice.amount.value}
+                )
+    </insert>
+</mapper>

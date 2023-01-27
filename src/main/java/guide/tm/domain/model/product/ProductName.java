@@ -5,4 +5,12 @@ package guide.tm.domain.model.product;
  */
 public class ProductName {
     String value;
+
+    ProductName() {
+        this("");
+    }
+
+    public ProductName(String value) {
+        this.value = value;
+    }
 }

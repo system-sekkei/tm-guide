@@ -5,4 +5,12 @@ package guide.tm.domain.model.product;
  */
 public class ProductCode {
     String value;
+
+    ProductCode() {
+        this("");
+    }
+
+    public ProductCode(String value) {
+        this.value = value;
+    }
 }

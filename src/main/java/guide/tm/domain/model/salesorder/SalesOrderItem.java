@@ -11,6 +11,16 @@ public class SalesOrderItem {
     Product product;
     Quantity quantity;
 
+    @Deprecated(since = "for myBatis")
+    SalesOrderItem() {
+
+    }
+
+    public SalesOrderItem(Product product, Quantity quantity) {
+        this.product = product;
+        this.quantity = quantity;
+    }
+
     /**
      * 税抜き金額
      */
