@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guide.tm.infrastructure.datasource.salesorder.SalesOrderItemMapper">
+
+    <insert id="register">
+        INSERT INTO 受注.受注明細 (受注番号, 受注明細番号, 商品コード, 受注数量)
+        VALUES (
+                #{salesOrderNumber.value},
+                #{saleOrderItemNumber},
+                #{salesOrderItem.product.productCode.value},
+                #{salesOrderItem.quantity.value}
+                )
+    </insert>
+
+    <select id="salesOrderItemsOf" resultType="guide.tm.domain.model.salesorder.SalesOrderItem">
+        SELECT
+            商品.商品コード AS "product.code.value",
+            商品名称 AS "product.name.value",
+            商品単価 AS "product.unitPrice.amount.value",
+            受注数量 AS "quantity.value"
+        FROM 受注.受注明細
+        INNER JOIN 商品.商品 ON 商品.商品コード = 受注明細.商品コード
+        WHERE 受注番号 = #{salesOrderNumber.value}
+    </select>
+
+</mapper>

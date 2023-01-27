@@ -7,9 +7,9 @@ import guide.tm.domain.model.primitive.Quantity;
  * 商品単価
  */
 public class UnitPrice {
-    Amount value;
+    Amount amount;
 
     public Amount multiply(Quantity quantity) {
-        return value.multiply(quantity);
+        return amount.multiply(quantity);
     }
 }
