@@ -3,6 +3,16 @@ plugins {
 	id 'org.springframework.boot' version '3.0.1'
 	id 'io.spring.dependency-management' version '1.1.0'
 	id 'org.dddjava.jig-gradle-plugin' version '2022.12.1'
+	id 'groovy'
+}
+
+sourceSets {
+	main {
+		resources.srcDirs = ["src/main/java", "src/main/resources"]
+	}
+	test {
+		resources.srcDirs = ["src/test/java", "src/test/groovy", "src/test/resources"]
+	}
 }
 
 group = 'guide'
@@ -21,6 +31,8 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'com.github.irof:jig-erd:latest.release'
+	testImplementation 'org.spockframework:spock-core:2.4-M1-groovy-4.0'
+	testImplementation 'org.spockframework:spock-spring:2.4-M1-groovy-4.0'
 }
 
 tasks.named('test') {

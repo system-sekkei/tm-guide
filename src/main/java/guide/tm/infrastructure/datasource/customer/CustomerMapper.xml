@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guide.tm.infrastructure.datasource.customer.CustomerMapper">
+
+    <insert id="register">
+        INSERT INTO 顧客.顧客 (顧客番号, 顧客名称, 個人法人区分)
+        VALUES (
+                #{customer.code.value},
+                #{customer.name.value},
+                #{customer.type}
+                )
+    </insert>
+</mapper>

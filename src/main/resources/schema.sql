@@ -31,6 +31,7 @@ CREATE TABLE 受注.受注
 (
     受注番号 UUID NOT NULL,
     顧客番号 UUID NOT NULL,
+    受注日 DATE NOT NULL,
     PRIMARY KEY (受注番号),
     FOREIGN KEY (顧客番号) REFERENCES 顧客.顧客 (顧客番号),
     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
