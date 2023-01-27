@@ -31,6 +31,14 @@ public class SalesOrderItems {
         return taxContext.includingTaxOf(totalAmountExcludingTax());
     }
 
+    /**
+     * 税額
+     */
+    Amount taxOf(TaxContext taxContext) {
+        return taxContext.taxOf(totalAmountExcludingTax());
+    }
+
+
     TotalAmount totalAmountExcludingTax() {
         return new TotalAmount(list.stream()
                 .map(SalesOrderItem::amountExcludingTax)

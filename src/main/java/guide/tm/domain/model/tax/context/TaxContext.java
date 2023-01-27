@@ -10,6 +10,11 @@ public class TaxContext {
     TaxRate taxRate;
     TaxSumType taxSumType;
 
+    public TaxContext(TaxRate taxRate, TaxSumType taxSumType) {
+        this.taxRate = taxRate;
+        this.taxSumType = taxSumType;
+    }
+
     /**
      * 消費税の適用条件に合わせて、税額を算出する
      */

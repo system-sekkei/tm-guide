@@ -10,7 +10,7 @@ public class Rate {
 
     public static final Rate ONE = new Rate(BigDecimal.ONE);
 
-    Rate(BigDecimal value) {
+    public Rate(BigDecimal value) {
         this.value = value;
     }
 
