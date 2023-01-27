@@ -16,12 +16,15 @@ public class TaxContext {
     }
 
     /**
-     * 消費税の適用条件に合わせて、税額を算出する
+     * 消費税の適用条件に合わせて、税込み総額を算出する
      */
     public Amount includingTaxOf(TotalAmount totalAmount) {
-        return taxSumType.taxOf(totalAmount, taxRate.includingTaxRate());
+        return totalAmount.total().add(taxOf(totalAmount));
     }
 
+    /**
+     * 消費税の適用条件に合わせて、税額を算出する
+     */
     public Amount taxOf(TotalAmount totalAmount) {
         return taxSumType.taxOf(totalAmount, taxRate.rate);
     }

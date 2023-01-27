@@ -15,7 +15,4 @@ public class TaxRate {
         this.rate = new Rate(percentValue.scaleByPowerOfTen(-2));
     }
 
-    public Rate includingTaxRate() {
-        return Rate.ONE.add(rate);
-    }
 }
