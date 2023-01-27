@@ -8,7 +8,7 @@ import javax.sql.DataSource;
 import java.util.Map;
 
 @SpringBootTest
-public class JigErd {
+public class JigErdTest {
     @Test
     void run(@Autowired DataSource dataSource) {
         jig.erd.JigErd.run(dataSource, Map.of(
