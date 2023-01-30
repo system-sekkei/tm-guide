@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 public class Quantity {
     int value;
 
-    Quantity() {
+    public Quantity() {
         this(0);
     }
 

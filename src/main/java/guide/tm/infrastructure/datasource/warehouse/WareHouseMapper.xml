@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guide.tm.infrastructure.datasource.warehouse.WareHouseMapper">
+
+    <insert id="register">
+        INSERT INTO 倉庫.倉庫 (倉庫コード, 倉庫名称, 倉庫住所)
+        VALUES (
+                #{wareHouse.wareHouseCode.value},
+                #{wareHouse.name},
+                #{wareHouse.address}
+                )
+    </insert>
+</mapper>

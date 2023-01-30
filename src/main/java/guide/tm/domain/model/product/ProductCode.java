@@ -6,7 +6,7 @@ package guide.tm.domain.model.product;
 public class ProductCode {
     String value;
 
-    ProductCode() {
+    public ProductCode() {
         this("");
     }
 

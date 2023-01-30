@@ -60,3 +60,26 @@ CREATE TABLE 引当.引当
     FOREIGN KEY (受注番号, 受注明細番号) REFERENCES 受注.受注明細 (受注番号, 受注明細番号),
     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE SCHEMA 倉庫;
+CREATE TABLE 倉庫.倉庫
+(
+    倉庫コード VARCHAR(8) NOT NULL,
+    倉庫名称 VARCHAR(20) NOT NULL,
+    倉庫住所 VARCHAR(40) NOT NULL,
+    PRIMARY KEY (倉庫コード),
+    作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE SCHEMA 在庫;
+CREATE TABLE 在庫.在庫
+(
+    商品コード VARCHAR(10) NOT NULL,
+    倉庫コード VARCHAR(8) NOT NULL,
+    在庫数量 NUMERIC(4) NOT NULL,
+    PRIMARY KEY (商品コード, 倉庫コード),
+    FOREIGN KEY (商品コード) REFERENCES 商品.商品 (商品コード),
+    FOREIGN KEY (倉庫コード) REFERENCES 倉庫.倉庫 (倉庫コード),
+    作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
