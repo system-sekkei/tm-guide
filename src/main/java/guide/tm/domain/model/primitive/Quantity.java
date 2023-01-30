@@ -19,4 +19,16 @@ public class Quantity {
     BigDecimal decimalValue() {
         return BigDecimal.valueOf(value);
     }
+
+    public Quantity add(Quantity other) {
+        return new Quantity(value + other.value);
+    }
+
+    public boolean isGreaterEqualThan(Quantity other) {
+        return value >= other.value;
+    }
+
+    public Quantity subtract(Quantity other) {
+        return new Quantity(value - other.value);
+    }
 }

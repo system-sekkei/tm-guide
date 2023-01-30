@@ -20,7 +20,7 @@ class 受注明細Test {
 
     SalesOrderItems sut = new SalesOrderItems(List.of(
             new SalesOrderItem(new Product(new ProductCode("821010"), new ProductName("専用ボトル"), new UnitPrice(4455)), new Quantity(1)),
-            new SalesOrderItem(new Product(new ProductCode("821010"), new ProductName("専用ボトルキャップ"), new UnitPrice(1203)), new Quantity(2))
+            new SalesOrderItem(new Product(new ProductCode("821011"), new ProductName("専用ボトルキャップ"), new UnitPrice(1203)), new Quantity(2))
     ));
 
 

@@ -8,6 +8,8 @@ import guide.tm.domain.model.product.Product;
  * 受注明細
  */
 public class SalesOrderItem {
+
+    SalesOrderItemNumber salesOrderItemNumber;
     Product product;
     Quantity quantity;
 
@@ -17,6 +19,7 @@ public class SalesOrderItem {
     }
 
     public SalesOrderItem(Product product, Quantity quantity) {
+        this.salesOrderItemNumber = new SalesOrderItemNumber();
         this.product = product;
         this.quantity = quantity;
     }
@@ -26,5 +29,14 @@ public class SalesOrderItem {
      */
     Amount amountExcludingTax() {
         return product.unitPrice().multiply(quantity);
+    }
+
+
+    public Product product() {
+        return product;
+    }
+
+    public Quantity quantity() {
+        return quantity;
     }
 }

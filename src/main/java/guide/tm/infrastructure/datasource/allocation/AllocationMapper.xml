@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guide.tm.infrastructure.datasource.allocation.AllocationMapper">
+
+    <insert id="register">
+        INSERT INTO 引当.引当 (引当番号, 受注番号, 受注明細番号, 引当数量)
+        VALUES (
+                #{allocationId},
+                #{salesOrderNumber.value},
+                #{salesOrderItem.salesOrderItemNumber.value},
+                #{allocation.allocatedQuantity.value}
+               )
+    </insert>
+
+    <insert id="recordAllocatedStock">
+        INSERT INTO 在庫.引当済在庫 (引当番号, 商品コード, 倉庫コード, 引当数量)
+        VALUES (
+                #{allocationId},
+                #{salesOrderItem.product.code.value},
+                #{allocation.wareHouseCode.value},
+                #{allocation.allocatedQuantity.value}
+               )
+    </insert>
+</mapper>

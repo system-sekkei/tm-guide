@@ -15,4 +15,8 @@ class StockSetup {
     def "在庫のテストデータの準備"(Stock 在庫) {
         service.register(在庫)
     }
+
+    def "在庫のテストデータの準備"(List<Stock> stocks) {
+        stocks.forEach(在庫 -> service.register(在庫))
+    }
 }
