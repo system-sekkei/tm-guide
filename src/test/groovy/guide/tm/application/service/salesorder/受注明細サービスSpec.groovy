@@ -3,8 +3,8 @@ package guide.tm.application.service.salesorder
 import guide.tm.application.CustomerSetUp
 import guide.tm.application.ProductSetUp
 import guide.tm.domain.model.customer.Customer
-import guide.tm.domain.model.customer.CustomerCode
 import guide.tm.domain.model.customer.CustomerName
+import guide.tm.domain.model.customer.CustomerNumber
 import guide.tm.domain.model.customer.CustomerType
 import guide.tm.domain.model.primitive.Quantity
 import guide.tm.domain.model.product.Product
@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.transaction.annotation.Transactional
 import spock.lang.Specification
-
 
 @SpringBootTest
 @Transactional
@@ -47,7 +46,7 @@ class 受注明細サービスSpec extends Specification {
             new UnitPrice(1200))
 
     def 顧客 = new Customer(
-            new CustomerCode("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"),
+            new CustomerNumber("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"),
             new CustomerName("梅宮 留美"),
             CustomerType.個人)
 

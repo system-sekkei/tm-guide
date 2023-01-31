@@ -10,8 +10,8 @@ import guide.tm.domain.model.allocation.stock.Stock
 import guide.tm.domain.model.allocation.warehouse.WareHouse
 import guide.tm.domain.model.allocation.warehouse.WareHouseCode
 import guide.tm.domain.model.customer.Customer
-import guide.tm.domain.model.customer.CustomerCode
 import guide.tm.domain.model.customer.CustomerName
+import guide.tm.domain.model.customer.CustomerNumber
 import guide.tm.domain.model.customer.CustomerType
 import guide.tm.domain.model.primitive.Quantity
 import guide.tm.domain.model.product.Product
@@ -60,7 +60,7 @@ class AllocationServiceSpec extends Specification {
     def 受注明細_専用ボトル = new SalesOrderItem(専用ボトル, new Quantity(42))
 
     void setup() {
-        def 顧客 = new Customer(new CustomerCode("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"), new CustomerName("梅宮 留美"), CustomerType.個人)
+        def 顧客 = new Customer(new CustomerNumber("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"), new CustomerName("梅宮 留美"), CustomerType.個人)
         顧客準備.顧客のテストデータの準備(顧客)
 
         def 東日本倉庫 = new WareHouse(new WareHouseCode("654321"), "東日本倉庫", "千葉県")

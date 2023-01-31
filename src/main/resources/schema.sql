@@ -95,3 +95,26 @@ CREATE TABLE 在庫.引当済在庫
     FOREIGN KEY (倉庫コード) REFERENCES 倉庫.倉庫 (倉庫コード),
     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE SCHEMA 運送会社;
+CREATE TABLE 運送会社.運送会社
+(
+    運送会社コード VARCHAR(10) NOT NULL ,
+    運送会社名称 VARCHAR(30) NOT NULL,
+    PRIMARY KEY (運送会社コード),
+    作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE SCHEMA 出荷;
+CREATE TABLE 出荷.出荷
+(
+    出荷番号 UUID NOT NULL,
+    顧客番号 UUID NOT NULL,
+    運送会社コード VARCHAR(10) NOT NULL,
+    出荷日 DATE NOT NULL,
+    PRIMARY KEY (出荷番号),
+    FOREIGN KEY (顧客番号) REFERENCES 顧客.顧客 (顧客番号),
+    FOREIGN KEY (運送会社コード) REFERENCES 運送会社.運送会社(運送会社コード),
+    作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

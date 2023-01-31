@@ -1,16 +1,16 @@
 package guide.tm.domain.model.customer;
 
 /**
- * 顧客コード
+ * 顧客番号
  */
-public class CustomerCode {
+public class CustomerNumber {
     String value;
 
-    CustomerCode() {
+    public CustomerNumber() {
         this("");
     }
 
-    public CustomerCode(String value) {
+    public CustomerNumber(String value) {
         this.value = value;
     }
 }

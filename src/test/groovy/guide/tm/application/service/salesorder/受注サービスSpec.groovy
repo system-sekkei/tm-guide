@@ -2,8 +2,8 @@ package guide.tm.application.service.salesorder
 
 import guide.tm.application.CustomerSetUp
 import guide.tm.domain.model.customer.Customer
-import guide.tm.domain.model.customer.CustomerCode
 import guide.tm.domain.model.customer.CustomerName
+import guide.tm.domain.model.customer.CustomerNumber
 import guide.tm.domain.model.customer.CustomerType
 import guide.tm.domain.model.salesorder.OrderedDate
 import guide.tm.domain.model.salesorder.SalesOrder
@@ -23,7 +23,7 @@ class 受注サービスSpec extends Specification{
 
     @Autowired
     CustomerSetUp 顧客準備
-    def 顧客 = new Customer(new CustomerCode("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"), new CustomerName("梅宮 留美"), CustomerType.個人)
+    def 顧客 = new Customer(new CustomerNumber("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"), new CustomerName("梅宮 留美"), CustomerType.個人)
 
     def setup() {
         顧客準備.顧客のテストデータの準備(顧客)
