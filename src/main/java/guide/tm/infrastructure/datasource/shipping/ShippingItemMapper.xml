@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guide.tm.infrastructure.datasource.shipping.ShippingItemMapper">
+
+    <insert id="register">
+        INSERT INTO 出荷.出荷明細 (出荷番号, 出荷明細番号, 受注番号, 受注明細番号, 商品コード, 出荷数量)
+        VALUES (
+                #{shippingNumber.value},
+                #{shippingItemNumber},
+                #{salesOrderNumber.value},
+                #{salesOrderItemNumber.value},
+                #{shippingItem.product.code.value},
+                #{shippingItem.shippingQuantity.value}
+               )
+    </insert>
+
+    <select id="shippingItemsOf" resultType="guide.tm.domain.model.shipping.item.ShippingItem">
+        SELECT
+            出荷番号,
+            出荷明細番号,
+            受注番号,
+            受注明細番号,
+            商品コード AS "product.code.value",
+            出荷数量 AS "shippingQuantity.value"
+        FROM 出荷.出荷明細
+        WHERE 出荷番号 = #{shippingNumber.value}
+    </select>
+
+</mapper>

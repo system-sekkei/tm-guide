@@ -9,12 +9,12 @@
             商品コード AS "productCode.value",
             倉庫コード AS "wareHouseCode.value",
             在庫数量 AS "quantity.value"
-        FROM 在庫.在庫
+        FROM 在庫._在庫
         WHERE 商品コード = #{product.code.value}
     </select>
 
     <insert id="register">
-        INSERT INTO 在庫.在庫(商品コード, 倉庫コード, 在庫数量)
+        INSERT INTO 在庫._在庫(商品コード, 倉庫コード, 在庫数量)
         VALUES (
                 #{stock.productCode.value},
                 #{stock.wareHouseCode.value},

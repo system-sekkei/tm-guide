@@ -31,6 +31,9 @@ public class SalesOrderItem {
         return product.unitPrice().multiply(quantity);
     }
 
+    public SalesOrderItemNumber salesOrderItemNumber() {
+        return salesOrderItemNumber;
+    }
 
     public Product product() {
         return product;

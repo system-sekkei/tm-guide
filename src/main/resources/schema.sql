@@ -73,7 +73,7 @@ CREATE TABLE 倉庫.倉庫
 
 
 CREATE SCHEMA 在庫;
-CREATE TABLE 在庫.在庫
+CREATE TABLE 在庫._在庫
 (
     商品コード VARCHAR(10) NOT NULL,
     倉庫コード VARCHAR(8) NOT NULL,
@@ -116,5 +116,20 @@ CREATE TABLE 出荷.出荷
     PRIMARY KEY (出荷番号),
     FOREIGN KEY (顧客番号) REFERENCES 顧客.顧客 (顧客番号),
     FOREIGN KEY (運送会社コード) REFERENCES 運送会社.運送会社(運送会社コード),
+    作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE 出荷.出荷明細
+(
+    出荷番号 UUID NOT NULL,
+    出荷明細番号 UUID NOT NULL,
+    受注番号 UUID NOT NULL,
+    受注明細番号 UUID NOT NULL,
+    商品コード VARCHAR(10) NOT NULL,
+    出荷数量 NUMERIC(3) NOT NULL,
+    PRIMARY KEY (出荷番号, 出荷明細番号),
+    FOREIGN KEY (出荷番号) REFERENCES 出荷.出荷 (出荷番号),
+    FOREIGN KEY (受注番号, 受注明細番号) REFERENCES 受注.受注明細 (受注番号, 受注明細番号),
+    FOREIGN KEY (商品コード) REFERENCES 商品.商品 (商品コード),
     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
