@@ -11,17 +11,6 @@ public class SalesOrderSummary {
     Customer customer;
     OrderedDate orderedDate;
 
-//    @Deprecated(since = "for mybatis")
-//    SalesOrderSummary() {
-//        this(new Customer(), new OrderedDate());
-//    }
-//
-//    public SalesOrderSummary(Customer customer, OrderedDate orderedDate) {
-//        this.customer = customer;
-//        this.orderedDate = orderedDate;
-//    }
-
-
     public SalesOrderNumber salesOrderNumber() {
         return salesOrderNumber;
     }
