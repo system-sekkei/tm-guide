@@ -2,7 +2,7 @@ package guide.tm.application.service.salesorder;
 
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
-import guide.tm.domain.model.salesorder.order.SalesOrders;
+import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
 import org.springframework.stereotype.Service;
 
 /**
@@ -34,7 +34,7 @@ public class SalesOrderService {
     /**
      * 受注の一覧を取得する
      */
-    public SalesOrders salesOrders() {
-        return salesORderRepository.salesOrders();
+    public SalesOrderSummaries salesOrderSummaries() {
+        return salesORderRepository.salesOrderSummaries();
     }
 }

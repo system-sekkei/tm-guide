@@ -22,10 +22,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr th:each="salesOrder : ${salesOrders.list}">
-        <td class="text-center"><i class="bi bi-bag-check"></i></td>
-        <td th:text="${salesOrder.orderedDate}">2022-12-22</td>
-        <td th:text="${salesOrder.customer.name}">本田正勝</td>
+      <tr th:each="salesOrderSummary : ${salesOrderSummaries.list}">
+        <td class="text-center">
+          <a href="" th:href="@{|/sales-orders/${salesOrderSummary.salesOrderNumber}|}">
+          <i class="bi bi-bag-check"></i>
+          </a>
+        </td>
+        <td th:text="${salesOrderSummary.orderedDate}">2022-12-22</td>
+        <td th:text="${salesOrderSummary.customer.name}">本田正勝</td>
       </tr>
     </tbody>
   </table>

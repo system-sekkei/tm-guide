@@ -2,6 +2,7 @@ package guide.tm.infrastructure.datasource.salesorder;
 
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.order.SalesOrderSummary;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,5 +18,5 @@ interface SalesOrderMapper {
 
     SalesOrder salesOrderOf(@Param("salesOrderNumber") SalesOrderNumber salesOrderNumber);
 
-    List<SalesOrder> salesOrders();
+    List<SalesOrderSummary> salesOrderSummaries();
 }

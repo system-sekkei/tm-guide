@@ -3,7 +3,7 @@ package guide.tm.infrastructure.datasource.salesorder;
 import guide.tm.application.service.salesorder.SalesOrderRepository;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
-import guide.tm.domain.model.salesorder.order.SalesOrders;
+import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
@@ -30,8 +30,8 @@ public class SalesOrderDataSource implements SalesOrderRepository {
     }
 
     @Override
-    public SalesOrders salesOrders() {
-        return new SalesOrders(salesOrderMapper.salesOrders());
+    public SalesOrderSummaries salesOrderSummaries() {
+        return new SalesOrderSummaries(salesOrderMapper.salesOrderSummaries());
     }
 
 
