@@ -18,4 +18,12 @@ public class SalesOrder {
         this.customer = customer;
         this.orderedDate = orderedDate;
     }
+
+    public Customer customer() {
+        return customer;
+    }
+
+    public OrderedDate orderedDate() {
+        return orderedDate;
+    }
 }

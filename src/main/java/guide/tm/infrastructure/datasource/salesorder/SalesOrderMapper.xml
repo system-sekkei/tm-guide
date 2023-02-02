@@ -12,6 +12,7 @@
                    #{salesOrder.orderedDate.value}
                )
     </insert>
+
     <select id="salesOrderOf" resultType="guide.tm.domain.model.salesorder.order.SalesOrder">
         SELECT
             受注.顧客番号 AS "customer.code.value",
@@ -21,5 +22,15 @@
         INNER JOIN 顧客.顧客 ON 受注.顧客番号 = 顧客.顧客番号
         WHERE 受注番号 = #{salesOrderNumber.value}
     </select>
+
+    <select id="salesOrders" resultType="guide.tm.domain.model.salesorder.order.SalesOrder">
+        SELECT
+            受注.顧客番号 AS "customer.code.value",
+            顧客名称 AS "customer.name.value",
+            受注日 AS "orderedDate.value"
+        FROM 受注.受注
+                 INNER JOIN 顧客.顧客 ON 受注.顧客番号 = 顧客.顧客番号
+    </select>
+
 
 </mapper>

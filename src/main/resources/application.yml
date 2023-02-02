@@ -19,7 +19,7 @@ spring:
         - classpath:schema.sql
       data-locations:
         - classpath:data.sql
-#        - classpath:sample-data.sql
+        - classpath:sample-data.sql
 
 management:
   endpoints:

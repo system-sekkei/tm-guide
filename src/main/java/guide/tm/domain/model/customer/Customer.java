@@ -18,4 +18,15 @@ public class Customer {
         this.type = type;
     }
 
+    public CustomerNumber code() {
+        return code;
+    }
+
+    public CustomerName name() {
+        return name;
+    }
+
+    public CustomerType type() {
+        return type;
+    }
 }
