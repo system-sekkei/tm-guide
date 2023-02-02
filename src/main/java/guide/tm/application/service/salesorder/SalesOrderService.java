@@ -1,6 +1,6 @@
 package guide.tm.application.service.salesorder;
 
-import guide.tm.domain.model.salesorder.order.SalesOrder;
+import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
 import org.springframework.stereotype.Service;
@@ -19,14 +19,14 @@ public class SalesOrderService {
     /**
      * 受注を登録する
      */
-    public SalesOrderNumber registerSalesOrder(SalesOrder salesOrder) {
+    public SalesOrderNumber registerSalesOrder(SalesOrderContent salesOrder) {
         return salesORderRepository.registerSalesOrder(salesOrder);
     }
 
     /**
      * 受注を取得する
      */
-    public SalesOrder salesOrderOf(SalesOrderNumber salesOrderNumber) {
+    public SalesOrderContent salesOrderOf(SalesOrderNumber salesOrderNumber) {
         return salesORderRepository.salesOrderOf(salesOrderNumber);
     }
 

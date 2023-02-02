@@ -31,4 +31,9 @@ public class Quantity {
     public Quantity subtract(Quantity other) {
         return new Quantity(value - other.value);
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
+    }
 }

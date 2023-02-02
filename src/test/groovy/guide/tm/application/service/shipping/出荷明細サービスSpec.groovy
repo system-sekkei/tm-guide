@@ -14,10 +14,10 @@ import guide.tm.domain.model.product.Product
 import guide.tm.domain.model.product.ProductCode
 import guide.tm.domain.model.product.ProductName
 import guide.tm.domain.model.product.UnitPrice
-import guide.tm.domain.model.salesorder.order.OrderedDate
-import guide.tm.domain.model.salesorder.order.SalesOrder
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem
+import guide.tm.domain.model.salesorder.content.OrderedDate
+import guide.tm.domain.model.salesorder.content.SalesOrderContent
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber
+import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem
 import guide.tm.domain.model.shipping.company.ShippingCompany
 import guide.tm.domain.model.shipping.company.ShippingCompanyCode
 import guide.tm.domain.model.shipping.content.Shipping
@@ -91,7 +91,7 @@ class 出荷明細サービスSpec extends Specification {
         商品準備.商品のテストデータの準備(専用ボトルキャップ)
 
         運送会社準備.運送会社のテストデータの準備(運送会社)
-        def 受注 = new SalesOrder(顧客, new OrderedDate("2023-01-12"))
+        def 受注 = new SalesOrderContent(顧客, new OrderedDate("2023-01-12"))
         受注番号 = 受注Service.registerSalesOrder(受注)
         受注明細Service.register(受注番号, 受注明細_専用ボトル)
         受注明細Service.register(受注番号, 受注明細_専用ボトルキャップ)

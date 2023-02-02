@@ -11,8 +11,8 @@ import guide.tm.domain.model.product.Product
 import guide.tm.domain.model.product.ProductCode
 import guide.tm.domain.model.product.ProductName
 import guide.tm.domain.model.product.UnitPrice
-import guide.tm.domain.model.salesorder.order.OrderedDate
-import guide.tm.domain.model.salesorder.order.SalesOrder
+import guide.tm.domain.model.salesorder.content.OrderedDate
+import guide.tm.domain.model.salesorder.content.SalesOrderContent
 import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -58,7 +58,7 @@ class 受注明細サービスSpec extends Specification {
 
     def 受注明細を登録する() {
         given:
-        def 受注 = new SalesOrder(顧客, new OrderedDate("2023-01-12"))
+        def 受注 = new SalesOrderContent(顧客, new OrderedDate("2023-01-12"))
         def 受注明細_専用ボトル = new SalesOrderItem(専用ボトル, new Quantity(1))
         def 受注明細_専用ボトルキャップ = new SalesOrderItem(専用ボトルキャップ, new Quantity(2))
 

@@ -1,20 +1,20 @@
-package guide.tm.domain.model.salesorder.order;
+package guide.tm.domain.model.salesorder.content;
 
 import guide.tm.domain.model.customer.Customer;
 
 /**
  * 受注
  */
-public class SalesOrder {
+public class SalesOrderContent {
     Customer customer;
     OrderedDate orderedDate;
 
     @Deprecated(since = "for mybatis")
-    SalesOrder() {
+    SalesOrderContent() {
         this(new Customer(), new OrderedDate());
     }
 
-    public SalesOrder(Customer customer, OrderedDate orderedDate) {
+    public SalesOrderContent(Customer customer, OrderedDate orderedDate) {
         this.customer = customer;
         this.orderedDate = orderedDate;
     }

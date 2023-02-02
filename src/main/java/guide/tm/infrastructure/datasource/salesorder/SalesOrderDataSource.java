@@ -1,7 +1,7 @@
 package guide.tm.infrastructure.datasource.salesorder;
 
 import guide.tm.application.service.salesorder.SalesOrderRepository;
-import guide.tm.domain.model.salesorder.order.SalesOrder;
+import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
 import org.springframework.stereotype.Repository;
@@ -18,14 +18,14 @@ public class SalesOrderDataSource implements SalesOrderRepository {
     }
 
     @Override
-    public SalesOrderNumber registerSalesOrder(SalesOrder salesOrder) {
+    public SalesOrderNumber registerSalesOrder(SalesOrderContent salesOrder) {
         UUID salesOrderNumber = UUID.randomUUID();
         salesOrderMapper.registerSalesOrder(salesOrderNumber, salesOrder);
         return new SalesOrderNumber(salesOrderNumber.toString());
     }
 
     @Override
-    public SalesOrder salesOrderOf(SalesOrderNumber salesOrderNumber) {
+    public SalesOrderContent salesOrderOf(SalesOrderNumber salesOrderNumber) {
         return salesOrderMapper.salesOrderOf(salesOrderNumber);
     }
 

@@ -26,4 +26,9 @@ public class UnitPrice {
     public Amount multiply(Quantity quantity) {
         return amount.multiply(quantity);
     }
+
+    @Override
+    public String toString() {
+        return amount.toString();
+    }
 }

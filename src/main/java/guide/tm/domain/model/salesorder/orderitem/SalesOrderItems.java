@@ -45,4 +45,7 @@ public class SalesOrderItems {
                 .collect(Collectors.toUnmodifiableSet()));
     }
 
+    public List<SalesOrderItem> list() {
+        return list;
+    }
 }

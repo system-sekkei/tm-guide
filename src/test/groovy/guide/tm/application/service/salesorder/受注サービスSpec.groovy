@@ -5,8 +5,8 @@ import guide.tm.domain.model.customer.Customer
 import guide.tm.domain.model.customer.CustomerName
 import guide.tm.domain.model.customer.CustomerNumber
 import guide.tm.domain.model.customer.CustomerType
-import guide.tm.domain.model.salesorder.order.OrderedDate
-import guide.tm.domain.model.salesorder.order.SalesOrder
+import guide.tm.domain.model.salesorder.content.OrderedDate
+import guide.tm.domain.model.salesorder.content.SalesOrderContent
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.transaction.annotation.Transactional
@@ -31,7 +31,7 @@ class 受注サービスSpec extends Specification{
 
     def 受注を登録する() {
         given:
-        def 受注 = new SalesOrder(顧客, new OrderedDate("2023-01-12"))
+        def 受注 = new SalesOrderContent(顧客, new OrderedDate("2023-01-12"))
 
         when: "受注を登録する"
         def 受注番号 = sut.registerSalesOrder(受注)

@@ -18,6 +18,14 @@ public class Product {
         this.unitPrice = unitPrice;
     }
 
+    public ProductCode code() {
+        return code;
+    }
+
+    public ProductName name() {
+        return name;
+    }
+
     public UnitPrice unitPrice() {
         return unitPrice;
     }

@@ -1,4 +1,4 @@
-package guide.tm.domain.model.salesorder;
+package guide.tm.domain.model.salesorder.orderitem;
 
 import guide.tm.domain.model.primitive.Amount;
 import guide.tm.domain.model.primitive.Quantity;
@@ -6,8 +6,6 @@ import guide.tm.domain.model.product.Product;
 import guide.tm.domain.model.product.ProductCode;
 import guide.tm.domain.model.product.ProductName;
 import guide.tm.domain.model.product.UnitPrice;
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem;
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItems;
 import guide.tm.domain.model.tax.context.TaxContext;
 import guide.tm.domain.model.tax.context.TaxRate;
 import guide.tm.domain.model.tax.context.TaxSumType;

@@ -18,10 +18,10 @@ import guide.tm.domain.model.product.Product
 import guide.tm.domain.model.product.ProductCode
 import guide.tm.domain.model.product.ProductName
 import guide.tm.domain.model.product.UnitPrice
-import guide.tm.domain.model.salesorder.order.OrderedDate
-import guide.tm.domain.model.salesorder.order.SalesOrder
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem
+import guide.tm.domain.model.salesorder.content.OrderedDate
+import guide.tm.domain.model.salesorder.content.SalesOrderContent
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber
+import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.transaction.annotation.Transactional
@@ -76,7 +76,7 @@ class AllocationServiceSpec extends Specification {
                         new Stock(new ProductCode("821009"), new WareHouseCode("254i66"), new Quantity(13))
                 )
         )
-        def 受注 = new SalesOrder(顧客, new OrderedDate("2023-01-12"))
+        def 受注 = new SalesOrderContent(顧客, new OrderedDate("2023-01-12"))
         受注番号 = 受注Service.registerSalesOrder(受注)
         受注明細Service.register(受注番号, 受注明細_専用ボトル)
     }

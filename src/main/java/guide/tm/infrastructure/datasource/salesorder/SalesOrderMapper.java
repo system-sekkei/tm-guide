@@ -1,6 +1,6 @@
 package guide.tm.infrastructure.datasource.salesorder;
 
-import guide.tm.domain.model.salesorder.order.SalesOrder;
+import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummary;
 import org.apache.ibatis.annotations.Mapper;
@@ -14,9 +14,9 @@ interface SalesOrderMapper {
 
     void registerSalesOrder(
             @Param("salesOrderNumber") UUID salesOrderNumber,
-            @Param("salesOrder") SalesOrder salesOrder);
+            @Param("salesOrder") SalesOrderContent salesOrder);
 
-    SalesOrder salesOrderOf(@Param("salesOrderNumber") SalesOrderNumber salesOrderNumber);
+    SalesOrderContent salesOrderOf(@Param("salesOrderNumber") SalesOrderNumber salesOrderNumber);
 
     List<SalesOrderSummary> salesOrderSummaries();
 }

@@ -1,6 +1,7 @@
 package guide.tm.domain.model.salesorder.order;
 
 import guide.tm.domain.model.customer.Customer;
+import guide.tm.domain.model.salesorder.content.OrderedDate;
 
 /**
  * 受注サマリー
