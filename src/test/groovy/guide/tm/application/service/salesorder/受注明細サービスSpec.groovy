@@ -11,9 +11,9 @@ import guide.tm.domain.model.product.Product
 import guide.tm.domain.model.product.ProductCode
 import guide.tm.domain.model.product.ProductName
 import guide.tm.domain.model.product.UnitPrice
-import guide.tm.domain.model.salesorder.OrderedDate
-import guide.tm.domain.model.salesorder.SalesOrder
-import guide.tm.domain.model.salesorder.SalesOrderItem
+import guide.tm.domain.model.salesorder.order.OrderedDate
+import guide.tm.domain.model.salesorder.order.SalesOrder
+import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.transaction.annotation.Transactional

@@ -1,4 +1,4 @@
-package guide.tm.domain.model.salesorder;
+package guide.tm.domain.model.salesorder.orderitem;
 
 public class SalesOrderItemNumber {
     String value;

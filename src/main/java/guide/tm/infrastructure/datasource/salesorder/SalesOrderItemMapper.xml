@@ -14,7 +14,7 @@
                 )
     </insert>
 
-    <select id="salesOrderItemsOf" resultType="guide.tm.domain.model.salesorder.SalesOrderItem">
+    <select id="salesOrderItemsOf" resultType="guide.tm.domain.model.salesorder.orderitem.SalesOrderItem">
         SELECT
             受注明細番号 AS "salesOrderItemNumber.value",
             商品.商品コード AS "product.code.value",

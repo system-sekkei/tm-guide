@@ -5,8 +5,8 @@ import guide.tm.domain.model.customer.Customer
 import guide.tm.domain.model.customer.CustomerName
 import guide.tm.domain.model.customer.CustomerNumber
 import guide.tm.domain.model.customer.CustomerType
-import guide.tm.domain.model.salesorder.OrderedDate
-import guide.tm.domain.model.salesorder.SalesOrder
+import guide.tm.domain.model.salesorder.order.OrderedDate
+import guide.tm.domain.model.salesorder.order.SalesOrder
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.transaction.annotation.Transactional

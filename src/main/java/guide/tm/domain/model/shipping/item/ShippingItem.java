@@ -2,7 +2,7 @@ package guide.tm.domain.model.shipping.item;
 
 import guide.tm.domain.model.primitive.Quantity;
 import guide.tm.domain.model.product.Product;
-import guide.tm.domain.model.salesorder.SalesOrderItem;
+import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem;
 
 /**
  * 出荷明細

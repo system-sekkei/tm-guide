@@ -1,8 +1,8 @@
 package guide.tm.infrastructure.datasource.salesorder;
 
 import guide.tm.application.service.salesorder.SalesOrderRepository;
-import guide.tm.domain.model.salesorder.SalesOrder;
-import guide.tm.domain.model.salesorder.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.order.SalesOrder;
+import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;

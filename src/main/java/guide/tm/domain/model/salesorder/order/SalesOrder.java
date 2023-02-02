@@ -1,4 +1,4 @@
-package guide.tm.domain.model.salesorder;
+package guide.tm.domain.model.salesorder.order;
 
 import guide.tm.domain.model.customer.Customer;
 

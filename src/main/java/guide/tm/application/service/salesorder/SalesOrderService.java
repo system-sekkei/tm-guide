@@ -1,7 +1,7 @@
 package guide.tm.application.service.salesorder;
 
-import guide.tm.domain.model.salesorder.SalesOrder;
-import guide.tm.domain.model.salesorder.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.order.SalesOrder;
+import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import org.springframework.stereotype.Service;
 
 /**
@@ -28,4 +28,6 @@ public class SalesOrderService {
     public SalesOrder salesOrderOf(SalesOrderNumber salesOrderNumber) {
         return salesORderRepository.salesOrderOf(salesOrderNumber);
     }
+
+
 }

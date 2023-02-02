@@ -11,6 +11,15 @@ spring:
   h2:
     console:
       enabled: true
+  sql:
+    init:
+      mode: ALWAYS
+      encoding: utf-8
+      schema-locations:
+        - classpath:schema.sql
+      data-locations:
+        - classpath:data.sql
+#        - classpath:sample-data.sql
 
 management:
   endpoints:

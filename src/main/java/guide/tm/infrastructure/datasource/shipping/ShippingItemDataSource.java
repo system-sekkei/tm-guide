@@ -1,8 +1,8 @@
 package guide.tm.infrastructure.datasource.shipping;
 
 import guide.tm.application.service.shipping.ShippingItemRepository;
-import guide.tm.domain.model.salesorder.SalesOrderItemNumber;
-import guide.tm.domain.model.salesorder.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemNumber;
+import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.shipping.content.ShippingNumber;
 import guide.tm.domain.model.shipping.item.ShippingItem;
 import guide.tm.domain.model.shipping.item.ShippingItems;

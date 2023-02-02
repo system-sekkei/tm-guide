@@ -1,4 +1,4 @@
-package guide.tm.domain.model.salesorder;
+package guide.tm.domain.model.salesorder.order;
 
 /**
  * 受注番号
