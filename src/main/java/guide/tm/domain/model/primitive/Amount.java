@@ -28,6 +28,7 @@ public class Amount {
     /**
      * 率を乗算した金額を計算する
      * 金額 x 税率
+     * 1円未満は切り捨て
      */
     public Amount multiply(Rate rate) {
         return new Amount(value.multiply(rate.value).setScale(0, RoundingMode.DOWN));
