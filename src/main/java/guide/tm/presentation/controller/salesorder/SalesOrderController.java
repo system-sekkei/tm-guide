@@ -1,7 +1,9 @@
 package guide.tm.presentation.controller.salesorder;
 
 import guide.tm.application.scenario.salesorder.SalesOrderScenario;
+import guide.tm.application.service.product.ProductService;
 import guide.tm.application.service.salesorder.SalesOrderService;
+import guide.tm.domain.model.product.Products;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
@@ -18,9 +20,12 @@ class SalesOrderController {
     SalesOrderScenario salesOrderScenario;
     SalesOrderService salesOrderService;
 
-    SalesOrderController(SalesOrderScenario salesOrderScenario, SalesOrderService salesOrderService) {
+    ProductService productService;
+
+    SalesOrderController(SalesOrderScenario salesOrderScenario, SalesOrderService salesOrderService, ProductService productService) {
         this.salesOrderScenario = salesOrderScenario;
         this.salesOrderService = salesOrderService;
+        this.productService = productService;
     }
 
     @GetMapping
@@ -35,6 +40,8 @@ class SalesOrderController {
                       Model model) {
         SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderNumber);
         model.addAttribute("salesOrder", salesOrder);
+        Products products = productService.products();
+        model.addAttribute("products", products);
         return "sales-order/sales-order";
     }
 

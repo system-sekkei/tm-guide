@@ -12,4 +12,16 @@
                 #{product.unitPrice.amount.value}
                 )
     </insert>
+
+    <select id="products" resultType="guide.tm.domain.model.product.Product">
+        SELECT
+            商品コード AS "code.value",
+            商品名称 AS "name.value",
+            商品単価 AS "unitPrice.amount.value"
+        FROM 商品.商品
+    </select>
+
+
+
+
 </mapper>

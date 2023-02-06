@@ -1,6 +1,7 @@
 package guide.tm.application.service.product;
 
 import guide.tm.domain.model.product.Product;
+import guide.tm.domain.model.product.Products;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,5 +20,9 @@ public class ProductService {
      */
     public void register(Product product) {
         productRepository.register(product);
+    }
+
+    public Products products() {
+        return productRepository.products();
     }
 }
