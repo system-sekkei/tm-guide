@@ -13,4 +13,6 @@ public interface SalesOrderRepository {
     SalesOrderSummaries salesOrderSummaries();
 
     TaxContext taxContextOf(SalesOrderNumber salesOrderNumber);
+
+    void registerTax(TaxContext taxContext, SalesOrderNumber salesOrderNumber);
 }

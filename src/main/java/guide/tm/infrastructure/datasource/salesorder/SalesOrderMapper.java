@@ -23,4 +23,8 @@ interface SalesOrderMapper {
 
     TaxContext taxContextOf(
             @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber);
+
+    void registerTax(
+            @Param("taxContext") TaxContext taxContext,
+            @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber);
 }

@@ -33,6 +33,13 @@ CREATE TABLE 消費税.計算方式区分
     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE 消費税.税率区分
+(
+    税率区分 CHAR(4) NOT NULL,
+    PRIMARY KEY (税率区分),
+    作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE SCHEMA 受注;
 CREATE TABLE 受注.受注
 (
@@ -59,10 +66,11 @@ CREATE TABLE 受注.受注明細
 CREATE TABLE 受注.消費税
 (
     受注番号 UUID NOT NULL,
-    消費税率 NUMERIC(3, 2) NOT NULL,
-    消費税計算方式 CHAR(4) NOT NULL,
+    税率区分 CHAR(4) NOT NULL,
+    計算方式 CHAR(4) NOT NULL,
     FOREIGN KEY (受注番号) REFERENCES 受注.受注 (受注番号),
-    FOREIGN KEY (消費税計算方式) REFERENCES 消費税.計算方式区分 (消費税計算方式),
+    FOREIGN KEY (税率区分) REFERENCES 消費税.税率区分 (税率区分),
+    FOREIGN KEY (計算方式) REFERENCES 消費税.計算方式区分 (消費税計算方式),
     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 

@@ -7,11 +7,10 @@ import guide.tm.domain.model.product.ProductCode;
 import guide.tm.domain.model.product.ProductName;
 import guide.tm.domain.model.product.UnitPrice;
 import guide.tm.domain.model.tax.context.TaxContext;
-import guide.tm.domain.model.tax.context.TaxRate;
+import guide.tm.domain.model.tax.context.TaxRateType;
 import guide.tm.domain.model.tax.context.TaxSumType;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,8 +23,8 @@ class 受注明細Test {
     ));
 
 
-    TaxContext 総額計算 = new TaxContext(new TaxRate(BigDecimal.valueOf(10)), TaxSumType.総額計算);
-    TaxContext 積上計算 = new TaxContext(new TaxRate(BigDecimal.valueOf(10)), TaxSumType.積上計算);
+    TaxContext 総額計算 = new TaxContext(TaxRateType.通常税率, TaxSumType.総額計算);
+    TaxContext 積上計算 = new TaxContext(TaxRateType.通常税率, TaxSumType.積上計算);
 
 
     @Test

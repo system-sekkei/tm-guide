@@ -40,5 +40,8 @@ public class SalesOrderDataSource implements SalesOrderRepository {
         return salesOrderMapper.taxContextOf(salesOrderNumber);
     }
 
-
+    @Override
+    public void registerTax(TaxContext taxContext, SalesOrderNumber salesOrderNumber) {
+        salesOrderMapper.registerTax(taxContext, salesOrderNumber);
+    }
 }

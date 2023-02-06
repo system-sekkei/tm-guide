@@ -37,11 +37,19 @@
     <select id="taxContextOf" resultType="guide.tm.domain.model.tax.context.TaxContext">
         SELECT
             受注番号,
-            消費税率 AS "taxRate.rate.value",
-            消費税計算方式 AS "taxSumType"
+            税率区分 AS "taxRateType",
+            計算方式 AS "taxSumType"
         FROM 受注.消費税
         WHERE 受注番号 = #{salesOrderNumber.value}
     </select>
 
+    <insert id="registerTax">
+        INSERT INTO 受注.消費税 (受注番号, 税率区分, 計算方式)
+        VALUES (
+                #{salesOrderNumber.value},
+                #{taxContext.taxRateType},
+                #{taxContext.taxSumType}
+               )
+    </insert>
 
 </mapper>

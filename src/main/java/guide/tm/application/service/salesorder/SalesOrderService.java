@@ -45,4 +45,8 @@ public class SalesOrderService {
     public TaxContext taxContextOf(SalesOrderNumber salesOrderNumber) {
         return salesORderRepository.taxContextOf(salesOrderNumber);
     }
+
+    public void registerTax(TaxContext taxContext, SalesOrderNumber salesOrderNumber) {
+        salesORderRepository.registerTax(taxContext, salesOrderNumber);
+    }
 }

@@ -1,7 +1,6 @@
 package guide.tm.domain.model.tax.context;
 
 import guide.tm.domain.model.primitive.Amount;
-import guide.tm.domain.model.primitive.Rate;
 import guide.tm.domain.model.primitive.TotalAmount;
 import guide.tm.domain.model.tax.method.SumUpTax;
 import guide.tm.domain.model.tax.method.TaxMethod;
@@ -21,7 +20,7 @@ public enum TaxSumType {
         this.taxMethod = taxMethod;
     }
 
-    public Amount taxOf(TotalAmount totalAmount, Rate rate) {
-        return taxMethod.taxOf(totalAmount, rate);
+    public Amount taxOf(TotalAmount totalAmount, TaxRateType taxRateType) {
+        return taxMethod.taxOf(totalAmount, taxRateType.rate());
     }
 }
