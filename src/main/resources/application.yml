@@ -22,6 +22,7 @@ spring:
         - classpath:sample-data.sql
   thymeleaf:
     cache: false
+    prefix: file:src/main/resources/templates/
 
 
 management:

@@ -65,7 +65,7 @@
 
   <hr>
 
-  <form method="post" th:action="@{__${salesOrderNumber}__/items/new}">
+  <form method="post" th:action="@{/sales-orders/__${salesOrderNumber}__/items/new}" th:object="${salesOrderItem}">
     <div class="mb-3">
       <label for="product" class="form-label">商品名称</label>
       <select class="form-control" id="product" name="product.code.value">
@@ -78,7 +78,13 @@
     </div>
     <div class="mb-3">
       <label for="quantity" class="form-label">数量</label>
-      <input type="number" class="form-control" id="quantity" name="quantity.value">
+      <input type="number" class="form-control" id="quantity" th:field="*{quantity.value}">
+      <div th:each="err : ${#fields.errors('*')}"
+           th:text="${err}"
+           th:class="text-danger"
+           th:if="${#fields.hasErrors('*')}">
+        error messages
+      </div>
     </div>
     <button type="submit" class="btn btn-primary">明細登録</button>
   </form>
