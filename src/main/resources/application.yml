@@ -20,6 +20,9 @@ spring:
       data-locations:
         - classpath:data.sql
         - classpath:sample-data.sql
+  thymeleaf:
+    cache: false
+
 
 management:
   endpoints:

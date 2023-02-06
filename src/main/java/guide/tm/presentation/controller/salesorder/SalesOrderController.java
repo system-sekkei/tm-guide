@@ -1,10 +1,13 @@
 package guide.tm.presentation.controller.salesorder;
 
 import guide.tm.application.scenario.salesorder.SalesOrderScenario;
+import guide.tm.application.service.customer.CustomerService;
 import guide.tm.application.service.salesorder.SalesOrderService;
+import guide.tm.domain.model.customer.CustomerSummaries;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
+import guide.tm.domain.model.tax.context.TaxSumType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,10 +20,12 @@ class SalesOrderController {
 
     SalesOrderScenario salesOrderScenario;
     SalesOrderService salesOrderService;
+    CustomerService customerService;
 
-    SalesOrderController(SalesOrderScenario salesOrderScenario, SalesOrderService salesOrderService) {
+    SalesOrderController(SalesOrderScenario salesOrderScenario, SalesOrderService salesOrderService, CustomerService customerService) {
         this.salesOrderScenario = salesOrderScenario;
         this.salesOrderService = salesOrderService;
+        this.customerService = customerService;
     }
 
     @GetMapping
@@ -36,5 +41,13 @@ class SalesOrderController {
         SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderNumber);
         model.addAttribute("salesOrder", salesOrder);
         return "sales-order/sales-order";
+    }
+
+    @GetMapping("new")
+    String newSalesOrder(Model model) {
+        CustomerSummaries customerSummaries = customerService.customerSummaries();
+        model.addAttribute("customerSummaries", customerSummaries);
+        model.addAttribute("taxSumTypes", TaxSumType.values());
+        return "sales-order/sales-order-new";
     }
 }

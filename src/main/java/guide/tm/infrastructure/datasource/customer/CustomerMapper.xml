@@ -12,4 +12,11 @@
                 #{customer.type}
                 )
     </insert>
+
+    <select id="summaries" resultType="guide.tm.domain.model.customer.CustomerSummary">
+        SELECT
+            顧客番号 AS "code.value",
+            顧客名称 AS "name.value"
+        FROM 顧客.顧客
+    </select>
 </mapper>
