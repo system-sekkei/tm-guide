@@ -18,5 +18,9 @@ public class CustomerNumber {
     public String toString() {
         return value;
     }
+
+    public boolean isEmpty() {
+        return value.isEmpty();
+    }
 }
 

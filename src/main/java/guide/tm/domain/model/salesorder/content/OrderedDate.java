@@ -20,4 +20,8 @@ public class OrderedDate {
     public String toString() {
         return value.format(DateTimeFormatter.ISO_DATE);
     }
+
+    public boolean isEmpty() {
+        return value == null;
+    }
 }

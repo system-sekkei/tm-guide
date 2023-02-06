@@ -13,6 +13,13 @@
   <h1 class="display-2">受注登録</h1>
 
   <form method="post" th:action="@{/sales-orders/new}">
+    <div th:object="${salesOrderContent}">
+      <div th:each="err : ${#fields.errors('*')}"
+           th:text="${err}"
+           th:class="text-danger"
+           th:if="${#fields.hasErrors('*')}">
+        error messages
+      </div>
     <div class="mb-3">
       <label for="customerName" class="form-label">顧客名称</label>
       <select class="form-control" id="customerName" name="customer.code.value">
@@ -27,31 +34,32 @@
 
     <div class="mb-3">
       <label for="orderedDate" class="form-label">受注日</label>
-      <input type="date" class="form-control" id="orderedDate" name="orderedDate.value">
+      <input type="date" class="form-control" id="orderedDate"
+             th:classappend="${#fields.hasErrors('orderedDate.value')}? fieldError"
+             name="orderedDate.value">
+    </div>
     </div>
 
-    <div class="mb-3">
-      <label for="taxRateType" class="form-label">消費税率区分</label>
-      <select class="form-control" id="taxRateType" name="taxRateType">
-        <option>選択してください</option>
-        <option th:each="taxRateType: ${taxRateTypes}"
-                th:value="${taxRateType.name}"
-                th:selected="${taxRateType.name == '99'}"
-                th:inline="text">
-          [[${taxRateType.name}]]
-        </option>
-      </select>
-    </div>
+    <div th:object="${taxContext}">
+    <label for="taxRateType" class="form-label">消費税率区分</label>
+      <div class="mb-3" id="taxRateType">
+        <span th:each="taxRateType : ${taxRateTypes}">
+          <label>
+            <input type="radio" th:field="*{taxRateType}" th:value="${taxRateType.name}"/>
+            <span th:text="${taxRateType.name}"></span>
+          </label>
+       </span>
+      </div>
 
-    <div class="mb-3">
-      <label for="taxMethod" class="form-label">消費税計算方式</label>
-      <select class="form-control" id="taxMethod" name="taxSumType">
-        <option>選択してください</option>
-        <option th:each="taxSumType: ${taxSumTypes}" th:value="${taxSumType.name}"
-                th:selected="${taxSumType.name == '99'}" th:inline="text">
-          [[${taxSumType.name}]]
-        </option>
-      </select>
+    <label for="taxSumType" class="form-label">消費税計算方式</label>
+    <div class="mb-3" id="taxSumType">
+       <span th:each="taxSumType : ${taxSumTypes}">
+          <label>
+            <input type="radio" th:field="*{taxSumType}" th:value="${taxSumType.name}"/>
+            <span th:text="${taxSumType.name}"></span>
+          </label>
+       </span>
+    </div>
     </div>
 
     <button type="submit" class="btn btn-primary">登録</button>
