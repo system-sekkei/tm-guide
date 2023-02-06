@@ -15,4 +15,6 @@ public class TaxRate {
         this.rate = new Rate(percentValue.scaleByPowerOfTen(-2));
     }
 
+    @Deprecated TaxRate() {
+    }
 }

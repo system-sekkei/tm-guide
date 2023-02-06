@@ -1,11 +1,10 @@
 package guide.tm.presentation.controller.salesorder;
 
-import guide.tm.application.service.salesorder.SalesOrderItemService;
+import guide.tm.application.scenario.salesorder.SalesOrderScenario;
 import guide.tm.application.service.salesorder.SalesOrderService;
-import guide.tm.domain.model.salesorder.content.SalesOrderContent;
+import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItems;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,13 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("sales-orders")
 class SalesOrderController {
 
+    SalesOrderScenario salesOrderScenario;
     SalesOrderService salesOrderService;
 
-    SalesOrderItemService salesOrderItemService;
-
-    SalesOrderController(SalesOrderService salesOrderService, SalesOrderItemService salesOrderItemService) {
+    SalesOrderController(SalesOrderScenario salesOrderScenario, SalesOrderService salesOrderService) {
+        this.salesOrderScenario = salesOrderScenario;
         this.salesOrderService = salesOrderService;
-        this.salesOrderItemService = salesOrderItemService;
     }
 
     @GetMapping
@@ -35,10 +33,8 @@ class SalesOrderController {
     @GetMapping("{salesOrderNumber}")
     String salesOrder(@PathVariable("salesOrderNumber") SalesOrderNumber salesOrderNumber,
                       Model model) {
-        SalesOrderContent salesOrder = salesOrderService.salesOrderOf(salesOrderNumber);
-        SalesOrderItems salesOrderItems = salesOrderItemService.salesOrderItemsOf(salesOrderNumber);
+        SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderNumber);
         model.addAttribute("salesOrder", salesOrder);
-        model.addAttribute("salesOrderItems", salesOrderItems);
         return "sales-order/sales-order";
     }
 }

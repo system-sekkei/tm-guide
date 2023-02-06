@@ -20,21 +20,21 @@ public class SalesOrderItems {
     /**
      * 税抜き金額
      */
-    Amount amountExcludingTax() {
+    public Amount amountExcludingTax() {
         return totalAmountExcludingTax().total();
     }
 
     /**
      * 税込金額
      */
-    Amount amountIncludingTax(TaxContext taxContext) {
+    public Amount amountIncludingTax(TaxContext taxContext) {
         return taxContext.includingTaxOf(totalAmountExcludingTax());
     }
 
     /**
      * 税額
      */
-    Amount taxOf(TaxContext taxContext) {
+    public Amount taxOf(TaxContext taxContext) {
         return taxContext.taxOf(totalAmountExcludingTax());
     }
 

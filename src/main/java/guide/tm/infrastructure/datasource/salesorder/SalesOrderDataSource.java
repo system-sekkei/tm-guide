@@ -4,6 +4,7 @@ import guide.tm.application.service.salesorder.SalesOrderRepository;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
+import guide.tm.domain.model.tax.context.TaxContext;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
@@ -32,6 +33,11 @@ public class SalesOrderDataSource implements SalesOrderRepository {
     @Override
     public SalesOrderSummaries salesOrderSummaries() {
         return new SalesOrderSummaries(salesOrderMapper.salesOrderSummaries());
+    }
+
+    @Override
+    public TaxContext taxContextOf(SalesOrderNumber salesOrderNumber) {
+        return salesOrderMapper.taxContextOf(salesOrderNumber);
     }
 
 

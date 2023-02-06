@@ -40,6 +40,6 @@ public class Amount {
 
     @Override
     public String toString() {
-        return value.toPlainString();
+        return value.stripTrailingZeros().toPlainString();
     }
 }

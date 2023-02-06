@@ -10,6 +10,9 @@ public class TaxContext {
     TaxRate taxRate;
     TaxSumType taxSumType;
 
+    @Deprecated TaxContext() {
+    }
+
     public TaxContext(TaxRate taxRate, TaxSumType taxSumType) {
         this.taxRate = taxRate;
         this.taxSumType = taxSumType;

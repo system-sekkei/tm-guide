@@ -34,5 +34,14 @@
                  INNER JOIN 顧客.顧客 ON 受注.顧客番号 = 顧客.顧客番号
     </select>
 
+    <select id="taxContextOf" resultType="guide.tm.domain.model.tax.context.TaxContext">
+        SELECT
+            受注番号,
+            消費税率 AS "taxRate.rate.value",
+            消費税計算方式 AS "taxSumType"
+        FROM 受注.消費税
+        WHERE 受注番号 = #{salesOrderNumber.value}
+    </select>
+
 
 </mapper>

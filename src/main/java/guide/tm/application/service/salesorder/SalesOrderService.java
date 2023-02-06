@@ -3,6 +3,7 @@ package guide.tm.application.service.salesorder;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
+import guide.tm.domain.model.tax.context.TaxContext;
 import org.springframework.stereotype.Service;
 
 /**
@@ -36,5 +37,12 @@ public class SalesOrderService {
      */
     public SalesOrderSummaries salesOrderSummaries() {
         return salesORderRepository.salesOrderSummaries();
+    }
+
+    /**
+     * 受注時の消費税を取得する
+     */
+    public TaxContext taxContextOf(SalesOrderNumber salesOrderNumber) {
+        return salesORderRepository.taxContextOf(salesOrderNumber);
     }
 }

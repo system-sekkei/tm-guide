@@ -12,4 +12,6 @@ public class Rate {
         this.value = value;
     }
 
+    @Deprecated Rate() {
+    }
 }
