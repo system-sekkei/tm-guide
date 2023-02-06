@@ -36,8 +36,22 @@ public class SalesOrder {
     /**
      * 税額
      */
-    public Amount taxOf() {
+    public Amount tax() {
         return salesOrderItems.taxOf(taxContext);
+    }
+
+    /**
+     * 送料
+     */
+    public ShippingFee shippingFee() {
+        return new ShippingFee(amountExcludingTax());
+    }
+
+    /**
+     * 合計金額
+     */
+    public Amount totalAmount() {
+        return amountIncludingTax().add(shippingFee().amount());
     }
 
     public SalesOrderContent salesOrderContent() {

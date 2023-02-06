@@ -2,6 +2,7 @@ package guide.tm.domain.model.primitive;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 /**
  * 金額
@@ -40,6 +41,12 @@ public class Amount {
 
     @Override
     public String toString() {
-        return value.stripTrailingZeros().toPlainString();
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        return decimalFormat.format(value);
+//        return value.stripTrailingZeros().toPlainString();
+    }
+
+    public boolean isGreaterThan(Amount other) {
+        return value.compareTo(other.value) > 0;
     }
 }
