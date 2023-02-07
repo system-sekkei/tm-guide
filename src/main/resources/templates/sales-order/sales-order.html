@@ -59,8 +59,8 @@
         <td class="text-center">
           <i class="bi bi-bag-check"></i>
         </td>
-        <td th:text="${salesOrderItem.product.name}">2022-12-22</td>
-        <td class="text-end" th:text="${salesOrderItem.product.unitPrice}">879</td>
+        <td th:text="${salesOrderItem.individualProduct.name}">2022-12-22</td>
+        <td class="text-end" th:text="${salesOrderItem.individualProduct.unitPrice}">879</td>
         <td class="text-end" th:text="${salesOrderItem.quantity}">2</td>
       </tr>
     </tbody>
@@ -72,12 +72,12 @@
 
   <form method="post" th:action="@{/sales-orders/__${salesOrderNumber}__/items/new}" th:object="${salesOrderItem}">
     <div class="mb-3">
-      <label for="product" class="form-label">商品名称</label>
-      <select class="form-control" id="product" name="product.code.value">
-        <option th:each="product: ${products.list}"
-                th:value="${product.code}"
+      <label for="individualProduct" class="form-label">商品名称</label>
+      <select class="form-control" id="individualProduct" name="individualProduct.code.value">
+        <option th:each="individualProduct: ${individualProducts.list}"
+                th:value="${individualProduct.code}"
                 th:inline="text">
-          [[${product.name}]] (¥[[${product.unitPrice}]])
+          [[${individualProduct.name}]] (¥[[${individualProduct.unitPrice}]])
         </option>
       </select>
     </div>

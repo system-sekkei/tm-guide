@@ -1,22 +1,22 @@
 package guide.tm.domain.model.shipping.item;
 
 import guide.tm.domain.model.primitive.Quantity;
-import guide.tm.domain.model.product.Product;
+import guide.tm.domain.model.product.individual.IndividualProduct;
 import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem;
 
 /**
  * 出荷明細
  */
 public class ShippingItem {
-    Product product;
+    IndividualProduct individualProduct;
     Quantity shippingQuantity;
 
     @Deprecated ShippingItem() {
-        this(new Product(), new Quantity());
+        this(new IndividualProduct(), new Quantity());
     }
 
-    public ShippingItem(Product product, Quantity shippingQuantity) {
-        this.product = product;
+    public ShippingItem(IndividualProduct individualProduct, Quantity shippingQuantity) {
+        this.individualProduct = individualProduct;
         this.shippingQuantity = shippingQuantity;
     }
 

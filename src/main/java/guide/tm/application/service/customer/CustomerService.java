@@ -22,6 +22,9 @@ public class CustomerService {
         customerRepository.register(customer);
     }
 
+    /**
+     * 顧客一覧を取得する
+     */
     public CustomerSummaries customerSummaries() {
         return customerRepository.summaries();
     }

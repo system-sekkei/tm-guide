@@ -1,4 +1,4 @@
-package guide.tm.domain.model.product;
+package guide.tm.domain.model.product.detail;
 
 /**
  * 商品コード

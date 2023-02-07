@@ -1,4 +1,4 @@
-package guide.tm.domain.model.product;
+package guide.tm.domain.model.product.detail;
 
 /**
  * 商品名称
@@ -6,7 +6,7 @@ package guide.tm.domain.model.product;
 public class ProductName {
     String value;
 
-    ProductName() {
+    public ProductName() {
         this("");
     }
 

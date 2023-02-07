@@ -11,7 +11,7 @@
                 #{shippingItemNumber},
                 #{salesOrderNumber.value},
                 #{salesOrderItemNumber.value},
-                #{shippingItem.product.code.value},
+                #{shippingItem.individualProduct.code.value},
                 #{shippingItem.shippingQuantity.value}
                )
     </insert>
@@ -22,7 +22,7 @@
             出荷明細番号,
             受注番号,
             受注明細番号,
-            商品コード AS "product.code.value",
+            商品コード AS "individualProduct.code.value",
             出荷数量 AS "shippingQuantity.value"
         FROM 出荷.出荷明細
         WHERE 出荷番号 = #{shippingNumber.value}

@@ -15,6 +15,9 @@ public class ShippingCompanyService {
         this.shippingCompanyRepository = shippingCompanyRepository;
     }
 
+    /**
+     * 運送会社を登録する
+     */
     public void register(ShippingCompany shippingCompany) {
         shippingCompanyRepository.register(shippingCompany);
     }

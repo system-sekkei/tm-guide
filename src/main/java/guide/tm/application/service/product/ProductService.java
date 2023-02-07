@@ -1,7 +1,7 @@
 package guide.tm.application.service.product;
 
-import guide.tm.domain.model.product.Product;
-import guide.tm.domain.model.product.Products;
+import guide.tm.domain.model.product.individual.IndividualProduct;
+import guide.tm.domain.model.product.individual.IndividualProducts;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,11 +18,11 @@ public class ProductService {
     /**
      * 商品を登録する
      */
-    public void register(Product product) {
-        productRepository.register(product);
+    public void register(IndividualProduct individualProduct) {
+        productRepository.register(individualProduct);
     }
 
-    public Products products() {
+    public IndividualProducts products() {
         return productRepository.products();
     }
 }

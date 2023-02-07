@@ -18,7 +18,7 @@
         INSERT INTO 在庫.引当済在庫 (引当番号, 商品コード, 倉庫コード, 引当数量)
         VALUES (
                 #{allocationId},
-                #{salesOrderItem.product.code.value},
+                #{salesOrderItem.individualProduct.code.value},
                 #{allocation.wareHouseCode.value},
                 #{allocation.allocatedQuantity.value}
                )

@@ -3,6 +3,9 @@ package guide.tm.application.service.warehouse;
 import guide.tm.domain.model.allocation.warehouse.WareHouse;
 import org.springframework.stereotype.Service;
 
+/**
+ * 倉庫サービス
+ */
 @Service
 public class WareHouseService {
 

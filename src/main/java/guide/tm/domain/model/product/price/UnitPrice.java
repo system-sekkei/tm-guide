@@ -1,4 +1,4 @@
-package guide.tm.domain.model.product;
+package guide.tm.domain.model.product.price;
 
 import guide.tm.domain.model.primitive.Amount;
 import guide.tm.domain.model.primitive.Quantity;
@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 public class UnitPrice {
     Amount amount;
 
-    UnitPrice() {
+    public UnitPrice() {
         this(new Amount());
     }
 

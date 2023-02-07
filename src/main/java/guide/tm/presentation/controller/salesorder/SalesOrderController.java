@@ -3,7 +3,7 @@ package guide.tm.presentation.controller.salesorder;
 import guide.tm.application.scenario.salesorder.SalesOrderScenario;
 import guide.tm.application.service.product.ProductService;
 import guide.tm.application.service.salesorder.SalesOrderService;
-import guide.tm.domain.model.product.Products;
+import guide.tm.domain.model.product.individual.IndividualProducts;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
@@ -48,8 +48,8 @@ class SalesOrderController {
                       Model model) {
         SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderNumber);
         model.addAttribute("salesOrder", salesOrder);
-        Products products = productService.products();
-        model.addAttribute("products", products);
+        IndividualProducts individualProducts = productService.products();
+        model.addAttribute("products", individualProducts);
         return "sales-order/sales-order";
     }
 

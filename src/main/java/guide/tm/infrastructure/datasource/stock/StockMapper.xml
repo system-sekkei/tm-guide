@@ -10,7 +10,7 @@
             倉庫コード AS "wareHouseCode.value",
             在庫数量 AS "quantity.value"
         FROM 在庫._在庫
-        WHERE 商品コード = #{product.code.value}
+        WHERE 商品コード = #{individualProduct.code.value}
     </select>
 
     <insert id="register">

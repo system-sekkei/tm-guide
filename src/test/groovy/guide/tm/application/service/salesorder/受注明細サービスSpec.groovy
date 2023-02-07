@@ -7,10 +7,10 @@ import guide.tm.domain.model.customer.CustomerName
 import guide.tm.domain.model.customer.CustomerNumber
 import guide.tm.domain.model.customer.CustomerType
 import guide.tm.domain.model.primitive.Quantity
-import guide.tm.domain.model.product.Product
-import guide.tm.domain.model.product.ProductCode
-import guide.tm.domain.model.product.ProductName
-import guide.tm.domain.model.product.UnitPrice
+import guide.tm.domain.model.product.individual.IndividualProduct
+import guide.tm.domain.model.product.detail.ProductCode
+import guide.tm.domain.model.product.detail.ProductName
+import guide.tm.domain.model.product.price.UnitPrice
 import guide.tm.domain.model.salesorder.content.OrderedDate
 import guide.tm.domain.model.salesorder.content.SalesOrderContent
 import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem
@@ -35,12 +35,12 @@ class 受注明細サービスSpec extends Specification {
     @Autowired
     CustomerSetUp 顧客準備
 
-    def 専用ボトル = new Product(
+    def 専用ボトル = new IndividualProduct(
             new ProductCode("821009"),
             new ProductName("専用ボトル"),
             new UnitPrice(4400))
 
-    def 専用ボトルキャップ = new Product(
+    def 専用ボトルキャップ = new IndividualProduct(
             new ProductCode("821010"),
             new ProductName("専用ボトルキャップ"),
             new UnitPrice(1200))

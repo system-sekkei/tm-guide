@@ -2,7 +2,7 @@ package guide.tm.domain.model.salesorder.orderitem;
 
 import guide.tm.domain.model.primitive.Amount;
 import guide.tm.domain.model.primitive.Quantity;
-import guide.tm.domain.model.product.Product;
+import guide.tm.domain.model.product.individual.IndividualProduct;
 import jakarta.validation.constraints.AssertTrue;
 
 /**
@@ -11,16 +11,16 @@ import jakarta.validation.constraints.AssertTrue;
 public class SalesOrderItem {
 
     SalesOrderItemNumber salesOrderItemNumber;
-    Product product;
+    IndividualProduct individualProduct;
     Quantity quantity;
 
     public SalesOrderItem() {
-        this(new Product(), new Quantity());
+        this(new IndividualProduct(), new Quantity());
     }
 
-    public SalesOrderItem(Product product, Quantity quantity) {
+    public SalesOrderItem(IndividualProduct individualProduct, Quantity quantity) {
         this.salesOrderItemNumber = new SalesOrderItemNumber();
-        this.product = product;
+        this.individualProduct = individualProduct;
         this.quantity = quantity;
     }
 
@@ -28,7 +28,7 @@ public class SalesOrderItem {
      * 税抜き金額
      */
     Amount amountExcludingTax() {
-        return product.unitPrice().multiply(quantity);
+        return individualProduct.unitPrice().multiply(quantity);
     }
 
     public SalesOrderItemNumber salesOrderItemNumber() {
@@ -40,8 +40,8 @@ public class SalesOrderItem {
         return quantity.isGreaterEqualThan(new Quantity(1));
     }
 
-    public Product product() {
-        return product;
+    public IndividualProduct product() {
+        return individualProduct;
     }
 
     public Quantity quantity() {

@@ -3,7 +3,7 @@ package guide.tm.infrastructure.datasource.stock;
 import guide.tm.application.service.stock.StockRepository;
 import guide.tm.domain.model.allocation.stock.Stock;
 import guide.tm.domain.model.allocation.stock.Stocks;
-import guide.tm.domain.model.product.Product;
+import guide.tm.domain.model.product.individual.IndividualProduct;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,8 +18,8 @@ public class StockDataSource implements StockRepository {
     }
 
     @Override
-    public Stocks stocksOf(Product product) {
-        List<Stock> list = stockMapper.stocksOf(product);
+    public Stocks stocksOf(IndividualProduct individualProduct) {
+        List<Stock> list = stockMapper.stocksOf(individualProduct);
         return new Stocks(list);
     }
 
