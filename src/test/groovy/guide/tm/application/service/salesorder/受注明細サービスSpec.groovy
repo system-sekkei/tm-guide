@@ -7,13 +7,13 @@ import guide.tm.domain.model.customer.CustomerName
 import guide.tm.domain.model.customer.CustomerNumber
 import guide.tm.domain.model.customer.CustomerType
 import guide.tm.domain.model.primitive.Quantity
-import guide.tm.domain.model.product.individual.IndividualProduct
 import guide.tm.domain.model.product.detail.ProductCode
 import guide.tm.domain.model.product.detail.ProductName
+import guide.tm.domain.model.product.individual.IndividualProduct
 import guide.tm.domain.model.product.price.UnitPrice
 import guide.tm.domain.model.salesorder.content.OrderedDate
 import guide.tm.domain.model.salesorder.content.SalesOrderContent
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem
+import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemContent
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.transaction.annotation.Transactional
@@ -59,8 +59,8 @@ class 受注明細サービスSpec extends Specification {
     def 受注明細を登録する() {
         given:
         def 受注 = new SalesOrderContent(顧客, new OrderedDate("2023-01-12"))
-        def 受注明細_専用ボトル = new SalesOrderItem(専用ボトル, new Quantity(1))
-        def 受注明細_専用ボトルキャップ = new SalesOrderItem(専用ボトルキャップ, new Quantity(2))
+        def 受注明細_専用ボトル = new SalesOrderItemContent(専用ボトル, new Quantity(1))
+        def 受注明細_専用ボトルキャップ = new SalesOrderItemContent(専用ボトルキャップ, new Quantity(2))
 
         when: "受注明細を登録する"
         def 受注番号 = salesOrderService.registerSalesOrder(受注)
@@ -73,12 +73,12 @@ class 受注明細サービスSpec extends Specification {
         assert 登録された受注明細.list.size() == 2
 
         and: "専用ボトルの受注明細の受注数は1"
-        def 専用ボトルの受注明細 = 登録された受注明細.list.find { it -> it.product.code.value == "821009"}
-        assert 専用ボトルの受注明細.quantity.value == 1
+        def 専用ボトルの受注明細 = 登録された受注明細.list.find { it -> it.product().code.value == "821009"}
+        assert 専用ボトルの受注明細.quantity().value == 1
 
         and: "専用ボトルキャップの受注明細の受注数は2"
-        def 専用ボトルキャップの受注明細 = 登録された受注明細.list.find { it -> it.product.code.value == "821010"}
-        assert 専用ボトルキャップの受注明細.quantity.value == 2
+        def 専用ボトルキャップの受注明細 = 登録された受注明細.list.find { it -> it.product().code.value == "821010"}
+        assert 専用ボトルキャップの受注明細.quantity().value == 2
 
     }
 }

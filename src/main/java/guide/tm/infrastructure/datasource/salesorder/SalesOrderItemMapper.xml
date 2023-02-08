@@ -9,18 +9,18 @@
         VALUES (
                 #{salesOrderNumber.value},
                 #{saleOrderItemNumber},
-                #{salesOrderItem.product.code.value},
-                #{salesOrderItem.quantity.value}
+                #{salesOrderItemContent.product.code.value},
+                #{salesOrderItemContent.quantity.value}
                 )
     </insert>
 
     <select id="salesOrderItemsOf" resultType="guide.tm.domain.model.salesorder.orderitem.SalesOrderItem">
         SELECT
             受注明細番号 AS "salesOrderItemNumber.value",
-            商品.商品コード AS "product.code.value",
-            商品名称 AS "product.name.value",
-            商品単価 AS "product.unitPrice.amount.value",
-            受注数量 AS "quantity.value"
+            商品.商品コード AS "salesOrderItemContent.product.code.value",
+            商品名称 AS "salesOrderItemContent.product.name.value",
+            商品単価 AS "salesOrderItemContent.product.unitPrice.amount.value",
+            受注数量 AS "salesOrderItemContent.quantity.value"
         FROM 受注.受注明細
         INNER JOIN 商品.商品 ON 商品.商品コード = 受注明細.商品コード
         WHERE 受注番号 = #{salesOrderNumber.value}

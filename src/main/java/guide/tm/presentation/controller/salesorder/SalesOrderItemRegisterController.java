@@ -9,6 +9,7 @@ import guide.tm.domain.model.product.individual.IndividualProducts;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem;
+import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemContent;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -47,7 +48,7 @@ class SalesOrderItemRegisterController {
     @PostMapping("new")
     String register(
             @PathVariable("salesOrderNumber") SalesOrderNumber salesOrderNumber,
-            @ModelAttribute("salesOrderItem") @Validated SalesOrderItem salesOrderItem,
+            @ModelAttribute("salesOrderItemContent") @Validated SalesOrderItemContent salesOrderItemContent,
                     BindingResult salesOrderItemResult,
                     Model model) {
 
@@ -61,7 +62,7 @@ class SalesOrderItemRegisterController {
             return "sales-order/sales-order";
         }
 
-        salesOrderItemService.register(salesOrderNumber, salesOrderItem);
+        salesOrderItemService.register(salesOrderNumber, salesOrderItemContent);
         return String.format("redirect:/sales-orders/%s", salesOrderNumber);
     }
 
@@ -71,7 +72,7 @@ class SalesOrderItemRegisterController {
     @PostMapping("new-bundle")
     String registerBundle(
             @PathVariable("salesOrderNumber") SalesOrderNumber salesOrderNumber,
-            @ModelAttribute("salesOrderItem") @Validated SalesOrderItem salesOrderItem,
+            @ModelAttribute("salesOrderItemContent") @Validated SalesOrderItemContent salesOrderItemContent,
             BindingResult salesOrderItemResult,
             Model model) {
 
@@ -85,11 +86,11 @@ class SalesOrderItemRegisterController {
             return "sales-order/sales-order";
         }
 
-        salesOrderItemService.register(salesOrderNumber, salesOrderItem);
+        salesOrderItemService.register(salesOrderNumber, salesOrderItemContent);
         return String.format("redirect:/sales-orders/%s", salesOrderNumber);
     }
 
-    @InitBinder("salesOrderItem")
+    @InitBinder("salesOrderItemContent")
     public void bindTaxContext(WebDataBinder binder) {
         binder.setAllowedFields(
                 "product.code.value",

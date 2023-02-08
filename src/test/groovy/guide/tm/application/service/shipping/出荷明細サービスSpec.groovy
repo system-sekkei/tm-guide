@@ -17,7 +17,7 @@ import guide.tm.domain.model.product.price.UnitPrice
 import guide.tm.domain.model.salesorder.content.OrderedDate
 import guide.tm.domain.model.salesorder.content.SalesOrderContent
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem
+import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemContent
 import guide.tm.domain.model.shipping.company.ShippingCompany
 import guide.tm.domain.model.shipping.company.ShippingCompanyCode
 import guide.tm.domain.model.shipping.content.Shipping
@@ -44,14 +44,14 @@ class 出荷明細サービスSpec extends Specification {
             new ProductName("専用ボトル"),
             new UnitPrice(4400))
 
-    def 受注明細_専用ボトル = new SalesOrderItem(専用ボトル, new Quantity(42))
+    def 受注明細_専用ボトル = new SalesOrderItemContent(専用ボトル, new Quantity(42))
 
     def 専用ボトルキャップ = new IndividualProduct(
             new ProductCode("821010"),
             new ProductName("専用ボトルキャップ"),
             new UnitPrice(1200))
 
-    def 受注明細_専用ボトルキャップ = new SalesOrderItem(専用ボトルキャップ, new Quantity(23))
+    def 受注明細_専用ボトルキャップ = new SalesOrderItemContent(専用ボトルキャップ, new Quantity(23))
 
     @Autowired
     StockSetup 在庫準備
