@@ -26,4 +26,46 @@
         WHERE 受注番号 = #{salesOrderNumber.value}
     </select>
 
+    <insert id="registerBundleProductOrderItem">
+        INSERT INTO 受注.セット商品受注明細 (受注番号, 受注明細番号, 商品コード, 受注数量)
+        VALUES (
+                   #{salesOrderNumber.value},
+                   #{saleOrderItemNumber},
+                   #{bundleProductOrderItemContent.product.code.value},
+                   #{bundleProductOrderItemContent.quantity.value}
+               )
+    </insert>
+
+    <resultMap id="BundleProductOrderItem" type="guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItem">
+        <id property="salesOrderItemNumber.value" column="受注明細番号"/>
+        <result property="bundleProductOrderItemContent.product.code.value" column="セット商品コード"/>
+        <result property="bundleProductOrderItemContent.product.name.value" column="セット商品名称"/>
+        <result property="bundleProductOrderItemContent.product.unitPrice.amount.value" column="セット商品単価"/>
+        <result property="bundleProductOrderItemContent.quantity.value" column="受注数量"/>
+        <collection property="bundleProductOrderItemContent.product.bundleProductItems.list"
+                    ofType="guide.tm.domain.model.product.individual.IndividualProduct">
+            <id property="code.value" column="個別商品コード"/>
+            <result property="name.value" column="個別商品名称"/>
+            <result property="unitPrice.amount.value" column="個別商品単価"/>
+        </collection>
+    </resultMap>
+
+    <select id="bundleProductOrderItemsOf" resultMap="BundleProductOrderItem">
+        SELECT
+            受注明細番号,
+            セット商品.商品コード AS "セット商品コード",
+            セット商品.商品名称 AS "セット商品名称",
+            セット商品.商品単価 AS "セット商品単価",
+            商品.商品コード AS "個別商品コード",
+            商品.商品名称 AS "個別商品名称",
+            商品.商品単価 AS "個別商品単価",
+            受注数量
+        FROM 受注.セット商品受注明細
+        INNER JOIN 受注.受注 ON 受注.受注番号 = セット商品受注明細.受注番号
+        INNER JOIN 商品.セット商品 ON セット商品受注明細.商品コード = セット商品.商品コード
+        INNER JOIN 商品.セット商品組合せ ON セット商品.商品コード = セット商品組合せ.セット商品コード
+        INNER JOIN 商品.商品 ON 商品.商品コード = セット商品組合せ.商品コード
+        WHERE 受注.受注番号 = #{salesOrderNumber.value}
+    </select>
+
 </mapper>

@@ -16,4 +16,8 @@ public class BundleProductItems {
     public BundleProductItems(List<IndividualProduct> list) {
         this.list = list;
     }
+
+    public List<IndividualProduct> list() {
+        return list;
+    }
 }

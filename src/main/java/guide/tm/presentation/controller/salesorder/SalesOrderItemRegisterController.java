@@ -8,6 +8,7 @@ import guide.tm.domain.model.product.bundle.BundleProducts;
 import guide.tm.domain.model.product.individual.IndividualProducts;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItemContent;
 import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem;
 import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemContent;
 import org.springframework.stereotype.Controller;
@@ -72,7 +73,7 @@ class SalesOrderItemRegisterController {
     @PostMapping("new-bundle")
     String registerBundle(
             @PathVariable("salesOrderNumber") SalesOrderNumber salesOrderNumber,
-            @ModelAttribute("salesOrderItemContent") @Validated SalesOrderItemContent salesOrderItemContent,
+            @ModelAttribute("bundleProductOrderItemContent") @Validated BundleProductOrderItemContent bundleProductOrderItemContent,
             BindingResult salesOrderItemResult,
             Model model) {
 
@@ -86,11 +87,11 @@ class SalesOrderItemRegisterController {
             return "sales-order/sales-order";
         }
 
-        salesOrderItemService.register(salesOrderNumber, salesOrderItemContent);
+        salesOrderItemService.register(salesOrderNumber, bundleProductOrderItemContent);
         return String.format("redirect:/sales-orders/%s", salesOrderNumber);
     }
 
-    @InitBinder("salesOrderItemContent")
+    @InitBinder({"salesOrderItemContent", "bundleProductOrderItemContent"})
     public void bindTaxContext(WebDataBinder binder) {
         binder.setAllowedFields(
                 "product.code.value",

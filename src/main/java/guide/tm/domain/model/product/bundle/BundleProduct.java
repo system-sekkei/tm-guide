@@ -25,4 +25,8 @@ public class BundleProduct {
     public UnitPrice unitPrice() {
         return unitPrice;
     }
+
+    public BundleProductItems bundleProductItems() {
+        return bundleProductItems;
+    }
 }

@@ -59,10 +59,27 @@
         <td class="text-center">
           <i class="bi bi-bag-check"></i>
         </td>
-        <td th:text="${salesOrderItem.product.name}">2022-12-22</td>
+        <td th:text="${salesOrderItem.product.name}">個別商品名</td>
         <td class="text-end" th:text="${salesOrderItem.product.unitPrice}">879</td>
         <td class="text-end" th:text="${salesOrderItem.quantity}">2</td>
       </tr>
+      <span th:each="bundleProductOrderItem: ${salesOrder.bundleProductOrderItems.list}">
+        <tr>
+          <td class="text-center">
+            <i class="bi bi-bag-check"></i>
+          </td>
+          <td th:text="${bundleProductOrderItem.product.name}">セット商品名</td>
+          <td class="text-end" th:text="${bundleProductOrderItem.product.unitPrice}">879</td>
+          <td class="text-end" th:text="${bundleProductOrderItem.quantity}">2</td>
+        </tr>
+        <tr th:each="product: ${bundleProductOrderItem.product.bundleProductItems.list}">
+          <td class="text-center">
+          </td>
+          <td th:text="|&nbsp;&nbsp;${product.name}|">個別商品名</td>
+          <td class="text-end">--</td>
+          <td class="text-end">--</td>
+        </tr>
+      </span>
     </tbody>
     <tfoot>
     </tfoot>
@@ -70,7 +87,7 @@
 
   <hr>
 
-  <form method="post" th:action="@{/sales-orders/__${salesOrderNumber}__/items/new}" th:object="${salesOrderItem}">
+  <form method="post" th:action="@{/sales-orders/__${salesOrderNumber}__/items/new}" th:object="${salesOrderItemContent}">
     <div class="mb-3">
       <label for="individualProduct" class="form-label">商品名称</label>
       <select class="form-control" id="individualProduct" name="product.code.value">
@@ -94,9 +111,9 @@
     <button type="submit" class="btn btn-primary">明細登録</button>
   </form>
 
-  <form method="post" th:action="@{/sales-orders/__${salesOrderNumber}__/items/new-bundle}" th:object="${salesOrderItem}">
+  <form method="post" th:action="@{/sales-orders/__${salesOrderNumber}__/items/new-bundle}" th:object="${bundleProductOrderItemContent}">
     <div class="mb-3">
-      <label for="bundleProduct" class="form-label">商品名称</label>
+      <label for="bundleProduct" class="form-label">セット商品名称</label>
       <select class="form-control" id="bundleProduct" name="product.code.value">
         <option th:each="bundleProduct: ${bundleProducts.list}"
                 th:value="${bundleProduct.code}"

@@ -9,7 +9,8 @@ import guide.tm.domain.model.product.individual.IndividualProducts;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem;
+import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItemContent;
+import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemContent;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,9 +42,14 @@ class SalesOrderController {
     }
 
 
-    @ModelAttribute("salesOrderItem")
-    SalesOrderItem salesOrderItem() {
-        return new SalesOrderItem();
+    @ModelAttribute("salesOrderItemContent")
+    SalesOrderItemContent salesOrderItemContent() {
+        return new SalesOrderItemContent();
+    }
+
+    @ModelAttribute("bundleProductOrderItemContent")
+    BundleProductOrderItemContent bundleProductOrderItemContent() {
+        return new BundleProductOrderItemContent();
     }
 
     @GetMapping("{salesOrderNumber}")

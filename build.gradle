@@ -29,12 +29,12 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.1'
-	implementation 'org.springframework.boot:spring-boot-devtools:3.0.1'
 	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'com.github.irof:jig-erd:latest.release'
 	testImplementation 'org.spockframework:spock-core:2.4-M1-groovy-4.0'
 	testImplementation 'org.spockframework:spock-spring:2.4-M1-groovy-4.0'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools:3.0.1'
 }
 
 tasks.named('test') {

@@ -82,6 +82,18 @@ CREATE TABLE 受注.受注明細
     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE 受注.セット商品受注明細
+(
+    受注番号 UUID NOT NULL,
+    受注明細番号 UUID NOT NULL,
+    商品コード VARCHAR(10) NOT NULL,
+    受注数量 NUMERIC(3) NOT NULL,
+    PRIMARY KEY (受注番号, 受注明細番号),
+    FOREIGN KEY (受注番号) REFERENCES 受注.受注 (受注番号),
+    FOREIGN KEY (商品コード) REFERENCES 商品.セット商品 (商品コード),
+    作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE 受注.消費税
 (
     受注番号 UUID NOT NULL,

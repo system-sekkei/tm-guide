@@ -2,21 +2,21 @@ package guide.tm.domain.model.salesorder.orderitem;
 
 import guide.tm.domain.model.primitive.Amount;
 import guide.tm.domain.model.primitive.Quantity;
-import guide.tm.domain.model.product.individual.IndividualProduct;
+import guide.tm.domain.model.product.bundle.BundleProduct;
 import jakarta.validation.constraints.AssertTrue;
 
 /**
- * 受注明細の内容
+ * セット商品の受注明細の内容
  */
-public class SalesOrderItemContent {
-    IndividualProduct product;
+public class BundleProductOrderItemContent {
+    BundleProduct product;
     Quantity quantity;
 
-    public SalesOrderItemContent() {
-        this(new IndividualProduct(), new Quantity());
+    public BundleProductOrderItemContent() {
+        this(new BundleProduct(), new Quantity());
     }
 
-    SalesOrderItemContent(IndividualProduct product, Quantity quantity) {
+    BundleProductOrderItemContent(BundleProduct product, Quantity quantity) {
         this.product = product;
         this.quantity = quantity;
     }
@@ -32,5 +32,4 @@ public class SalesOrderItemContent {
     boolean isQuantitySpecified() {
         return quantity.isGreaterEqualThan(new Quantity(1));
     }
-
 }
