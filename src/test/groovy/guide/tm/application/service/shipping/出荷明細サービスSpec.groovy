@@ -10,9 +10,9 @@ import guide.tm.domain.model.customer.CustomerName
 import guide.tm.domain.model.customer.CustomerNumber
 import guide.tm.domain.model.customer.CustomerType
 import guide.tm.domain.model.primitive.Quantity
-import guide.tm.domain.model.product.individual.IndividualProduct
 import guide.tm.domain.model.product.detail.ProductCode
 import guide.tm.domain.model.product.detail.ProductName
+import guide.tm.domain.model.product.individual.IndividualProduct
 import guide.tm.domain.model.product.price.UnitPrice
 import guide.tm.domain.model.salesorder.content.OrderedDate
 import guide.tm.domain.model.salesorder.content.SalesOrderContent
@@ -116,9 +116,9 @@ class 出荷明細サービスSpec extends Specification {
         assert shippingItems.list.size() == 2
 
         and: "専用ボトルの出荷数は42"
-        shippingItems.list.find { it.product.code.value == "821009" }.shippingQuantity.value == 42
+        shippingItems.list.find { it.individualProduct.code.value == "821009" }.shippingQuantity.value == 42
 
         and: "専用ボトルキャップの出荷数は23"
-        shippingItems.list.find { it.product.code.value == "821010" }.shippingQuantity.value == 23
+        shippingItems.list.find { it.individualProduct.code.value == "821010" }.shippingQuantity.value == 23
     }
 }

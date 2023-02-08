@@ -1,8 +1,10 @@
 package guide.tm.presentation.controller.salesorder;
 
 import guide.tm.application.scenario.salesorder.SalesOrderScenario;
-import guide.tm.application.service.product.ProductService;
+import guide.tm.application.service.product.bundle.BundleProductService;
+import guide.tm.application.service.product.individual.ProductService;
 import guide.tm.application.service.salesorder.SalesOrderService;
+import guide.tm.domain.model.product.bundle.BundleProducts;
 import guide.tm.domain.model.product.individual.IndividualProducts;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
@@ -21,13 +23,14 @@ class SalesOrderController {
 
     SalesOrderScenario salesOrderScenario;
     SalesOrderService salesOrderService;
-
     ProductService productService;
+    BundleProductService bundleProductService;
 
-    SalesOrderController(SalesOrderScenario salesOrderScenario, SalesOrderService salesOrderService, ProductService productService) {
+    SalesOrderController(SalesOrderScenario salesOrderScenario, SalesOrderService salesOrderService, ProductService productService, BundleProductService bundleProductService) {
         this.salesOrderScenario = salesOrderScenario;
         this.salesOrderService = salesOrderService;
         this.productService = productService;
+        this.bundleProductService = bundleProductService;
     }
 
     @GetMapping
@@ -50,6 +53,8 @@ class SalesOrderController {
         model.addAttribute("salesOrder", salesOrder);
         IndividualProducts individualProducts = productService.products();
         model.addAttribute("products", individualProducts);
+        BundleProducts bundleProducts = bundleProductService.bundleProducts();
+        model.addAttribute("bundleProducts", bundleProducts);
         return "sales-order/sales-order";
     }
 

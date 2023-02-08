@@ -1,7 +1,7 @@
 package guide.tm.application
 
 
-import guide.tm.application.service.product.ProductService
+import guide.tm.application.service.product.individual.ProductService
 import guide.tm.domain.model.product.individual.IndividualProduct
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component

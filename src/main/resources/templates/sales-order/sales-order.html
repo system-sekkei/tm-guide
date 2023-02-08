@@ -59,8 +59,8 @@
         <td class="text-center">
           <i class="bi bi-bag-check"></i>
         </td>
-        <td th:text="${salesOrderItem.individualProduct.name}">2022-12-22</td>
-        <td class="text-end" th:text="${salesOrderItem.individualProduct.unitPrice}">879</td>
+        <td th:text="${salesOrderItem.product.name}">2022-12-22</td>
+        <td class="text-end" th:text="${salesOrderItem.product.unitPrice}">879</td>
         <td class="text-end" th:text="${salesOrderItem.quantity}">2</td>
       </tr>
     </tbody>
@@ -73,11 +73,11 @@
   <form method="post" th:action="@{/sales-orders/__${salesOrderNumber}__/items/new}" th:object="${salesOrderItem}">
     <div class="mb-3">
       <label for="individualProduct" class="form-label">商品名称</label>
-      <select class="form-control" id="individualProduct" name="individualProduct.code.value">
-        <option th:each="individualProduct: ${individualProducts.list}"
-                th:value="${individualProduct.code}"
+      <select class="form-control" id="individualProduct" name="product.code.value">
+        <option th:each="product: ${products.list}"
+                th:value="${product.code}"
                 th:inline="text">
-          [[${individualProduct.name}]] (¥[[${individualProduct.unitPrice}]])
+          [[${product.name}]] (¥[[${product.unitPrice}]])
         </option>
       </select>
     </div>
@@ -92,6 +92,30 @@
       </div>
     </div>
     <button type="submit" class="btn btn-primary">明細登録</button>
+  </form>
+
+  <form method="post" th:action="@{/sales-orders/__${salesOrderNumber}__/items/new-bundle}" th:object="${salesOrderItem}">
+    <div class="mb-3">
+      <label for="bundleProduct" class="form-label">商品名称</label>
+      <select class="form-control" id="bundleProduct" name="product.code.value">
+        <option th:each="bundleProduct: ${bundleProducts.list}"
+                th:value="${bundleProduct.code}"
+                th:inline="text">
+          [[${bundleProduct.name}]] (¥[[${bundleProduct.unitPrice}]])
+        </option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="quantity-bundle" class="form-label">数量</label>
+      <input type="number" class="form-control" id="quantity-bundle" th:field="*{quantity.value}">
+      <div th:each="err : ${#fields.errors('*')}"
+           th:text="${err}"
+           th:class="text-danger"
+           th:if="${#fields.hasErrors('*')}">
+        error messages
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">セット商品登録</button>
   </form>
 
 </div>

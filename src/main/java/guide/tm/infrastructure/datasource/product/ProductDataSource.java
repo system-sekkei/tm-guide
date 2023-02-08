@@ -1,6 +1,6 @@
 package guide.tm.infrastructure.datasource.product;
 
-import guide.tm.application.service.product.ProductRepository;
+import guide.tm.application.service.product.individual.ProductRepository;
 import guide.tm.domain.model.product.individual.IndividualProduct;
 import guide.tm.domain.model.product.individual.IndividualProducts;
 import org.springframework.stereotype.Repository;

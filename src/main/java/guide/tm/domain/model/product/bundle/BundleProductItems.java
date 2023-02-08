@@ -10,6 +10,9 @@ import java.util.List;
 public class BundleProductItems {
     List<IndividualProduct> list;
 
+    @Deprecated BundleProductItems() {
+    }
+
     public BundleProductItems(List<IndividualProduct> list) {
         this.list = list;
     }

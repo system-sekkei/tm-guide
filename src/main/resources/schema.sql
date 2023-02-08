@@ -8,6 +8,25 @@ CREATE TABLE 商品.商品
     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE 商品.セット商品
+(
+    商品コード VARCHAR(10) NOT NULL,
+    商品名称 VARCHAR(40) NOT NULL,
+    商品単価 NUMERIC(9, 3) NOT NULL,
+    PRIMARY KEY (商品コード),
+    作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE 商品.セット商品組合せ
+(
+    セット商品コード VARCHAR(10) NOT NULL,
+    商品コード VARCHAR(10) NOT NULL,
+    PRIMARY KEY (セット商品コード, 商品コード),
+    FOREIGN KEY (セット商品コード) REFERENCES 商品.セット商品 (商品コード),
+    FOREIGN KEY (商品コード) REFERENCES 商品.商品 (商品コード),
+    作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE SCHEMA 顧客;
 CREATE TABLE 顧客.顧客区分
 (

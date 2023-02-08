@@ -2,9 +2,9 @@ package guide.tm.domain.model.salesorder.orderitem;
 
 import guide.tm.domain.model.primitive.Amount;
 import guide.tm.domain.model.primitive.Quantity;
-import guide.tm.domain.model.product.individual.IndividualProduct;
 import guide.tm.domain.model.product.detail.ProductCode;
 import guide.tm.domain.model.product.detail.ProductName;
+import guide.tm.domain.model.product.individual.IndividualProduct;
 import guide.tm.domain.model.product.price.UnitPrice;
 import guide.tm.domain.model.tax.context.TaxContext;
 import guide.tm.domain.model.tax.context.TaxRateType;
@@ -30,14 +30,14 @@ class 受注明細Test {
     @Test
     void 税抜き金額の取得() {
         Amount amount = sut.amountExcludingTax();
-        assertEquals("6861", amount.toString());
+        assertEquals("6,861", amount.toString());
     }
 
     @Test
     void 総額計算方式での税込金額の取得() {
         Amount amount = sut.amountIncludingTax(総額計算);
         // 6861 * 1.1 = 7547.1 => 切り捨て
-        assertEquals("7547", amount.toString());
+        assertEquals("7,547", amount.toString());
     }
 
     @Test

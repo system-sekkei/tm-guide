@@ -12,4 +12,17 @@ public class BundleProduct {
     ProductName name;
     BundleProductItems bundleProductItems;
     UnitPrice unitPrice;
+
+
+    public ProductCode code() {
+        return code;
+    }
+
+    public ProductName name() {
+        return name;
+    }
+
+    public UnitPrice unitPrice() {
+        return unitPrice;
+    }
 }

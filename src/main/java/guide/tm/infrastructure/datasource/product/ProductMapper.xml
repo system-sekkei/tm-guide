@@ -2,18 +2,18 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="guide.tm.infrastructure.datasource.individualProduct.ProductMapper">
+<mapper namespace="guide.tm.infrastructure.datasource.product.ProductMapper">
 
     <insert id="register">
         INSERT INTO 商品.商品 (商品コード, 商品名称, 商品単価)
         VALUES (
-                #{individualProduct.code.value},
-                #{individualProduct.name.value},
-                #{individualProduct.unitPrice.amount.value}
+                #{product.code.value},
+                #{product.name.value},
+                #{product.unitPrice.amount.value}
                 )
     </insert>
 
-    <select id="individualProducts" resultType="guide.tm.domain.model.individualProduct.individual.IndividualProduct">
+    <select id="products" resultType="guide.tm.domain.model.product.individual.IndividualProduct">
         SELECT
             商品コード AS "code.value",
             商品名称 AS "name.value",

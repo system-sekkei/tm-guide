@@ -11,16 +11,16 @@ import jakarta.validation.constraints.AssertTrue;
 public class SalesOrderItem {
 
     SalesOrderItemNumber salesOrderItemNumber;
-    IndividualProduct individualProduct;
+    IndividualProduct product;
     Quantity quantity;
 
     public SalesOrderItem() {
         this(new IndividualProduct(), new Quantity());
     }
 
-    public SalesOrderItem(IndividualProduct individualProduct, Quantity quantity) {
+    public SalesOrderItem(IndividualProduct product, Quantity quantity) {
         this.salesOrderItemNumber = new SalesOrderItemNumber();
-        this.individualProduct = individualProduct;
+        this.product = product;
         this.quantity = quantity;
     }
 
@@ -28,7 +28,7 @@ public class SalesOrderItem {
      * 税抜き金額
      */
     Amount amountExcludingTax() {
-        return individualProduct.unitPrice().multiply(quantity);
+        return product.unitPrice().multiply(quantity);
     }
 
     public SalesOrderItemNumber salesOrderItemNumber() {
@@ -41,7 +41,7 @@ public class SalesOrderItem {
     }
 
     public IndividualProduct product() {
-        return individualProduct;
+        return product;
     }
 
     public Quantity quantity() {
