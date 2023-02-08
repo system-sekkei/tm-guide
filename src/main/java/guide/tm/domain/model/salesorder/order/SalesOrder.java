@@ -30,21 +30,27 @@ public class SalesOrder {
      * 税抜き金額
      */
     public Amount amountExcludingTax() {
-        return salesOrderItems.amountExcludingTax();
+        Amount individualAmount = salesOrderItems.amountExcludingTax();
+        Amount bundleAmount = bundleProductOrderItems.amountExcludingTax();
+        return individualAmount.add(bundleAmount);
     }
 
     /**
      * 税込金額
      */
     public Amount amountIncludingTax() {
-        return salesOrderItems.amountIncludingTax(taxContext);
+        Amount individualAmount = salesOrderItems.amountIncludingTax(taxContext);
+        Amount bundleAmount = bundleProductOrderItems.amountIncludingTax(taxContext);
+        return individualAmount.add(bundleAmount);
     }
 
     /**
      * 税額
      */
     public Amount tax() {
-        return salesOrderItems.taxOf(taxContext);
+        Amount individualAmount = salesOrderItems.taxOf(taxContext);
+        Amount bundleAmount = bundleProductOrderItems.taxOf(taxContext);
+        return individualAmount.add(bundleAmount);
     }
 
     /**
