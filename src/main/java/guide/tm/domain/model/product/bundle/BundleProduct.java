@@ -13,6 +13,16 @@ public class BundleProduct {
     BundleProductItems bundleProductItems;
     UnitPrice unitPrice;
 
+    public BundleProduct() {
+        this(new ProductCode(), new ProductName(), new BundleProductItems(), new UnitPrice());
+    }
+
+    public BundleProduct(ProductCode code, ProductName name, BundleProductItems bundleProductItems, UnitPrice unitPrice) {
+        this.code = code;
+        this.name = name;
+        this.bundleProductItems = bundleProductItems;
+        this.unitPrice = unitPrice;
+    }
 
     public ProductCode code() {
         return code;

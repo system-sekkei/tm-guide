@@ -87,7 +87,7 @@ class SalesOrderItemRegisterController {
             return "sales-order/sales-order";
         }
 
-        salesOrderItemService.register(salesOrderNumber, bundleProductOrderItemContent);
+        salesOrderItemService.registerBundleProductOrderItem(salesOrderNumber, bundleProductOrderItemContent);
         return String.format("redirect:/sales-orders/%s", salesOrderNumber);
     }
 

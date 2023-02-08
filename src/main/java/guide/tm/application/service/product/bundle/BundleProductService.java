@@ -1,5 +1,6 @@
 package guide.tm.application.service.product.bundle;
 
+import guide.tm.domain.model.product.bundle.BundleProduct;
 import guide.tm.domain.model.product.bundle.BundleProducts;
 import org.springframework.stereotype.Service;
 
@@ -17,4 +18,12 @@ public class BundleProductService {
     public BundleProducts bundleProducts() {
         return bundleProductRepository.bundleProducts();
     }
+
+    /**
+     * 商品を登録する
+     */
+    public void register(BundleProduct bundleProduct) {
+        bundleProductRepository.register(bundleProduct);
+    }
+
 }

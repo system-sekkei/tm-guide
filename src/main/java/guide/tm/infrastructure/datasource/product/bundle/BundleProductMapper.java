@@ -1,7 +1,10 @@
 package guide.tm.infrastructure.datasource.product.bundle;
 
 import guide.tm.domain.model.product.bundle.BundleProduct;
+import guide.tm.domain.model.product.detail.ProductCode;
+import guide.tm.domain.model.product.individual.IndividualProduct;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -9,4 +12,10 @@ import java.util.List;
 interface BundleProductMapper {
 
     List<BundleProduct> bundleProducts();
+
+    void register(@Param("bundleProduct") BundleProduct bundleProduct);
+
+    void registerCombination(
+            @Param("productCode") ProductCode productCode,
+            @Param("individualProduct") IndividualProduct individualProduct);
 }

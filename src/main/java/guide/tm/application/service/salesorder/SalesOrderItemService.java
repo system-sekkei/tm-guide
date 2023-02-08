@@ -29,7 +29,7 @@ public class SalesOrderItemService {
     /**
      * セット商品の受注明細を登録する
      */
-    public void register(SalesOrderNumber salesOrderNumber, BundleProductOrderItemContent bundleProductOrderItemContent) {
+    public void registerBundleProductOrderItem(SalesOrderNumber salesOrderNumber, BundleProductOrderItemContent bundleProductOrderItemContent) {
         salesOrderItemRepository.registerBundleProductOrderItem(salesOrderNumber, bundleProductOrderItemContent);
     }
 
