@@ -22,5 +22,9 @@ public class CustomerNumber {
     public boolean isEmpty() {
         return value.isEmpty();
     }
+
+    public boolean isSame(CustomerNumber other) {
+        return value.equals(other.value);
+    }
 }
 

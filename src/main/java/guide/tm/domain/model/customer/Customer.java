@@ -29,4 +29,8 @@ public class Customer {
     public CustomerType type() {
         return type;
     }
+
+    public boolean isSame(Customer other) {
+        return code.isSame(other.code);
+    }
 }
