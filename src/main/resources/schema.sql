@@ -105,18 +105,6 @@ CREATE TABLE 受注.消費税
     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE SCHEMA 引当;
-CREATE TABLE 引当.引当
-(
-    引当番号 UUID NOT NULL,
-    受注番号 UUID NOT NULL,
-    受注明細番号 UUID NOT NULL,
-    引当数量 NUMERIC(3) NOT NULL,
-    PRIMARY KEY (引当番号),
-    FOREIGN KEY (受注番号, 受注明細番号) REFERENCES 受注.受注明細 (受注番号, 受注明細番号),
-    作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
 CREATE SCHEMA 倉庫;
 CREATE TABLE 倉庫.倉庫
 (
@@ -124,6 +112,21 @@ CREATE TABLE 倉庫.倉庫
     倉庫名称 VARCHAR(20) NOT NULL,
     倉庫住所 VARCHAR(40) NOT NULL,
     PRIMARY KEY (倉庫コード),
+    作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE SCHEMA 引当;
+CREATE TABLE 引当.引当
+(
+    引当番号 UUID NOT NULL,
+    受注番号 UUID NOT NULL,
+    受注明細番号 UUID NOT NULL,
+    倉庫コード VARCHAR(8) NOT NULL,
+    引当数量 NUMERIC(3) NOT NULL,
+    PRIMARY KEY (引当番号),
+    FOREIGN KEY (受注番号, 受注明細番号) REFERENCES 受注.受注明細 (受注番号, 受注明細番号),
+    FOREIGN KEY (倉庫コード) REFERENCES 倉庫.倉庫 (倉庫コード),
     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 

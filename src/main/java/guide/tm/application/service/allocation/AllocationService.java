@@ -1,10 +1,12 @@
 package guide.tm.application.service.allocation;
 
 import guide.tm.application.service.stock.StockService;
+import guide.tm.domain.model.allocation.allocation.AllocationContents;
 import guide.tm.domain.model.allocation.allocation.Allocations;
 import guide.tm.domain.model.allocation.stock.Stocks;
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem;
+import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,11 +24,33 @@ public class AllocationService {
     }
 
     /**
+     * 受注の引当を行う
+     */
+    public void allocateSalesOrder(SalesOrder salesOrder, SalesOrderNumber salesOrderNumber) {
+        salesOrder.salesOrderItems().list().forEach(it -> allocate(it, salesOrderNumber));
+    }
+
+    /**
      * 引当する
      */
     public void allocate(SalesOrderItem salesOrderItem, SalesOrderNumber salesOrderNumber) {
         Stocks stocks = stockService.stocksOf(salesOrderItem.product());
-        Allocations allocations = stocks.allocate(salesOrderItem.quantity());
-        allocationRepository.register(allocations, salesOrderNumber, salesOrderItem);
+        AllocationContents allocationContents = stocks.allocate(salesOrderItem.quantity());
+        allocationRepository.register(allocationContents, salesOrderNumber, salesOrderItem);
     }
+
+    public Allocations allocationsOf(SalesOrderNumber salesOrderNumber) {
+        return allocationRepository.allocationsOf(salesOrderNumber);
+    }
+
+//    /**
+//     * 引当する
+//     */
+//    public void allocate(BundleProductOrderItem bundleProductOrderItem, SalesOrderNumber salesOrderNumber) {
+//        bundleProductOrderItem.product().bundleProductItems().list().forEach(it -> {
+//            Stocks stocks = stockService.stocksOf(it);
+//            Allocations allocations = stocks.allocate(bundleProductOrderItem.quantity());
+//            allocationRepository.register(allocations, salesOrderNumber, it);
+//        });
+//    }
 }

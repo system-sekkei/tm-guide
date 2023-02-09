@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>受注詳細</title>
@@ -63,7 +63,7 @@
         <td class="text-end" th:text="${salesOrderItem.product.unitPrice}">879</td>
         <td class="text-end" th:text="${salesOrderItem.quantity}">2</td>
       </tr>
-      <span th:each="bundleProductOrderItem: ${salesOrder.bundleProductOrderItems.list}">
+      <th:block th:each="bundleProductOrderItem: ${salesOrder.bundleProductOrderItems.list}">
         <tr>
           <td class="text-center">
             <i class="bi bi-bag-check"></i>
@@ -79,12 +79,16 @@
           <td class="text-end">--</td>
           <td class="text-end">--</td>
         </tr>
-      </span>
+      </th:block>
     </tbody>
     <tfoot>
     </tfoot>
   </table>
 
+  <hr>
+  <form method="post" th:action="@{/allocate/sales-orders/__${salesOrderNumber}__}">
+    <button type="submit" class="btn btn-success">引当（受注登録完了）</button>
+  </form>
   <hr>
 
   <form method="post" th:action="@{/sales-orders/__${salesOrderNumber}__/items/new}" th:object="${salesOrderItemContent}">

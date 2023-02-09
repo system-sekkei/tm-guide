@@ -84,9 +84,14 @@ class AllocationServiceSpec extends Specification {
     def "引当を登録する"() {
         given:
         def 受注明細 = 受注明細Service.salesOrderItemsOf(受注番号).list.get(0)
+
         when: "引当して、結果を登録する"
         sut.allocate(受注明細, 受注番号)
-        then: ""
+
+        then: "引当を取得できる"
+        def 引当結果= sut.allocationsOf(受注番号)
+        and: "引当が3件"
+        assert 引当結果.list().size() == 3
 
     }
 }

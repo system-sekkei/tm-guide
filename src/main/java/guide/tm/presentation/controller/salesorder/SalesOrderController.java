@@ -41,7 +41,6 @@ class SalesOrderController {
         return "sales-order/sales-order-list";
     }
 
-
     @ModelAttribute("salesOrderItemContent")
     SalesOrderItemContent salesOrderItemContent() {
         return new SalesOrderItemContent();
