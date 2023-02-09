@@ -10,4 +10,8 @@ public class SalesOrderItemNumber {
     public SalesOrderItemNumber(String value) {
         this.value = value;
     }
+
+    public boolean isSame(SalesOrderItemNumber other) {
+        return value.equals(other.value);
+    }
 }

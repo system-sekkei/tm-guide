@@ -6,7 +6,7 @@ package guide.tm.domain.model.salesorder.order;
 public class SalesOrderNumber {
     String value;
 
-    @Deprecated SalesOrderNumber() {
+    public SalesOrderNumber() {
         this("");
     }
 
@@ -17,5 +17,9 @@ public class SalesOrderNumber {
     @Override
     public String toString() {
         return value;
+    }
+
+    public boolean isSame(SalesOrderNumber other) {
+        return value.equals(other.value);
     }
 }

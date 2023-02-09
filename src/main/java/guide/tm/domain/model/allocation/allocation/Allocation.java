@@ -1,5 +1,6 @@
 package guide.tm.domain.model.allocation.allocation;
 
+import guide.tm.domain.model.primitive.Quantity;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemNumber;
 
@@ -13,7 +14,8 @@ public class Allocation {
     SalesOrderItemNumber salesOrderItemNumber;
     AllocationContents allocationContents;
 
-    @Deprecated Allocation() {
+    Allocation() {
+        this(new AllocationId(), new SalesOrderNumber(), new SalesOrderItemNumber(), new AllocationContents());
     }
 
     public Allocation(
@@ -25,5 +27,13 @@ public class Allocation {
         this.salesOrderNumber = salesOrderNumber;
         this.salesOrderItemNumber = salesOrderItemNumber;
         this.allocationContents = allocationContents;
+    }
+
+    Quantity allocatedQuantity() {
+        return allocationContents.allocatedQuantity();
+    }
+
+    boolean isSame(SalesOrderItemNumber salesOrderItemNumber) {
+        return this.salesOrderItemNumber.isSame(salesOrderItemNumber);
     }
 }

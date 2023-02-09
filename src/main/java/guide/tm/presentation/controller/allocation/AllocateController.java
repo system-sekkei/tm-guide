@@ -16,10 +16,16 @@ class AllocateController {
     SalesOrderScenario salesOrderScenario;
     AllocationService allocationService;
 
+    AllocateController(SalesOrderScenario salesOrderScenario, AllocationService allocationService) {
+        this.salesOrderScenario = salesOrderScenario;
+        this.allocationService = allocationService;
+    }
+
     @PostMapping
     String allocateSalesOrder(@PathVariable SalesOrderNumber salesOrderNumber) {
         SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderNumber);
         allocationService.allocateSalesOrder(salesOrder, salesOrderNumber);
-        return "TODO";
+        return "redirect:/sales-orders/{salesOrderNumber}/allocations";
     }
+
 }

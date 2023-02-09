@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>引当状況</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+</head>
+<body>
+
+<div class="container">
+  <h1 class="display-2">引当状況</h1>
+
+  <div class="mb-3 row">
+    <label for="customerName" class="col-sm-2 col-form-label">顧客名称</label>
+    <div class="col-sm-4">
+      <span id="customerName" class="font-weight-bold" th:text="${salesOrder.salesOrderContent.customer.name}">岸田 文雄</span>
+    </div>
+    <label for="orderedDate" class="col-sm-2 col-form-label">受注日</label>
+    <div class="col-sm-4">
+      <span id="orderedDate" class="font-weight-bold" th:text="${salesOrder.salesOrderContent.orderedDate}">2023-01-01</span>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label for="total" class="col-sm-2 col-form-label">受注金額</label>
+    <div class="col-sm-2">
+      <input type="text" readonly class="form-control-plaintext" id="total" th:value="${salesOrder.totalAmount}">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="amountExcludingTax" class="col-sm-2 col-form-label">税抜き金額</label>
+    <div class="col-sm-2">
+      <input type="text" readonly class="form-control-plaintext" id="amountExcludingTax" th:value="${salesOrder.amountExcludingTax}">
+    </div>
+    <label for="tax" class="col-sm-2 col-form-label">消費税</label>
+    <div class="col-sm-2">
+      <input type="text" readonly class="form-control-plaintext" id="tax" th:value="${salesOrder.tax}">
+    </div>
+    <label for="shippingFee" class="col-sm-2 col-form-label">送料</label>
+    <div class="col-sm-2">
+      <input type="text" readonly class="form-control-plaintext" id="shippingFee" th:value="${salesOrder.shippingFee.amount}">
+    </div>
+  </div>
+
+
+  <table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th></th>
+      <th>商品名称</th>
+      <th class="text-end">商品単価</th>
+      <th class="text-end">数量</th>
+      <th class="text-center">引当済み</th>
+      <th class="text-end">引当数量</th>
+      <th class="text-end">引当残</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="salesOrderItemAllocation: ${salesOrderAllocation.salesOrderItemAllocations}">
+      <td class="text-center">
+        <i class="bi bi-bag-check"></i>
+      </td>
+      <td th:text="${salesOrderItemAllocation.salesOrderItem.product.name}">個別商品名</td>
+      <td class="text-end" th:text="${salesOrderItemAllocation.salesOrderItem.product.unitPrice}">879</td>
+      <td class="text-end" th:text="${salesOrderItemAllocation.salesOrderItem.quantity}">2</td>
+      <td class="text-center" th:if="${salesOrderItemAllocation.isAllAllocated}">
+        <span class="btn btn-info">引当済み</span>
+      </td>
+      <td class="text-center" th:unless="${salesOrderItemAllocation.isAllAllocated}">
+        <label class="btn btn-warning">引当残あり</label>
+      </td>
+      <td class="text-end" th:text="${salesOrderItemAllocation.allocatedQuantity}">2</td>
+      <td class="text-end" th:text="${salesOrderItemAllocation.remainingQuantity}">2</td>
+    </tr>
+
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </table>
+
+</div>
+
+
+
+</body>
+</html>

@@ -32,6 +32,9 @@ public class Quantity {
         return new Quantity(value - other.value);
     }
 
+    public boolean isEqual(Quantity other) {
+        return value == other.value;
+    }
     @Override
     public String toString() {
         return String.valueOf(value);

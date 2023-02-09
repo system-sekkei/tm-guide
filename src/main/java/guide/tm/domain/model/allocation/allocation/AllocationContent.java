@@ -20,4 +20,8 @@ public class AllocationContent {
         this.wareHouseCode = wareHouseCode;
         this.allocatedQuantity = allocatedQuantity;
     }
+
+    public Quantity allocatedQuantity() {
+        return allocatedQuantity;
+    }
 }
