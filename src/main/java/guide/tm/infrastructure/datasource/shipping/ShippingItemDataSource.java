@@ -1,8 +1,8 @@
 package guide.tm.infrastructure.datasource.shipping;
 
 import guide.tm.application.service.shipping.ShippingItemRepository;
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemNumber;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemNumber;
 import guide.tm.domain.model.shipping.content.ShippingNumber;
 import guide.tm.domain.model.shipping.item.ShippingItem;
 import guide.tm.domain.model.shipping.item.ShippingItems;
@@ -30,5 +30,10 @@ public class ShippingItemDataSource implements ShippingItemRepository {
     @Override
     public ShippingItems shippingItemsOf(ShippingNumber shippingNumber) {
         return new ShippingItems(shippingItemMapper.shippingItemsOf(shippingNumber));
+    }
+
+    @Override
+    public ShippingItems shippingItems(SalesOrderNumber salesOrderNumber) {
+        return new ShippingItems(shippingItemMapper.shippingItems(salesOrderNumber));
     }
 }

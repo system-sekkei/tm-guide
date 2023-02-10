@@ -83,6 +83,27 @@
   <form method="post" th:action="@{/shipping/sales-order/__${salesOrderNumber}__}">
     <button type="submit" class="btn btn-primary">出荷登録</button>
   </form>
+
+  <hr>
+
+  <h2 class="display-3">出荷状況</h2>
+  <table class="table table-striped table-hover" th:unless="${shippingItems.isEmpty}">
+    <thead>
+    <tr>
+      <th>商品名称</th>
+      <th class="text-end">数量</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="shippingItem: ${shippingItems.list}">
+      <td th:text="${shippingItem.individualProduct.name}">個別商品名</td>
+      <td class="text-end" th:text="${shippingItem.shippingQuantity()}">2</td>
+    </tr>
+
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </table>
 </div>
 
 

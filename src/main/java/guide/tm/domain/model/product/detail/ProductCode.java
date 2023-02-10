@@ -18,4 +18,8 @@ public class ProductCode {
     public String toString() {
         return value;
     }
+
+    public boolean isSame(ProductCode other) {
+        return value.equals(other.value);
+    }
 }

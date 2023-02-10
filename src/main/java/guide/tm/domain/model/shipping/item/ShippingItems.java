@@ -1,5 +1,7 @@
 package guide.tm.domain.model.shipping.item;
 
+import guide.tm.domain.model.product.individual.IndividualProduct;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +12,7 @@ public class ShippingItems {
 
     List<ShippingItem> list;
 
-    public ShippingItems() {
+    @Deprecated ShippingItems() {
         this(new ArrayList<>());
     }
 
@@ -20,5 +22,31 @@ public class ShippingItems {
 
     public List<ShippingItem> list() {
         return list;
+    }
+
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+
+    public ShippingItems toBeShipped(ShippingItems shippedItems) {
+        return new ShippingItems(
+                list.stream().filter(shippingItem -> {
+                    if (!shippedItems.contains(shippingItem.individualProduct)) return true;
+                    ShippingItem shippedItem = shippedItems.shippingItemOf(shippingItem.individualProduct);
+                    return !shippedItem.shippingQuantity.isEqual(shippedItem.shippingQuantity);
+                }).toList());
+    }
+
+    private boolean contains(IndividualProduct product) {
+        return list.stream()
+                .anyMatch(shippingItem -> shippingItem.individualProduct.code().isSame(product.code()));
+    }
+
+    private ShippingItem shippingItemOf(IndividualProduct product) {
+        return list.stream()
+                .filter(shippingItem -> shippingItem.individualProduct.code().isSame(product.code()))
+                .findFirst()
+                .orElseThrow()
+                ;
     }
 }

@@ -5,6 +5,7 @@ import guide.tm.application.service.allocation.AllocationService;
 import guide.tm.application.service.product.bundle.BundleProductService;
 import guide.tm.application.service.product.individual.ProductService;
 import guide.tm.application.service.salesorder.SalesOrderService;
+import guide.tm.application.service.shipping.ShippingItemService;
 import guide.tm.domain.model.allocation.allocation.Allocations;
 import guide.tm.domain.model.allocation.allocation.SalesOrderAllocation;
 import guide.tm.domain.model.product.bundle.BundleProducts;
@@ -14,6 +15,7 @@ import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
 import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItemContent;
 import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemContent;
+import guide.tm.domain.model.shipping.item.ShippingItems;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,18 +32,21 @@ class SalesOrderController {
     ProductService productService;
     BundleProductService bundleProductService;
     AllocationService allocationService;
+    ShippingItemService shippingItemService;
 
     SalesOrderController(
             SalesOrderScenario salesOrderScenario,
             SalesOrderService salesOrderService,
             ProductService productService,
             BundleProductService bundleProductService,
-            AllocationService allocationService) {
+            AllocationService allocationService,
+            ShippingItemService shippingItemService) {
         this.salesOrderScenario = salesOrderScenario;
         this.salesOrderService = salesOrderService;
         this.productService = productService;
         this.bundleProductService = bundleProductService;
         this.allocationService = allocationService;
+        this.shippingItemService = shippingItemService;
     }
 
     @GetMapping
@@ -75,11 +80,13 @@ class SalesOrderController {
 
     @GetMapping("{salesOrderNumber}/allocations")
     String allocations(@PathVariable("salesOrderNumber") SalesOrderNumber salesOrderNumber,
-                      Model model) {
+                       Model model) {
         SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderNumber);
         model.addAttribute("salesOrder", salesOrder);
         Allocations allocations = allocationService.allocationsOf(salesOrderNumber);
         model.addAttribute("salesOrderAllocation", new SalesOrderAllocation(salesOrderNumber, salesOrder, allocations));
+        ShippingItems shippingItems = shippingItemService.shippingItems(salesOrderNumber);
+        model.addAttribute("shippingItems", shippingItems);
         return "sales-order/allocations";
     }
 

@@ -27,4 +27,12 @@ public class ShippingItem {
     public static ShippingItem from(SalesOrderItem salesOrderItem) {
         return new ShippingItem(salesOrderItem.salesOrderItemNumber(), salesOrderItem.product(), salesOrderItem.quantity());
     }
+
+    public IndividualProduct individualProduct() {
+        return individualProduct;
+    }
+
+    public Quantity shippingQuantity() {
+        return shippingQuantity;
+    }
 }

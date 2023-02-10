@@ -1,7 +1,7 @@
 package guide.tm.infrastructure.datasource.shipping;
 
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemNumber;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemNumber;
 import guide.tm.domain.model.shipping.content.ShippingNumber;
 import guide.tm.domain.model.shipping.item.ShippingItem;
 import org.apache.ibatis.annotations.Mapper;
@@ -22,4 +22,7 @@ interface ShippingItemMapper {
 
     List<ShippingItem> shippingItemsOf(
             @Param("shippingNumber") ShippingNumber shippingNumber);
+
+    List<ShippingItem> shippingItems(
+            @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber);
 }

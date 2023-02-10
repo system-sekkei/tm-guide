@@ -1,7 +1,7 @@
 package guide.tm.application.service.shipping;
 
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem;
 import guide.tm.domain.model.shipping.content.ShippingNumber;
 import guide.tm.domain.model.shipping.item.ShippingItem;
 import guide.tm.domain.model.shipping.item.ShippingItems;
@@ -28,5 +28,9 @@ public class ShippingItemService {
      */
     public ShippingItems shippingItemsOf(ShippingNumber shippingNumber) {
         return shippingItemRepository.shippingItemsOf(shippingNumber);
+    }
+
+    public ShippingItems shippingItems(SalesOrderNumber salesOrderNumber) {
+        return shippingItemRepository.shippingItems(salesOrderNumber);
     }
 }

@@ -21,11 +21,26 @@
             出荷番号,
             出荷明細番号,
             受注番号,
-            受注明細番号,
+            受注明細番号 AS "salesOrderItemNumber.value",
             商品コード AS "individualProduct.code.value",
             出荷数量 AS "shippingQuantity.value"
         FROM 出荷.出荷明細
         WHERE 出荷番号 = #{shippingNumber.value}
+    </select>
+
+    <select id="shippingItems" resultType="guide.tm.domain.model.shipping.item.ShippingItem">
+        SELECT
+            出荷番号,
+            出荷明細番号,
+            受注番号,
+            受注明細番号 AS "salesOrderItemNumber.value",
+            出荷明細.商品コード AS "individualProduct.code.value",
+            商品.商品名称 AS "individualProduct.name.value",
+            商品.商品単価 AS "individualProduct.unitPrice.amount.value",
+            出荷数量 AS "shippingQuantity.value"
+        FROM 出荷.出荷明細
+        INNER JOIN 商品.商品 ON 商品.商品コード = 出荷明細.商品コード
+        WHERE 受注番号 = #{salesOrderNumber.value}
     </select>
 
 </mapper>
