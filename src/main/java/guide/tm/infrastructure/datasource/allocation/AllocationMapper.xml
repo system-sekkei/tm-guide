@@ -5,11 +5,12 @@
 <mapper namespace="guide.tm.infrastructure.datasource.allocation.AllocationMapper">
 
     <insert id="register">
-        INSERT INTO 引当.引当 (引当番号, 受注番号, 受注明細番号, 倉庫コード, 引当数量)
+        INSERT INTO 引当.引当 (引当番号, 受注番号, 受注明細番号, 商品コード, 倉庫コード, 引当数量)
         VALUES (
                 #{allocationId},
                 #{salesOrderNumber.value},
-                #{salesOrderItem.salesOrderItemNumber.value},
+                #{salesOrderItemNumber.value},
+                #{product.code.value},
                 #{allocationContent.wareHouseCode.value},
                 #{allocationContent.allocatedQuantity.value}
                )
@@ -19,9 +20,21 @@
         INSERT INTO 在庫.引当済在庫 (引当番号, 商品コード, 倉庫コード, 引当数量)
         VALUES (
                 #{allocationId},
-                #{salesOrderItem.salesOrderItemContent.product.code.value},
+                #{product.code.value},
                 #{allocationContent.wareHouseCode.value},
                 #{allocationContent.allocatedQuantity.value}
+               )
+    </insert>
+
+    <insert id="registerBundleProduct">
+        INSERT INTO 引当.セット商品引当 (引当番号, 受注番号, 受注明細番号, 商品コード, 倉庫コード, 引当数量)
+        VALUES (
+                   #{allocationId},
+                   #{salesOrderNumber.value},
+                   #{salesOrderItemNumber.value},
+                   #{product.code.value},
+                   #{allocationContent.wareHouseCode.value},
+                   #{allocationContent.allocatedQuantity.value}
                )
     </insert>
 

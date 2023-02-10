@@ -6,6 +6,7 @@ import guide.tm.domain.model.allocation.allocation.Allocations;
 import guide.tm.domain.model.allocation.stock.Stocks;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItem;
 import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,7 @@ public class AllocationService {
      */
     public void allocateSalesOrder(SalesOrder salesOrder, SalesOrderNumber salesOrderNumber) {
         salesOrder.salesOrderItems().list().forEach(it -> allocate(it, salesOrderNumber));
+        salesOrder.bundleProductOrderItems().list().forEach(it -> allocate(it, salesOrderNumber));
     }
 
     /**
@@ -43,14 +45,14 @@ public class AllocationService {
         return allocationRepository.allocationsOf(salesOrderNumber);
     }
 
-//    /**
-//     * 引当する
-//     */
-//    public void allocate(BundleProductOrderItem bundleProductOrderItem, SalesOrderNumber salesOrderNumber) {
-//        bundleProductOrderItem.product().bundleProductItems().list().forEach(it -> {
-//            Stocks stocks = stockService.stocksOf(it);
-//            Allocations allocations = stocks.allocate(bundleProductOrderItem.quantity());
-//            allocationRepository.register(allocations, salesOrderNumber, it);
-//        });
-//    }
+    /**
+     * 引当する
+     */
+    public void allocate(BundleProductOrderItem bundleProductOrderItem, SalesOrderNumber salesOrderNumber) {
+        bundleProductOrderItem.product().bundleProductItems().list().forEach(it -> {
+            Stocks stocks = stockService.stocksOf(it);
+            AllocationContents allocationContents = stocks.allocate(bundleProductOrderItem.quantity());
+            allocationRepository.register(allocationContents, salesOrderNumber, bundleProductOrderItem.salesOrderItemNumber(), it);
+        });
+    }
 }
