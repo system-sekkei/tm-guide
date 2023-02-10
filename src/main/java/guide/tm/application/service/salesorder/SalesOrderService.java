@@ -1,5 +1,6 @@
 package guide.tm.application.service.salesorder;
 
+import guide.tm.domain.model.customer.CustomerNumber;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
@@ -37,6 +38,14 @@ public class SalesOrderService {
      */
     public SalesOrderSummaries salesOrderSummaries() {
         return salesORderRepository.salesOrderSummaries();
+    }
+
+
+    /**
+     * 受注の一覧を取得する
+     */
+    public SalesOrderSummaries salesOrderSummariesOf(CustomerNumber customerNumber) {
+        return salesORderRepository.salesOrderSummariesOf(customerNumber);
     }
 
     /**

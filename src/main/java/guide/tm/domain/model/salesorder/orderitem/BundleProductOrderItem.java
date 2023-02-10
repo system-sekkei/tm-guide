@@ -40,4 +40,8 @@ public class BundleProductOrderItem {
     public Quantity quantity() {
         return bundleProductOrderItemContent.quantity;
     }
+
+    public BundleProductOrderItemContent bundleProductOrderItemContent() {
+        return bundleProductOrderItemContent;
+    }
 }

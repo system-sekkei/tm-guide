@@ -79,11 +79,7 @@ class SalesOrderController {
         SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderNumber);
         model.addAttribute("salesOrder", salesOrder);
         Allocations allocations = allocationService.allocationsOf(salesOrderNumber);
-        model.addAttribute("salesOrderAllocation", new SalesOrderAllocation(salesOrder, allocations));
-//        IndividualProducts individualProducts = productService.products();
-//        model.addAttribute("products", individualProducts);
-//        BundleProducts bundleProducts = bundleProductService.bundleProducts();
-//        model.addAttribute("bundleProducts", bundleProducts);
+        model.addAttribute("salesOrderAllocation", new SalesOrderAllocation(salesOrderNumber, salesOrder, allocations));
         return "sales-order/allocations";
     }
 

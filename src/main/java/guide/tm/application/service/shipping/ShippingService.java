@@ -1,7 +1,9 @@
 package guide.tm.application.service.shipping;
 
+import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.shipping.content.Shipping;
 import guide.tm.domain.model.shipping.content.ShippingNumber;
+import guide.tm.domain.model.shipping.item.ShippingItems;
 import org.springframework.stereotype.Service;
 
 /**
@@ -27,5 +29,9 @@ public class ShippingService {
      */
     public Shipping shippingOf(ShippingNumber shippingNumber) {
         return shippingRepository.shippingOf(shippingNumber);
+    }
+
+    public void registerItems(ShippingNumber shippingNumber, SalesOrderNumber salesOrderNumber, ShippingItems shippingItems) {
+        shippingRepository.registerShippingItems(shippingNumber, salesOrderNumber, shippingItems);
     }
 }

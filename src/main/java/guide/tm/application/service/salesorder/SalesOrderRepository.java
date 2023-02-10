@@ -1,5 +1,6 @@
 package guide.tm.application.service.salesorder;
 
+import guide.tm.domain.model.customer.CustomerNumber;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
@@ -15,4 +16,6 @@ public interface SalesOrderRepository {
     TaxContext taxContextOf(SalesOrderNumber salesOrderNumber);
 
     void registerTax(TaxContext taxContext, SalesOrderNumber salesOrderNumber);
+
+    SalesOrderSummaries salesOrderSummariesOf(CustomerNumber customerNumber);
 }

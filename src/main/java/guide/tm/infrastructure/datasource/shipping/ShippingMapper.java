@@ -1,7 +1,9 @@
 package guide.tm.infrastructure.datasource.shipping;
 
+import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.shipping.content.Shipping;
 import guide.tm.domain.model.shipping.content.ShippingNumber;
+import guide.tm.domain.model.shipping.item.ShippingItem;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -15,4 +17,11 @@ interface ShippingMapper {
             @Param("shippingNumber") UUID shippingNumber);
 
     Shipping shippingOf(@Param("shippingNumber") ShippingNumber shippingNumber);
+
+    void registerShippingItem(
+            @Param("shippingNumber") ShippingNumber shippingNumber,
+            @Param("shippingItemNumber") UUID shippingItemNumber,
+            @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber,
+            @Param("shippingItem") ShippingItem shippingItem);
+
 }

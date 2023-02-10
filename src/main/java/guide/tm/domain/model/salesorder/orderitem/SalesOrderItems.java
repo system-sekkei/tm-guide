@@ -48,4 +48,8 @@ public class SalesOrderItems {
     public List<SalesOrderItem> list() {
         return list;
     }
+
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
 }

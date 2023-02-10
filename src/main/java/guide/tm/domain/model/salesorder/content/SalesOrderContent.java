@@ -10,7 +10,6 @@ public class SalesOrderContent {
     Customer customer;
     OrderedDate orderedDate;
 
-//    @Deprecated(since = "for mybatis")
     public SalesOrderContent() {
         this(new Customer(), new OrderedDate());
     }

@@ -32,4 +32,8 @@ public class BundleProductOrderItemContent {
     boolean isQuantitySpecified() {
         return quantity.isGreaterEqualThan(new Quantity(1));
     }
+
+    public BundleProduct product() {
+        return product;
+    }
 }

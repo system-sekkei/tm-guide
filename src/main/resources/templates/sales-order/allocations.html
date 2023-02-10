@@ -58,7 +58,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="salesOrderItemAllocation: ${salesOrderAllocation.salesOrderItemAllocations}">
+    <tr th:each="salesOrderItemAllocation: ${salesOrderAllocation.salesOrderItemAllocations.list}">
       <td class="text-center">
         <i class="bi bi-bag-check"></i>
       </td>
@@ -80,6 +80,9 @@
     </tfoot>
   </table>
 
+  <form method="post" th:action="@{/shipping/sales-order/__${salesOrderNumber}__}">
+    <button type="submit" class="btn btn-primary">出荷登録</button>
+  </form>
 </div>
 
 
