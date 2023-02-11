@@ -7,11 +7,13 @@ public class SalesOrderAllocation {
     SalesOrderNumber salesOrderNumber;
     SalesOrder salesOrder;
     Allocations allocations;
+    BundleAllocations bundleAllocations;
 
-    public SalesOrderAllocation(SalesOrderNumber salesOrderNumber, SalesOrder salesOrder, Allocations allocations) {
+    public SalesOrderAllocation(SalesOrderNumber salesOrderNumber, SalesOrder salesOrder, Allocations allocations, BundleAllocations bundleAllocations) {
         this.salesOrderNumber = salesOrderNumber;
         this.salesOrder = salesOrder;
         this.allocations = allocations;
+        this.bundleAllocations = bundleAllocations;
     }
 
     public SalesOrderItemAllocations salesOrderItemAllocations() {
@@ -21,6 +23,15 @@ public class SalesOrderAllocation {
                             Allocation allocation = allocations.allocationOf(salesOrderItem);
                             return new SalesOrderItemAllocation(salesOrderItem, allocation);
                         }).toList());
+    }
+
+    public BundleOrderItemAllocations bundleProductOrderItemAllocations() {
+        return new BundleOrderItemAllocations(
+                salesOrder.bundleProductOrderItems().list().stream()
+                .map(bundleProductOrderItem -> {
+                    BundleAllocation bundleAllocation = bundleAllocations.allocationOf(bundleProductOrderItem);
+                    return new BundleOrderItemAllocation(bundleProductOrderItem, bundleAllocation);
+                }).toList());
     }
 
     public SalesOrder salesOrder() {

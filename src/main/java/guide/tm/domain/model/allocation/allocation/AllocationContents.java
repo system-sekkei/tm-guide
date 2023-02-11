@@ -2,16 +2,13 @@ package guide.tm.domain.model.allocation.allocation;
 
 import guide.tm.domain.model.primitive.Quantity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AllocationContents {
     List<AllocationContent> list;
 
-    AllocationContents() {
-        this(new ArrayList<>());
+    @Deprecated AllocationContents() {
     }
-
 
     public AllocationContents(List<AllocationContent> list) {
         this.list = list;
@@ -21,10 +18,13 @@ public class AllocationContents {
         return list;
     }
 
+    public boolean isAllAllocated(Quantity quantity) {
+        return list.stream().allMatch(allocationContent -> allocationContent.isAllocated(quantity));
+    }
+
     public Quantity allocatedQuantity() {
-        return list.stream()
-                .map(AllocationContent::allocatedQuantity)
-                .reduce(Quantity::add)
-                .orElse(new Quantity(0));
+        return list.stream().map(AllocationContent::allocatedQuantity)
+                .min(Quantity::compare)
+                .orElse(new Quantity());
     }
 }

@@ -7,6 +7,7 @@ import guide.tm.application.service.product.individual.ProductService;
 import guide.tm.application.service.salesorder.SalesOrderService;
 import guide.tm.application.service.shipping.ShippingItemService;
 import guide.tm.domain.model.allocation.allocation.Allocations;
+import guide.tm.domain.model.allocation.allocation.BundleAllocations;
 import guide.tm.domain.model.allocation.allocation.SalesOrderAllocation;
 import guide.tm.domain.model.product.bundle.BundleProducts;
 import guide.tm.domain.model.product.individual.IndividualProducts;
@@ -84,7 +85,10 @@ class SalesOrderController {
         SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderNumber);
         model.addAttribute("salesOrder", salesOrder);
         Allocations allocations = allocationService.allocationsOf(salesOrderNumber);
-        model.addAttribute("salesOrderAllocation", new SalesOrderAllocation(salesOrderNumber, salesOrder, allocations));
+
+        BundleAllocations bundleAllocations = allocationService.bundleAllocations(salesOrderNumber);
+
+        model.addAttribute("salesOrderAllocation", new SalesOrderAllocation(salesOrderNumber, salesOrder, allocations, bundleAllocations));
         ShippingItems shippingItems = shippingItemService.shippingItems(salesOrderNumber);
         model.addAttribute("shippingItems", shippingItems);
         return "sales-order/allocations";

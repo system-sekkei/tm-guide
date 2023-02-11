@@ -1,7 +1,7 @@
 package guide.tm.domain.model.allocation.stock;
 
-import guide.tm.domain.model.allocation.allocation.AllocationContent;
-import guide.tm.domain.model.allocation.allocation.AllocationContents;
+import guide.tm.domain.model.allocation.allocation.AllocatedLocation;
+import guide.tm.domain.model.allocation.allocation.AllocatedLocations;
 import guide.tm.domain.model.primitive.Quantity;
 
 import java.util.ArrayList;
@@ -18,18 +18,18 @@ public class Stocks {
         this.list = list;
     }
 
-    public AllocationContents allocate(Quantity orderedQuantity) {
-        List<AllocationContent> result = new ArrayList<>();
+    public AllocatedLocations allocate(Quantity orderedQuantity) {
+        List<AllocatedLocation> result = new ArrayList<>();
         Quantity remaining = orderedQuantity;
         for (Stock stock : list) {
             if (stock.quantity.isGreaterEqualThan(remaining)) {
-                result.add(new AllocationContent(stock.wareHouseCode, remaining));
+                result.add(new AllocatedLocation(stock.wareHouseCode, remaining));
                 break;
             }
-            result.add(new AllocationContent(stock.wareHouseCode, stock.quantity));
+            result.add(new AllocatedLocation(stock.wareHouseCode, stock.quantity));
             remaining = remaining.subtract(stock.quantity);
         }
-        return new AllocationContents(result);
+        return new AllocatedLocations(result);
     }
 
 }

@@ -1,8 +1,9 @@
 package guide.tm.application.service.allocation;
 
 import guide.tm.application.service.stock.StockService;
-import guide.tm.domain.model.allocation.allocation.AllocationContents;
+import guide.tm.domain.model.allocation.allocation.AllocatedLocations;
 import guide.tm.domain.model.allocation.allocation.Allocations;
+import guide.tm.domain.model.allocation.allocation.BundleAllocations;
 import guide.tm.domain.model.allocation.stock.Stocks;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
@@ -37,12 +38,16 @@ public class AllocationService {
      */
     public void allocate(SalesOrderItem salesOrderItem, SalesOrderNumber salesOrderNumber) {
         Stocks stocks = stockService.stocksOf(salesOrderItem.product());
-        AllocationContents allocationContents = stocks.allocate(salesOrderItem.quantity());
-        allocationRepository.register(allocationContents, salesOrderNumber, salesOrderItem);
+        AllocatedLocations allocatedLocations = stocks.allocate(salesOrderItem.quantity());
+        allocationRepository.register(allocatedLocations, salesOrderNumber, salesOrderItem);
     }
 
     public Allocations allocationsOf(SalesOrderNumber salesOrderNumber) {
         return allocationRepository.allocationsOf(salesOrderNumber);
+    }
+
+    public BundleAllocations bundleAllocations(SalesOrderNumber salesOrderNumber) {
+        return allocationRepository.bundleAllocationsOf(salesOrderNumber);
     }
 
     /**
@@ -51,8 +56,8 @@ public class AllocationService {
     public void allocate(BundleProductOrderItem bundleProductOrderItem, SalesOrderNumber salesOrderNumber) {
         bundleProductOrderItem.product().bundleProductItems().list().forEach(it -> {
             Stocks stocks = stockService.stocksOf(it);
-            AllocationContents allocationContents = stocks.allocate(bundleProductOrderItem.quantity());
-            allocationRepository.register(allocationContents, salesOrderNumber, bundleProductOrderItem.salesOrderItemNumber(), it);
+            AllocatedLocations allocatedLocations  = stocks.allocate(bundleProductOrderItem.quantity());
+            allocationRepository.register(allocatedLocations, salesOrderNumber, bundleProductOrderItem.salesOrderItemNumber(), it);
         });
     }
 }

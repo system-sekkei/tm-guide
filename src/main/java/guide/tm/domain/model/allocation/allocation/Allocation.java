@@ -12,25 +12,25 @@ public class Allocation {
     AllocationId allocationId;
     SalesOrderNumber salesOrderNumber;
     SalesOrderItemNumber salesOrderItemNumber;
-    AllocationContents allocationContents;
+    AllocationContent allocationContent;
 
     Allocation() {
-        this(new AllocationId(), new SalesOrderNumber(), new SalesOrderItemNumber(), new AllocationContents());
+        this(new AllocationId(), new SalesOrderNumber(), new SalesOrderItemNumber(), new AllocationContent());
     }
 
     public Allocation(
             AllocationId allocationId,
             SalesOrderNumber salesOrderNumber,
             SalesOrderItemNumber salesOrderItemNumber,
-            AllocationContents allocationContents) {
+            AllocationContent allocationContent) {
         this.allocationId = allocationId;
         this.salesOrderNumber = salesOrderNumber;
         this.salesOrderItemNumber = salesOrderItemNumber;
-        this.allocationContents = allocationContents;
+        this.allocationContent = allocationContent;
     }
 
     Quantity allocatedQuantity() {
-        return allocationContents.allocatedQuantity();
+        return allocationContent.allocatedQuantity();
     }
 
     boolean isSame(SalesOrderItemNumber salesOrderItemNumber) {

@@ -74,6 +74,22 @@
       <td class="text-end" th:text="${salesOrderItemAllocation.allocatedQuantity}">2</td>
       <td class="text-end" th:text="${salesOrderItemAllocation.remainingQuantity}">2</td>
     </tr>
+    <tr th:each="bundleOrderItemAllocation: ${salesOrderAllocation.bundleProductOrderItemAllocations.list}">
+      <td class="text-center">
+        <i class="bi bi-bag-check"></i>
+      </td>
+      <td th:text="${bundleOrderItemAllocation.bundleProductOrderItem.product.name}">個別商品名</td>
+      <td class="text-end" th:text="${bundleOrderItemAllocation.bundleProductOrderItem.product.unitPrice}">879</td>
+      <td class="text-end" th:text="${bundleOrderItemAllocation.bundleProductOrderItem.quantity}">2</td>
+      <td class="text-center" th:if="${bundleOrderItemAllocation.isAllAllocated}">
+        <span class="btn btn-info">引当済み</span>
+      </td>
+      <td class="text-center" th:unless="${bundleOrderItemAllocation.isAllAllocated}">
+        <label class="btn btn-warning">引当残あり</label>
+      </td>
+      <td class="text-end" th:text="${bundleOrderItemAllocation.allocatedQuantity}">2</td>
+      <td class="text-end" th:text="${bundleOrderItemAllocation.remainingQuantity}">2</td>
+    </tr>
 
     </tbody>
     <tfoot>

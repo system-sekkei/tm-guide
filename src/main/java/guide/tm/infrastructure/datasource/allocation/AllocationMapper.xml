@@ -11,8 +11,8 @@
                 #{salesOrderNumber.value},
                 #{salesOrderItemNumber.value},
                 #{product.code.value},
-                #{allocationContent.wareHouseCode.value},
-                #{allocationContent.allocatedQuantity.value}
+                #{allocatedLocation.wareHouseCode.value},
+                #{allocatedLocation.allocatedQuantity.value}
                )
     </insert>
 
@@ -21,8 +21,8 @@
         VALUES (
                 #{allocationId},
                 #{product.code.value},
-                #{allocationContent.wareHouseCode.value},
-                #{allocationContent.allocatedQuantity.value}
+                #{allocatedLocation.wareHouseCode.value},
+                #{allocatedLocation.allocatedQuantity.value}
                )
     </insert>
 
@@ -33,8 +33,8 @@
                    #{salesOrderNumber.value},
                    #{salesOrderItemNumber.value},
                    #{product.code.value},
-                   #{allocationContent.wareHouseCode.value},
-                   #{allocationContent.allocatedQuantity.value}
+                   #{allocatedLocation.wareHouseCode.value},
+                   #{allocatedLocation.allocatedQuantity.value}
                )
     </insert>
 
@@ -42,8 +42,8 @@
         <id property="allocationId.value" column="引当番号"/>
         <result property="salesOrderNumber.value" column="受注番号"/>
         <result property="salesOrderItemNumber.value" column="受注明細番号"/>
-        <collection property="allocationContents.list"
-                    ofType="guide.tm.domain.model.allocation.allocation.AllocationContent">
+        <collection property="allocationContent.allocatedLocations.list"
+                    ofType="guide.tm.domain.model.allocation.allocation.AllocatedLocation">
             <result property="wareHouseCode.value" column="倉庫コード"/>
             <result property="allocatedQuantity.value" column="引当数量"/>
         </collection>
@@ -57,6 +57,31 @@
             倉庫コード,
             引当数量
         FROM 引当.引当
+        WHERE 受注番号 = #{salesOrderNumber.value}
+    </select>
+
+    <resultMap id="BundleAllocation" type="guide.tm.domain.model.allocation.allocation.BundleAllocation">
+        <result property="salesOrderNumber.value" column="受注番号"/>
+        <result property="salesOrderItemNumber.value" column="受注明細番号"/>
+        <collection property="allocationContents.list"
+                    ofType="guide.tm.domain.model.allocation.allocation.AllocationContent">
+            <result property="productCode.value" column="商品コード"/>
+            <collection property="allocatedLocations.list" ofType="guide.tm.domain.model.allocation.allocation.AllocatedLocation">
+                <result property="wareHouseCode.value" column="倉庫コード"/>
+                <result property="allocatedQuantity.value" column="引当数量"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <select id="bundleAllocationsOf" resultMap="BundleAllocation">
+        SELECT
+            引当番号,
+            受注番号,
+            受注明細番号,
+            商品コード,
+            倉庫コード,
+            引当数量
+        FROM 引当.セット商品引当
         WHERE 受注番号 = #{salesOrderNumber.value}
     </select>
 </mapper>

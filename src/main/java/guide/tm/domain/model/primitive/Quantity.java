@@ -39,4 +39,8 @@ public class Quantity {
     public String toString() {
         return String.valueOf(value);
     }
+
+    public int compare(Quantity other) {
+        return Integer.compare(value, other.value);
+    }
 }

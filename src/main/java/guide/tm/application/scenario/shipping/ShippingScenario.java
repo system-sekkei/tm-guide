@@ -5,6 +5,7 @@ import guide.tm.application.service.allocation.AllocationService;
 import guide.tm.application.service.shipping.ShippingItemService;
 import guide.tm.application.service.shipping.ShippingService;
 import guide.tm.domain.model.allocation.allocation.Allocations;
+import guide.tm.domain.model.allocation.allocation.BundleAllocations;
 import guide.tm.domain.model.allocation.allocation.SalesOrderAllocation;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
@@ -55,6 +56,7 @@ public class ShippingScenario {
     SalesOrderAllocation salesOrderAllocation(SalesOrderNumber salesOrderNumber) {
         SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderNumber);
         Allocations allocations = allocationService.allocationsOf(salesOrderNumber);
-        return new SalesOrderAllocation(salesOrderNumber, salesOrder, allocations);
+        BundleAllocations bundleAllocations = allocationService.bundleAllocations(salesOrderNumber);
+        return new SalesOrderAllocation(salesOrderNumber, salesOrder, allocations, bundleAllocations);
     }
 }

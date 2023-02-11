@@ -1,7 +1,8 @@
 package guide.tm.infrastructure.datasource.allocation;
 
+import guide.tm.domain.model.allocation.allocation.AllocatedLocation;
 import guide.tm.domain.model.allocation.allocation.Allocation;
-import guide.tm.domain.model.allocation.allocation.AllocationContent;
+import guide.tm.domain.model.allocation.allocation.BundleAllocation;
 import guide.tm.domain.model.product.individual.IndividualProduct;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemNumber;
@@ -16,7 +17,7 @@ interface AllocationMapper {
 
     void register(
             @Param("allocationId") UUID allocationId,
-            @Param("allocationContent") AllocationContent allocationContent,
+            @Param("allocatedLocation") AllocatedLocation allocatedLocation,
             @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber,
             @Param("salesOrderItemNumber") SalesOrderItemNumber salesOrderItemNumber,
             @Param("product") IndividualProduct product
@@ -24,7 +25,7 @@ interface AllocationMapper {
 
     void recordAllocatedStock(
             @Param("allocationId") UUID allocationId,
-            @Param("allocationContent") AllocationContent allocationContent,
+            @Param("allocatedLocation") AllocatedLocation allocatedLocation,
             @Param("product") IndividualProduct product);
 
     List<Allocation> allocationsOf(
@@ -32,10 +33,12 @@ interface AllocationMapper {
 
     void registerBundleProduct(
             @Param("allocationId") UUID allocationId,
-            @Param("allocationContent") AllocationContent allocationContent,
+            @Param("allocatedLocation") AllocatedLocation allocatedLocation,
             @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber,
             @Param("salesOrderItemNumber") SalesOrderItemNumber salesOrderItemNumber,
             @Param("product") IndividualProduct product
     );
 
+    List<BundleAllocation> bundleAllocationsOf(
+            @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber);
 }
