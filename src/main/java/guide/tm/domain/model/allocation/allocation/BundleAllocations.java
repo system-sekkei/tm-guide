@@ -4,6 +4,9 @@ import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItem;
 
 import java.util.List;
 
+/**
+ * セット商品の引当のリスト
+ */
 public class BundleAllocations {
     List<BundleAllocation> list;
 

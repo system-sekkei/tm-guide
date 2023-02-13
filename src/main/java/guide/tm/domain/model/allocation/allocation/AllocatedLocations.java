@@ -5,6 +5,9 @@ import guide.tm.domain.model.primitive.Quantity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 引当場所のリスト
+ */
 public class AllocatedLocations {
 
     List<AllocatedLocation> list;

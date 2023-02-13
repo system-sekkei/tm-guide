@@ -4,6 +4,9 @@ import guide.tm.domain.model.primitive.Quantity;
 
 import java.util.List;
 
+/**
+ * 引当内容のリスト
+ */
 public class AllocationContents {
     List<AllocationContent> list;
 

@@ -5,6 +5,9 @@ import guide.tm.domain.model.product.detail.ProductCode;
 
 import java.util.List;
 
+/**
+ * 引当内容
+ */
 public class AllocationContent {
     ProductCode productCode;
     AllocatedLocations allocatedLocations;

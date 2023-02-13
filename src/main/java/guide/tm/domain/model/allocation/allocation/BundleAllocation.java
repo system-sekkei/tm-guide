@@ -4,6 +4,9 @@ import guide.tm.domain.model.primitive.Quantity;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemNumber;
 
+/**
+ * セット商品の引当
+ */
 public class BundleAllocation {
     SalesOrderNumber salesOrderNumber;
     SalesOrderItemNumber salesOrderItemNumber;

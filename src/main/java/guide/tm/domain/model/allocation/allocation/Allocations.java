@@ -4,6 +4,9 @@ import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem;
 
 import java.util.List;
 
+/**
+ * 引当の一覧
+ */
 public class Allocations {
     List<Allocation> list;
 

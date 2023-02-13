@@ -2,6 +2,9 @@ package guide.tm.domain.model.allocation.allocation;
 
 import java.util.List;
 
+/**
+ * セット品の受注明細と引当のリスト
+ */
 public class BundleOrderItemAllocations {
     List<BundleOrderItemAllocation> list;
 

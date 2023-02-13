@@ -3,6 +3,9 @@ package guide.tm.domain.model.allocation.allocation;
 import guide.tm.domain.model.primitive.Quantity;
 import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem;
 
+/**
+ * 受注明細と引当
+ */
 public class SalesOrderItemAllocation {
     SalesOrderItem salesOrderItem;
     Allocation allocation;
