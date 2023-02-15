@@ -2,6 +2,7 @@ package guide.tm.infrastructure.datasource.allocation;
 
 import guide.tm.application.service.allocation.AllocationRepository;
 import guide.tm.domain.model.allocation.bundle.BundleAllocationNumber;
+import guide.tm.domain.model.allocation.bundle.BundleAllocations;
 import guide.tm.domain.model.allocation.location.AllocatedLocations;
 import guide.tm.domain.model.allocation.single.SingleAllocations;
 import guide.tm.domain.model.product.individual.SingleProduct;
@@ -50,7 +51,12 @@ public class AllocationDataSource implements AllocationRepository {
 
     @Override
     public SingleAllocations singleAllocationsOf(SalesOrderNumber salesOrderNumber) {
-        return null;
+        return new SingleAllocations(allocationMapper.singleAllocationsOf(salesOrderNumber));
+    }
+
+    @Override
+    public BundleAllocations bundleAllocations(SalesOrderNumber salesOrderNumber) {
+        return new BundleAllocations(allocationMapper.bundleAllocationsOf(salesOrderNumber));
     }
 
 }

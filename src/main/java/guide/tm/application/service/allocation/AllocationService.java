@@ -2,6 +2,7 @@ package guide.tm.application.service.allocation;
 
 import guide.tm.application.service.stock.StockService;
 import guide.tm.domain.model.allocation.bundle.BundleAllocationNumber;
+import guide.tm.domain.model.allocation.bundle.BundleAllocations;
 import guide.tm.domain.model.allocation.location.AllocatedLocations;
 import guide.tm.domain.model.allocation.single.SingleAllocations;
 import guide.tm.domain.model.allocation.stock.Stocks;
@@ -48,13 +49,9 @@ public class AllocationService {
     public SingleAllocations singleAllocationsOf(SalesOrderNumber salesOrderNumber) {
         return allocationRepository.singleAllocationsOf(salesOrderNumber);
     }
-//
-//    public BundleAllocations bundleAllocations(SalesOrderNumber salesOrderNumber) {
-//        return allocationRepository.bundleAllocationsOf(salesOrderNumber);
-//    }
 
     /**
-     * 引当する
+     * セット商品の引当を行う
      */
     public void allocate(BundleProductOrderItem bundleProductOrderItem, SalesOrderNumber salesOrderNumber) {
         BundleAllocationNumber bundleAllocationNumber =
@@ -64,5 +61,12 @@ public class AllocationService {
             AllocatedLocations allocatedLocations  = stocks.allocate(bundleProductOrderItem.quantity());
             allocationRepository.registerBundleAllocationItem(bundleAllocationNumber, allocatedLocations, salesOrderNumber, singleProduct);
         });
+    }
+
+    /**
+     * セット商品の引当を取得する
+     */
+    public BundleAllocations bundleAllocations(SalesOrderNumber salesOrderNumber) {
+        return allocationRepository.bundleAllocations(salesOrderNumber);
     }
 }

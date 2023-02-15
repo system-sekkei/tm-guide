@@ -58,28 +58,28 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="salesOrderItemAllocation: ${salesOrderAllocation.salesOrderItemAllocations.list}">
+    <tr th:each="singleOrderItemAllocation: ${salesOrderAllocation.singleOrderItemAllocations.list}">
       <td class="text-center">
         <i class="bi bi-bag-check"></i>
       </td>
-      <td th:text="${salesOrderItemAllocation.singleOrderItem.product.name}">個別商品名</td>
-      <td class="text-end" th:text="${salesOrderItemAllocation.singleOrderItem.product.unitPrice}">879</td>
-      <td class="text-end" th:text="${salesOrderItemAllocation.singleOrderItem.quantity}">2</td>
-      <td class="text-center" th:if="${salesOrderItemAllocation.isAllAllocated}">
+      <td th:text="${singleOrderItemAllocation.singleOrderItem.product.name}">個別商品名</td>
+      <td class="text-end" th:text="${singleOrderItemAllocation.singleOrderItem.product.unitPrice}">879</td>
+      <td class="text-end" th:text="${singleOrderItemAllocation.singleOrderItem.quantity}">2</td>
+      <td class="text-center" th:if="${singleOrderItemAllocation.isAllAllocated}">
         <span class="btn btn-info">引当済み</span>
       </td>
-      <td class="text-center" th:unless="${salesOrderItemAllocation.isAllAllocated}">
+      <td class="text-center" th:unless="${singleOrderItemAllocation.isAllAllocated}">
         <label class="btn btn-warning">引当残あり</label>
       </td>
-      <td class="text-end" th:text="${salesOrderItemAllocation.allocatedQuantity}">2</td>
-      <td class="text-end" th:text="${salesOrderItemAllocation.remainingQuantity}">2</td>
+      <td class="text-end" th:text="${singleOrderItemAllocation.allocatedQuantity}">2</td>
+      <td class="text-end" th:text="${singleOrderItemAllocation.remainingQuantity}">2</td>
     </tr>
-    <tr th:each="bundleOrderItemAllocation: ${salesOrderAllocation.bundleProductOrderItemAllocations.list}">
+    <tr th:each="bundleOrderItemAllocation: ${salesOrderAllocation.bundleOrderItemAllocations.list}">
       <td class="text-center">
         <i class="bi bi-bag-check"></i>
       </td>
-      <td th:text="${bundleOrderItemAllocation.bundleProductOrderItem.product.name}">個別商品名</td>
-      <td class="text-end" th:text="${bundleOrderItemAllocation.bundleProductOrderItem.product.unitPrice}">879</td>
+      <td th:text="${bundleOrderItemAllocation.bundleProductOrderItem.bundleProduct.name}">個別商品名</td>
+      <td class="text-end" th:text="${bundleOrderItemAllocation.bundleProductOrderItem.bundleProduct.unitPrice}">879</td>
       <td class="text-end" th:text="${bundleOrderItemAllocation.bundleProductOrderItem.quantity}">2</td>
       <td class="text-center" th:if="${bundleOrderItemAllocation.isAllAllocated}">
         <span class="btn btn-info">引当済み</span>

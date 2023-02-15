@@ -1,6 +1,7 @@
 package guide.tm.application.service.allocation;
 
 import guide.tm.domain.model.allocation.bundle.BundleAllocationNumber;
+import guide.tm.domain.model.allocation.bundle.BundleAllocations;
 import guide.tm.domain.model.allocation.location.AllocatedLocations;
 import guide.tm.domain.model.allocation.single.SingleAllocations;
 import guide.tm.domain.model.product.individual.SingleProduct;
@@ -34,9 +35,9 @@ public interface AllocationRepository {
      * 個別商品の引当を取得する
      */
     SingleAllocations singleAllocationsOf(SalesOrderNumber salesOrderNumber);
-//
-//    Allocations allocationsOf(SalesOrderNumber salesOrderNumber);
-//
-//
-//    BundleAllocations bundleAllocationsOf(SalesOrderNumber salesOrderNumber);
+
+    /**
+     * セット商品の引当を取得する
+     */
+    BundleAllocations bundleAllocations(SalesOrderNumber salesOrderNumber);
 }
