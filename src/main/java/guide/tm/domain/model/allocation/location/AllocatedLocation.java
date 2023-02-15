@@ -1,4 +1,5 @@
-package guide.tm.domain.model.allocation.allocation;
+package guide.tm.domain.model.allocation.location;
+
 
 import guide.tm.domain.model.allocation.warehouse.WareHouseCode;
 import guide.tm.domain.model.primitive.Quantity;

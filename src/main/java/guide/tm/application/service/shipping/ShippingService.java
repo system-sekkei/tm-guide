@@ -17,12 +17,12 @@ public class ShippingService {
         this.shippingRepository = shippingRepository;
     }
 
-    /**
-     * 出荷を登録する
-     */
-    public ShippingNumber register(Shipping shipping) {
-        return shippingRepository.register(shipping);
-    }
+//    /**
+//     * 出荷を登録する
+//     */
+//    public ShippingNumber register(Shipping shipping, SalesOrderItemAllocations salesOrderItemAllocations, BundleOrderItemAllocations bundleOrderItemAllocations) {
+//        return shippingRepository.register(shipping, salesOrderItemAllocations, bundleOrderItemAllocations);
+//    }
 
     /**
      * 出荷を取得する

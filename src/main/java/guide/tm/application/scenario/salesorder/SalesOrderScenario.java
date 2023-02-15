@@ -2,9 +2,9 @@ package guide.tm.application.scenario.salesorder;
 
 import guide.tm.application.service.salesorder.SalesOrderItemService;
 import guide.tm.application.service.salesorder.SalesOrderService;
-import guide.tm.domain.model.customer.Customers;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
-import guide.tm.domain.model.salesorder.order.*;
+import guide.tm.domain.model.salesorder.order.SalesOrder;
+import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItems;
 import guide.tm.domain.model.salesorder.orderitem.SalesOrderItems;
 import guide.tm.domain.model.tax.context.TaxContext;
@@ -35,13 +35,13 @@ public class SalesOrderScenario {
         return new SalesOrder(salesOrderContent, taxContext, salesOrderItems, bundleProductOrderItems);
     }
 
-    public CustomerSalesOrders customerSalesOrders() {
-        SalesOrderSummaries salesOrderSummaries = salesOrderService.salesOrderSummaries();
-        Customers customers = salesOrderSummaries.customers();
-        return new CustomerSalesOrders(
-                customers.list().stream()
-                        .map(customer -> new CustomerSalesOrder(customer, salesOrderSummaries.of(customer)))
-                        .toList());
-    }
+//    public CustomerSalesOrders customerSalesOrders() {
+//        SalesOrderSummaries salesOrderSummaries = salesOrderService.salesOrderSummaries();
+//        Customers customers = salesOrderSummaries.customers();
+//        return new CustomerSalesOrders(
+//                customers.list().stream()
+//                        .map(customer -> new CustomerSalesOrder(customer, salesOrderSummaries.of(customer)))
+//                        .toList());
+//    }
 
 }

@@ -29,7 +29,7 @@ import spock.lang.Specification
 
 @SpringBootTest
 @Transactional
-class AllocationServiceSpec extends Specification {
+class SingleAllocationServiceSpec extends Specification {
 
     @Autowired
     AllocationService sut

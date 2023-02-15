@@ -24,4 +24,11 @@ interface ShippingMapper {
             @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber,
             @Param("shippingItem") ShippingItem shippingItem);
 
+//    void registerShippedAllocations(
+//            @Param("shippingNumber") UUID shippingNumber,
+//            @Param("allocation") Allocation allocation);
+//
+//    void registerShippedBundleAllocations(
+//            @Param("shippingNumber") UUID shippingNumber,
+//            @Param("allocation") BundleAllocation allocation);
 }

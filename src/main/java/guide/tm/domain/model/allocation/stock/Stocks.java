@@ -1,7 +1,7 @@
 package guide.tm.domain.model.allocation.stock;
 
-import guide.tm.domain.model.allocation.allocation.AllocatedLocation;
-import guide.tm.domain.model.allocation.allocation.AllocatedLocations;
+import guide.tm.domain.model.allocation.location.AllocatedLocation;
+import guide.tm.domain.model.allocation.location.AllocatedLocations;
 import guide.tm.domain.model.primitive.Quantity;
 
 import java.util.ArrayList;
@@ -18,6 +18,11 @@ public class Stocks {
         this.list = list;
     }
 
+    /**
+     * 引当する
+     *
+     * 引当して、引当場所のリストを返却する
+     */
     public AllocatedLocations allocate(Quantity orderedQuantity) {
         List<AllocatedLocation> result = new ArrayList<>();
         Quantity remaining = orderedQuantity;

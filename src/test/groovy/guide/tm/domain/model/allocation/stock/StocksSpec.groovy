@@ -1,6 +1,7 @@
 package guide.tm.domain.model.allocation.stock
 
-import guide.tm.domain.model.allocation.allocation.Allocations
+
+import guide.tm.domain.model.allocation.location.AllocatedLocations
 import guide.tm.domain.model.allocation.warehouse.WareHouseCode
 import guide.tm.domain.model.primitive.Quantity
 import guide.tm.domain.model.product.detail.ProductCode
@@ -22,7 +23,7 @@ class StocksSpec extends Specification {
 
     def "1つの倉庫で引当できる場合,引当が1つ作成される"() {
         when: "数量10の引当を行う"
-        Allocations allocate = sut.allocate(new Quantity(10))
+        AllocatedLocations allocate = sut.allocate(new Quantity(10))
 
         then: "引当は1つ作成される"
         assert allocate.list().size() == 1
@@ -34,7 +35,7 @@ class StocksSpec extends Specification {
 
     def "2つの倉庫で引当できる場合,引当が2つ作成される"() {
         when: "数量15の引当を行う"
-        Allocations allocate = sut.allocate(new Quantity(15))
+        AllocatedLocations allocate = sut.allocate(new Quantity(15))
 
         then: "引当は2つ作成される"
         assert allocate.list().size() == 2
@@ -51,7 +52,7 @@ class StocksSpec extends Specification {
 
     def "在庫が不足している場合、全倉庫数分の引当が作成される"() {
         when: "数量25の引当を行う"
-        Allocations allocate = sut.allocate(new Quantity(35))
+        AllocatedLocations allocate = sut.allocate(new Quantity(35))
 
         then: "引当は2つ作成される"
         assert allocate.list().size() == 3

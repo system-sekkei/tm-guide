@@ -18,12 +18,21 @@ public class ShippingDataSource implements ShippingRepository {
         this.shippingMapper = shippingMapper;
     }
 
-    @Override
-    public ShippingNumber register(Shipping shipping) {
-        UUID shippingNumber = UUID.randomUUID();
-        shippingMapper.register(shipping, shippingNumber);
-        return new ShippingNumber(shippingNumber.toString());
-    }
+//    @Override
+//    public ShippingNumber register(Shipping shipping, SalesOrderItemAllocations salesOrderItemAllocations, BundleOrderItemAllocations bundleOrderItemAllocations) {
+//        UUID shippingNumber = UUID.randomUUID();
+//        shippingMapper.register(shipping, shippingNumber);
+//
+//        salesOrderItemAllocations.allocations().list().forEach(allocation -> {
+//            shippingMapper.registerShippedAllocations(shippingNumber, allocation);
+//        });
+//
+//        bundleOrderItemAllocations.allocations().list().forEach(allocation -> {
+//            shippingMapper.registerShippedBundleAllocations(shippingNumber, allocation);
+//        });
+//
+//        return new ShippingNumber(shippingNumber.toString());
+//    }
 
     @Override
     public Shipping shippingOf(ShippingNumber shippingNumber) {

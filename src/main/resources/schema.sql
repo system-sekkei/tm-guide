@@ -117,17 +117,26 @@ CREATE TABLE 倉庫.倉庫
 
 
 CREATE SCHEMA 引当;
-CREATE TABLE 引当.引当
+
+CREATE TABLE 引当.個別商品引当
 (
     引当番号 UUID NOT NULL,
     受注番号 UUID NOT NULL,
     受注明細番号 UUID NOT NULL,
     商品コード VARCHAR(10) NOT NULL,
-    倉庫コード VARCHAR(8) NOT NULL,
-    引当数量 NUMERIC(3) NOT NULL,
     PRIMARY KEY (引当番号),
     FOREIGN KEY (受注番号, 受注明細番号) REFERENCES 受注.受注明細 (受注番号, 受注明細番号),
     FOREIGN KEY (商品コード) REFERENCES 商品.商品 (商品コード),
+    作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE 引当.個別商品引当明細
+(
+    引当番号 UUID NOT NULL,
+    倉庫コード VARCHAR(8) NOT NULL,
+    引当数量 NUMERIC(3) NOT NULL,
+    PRIMARY KEY (引当番号),
+    FOREIGN KEY (引当番号) REFERENCES 引当.個別商品引当 (引当番号),
     FOREIGN KEY (倉庫コード) REFERENCES 倉庫.倉庫 (倉庫コード),
     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -138,10 +147,20 @@ CREATE TABLE 引当.セット商品引当
     受注番号 UUID NOT NULL,
     受注明細番号 UUID NOT NULL,
     商品コード VARCHAR(10) NOT NULL,
+    PRIMARY KEY (引当番号),
+    FOREIGN KEY (受注番号, 受注明細番号) REFERENCES 受注.セット商品受注明細 (受注番号, 受注明細番号),
+    FOREIGN KEY (商品コード) REFERENCES 商品.セット商品 (商品コード),
+    作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE 引当.セット商品引当明細
+(
+    引当番号 UUID NOT NULL,
+    商品コード VARCHAR(10) NOT NULL,
     倉庫コード VARCHAR(8) NOT NULL,
     引当数量 NUMERIC(3) NOT NULL,
     PRIMARY KEY (引当番号),
-    FOREIGN KEY (受注番号, 受注明細番号) REFERENCES 受注.セット商品受注明細 (受注番号, 受注明細番号),
+    FOREIGN KEY (引当番号) REFERENCES 引当.セット商品引当 (引当番号),
     FOREIGN KEY (商品コード) REFERENCES 商品.商品 (商品コード),
     FOREIGN KEY (倉庫コード) REFERENCES 倉庫.倉庫 (倉庫コード),
     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -159,26 +178,17 @@ CREATE TABLE 在庫._在庫
     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE 在庫.引当済在庫
-(
-    引当番号 UUID NOT NULL,
-    商品コード VARCHAR(10) NOT NULL,
-    倉庫コード VARCHAR(8) NOT NULL,
-    引当数量 NUMERIC(4) NOT NULL,
-    PRIMARY KEY (引当番号, 商品コード, 倉庫コード),
-    FOREIGN KEY (商品コード) REFERENCES 商品.商品 (商品コード),
-    FOREIGN KEY (倉庫コード) REFERENCES 倉庫.倉庫 (倉庫コード),
-    作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE SCHEMA 運送会社;
-CREATE TABLE 運送会社.運送会社
-(
-    運送会社コード VARCHAR(10) NOT NULL ,
-    運送会社名称 VARCHAR(30) NOT NULL,
-    PRIMARY KEY (運送会社コード),
-    作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
+-- CREATE TABLE 在庫.引当済在庫
+-- (
+--     引当番号 UUID NOT NULL,
+--     商品コード VARCHAR(10) NOT NULL,
+--     倉庫コード VARCHAR(8) NOT NULL,
+--     引当数量 NUMERIC(4) NOT NULL,
+--     PRIMARY KEY (引当番号, 商品コード, 倉庫コード),
+--     FOREIGN KEY (商品コード) REFERENCES 商品.商品 (商品コード),
+--     FOREIGN KEY (倉庫コード) REFERENCES 倉庫.倉庫 (倉庫コード),
+--     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+-- );
 
 
 CREATE SCHEMA 出荷指示;
@@ -197,7 +207,8 @@ CREATE TABLE 出荷指示.出荷指示済引当
     出荷番号 UUID NOT NULL,
     引当番号 UUID NOT NULL,
     PRIMARY KEY (出荷番号, 引当番号),
-    FOREIGN KEY (引当番号) REFERENCES 引当.引当 (引当番号),
+    FOREIGN KEY (出荷番号) REFERENCES 出荷指示.出荷指示 (出荷番号),
+    FOREIGN KEY (引当番号) REFERENCES 引当.個別商品引当 (引当番号),
     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -206,6 +217,7 @@ CREATE TABLE 出荷指示.出荷指示済セット商品引当
     出荷番号 UUID NOT NULL,
     引当番号 UUID NOT NULL,
     PRIMARY KEY (出荷番号, 引当番号),
+    FOREIGN KEY (出荷番号) REFERENCES 出荷指示.出荷指示 (出荷番号),
     FOREIGN KEY (引当番号) REFERENCES 引当.セット商品引当 (引当番号),
     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

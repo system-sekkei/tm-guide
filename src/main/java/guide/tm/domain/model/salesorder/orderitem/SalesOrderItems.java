@@ -52,4 +52,9 @@ public class SalesOrderItems {
     public boolean isEmpty() {
         return list.isEmpty();
     }
+
+    public boolean contains(SalesOrderItem salesOrderItem) {
+        return list.stream()
+                .anyMatch(it -> it.salesOrderItemNumber().isSame(salesOrderItem.salesOrderItemNumber()));
+    }
 }

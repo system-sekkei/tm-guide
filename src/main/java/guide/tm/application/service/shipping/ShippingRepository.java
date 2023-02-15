@@ -6,7 +6,10 @@ import guide.tm.domain.model.shipping.content.ShippingNumber;
 import guide.tm.domain.model.shipping.item.ShippingItems;
 
 public interface ShippingRepository {
-    ShippingNumber register(Shipping shipping);
+//    ShippingNumber register(
+//            Shipping shipping,
+//            SalesOrderItemAllocations salesOrderItemAllocations,
+//            BundleOrderItemAllocations bundleOrderItemAllocations);
 
     Shipping shippingOf(ShippingNumber shippingNumber);
 

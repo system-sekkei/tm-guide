@@ -47,7 +47,7 @@ class 出荷サービスSpec extends Specification {
         def 出荷 = new Shipping(顧客番号, 出荷日, 運送会社コード)
 
         when:"出荷を登録する"
-        def 出荷番号 = sut.register(出荷)
+        def 出荷番号 = sut.register(出荷, salesOrderItemsToShip, bundleItemsToShip)
 
         then: "出荷を取得できる"
         def shipping = sut.shippingOf(出荷番号)

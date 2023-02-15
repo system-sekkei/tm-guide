@@ -6,9 +6,6 @@ import guide.tm.application.service.product.bundle.BundleProductService;
 import guide.tm.application.service.product.individual.ProductService;
 import guide.tm.application.service.salesorder.SalesOrderService;
 import guide.tm.application.service.shipping.ShippingItemService;
-import guide.tm.domain.model.allocation.allocation.Allocations;
-import guide.tm.domain.model.allocation.allocation.BundleAllocations;
-import guide.tm.domain.model.allocation.allocation.SalesOrderAllocation;
 import guide.tm.domain.model.product.bundle.BundleProducts;
 import guide.tm.domain.model.product.individual.IndividualProducts;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
@@ -16,7 +13,6 @@ import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
 import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItemContent;
 import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemContent;
-import guide.tm.domain.model.shipping.item.ShippingItems;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -82,15 +78,15 @@ class SalesOrderController {
     @GetMapping("{salesOrderNumber}/allocations")
     String allocations(@PathVariable("salesOrderNumber") SalesOrderNumber salesOrderNumber,
                        Model model) {
-        SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderNumber);
-        model.addAttribute("salesOrder", salesOrder);
-        Allocations allocations = allocationService.allocationsOf(salesOrderNumber);
-
-        BundleAllocations bundleAllocations = allocationService.bundleAllocations(salesOrderNumber);
-
-        model.addAttribute("salesOrderAllocation", new SalesOrderAllocation(salesOrderNumber, salesOrder, allocations, bundleAllocations));
-        ShippingItems shippingItems = shippingItemService.shippingItems(salesOrderNumber);
-        model.addAttribute("shippingItems", shippingItems);
+//        SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderNumber);
+//        model.addAttribute("salesOrder", salesOrder);
+//        Allocations allocations = allocationService.allocationsOf(salesOrderNumber);
+//
+//        BundleAllocations bundleAllocations = allocationService.bundleAllocations(salesOrderNumber);
+//
+//        model.addAttribute("salesOrderAllocation", new SalesOrderAllocation(salesOrderNumber, salesOrder, allocations, bundleAllocations));
+////        ShippingItems shippingItems = shippingItemService.shippingItems(salesOrderNumber);
+////        model.addAttribute("shippingItems", shippingItems);
         return "sales-order/allocations";
     }
 

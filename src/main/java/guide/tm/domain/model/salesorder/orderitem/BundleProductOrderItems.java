@@ -48,4 +48,9 @@ public class BundleProductOrderItems {
     public List<BundleProductOrderItem> list() {
         return list;
     }
+
+    public boolean contains(BundleProductOrderItem bundleProductOrderItem) {
+        return list.stream()
+                .anyMatch(it -> it.salesOrderItemNumber().isSame(bundleProductOrderItem.salesOrderItemNumber()));
+    }
 }

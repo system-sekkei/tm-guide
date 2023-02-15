@@ -5,7 +5,7 @@
 <mapper namespace="guide.tm.infrastructure.datasource.shipping.ShippingMapper">
 
     <insert id="register">
-        INSERT INTO 出荷.出荷 (出荷番号, 受注番号, 出荷日)
+        INSERT INTO 出荷指示.出荷指示 (出荷番号, 受注番号, 出荷日)
         VALUES (
                 #{shippingNumber},
                 #{shipping.salesOrderNumber.value},
@@ -24,6 +24,16 @@
                 #{shippingItem.individualProduct.code.value},
                 #{shippingItem.shippingQuantity.value}
                 )
+    </insert>
+
+    <insert id="registerShippedAllocations">
+        INSERT INTO 出荷指示.出荷指示済引当 (出荷番号, 引当番号)
+        VALUES (#{shippingNumber}, #{allocation.allocationId.value})
+    </insert>
+
+    <insert id="registerShippedBundleAllocations">
+        INSERT INTO 出荷指示.出荷指示済セット商品引当 (出荷番号, 引当番号)
+        VALUES (#{shippingNumber}, #{allocation.allocationId.value})
     </insert>
 
     <select id="shippingOf" resultType="guide.tm.domain.model.shipping.content.Shipping">

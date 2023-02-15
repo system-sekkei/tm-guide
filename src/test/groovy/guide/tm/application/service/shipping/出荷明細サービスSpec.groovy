@@ -102,7 +102,7 @@ class 出荷明細サービスSpec extends Specification {
         def 出荷日 = new ShippingDate(LocalDate.of(2023, Month.MARCH, 2))
         def 出荷 = new Shipping(顧客番号, 出荷日, 運送会社コード)
 
-        def 出荷番号 = 出荷サービス.register(出荷)
+        def 出荷番号 = 出荷サービス.register(出荷, salesOrderItemsToShip, bundleItemsToShip)
 
         def 受注明細リスト = 受注明細Service.salesOrderItemsOf(受注番号)
 
