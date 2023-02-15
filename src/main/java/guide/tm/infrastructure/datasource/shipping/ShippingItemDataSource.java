@@ -34,6 +34,7 @@ public class ShippingItemDataSource implements ShippingItemRepository {
 
     @Override
     public ShippingItems shippingItems(SalesOrderNumber salesOrderNumber) {
+        ShippingItems bundleShippingItems = new ShippingItems(shippingItemMapper.bundleShippingItems(salesOrderNumber));
         return new ShippingItems(shippingItemMapper.shippingItems(salesOrderNumber));
     }
 }

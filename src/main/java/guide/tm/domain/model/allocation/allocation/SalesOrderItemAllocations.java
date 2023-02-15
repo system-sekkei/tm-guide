@@ -4,6 +4,9 @@ import guide.tm.domain.model.salesorder.orderitem.SalesOrderItems;
 
 import java.util.List;
 
+/**
+ * 受注明細と引当のリスト
+ */
 public class SalesOrderItemAllocations {
     List<SalesOrderItemAllocation> list;
 

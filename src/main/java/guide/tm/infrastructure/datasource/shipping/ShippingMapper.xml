@@ -5,9 +5,10 @@
 <mapper namespace="guide.tm.infrastructure.datasource.shipping.ShippingMapper">
 
     <insert id="register">
-        INSERT INTO 出荷.出荷 (出荷番号, 出荷日)
+        INSERT INTO 出荷.出荷 (出荷番号, 受注番号, 出荷日)
         VALUES (
                 #{shippingNumber},
+                #{shipping.salesOrderNumber.value},
                 #{shipping.shippingDate.value}
                )
 

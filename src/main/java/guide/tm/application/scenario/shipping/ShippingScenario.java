@@ -46,10 +46,15 @@ public class ShippingScenario {
         SalesOrderAllocation salesOrderAllocation = salesOrderAllocation(salesOrderNumber);
         SalesOrderItems salesOrderItems = salesOrderAllocation.salesOrderItemAllocations().allocatedSaleOrderItems();
         ShippingItems shippingItems = new ShippingItems(salesOrderItems.list().stream().map(ShippingItem::from).toList());
+
+//        BundleProductOrderItems bundleShippingItems = salesOrderAllocation.bundleProductOrderItemAllocations().allocatedSaleOrderItems();
+//        ShippingItems shippingItems = new ShippingItems(bundleShippingItems.list().stream().map(ShippingItem::from).toList());
+//        ShippingItems shippingItems = new ShippingItems(salesOrderItems.list().stream().map(ShippingItem::from).toList());
+
         ShippingItems toBeShipped = shippingItems.toBeShipped(shippedItems);
         if (salesOrderItems.isEmpty()) return;
         ShippingNumber shippingNumber =
-                shippingService.register(new Shipping(new ShippingDate(LocalDate.now())));
+                shippingService.register(new Shipping(salesOrderNumber, new ShippingDate(LocalDate.now())));
         shippingService.registerItems(shippingNumber, salesOrderAllocation.salesOrderNumber(), toBeShipped);
     }
 

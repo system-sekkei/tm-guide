@@ -25,4 +25,7 @@ interface ShippingItemMapper {
 
     List<ShippingItem> shippingItems(
             @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber);
+
+    List<ShippingItem> bundleShippingItems(
+            @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber);
 }

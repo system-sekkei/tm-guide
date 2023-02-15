@@ -1,5 +1,7 @@
 package guide.tm.domain.model.allocation.allocation;
 
+import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItems;
+
 import java.util.List;
 
 /**
@@ -16,5 +18,11 @@ public class BundleOrderItemAllocations {
         return list;
     }
 
-
+    public BundleProductOrderItems allocatedSaleOrderItems() {
+        return new BundleProductOrderItems(
+                list.stream()
+                        .filter(BundleOrderItemAllocation::isAllAllocated)
+                        .map(BundleOrderItemAllocation::bundleProductOrderItem)
+                        .toList());
+    }
 }
