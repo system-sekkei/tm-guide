@@ -4,7 +4,7 @@ import guide.tm.domain.model.primitive.Amount;
 import guide.tm.domain.model.primitive.Quantity;
 import guide.tm.domain.model.product.detail.ProductCode;
 import guide.tm.domain.model.product.detail.ProductName;
-import guide.tm.domain.model.product.individual.IndividualProduct;
+import guide.tm.domain.model.product.individual.SingleProduct;
 import guide.tm.domain.model.product.price.UnitPrice;
 import guide.tm.domain.model.tax.context.TaxContext;
 import guide.tm.domain.model.tax.context.TaxRateType;
@@ -17,14 +17,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class 受注明細Test {
 
-    SalesOrderItems sut = new SalesOrderItems(List.of(
-            new SalesOrderItem(
+    SingleProductOrderItems sut = new SingleProductOrderItems(List.of(
+            new SingleOrderItem(
                     new SalesOrderItemNumber(),
-                    new SalesOrderItemContent(new IndividualProduct(new ProductCode("821010"), new ProductName("専用ボトル"), new UnitPrice(4455)), new Quantity(1))
+                    new SalesOrderItemContent(new SingleProduct(new ProductCode("821010"), new ProductName("専用ボトル"), new UnitPrice(4455)), new Quantity(1))
             ),
-            new SalesOrderItem(
+            new SingleOrderItem(
                     new SalesOrderItemNumber(),
-                    new SalesOrderItemContent(new IndividualProduct(new ProductCode("821011"), new ProductName("専用ボトルキャップ"), new UnitPrice(1203)), new Quantity(2))
+                    new SalesOrderItemContent(new SingleProduct(new ProductCode("821011"), new ProductName("専用ボトルキャップ"), new UnitPrice(1203)), new Quantity(2))
             )
     ));
 

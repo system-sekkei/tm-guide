@@ -1,9 +1,9 @@
 package guide.tm.domain.model.shipping.item;
 
 import guide.tm.domain.model.primitive.Quantity;
-import guide.tm.domain.model.product.individual.IndividualProduct;
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem;
+import guide.tm.domain.model.product.individual.SingleProduct;
 import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemNumber;
+import guide.tm.domain.model.salesorder.orderitem.SingleOrderItem;
 
 /**
  * 出荷明細
@@ -11,25 +11,25 @@ import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemNumber;
 public class ShippingItem {
 
     SalesOrderItemNumber salesOrderItemNumber;
-    IndividualProduct individualProduct;
+    SingleProduct singleProduct;
     Quantity shippingQuantity;
 
     @Deprecated ShippingItem() {
-        this(new SalesOrderItemNumber(), new IndividualProduct(), new Quantity());
+        this(new SalesOrderItemNumber(), new SingleProduct(), new Quantity());
     }
 
-    public ShippingItem(SalesOrderItemNumber salesOrderItemNumber, IndividualProduct individualProduct, Quantity shippingQuantity) {
+    public ShippingItem(SalesOrderItemNumber salesOrderItemNumber, SingleProduct singleProduct, Quantity shippingQuantity) {
         this.salesOrderItemNumber = salesOrderItemNumber;
-        this.individualProduct = individualProduct;
+        this.singleProduct = singleProduct;
         this.shippingQuantity = shippingQuantity;
     }
 
-    public static ShippingItem from(SalesOrderItem salesOrderItem) {
-        return new ShippingItem(salesOrderItem.salesOrderItemNumber(), salesOrderItem.product(), salesOrderItem.quantity());
+    public static ShippingItem from(SingleOrderItem singleOrderItem) {
+        return new ShippingItem(singleOrderItem.salesOrderItemNumber(), singleOrderItem.product(), singleOrderItem.quantity());
     }
 
-    public IndividualProduct individualProduct() {
-        return individualProduct;
+    public SingleProduct individualProduct() {
+        return singleProduct;
     }
 
     public Quantity shippingQuantity() {

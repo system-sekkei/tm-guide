@@ -6,13 +6,13 @@ import java.util.List;
  * 商品の一覧
  */
 public class IndividualProducts {
-    List<IndividualProduct> list;
+    List<SingleProduct> list;
 
-    public List<IndividualProduct> list() {
+    public List<SingleProduct> list() {
         return list;
     }
 
-    public IndividualProducts(List<IndividualProduct> list) {
+    public IndividualProducts(List<SingleProduct> list) {
         this.list = list;
     }
 }

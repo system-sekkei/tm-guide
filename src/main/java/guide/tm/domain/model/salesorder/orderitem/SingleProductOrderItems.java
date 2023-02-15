@@ -10,10 +10,10 @@ import java.util.stream.Collectors;
 /**
  * 受注明細のリスト
  */
-public class SalesOrderItems {
-    List<SalesOrderItem> list;
+public class SingleProductOrderItems {
+    List<SingleOrderItem> list;
 
-    public SalesOrderItems(List<SalesOrderItem> list) {
+    public SingleProductOrderItems(List<SingleOrderItem> list) {
         this.list = list;
     }
 
@@ -41,11 +41,11 @@ public class SalesOrderItems {
 
     TotalAmount totalAmountExcludingTax() {
         return new TotalAmount(list.stream()
-                .map(SalesOrderItem::amountExcludingTax)
+                .map(SingleOrderItem::amountExcludingTax)
                 .collect(Collectors.toUnmodifiableSet()));
     }
 
-    public List<SalesOrderItem> list() {
+    public List<SingleOrderItem> list() {
         return list;
     }
 
@@ -53,8 +53,8 @@ public class SalesOrderItems {
         return list.isEmpty();
     }
 
-    public boolean contains(SalesOrderItem salesOrderItem) {
+    public boolean contains(SingleOrderItem singleOrderItem) {
         return list.stream()
-                .anyMatch(it -> it.salesOrderItemNumber().isSame(salesOrderItem.salesOrderItemNumber()));
+                .anyMatch(it -> it.salesOrderItemNumber().isSame(singleOrderItem.salesOrderItemNumber()));
     }
 }

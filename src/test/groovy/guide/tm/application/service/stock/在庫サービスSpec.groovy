@@ -6,9 +6,9 @@ import guide.tm.domain.model.allocation.stock.Stock
 import guide.tm.domain.model.allocation.warehouse.WareHouse
 import guide.tm.domain.model.allocation.warehouse.WareHouseCode
 import guide.tm.domain.model.primitive.Quantity
-import guide.tm.domain.model.product.individual.IndividualProduct
 import guide.tm.domain.model.product.detail.ProductCode
 import guide.tm.domain.model.product.detail.ProductName
+import guide.tm.domain.model.product.individual.SingleProduct
 import guide.tm.domain.model.product.price.UnitPrice
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -31,12 +31,12 @@ class 在庫サービスSpec extends Specification {
     def 東日本倉庫 = new WareHouse(new WareHouseCode("654321"), "東日本倉庫", "千葉県")
     def 西日本倉庫 = new WareHouse(new WareHouseCode("098765"), "西日本倉庫", "奈良県")
 
-    def 専用ボトル = new IndividualProduct(
+    def 専用ボトル = new SingleProduct(
             new ProductCode("821009"),
             new ProductName("専用ボトル"),
             new UnitPrice(4400))
 
-    def 専用ボトルキャップ = new IndividualProduct(
+    def 専用ボトルキャップ = new SingleProduct(
             new ProductCode("821010"),
             new ProductName("専用ボトルキャップ"),
             new UnitPrice(1200))

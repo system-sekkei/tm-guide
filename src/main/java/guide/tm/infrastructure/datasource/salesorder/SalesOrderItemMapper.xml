@@ -14,7 +14,7 @@
                 )
     </insert>
 
-    <select id="salesOrderItemsOf" resultType="guide.tm.domain.model.salesorder.orderitem.SalesOrderItem">
+    <select id="salesOrderItemsOf" resultType="guide.tm.domain.model.salesorder.orderitem.SingleOrderItem">
         SELECT
             受注明細番号 AS "salesOrderItemNumber.value",
             商品.商品コード AS "salesOrderItemContent.product.code.value",
@@ -43,7 +43,7 @@
         <result property="bundleProductOrderItemContent.product.unitPrice.amount.value" column="セット商品単価"/>
         <result property="bundleProductOrderItemContent.quantity.value" column="受注数量"/>
         <collection property="bundleProductOrderItemContent.product.bundleProductItems.list"
-                    ofType="guide.tm.domain.model.product.individual.IndividualProduct">
+                    ofType="guide.tm.domain.model.product.individual.SingleProduct">
             <id property="code.value" column="個別商品コード"/>
             <result property="name.value" column="個別商品名称"/>
             <result property="unitPrice.amount.value" column="個別商品単価"/>

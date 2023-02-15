@@ -4,7 +4,7 @@ import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItemContent;
 import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItems;
 import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemContent;
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItems;
+import guide.tm.domain.model.salesorder.orderitem.SingleProductOrderItems;
 import org.springframework.stereotype.Service;
 
 /**
@@ -36,7 +36,7 @@ public class SalesOrderItemService {
     /**
      * 受注明細を取得する
      */
-    public SalesOrderItems salesOrderItemsOf(SalesOrderNumber salesOrderNumber) {
+    public SingleProductOrderItems salesOrderItemsOf(SalesOrderNumber salesOrderNumber) {
         return salesOrderItemRepository.salesOrderItemsOf(salesOrderNumber);
     }
 

@@ -135,7 +135,7 @@ CREATE TABLE 引当.個別商品引当明細
     引当番号 UUID NOT NULL,
     倉庫コード VARCHAR(8) NOT NULL,
     引当数量 NUMERIC(3) NOT NULL,
-    PRIMARY KEY (引当番号),
+    PRIMARY KEY (引当番号, 倉庫コード),
     FOREIGN KEY (引当番号) REFERENCES 引当.個別商品引当 (引当番号),
     FOREIGN KEY (倉庫コード) REFERENCES 倉庫.倉庫 (倉庫コード),
     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -159,7 +159,7 @@ CREATE TABLE 引当.セット商品引当明細
     商品コード VARCHAR(10) NOT NULL,
     倉庫コード VARCHAR(8) NOT NULL,
     引当数量 NUMERIC(3) NOT NULL,
-    PRIMARY KEY (引当番号),
+    PRIMARY KEY (引当番号, 商品コード, 倉庫コード),
     FOREIGN KEY (引当番号) REFERENCES 引当.セット商品引当 (引当番号),
     FOREIGN KEY (商品コード) REFERENCES 商品.商品 (商品コード),
     FOREIGN KEY (倉庫コード) REFERENCES 倉庫.倉庫 (倉庫コード),

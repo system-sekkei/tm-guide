@@ -13,7 +13,7 @@
                 )
     </insert>
 
-    <select id="products" resultType="guide.tm.domain.model.product.individual.IndividualProduct">
+    <select id="products" resultType="guide.tm.domain.model.product.individual.SingleProduct">
         SELECT
             商品コード AS "code.value",
             商品名称 AS "name.value",

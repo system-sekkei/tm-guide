@@ -4,12 +4,12 @@ import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItemContent;
 import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItems;
 import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemContent;
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItems;
+import guide.tm.domain.model.salesorder.orderitem.SingleProductOrderItems;
 
 public interface SalesOrderItemRepository {
     void registerBundleProductOrderItem(SalesOrderNumber salesOrderNumber, SalesOrderItemContent salesOrderItemContent);
 
-    SalesOrderItems salesOrderItemsOf(SalesOrderNumber salesOrderNumber);
+    SingleProductOrderItems salesOrderItemsOf(SalesOrderNumber salesOrderNumber);
 
     void registerBundleProductOrderItem(SalesOrderNumber salesOrderNumber, BundleProductOrderItemContent bundleProductOrderItemContent);
 

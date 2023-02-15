@@ -2,7 +2,7 @@ package guide.tm.application.service.stock;
 
 import guide.tm.domain.model.allocation.stock.Stock;
 import guide.tm.domain.model.allocation.stock.Stocks;
-import guide.tm.domain.model.product.individual.IndividualProduct;
+import guide.tm.domain.model.product.individual.SingleProduct;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,8 +20,8 @@ public class StockService {
     /**
      * 在庫を取得する
      */
-    public Stocks stocksOf(IndividualProduct individualProduct) {
-        return stockRepository.stocksOf(individualProduct);
+    public Stocks stocksOf(SingleProduct singleProduct) {
+        return stockRepository.stocksOf(singleProduct);
     }
 
     /**

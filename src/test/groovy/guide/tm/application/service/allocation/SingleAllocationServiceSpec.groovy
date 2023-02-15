@@ -16,7 +16,7 @@ import guide.tm.domain.model.customer.CustomerType
 import guide.tm.domain.model.primitive.Quantity
 import guide.tm.domain.model.product.detail.ProductCode
 import guide.tm.domain.model.product.detail.ProductName
-import guide.tm.domain.model.product.individual.IndividualProduct
+import guide.tm.domain.model.product.individual.SingleProduct
 import guide.tm.domain.model.product.price.UnitPrice
 import guide.tm.domain.model.salesorder.content.OrderedDate
 import guide.tm.domain.model.salesorder.content.SalesOrderContent
@@ -36,7 +36,7 @@ class SingleAllocationServiceSpec extends Specification {
 
     SalesOrderNumber 受注番号
 
-    def 専用ボトル = new IndividualProduct(
+    def 専用ボトル = new SingleProduct(
             new ProductCode("821009"),
             new ProductName("専用ボトル"),
             new UnitPrice(4400))
@@ -89,7 +89,7 @@ class SingleAllocationServiceSpec extends Specification {
         sut.allocate(受注明細, 受注番号)
 
         then: "引当を取得できる"
-        def 引当結果= sut.allocationsOf(受注番号)
+        def 引当結果= sut.singleAllocationsOf(受注番号)
         and: "引当が3件"
         assert 引当結果.list().size() == 3
 

@@ -1,6 +1,6 @@
 package guide.tm.domain.model.product.bundle;
 
-import guide.tm.domain.model.product.individual.IndividualProduct;
+import guide.tm.domain.model.product.individual.SingleProduct;
 
 import java.util.List;
 
@@ -8,16 +8,16 @@ import java.util.List;
  * セット商品内容
  */
 public class BundleProductItems {
-    List<IndividualProduct> list;
+    List<SingleProduct> list;
 
     BundleProductItems() {
     }
 
-    public BundleProductItems(List<IndividualProduct> list) {
+    public BundleProductItems(List<SingleProduct> list) {
         this.list = list;
     }
 
-    public List<IndividualProduct> list() {
+    public List<SingleProduct> list() {
         return list;
     }
 }

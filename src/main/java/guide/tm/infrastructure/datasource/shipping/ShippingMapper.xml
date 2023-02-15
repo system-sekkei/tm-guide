@@ -21,7 +21,7 @@
                 #{shippingItemNumber},
                 #{salesOrderNumber.value},
                 #{shippingItem.salesOrderItemNumber.value},
-                #{shippingItem.individualProduct.code.value},
+                #{shippingItem.singleProduct.code.value},
                 #{shippingItem.shippingQuantity.value}
                 )
     </insert>

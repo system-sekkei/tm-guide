@@ -24,7 +24,7 @@ class AllocateController {
     @PostMapping
     String allocateSalesOrder(@PathVariable SalesOrderNumber salesOrderNumber) {
         SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderNumber);
-//        allocationService.allocateSalesOrder(salesOrder, salesOrderNumber);
+        allocationService.allocateSalesOrder(salesOrder, salesOrderNumber);
         return "redirect:/sales-orders/{salesOrderNumber}/allocations";
     }
 

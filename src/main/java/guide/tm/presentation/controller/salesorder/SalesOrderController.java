@@ -78,15 +78,15 @@ class SalesOrderController {
     @GetMapping("{salesOrderNumber}/allocations")
     String allocations(@PathVariable("salesOrderNumber") SalesOrderNumber salesOrderNumber,
                        Model model) {
-//        SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderNumber);
-//        model.addAttribute("salesOrder", salesOrder);
-//        Allocations allocations = allocationService.allocationsOf(salesOrderNumber);
-//
+        SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderNumber);
+        model.addAttribute("salesOrder", salesOrder);
+//        Allocations allocations = allocationService.singleAllocationsOf(salesOrderNumber);
+////
 //        BundleAllocations bundleAllocations = allocationService.bundleAllocations(salesOrderNumber);
-//
+////
 //        model.addAttribute("salesOrderAllocation", new SalesOrderAllocation(salesOrderNumber, salesOrder, allocations, bundleAllocations));
-////        ShippingItems shippingItems = shippingItemService.shippingItems(salesOrderNumber);
-////        model.addAttribute("shippingItems", shippingItems);
+//////        ShippingItems shippingItems = shippingItemService.shippingItems(salesOrderNumber);
+//////        model.addAttribute("shippingItems", shippingItems);
         return "sales-order/allocations";
     }
 

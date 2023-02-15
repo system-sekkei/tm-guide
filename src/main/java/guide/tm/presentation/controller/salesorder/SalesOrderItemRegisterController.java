@@ -9,8 +9,8 @@ import guide.tm.domain.model.product.individual.IndividualProducts;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItemContent;
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem;
 import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemContent;
+import guide.tm.domain.model.salesorder.orderitem.SingleOrderItem;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,8 +39,8 @@ class SalesOrderItemRegisterController {
     }
 
     @ModelAttribute("salesOrderItem")
-    SalesOrderItem salesOrderItem() {
-        return new SalesOrderItem();
+    SingleOrderItem salesOrderItem() {
+        return new SingleOrderItem();
     }
 
     /**

@@ -11,7 +11,7 @@ import guide.tm.domain.model.product.bundle.BundleProduct
 import guide.tm.domain.model.product.bundle.BundleProductItems
 import guide.tm.domain.model.product.detail.ProductCode
 import guide.tm.domain.model.product.detail.ProductName
-import guide.tm.domain.model.product.individual.IndividualProduct
+import guide.tm.domain.model.product.individual.SingleProduct
 import guide.tm.domain.model.product.price.UnitPrice
 import guide.tm.domain.model.salesorder.content.OrderedDate
 import guide.tm.domain.model.salesorder.content.SalesOrderContent
@@ -37,12 +37,12 @@ class セット商品受注明細サービスSpec extends Specification {
     @Autowired
     CustomerSetUp 顧客準備
 
-    def 尾西のご飯 = new IndividualProduct(
+    def 尾西のご飯 = new SingleProduct(
             new ProductCode("821009"),
             new ProductName("尾西のご飯"),
             new UnitPrice(4400))
 
-    def サタケのマジックパスタ = new IndividualProduct(
+    def サタケのマジックパスタ = new SingleProduct(
             new ProductCode("821010"),
             new ProductName("サタケのマジックパスタ"),
             new UnitPrice(1200))
@@ -82,7 +82,7 @@ class セット商品受注明細サービスSpec extends Specification {
         assert 登録された受注明細.list.size() == 1
 
         and: "非常食セット_受注明細の受注明細の受注数は1"
-        def 非常食セット受注明細 = 登録された受注明細.list.find { it -> it.product().code.value == "9807987"}
+        def 非常食セット受注明細 = 登録された受注明細.list.find { it -> it.bundleProduct().code.value == "9807987"}
         assert 非常食セット受注明細.quantity().value == 1
 
     }

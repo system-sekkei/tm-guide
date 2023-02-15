@@ -1,6 +1,6 @@
 package guide.tm.domain.model.shipping.item;
 
-import guide.tm.domain.model.product.individual.IndividualProduct;
+import guide.tm.domain.model.product.individual.SingleProduct;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,20 +31,20 @@ public class ShippingItems {
     public ShippingItems toBeShipped(ShippingItems shippedItems) {
         return new ShippingItems(
                 list.stream().filter(shippingItem -> {
-                    if (!shippedItems.contains(shippingItem.individualProduct)) return true;
-                    ShippingItem shippedItem = shippedItems.shippingItemOf(shippingItem.individualProduct);
+                    if (!shippedItems.contains(shippingItem.singleProduct)) return true;
+                    ShippingItem shippedItem = shippedItems.shippingItemOf(shippingItem.singleProduct);
                     return !shippedItem.shippingQuantity.isEqual(shippedItem.shippingQuantity);
                 }).toList());
     }
 
-    private boolean contains(IndividualProduct product) {
+    private boolean contains(SingleProduct product) {
         return list.stream()
-                .anyMatch(shippingItem -> shippingItem.individualProduct.code().isSame(product.code()));
+                .anyMatch(shippingItem -> shippingItem.singleProduct.code().isSame(product.code()));
     }
 
-    private ShippingItem shippingItemOf(IndividualProduct product) {
+    private ShippingItem shippingItemOf(SingleProduct product) {
         return list.stream()
-                .filter(shippingItem -> shippingItem.individualProduct.code().isSame(product.code()))
+                .filter(shippingItem -> shippingItem.singleProduct.code().isSame(product.code()))
                 .findFirst()
                 .orElseThrow()
                 ;

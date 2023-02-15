@@ -33,7 +33,7 @@ public class BundleProductOrderItem {
         return salesOrderItemNumber;
     }
 
-    public BundleProduct product() {
+    public BundleProduct bundleProduct() {
         return bundleProductOrderItemContent.product;
     }
 

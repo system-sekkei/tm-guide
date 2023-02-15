@@ -2,21 +2,21 @@ package guide.tm.domain.model.salesorder.orderitem;
 
 import guide.tm.domain.model.primitive.Amount;
 import guide.tm.domain.model.primitive.Quantity;
-import guide.tm.domain.model.product.individual.IndividualProduct;
+import guide.tm.domain.model.product.individual.SingleProduct;
 
 /**
  * 受注明細
  */
-public class SalesOrderItem {
+public class SingleOrderItem {
 
     SalesOrderItemNumber salesOrderItemNumber;
     SalesOrderItemContent salesOrderItemContent;
 
-    public SalesOrderItem() {
+    public SingleOrderItem() {
         this(new SalesOrderItemNumber(), new SalesOrderItemContent());
     }
 
-    public SalesOrderItem(SalesOrderItemNumber salesOrderItemNumber, SalesOrderItemContent salesOrderItemContent) {
+    public SingleOrderItem(SalesOrderItemNumber salesOrderItemNumber, SalesOrderItemContent salesOrderItemContent) {
         this.salesOrderItemNumber = salesOrderItemNumber;
         this.salesOrderItemContent = salesOrderItemContent;
     }
@@ -32,7 +32,7 @@ public class SalesOrderItem {
         return salesOrderItemNumber;
     }
 
-    public IndividualProduct product() {
+    public SingleProduct product() {
         return salesOrderItemContent.product;
     }
 

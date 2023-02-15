@@ -55,24 +55,24 @@
       </tr>
     </thead>
     <tbody>
-      <tr th:each="salesOrderItem: ${salesOrder.salesOrderItems.list}">
+      <tr th:each="singleOrderItem: ${salesOrder.singleProductOrderItems.list}">
         <td class="text-center">
           <i class="bi bi-bag-check"></i>
         </td>
-        <td th:text="${salesOrderItem.product.name}">個別商品名</td>
-        <td class="text-end" th:text="${salesOrderItem.product.unitPrice}">879</td>
-        <td class="text-end" th:text="${salesOrderItem.quantity}">2</td>
+        <td th:text="${singleOrderItem.product.name}">個別商品名</td>
+        <td class="text-end" th:text="${singleOrderItem.product.unitPrice}">879</td>
+        <td class="text-end" th:text="${singleOrderItem.quantity}">2</td>
       </tr>
       <th:block th:each="bundleProductOrderItem: ${salesOrder.bundleProductOrderItems.list}">
         <tr>
           <td class="text-center">
             <i class="bi bi-bag-check"></i>
           </td>
-          <td th:text="${bundleProductOrderItem.product.name}">セット商品名</td>
-          <td class="text-end" th:text="${bundleProductOrderItem.product.unitPrice}">879</td>
+          <td th:text="${bundleProductOrderItem.bundleProduct.name}">セット商品名</td>
+          <td class="text-end" th:text="${bundleProductOrderItem.bundleProduct.unitPrice}">879</td>
           <td class="text-end" th:text="${bundleProductOrderItem.quantity}">2</td>
         </tr>
-        <tr th:each="product: ${bundleProductOrderItem.product.bundleProductItems.list}">
+        <tr th:each="product: ${bundleProductOrderItem.bundleProduct.bundleProductItems.list}">
           <td class="text-center">
           </td>
           <td th:text="|&nbsp;&nbsp;${product.name}|">個別商品名</td>
@@ -93,8 +93,8 @@
 
   <form method="post" th:action="@{/sales-orders/__${salesOrderNumber}__/items/new}" th:object="${salesOrderItemContent}">
     <div class="mb-3">
-      <label for="individualProduct" class="form-label">商品名称</label>
-      <select class="form-control" id="individualProduct" name="product.code.value">
+      <label for="singleProduct" class="form-label">商品名称</label>
+      <select class="form-control" id="singleProduct" name="product.code.value">
         <option th:each="product: ${products.list}"
                 th:value="${product.code}"
                 th:inline="text">

@@ -2,21 +2,21 @@ package guide.tm.domain.model.salesorder.orderitem;
 
 import guide.tm.domain.model.primitive.Amount;
 import guide.tm.domain.model.primitive.Quantity;
-import guide.tm.domain.model.product.individual.IndividualProduct;
+import guide.tm.domain.model.product.individual.SingleProduct;
 import jakarta.validation.constraints.AssertTrue;
 
 /**
  * 受注明細の内容
  */
 public class SalesOrderItemContent {
-    IndividualProduct product;
+    SingleProduct product;
     Quantity quantity;
 
     public SalesOrderItemContent() {
-        this(new IndividualProduct(), new Quantity());
+        this(new SingleProduct(), new Quantity());
     }
 
-    SalesOrderItemContent(IndividualProduct product, Quantity quantity) {
+    SalesOrderItemContent(SingleProduct product, Quantity quantity) {
         this.product = product;
         this.quantity = quantity;
     }

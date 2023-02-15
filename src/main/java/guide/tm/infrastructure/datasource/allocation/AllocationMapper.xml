@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guide.tm.infrastructure.datasource.allocation.AllocationMapper">
+
+    <insert id="registerSingleAllocation">
+        INSERT INTO 引当.個別商品引当 (引当番号, 受注番号, 受注明細番号, 商品コード)
+        VALUES (
+                #{allocationNumber},
+                #{salesOrderNumber.value},
+                #{singleOrderItem.salesOrderItemNumber.value},
+                #{singleOrderItem.salesOrderItemContent.product.code.value}
+               )
+    </insert>
+
+    <insert id="registerSingleAllocationItem">
+        INSERT INTO 引当.個別商品引当明細 (引当番号, 倉庫コード, 引当数量)
+        VALUES (
+                   #{allocationNumber},
+                   #{allocatedLocation.wareHouseCode.value},
+                   #{allocatedLocation.allocatedQuantity.value}
+               )
+    </insert>
+
+    <insert id="registerBundleAllocation">
+        INSERT INTO 引当.セット商品引当 (引当番号, 受注番号, 受注明細番号, 商品コード)
+        VALUES (
+                #{allocationNumber},
+                #{salesOrderNumber.value},
+                #{bundleProductOrderItem.salesOrderItemNumber.value},
+                #{bundleProductOrderItem.bundleProductOrderItemContent.product.code.value}
+               )
+    </insert>
+
+    <insert id="registerBundleAllocationItem">
+        INSERT INTO 引当.セット商品引当明細 (引当番号, 商品コード, 倉庫コード, 引当数量)
+        VALUES (
+                #{bundleAllocationNumber.value},
+                #{singleProduct.code.value},
+                #{allocatedLocation.wareHouseCode.value},
+                #{allocatedLocation.allocatedQuantity.value}
+               )
+    </insert>
+</mapper>

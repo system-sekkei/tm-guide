@@ -17,7 +17,7 @@
         INSERT INTO 商品.セット商品組合せ (セット商品コード, 商品コード)
         VALUES (
                 #{productCode.value},
-                #{individualProduct.code.value}
+                #{singleProduct.code.value}
                )
     </insert>
 

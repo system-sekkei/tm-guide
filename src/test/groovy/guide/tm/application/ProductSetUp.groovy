@@ -3,7 +3,7 @@ package guide.tm.application
 import guide.tm.application.service.product.bundle.BundleProductService
 import guide.tm.application.service.product.individual.ProductService
 import guide.tm.domain.model.product.bundle.BundleProduct
-import guide.tm.domain.model.product.individual.IndividualProduct
+import guide.tm.domain.model.product.individual.SingleProduct
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -16,11 +16,11 @@ class ProductSetUp {
     @Autowired
     BundleProductService bundleProductService
 
-    def "商品のテストデータの準備"(IndividualProduct 商品) {
+    def "商品のテストデータの準備"(SingleProduct 商品) {
         productService.register(商品)
     }
 
-    def "商品のテストデータの準備"(List<IndividualProduct> 商品リスト) {
+    def "商品のテストデータの準備"(List<SingleProduct> 商品リスト) {
         商品リスト.forEach {商品 -> productService.register(商品) }
     }
 

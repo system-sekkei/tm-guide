@@ -1,7 +1,7 @@
 package guide.tm.application.service.shipping;
 
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItem;
+import guide.tm.domain.model.salesorder.orderitem.SingleOrderItem;
 import guide.tm.domain.model.shipping.content.ShippingNumber;
 import guide.tm.domain.model.shipping.item.ShippingItem;
 import guide.tm.domain.model.shipping.item.ShippingItems;
@@ -18,9 +18,9 @@ public class ShippingItemService {
     /**
      * 出荷明細を登録する
      */
-    public void register(ShippingNumber shippingNumber, SalesOrderNumber salesOrderNumber,  SalesOrderItem salesOrderItem) {
-        ShippingItem shippingItem = ShippingItem.from(salesOrderItem);
-        shippingItemRepository.register(shippingNumber, shippingItem, salesOrderNumber, salesOrderItem.salesOrderItemNumber());
+    public void register(ShippingNumber shippingNumber, SalesOrderNumber salesOrderNumber,  SingleOrderItem singleOrderItem) {
+        ShippingItem shippingItem = ShippingItem.from(singleOrderItem);
+        shippingItemRepository.register(shippingNumber, shippingItem, salesOrderNumber, singleOrderItem.salesOrderItemNumber());
     }
 
     /**

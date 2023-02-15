@@ -7,16 +7,16 @@ import guide.tm.domain.model.product.price.UnitPrice;
 /**
  * 商品
  */
-public class IndividualProduct {
+public class SingleProduct {
     ProductCode code;
     ProductName name;
     UnitPrice unitPrice;
 
-    public IndividualProduct() {
+    public SingleProduct() {
         this(new ProductCode(), new ProductName(), new UnitPrice());
     }
 
-    public IndividualProduct(ProductCode code, ProductName name, UnitPrice unitPrice) {
+    public SingleProduct(ProductCode code, ProductName name, UnitPrice unitPrice) {
         this.code = code;
         this.name = name;
         this.unitPrice = unitPrice;

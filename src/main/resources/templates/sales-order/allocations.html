@@ -62,9 +62,9 @@
       <td class="text-center">
         <i class="bi bi-bag-check"></i>
       </td>
-      <td th:text="${salesOrderItemAllocation.salesOrderItem.product.name}">個別商品名</td>
-      <td class="text-end" th:text="${salesOrderItemAllocation.salesOrderItem.product.unitPrice}">879</td>
-      <td class="text-end" th:text="${salesOrderItemAllocation.salesOrderItem.quantity}">2</td>
+      <td th:text="${salesOrderItemAllocation.singleOrderItem.product.name}">個別商品名</td>
+      <td class="text-end" th:text="${salesOrderItemAllocation.singleOrderItem.product.unitPrice}">879</td>
+      <td class="text-end" th:text="${salesOrderItemAllocation.singleOrderItem.quantity}">2</td>
       <td class="text-center" th:if="${salesOrderItemAllocation.isAllAllocated}">
         <span class="btn btn-info">引当済み</span>
       </td>
