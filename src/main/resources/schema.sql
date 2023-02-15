@@ -181,8 +181,8 @@ CREATE TABLE 運送会社.運送会社
 );
 
 
-CREATE SCHEMA 出荷;
-CREATE TABLE 出荷.出荷
+CREATE SCHEMA 出荷指示;
+CREATE TABLE 出荷指示.出荷指示
 (
     出荷番号 UUID NOT NULL,
     出荷日 DATE NOT NULL,
@@ -192,34 +192,50 @@ CREATE TABLE 出荷.出荷
     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-
-
-CREATE TABLE 出荷.出荷明細
+CREATE TABLE 出荷指示.出荷指示済引当
 (
     出荷番号 UUID NOT NULL,
-    出荷明細番号 UUID NOT NULL,
-    受注番号 UUID NOT NULL,
-    受注明細番号 UUID NOT NULL,
-    商品コード VARCHAR(10) NOT NULL,
-    出荷数量 NUMERIC(3) NOT NULL,
-    PRIMARY KEY (出荷番号, 出荷明細番号),
-    FOREIGN KEY (出荷番号) REFERENCES 出荷.出荷 (出荷番号),
-    FOREIGN KEY (受注番号, 受注明細番号) REFERENCES 受注.受注明細 (受注番号, 受注明細番号),
-    FOREIGN KEY (商品コード) REFERENCES 商品.商品 (商品コード),
+    引当番号 UUID NOT NULL,
+    PRIMARY KEY (出荷番号, 引当番号),
+    FOREIGN KEY (引当番号) REFERENCES 引当.引当 (引当番号),
     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE 出荷.セット商品出荷明細
+CREATE TABLE 出荷指示.出荷指示済セット商品引当
 (
     出荷番号 UUID NOT NULL,
-    出荷明細番号 UUID NOT NULL,
-    受注番号 UUID NOT NULL,
-    受注明細番号 UUID NOT NULL,
-    商品コード VARCHAR(10) NOT NULL,
-    出荷数量 NUMERIC(3) NOT NULL,
-    PRIMARY KEY (出荷番号, 出荷明細番号),
-    FOREIGN KEY (出荷番号) REFERENCES 出荷.出荷 (出荷番号),
-    FOREIGN KEY (受注番号, 受注明細番号) REFERENCES 受注.セット商品受注明細 (受注番号, 受注明細番号),
-    FOREIGN KEY (商品コード) REFERENCES 商品.セット商品 (商品コード),
+    引当番号 UUID NOT NULL,
+    PRIMARY KEY (出荷番号, 引当番号),
+    FOREIGN KEY (引当番号) REFERENCES 引当.セット商品引当 (引当番号),
     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+-- CREATE TABLE 出荷.出荷明細
+-- (
+--     出荷番号 UUID NOT NULL,
+--     出荷明細番号 UUID NOT NULL,
+--     受注番号 UUID NOT NULL,
+--     受注明細番号 UUID NOT NULL,
+--     商品コード VARCHAR(10) NOT NULL,
+--     出荷数量 NUMERIC(3) NOT NULL,
+--     PRIMARY KEY (出荷番号, 出荷明細番号),
+--     FOREIGN KEY (出荷番号) REFERENCES 出荷.出荷 (出荷番号),
+--     FOREIGN KEY (受注番号, 受注明細番号) REFERENCES 受注.受注明細 (受注番号, 受注明細番号),
+--     FOREIGN KEY (商品コード) REFERENCES 商品.商品 (商品コード),
+--     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+-- );
+--
+-- CREATE TABLE 出荷.セット商品出荷明細
+-- (
+--     出荷番号 UUID NOT NULL,
+--     出荷明細番号 UUID NOT NULL,
+--     受注番号 UUID NOT NULL,
+--     受注明細番号 UUID NOT NULL,
+--     商品コード VARCHAR(10) NOT NULL,
+--     出荷数量 NUMERIC(3) NOT NULL,
+--     PRIMARY KEY (出荷番号, 出荷明細番号),
+--     FOREIGN KEY (出荷番号) REFERENCES 出荷.出荷 (出荷番号),
+--     FOREIGN KEY (受注番号, 受注明細番号) REFERENCES 受注.セット商品受注明細 (受注番号, 受注明細番号),
+--     FOREIGN KEY (商品コード) REFERENCES 商品.セット商品 (商品コード),
+--     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+-- );
