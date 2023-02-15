@@ -1,7 +1,7 @@
 package guide.tm.domain.model.product.price;
 
-import guide.tm.domain.model.primitive.Amount;
-import guide.tm.domain.model.primitive.Quantity;
+import guide.tm.domain.primitive.Amount;
+import guide.tm.domain.primitive.Quantity;
 
 import java.math.BigDecimal;
 

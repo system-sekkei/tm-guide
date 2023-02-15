@@ -1,6 +1,6 @@
 package guide.tm.domain.model.salesorder.order;
 
-import guide.tm.domain.model.primitive.Amount;
+import guide.tm.domain.primitive.Amount;
 
 import java.math.BigDecimal;
 

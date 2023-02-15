@@ -1,7 +1,5 @@
 package guide.tm.domain.model.salesorder.orderitem;
 
-import guide.tm.domain.model.primitive.Amount;
-import guide.tm.domain.model.primitive.Quantity;
 import guide.tm.domain.model.product.detail.ProductCode;
 import guide.tm.domain.model.product.detail.ProductName;
 import guide.tm.domain.model.product.individual.SingleProduct;
@@ -9,6 +7,8 @@ import guide.tm.domain.model.product.price.UnitPrice;
 import guide.tm.domain.model.tax.context.TaxContext;
 import guide.tm.domain.model.tax.context.TaxRateType;
 import guide.tm.domain.model.tax.context.TaxSumType;
+import guide.tm.domain.primitive.Amount;
+import guide.tm.domain.primitive.Quantity;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

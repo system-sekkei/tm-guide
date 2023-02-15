@@ -1,10 +1,10 @@
 package guide.tm.domain.model.allocation.bundle;
 
 import guide.tm.domain.model.allocation.location.ProductAllocations;
-import guide.tm.domain.model.primitive.Quantity;
 import guide.tm.domain.model.product.detail.ProductCode;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemNumber;
+import guide.tm.domain.primitive.Quantity;
 
 public class BundleAllocation {
     BundleAllocationNumber bundleAllocationNumber;

@@ -1,8 +1,8 @@
 package guide.tm.domain.model.salesorder.orderitem;
 
-import guide.tm.domain.model.primitive.Amount;
-import guide.tm.domain.model.primitive.TotalAmount;
 import guide.tm.domain.model.tax.context.TaxContext;
+import guide.tm.domain.primitive.Amount;
+import guide.tm.domain.primitive.TotalAmount;
 
 import java.util.List;
 import java.util.stream.Collectors;

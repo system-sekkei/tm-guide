@@ -1,10 +1,9 @@
 package guide.tm.domain.model.allocation.stock
 
-
 import guide.tm.domain.model.allocation.location.AllocatedLocations
 import guide.tm.domain.model.allocation.warehouse.WareHouseCode
-import guide.tm.domain.model.primitive.Quantity
 import guide.tm.domain.model.product.detail.ProductCode
+import guide.tm.domain.primitive.Quantity
 import spock.lang.Specification
 
 class StocksSpec extends Specification {

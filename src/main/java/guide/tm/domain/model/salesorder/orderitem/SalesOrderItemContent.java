@@ -1,8 +1,8 @@
 package guide.tm.domain.model.salesorder.orderitem;
 
-import guide.tm.domain.model.primitive.Amount;
-import guide.tm.domain.model.primitive.Quantity;
 import guide.tm.domain.model.product.individual.SingleProduct;
+import guide.tm.domain.primitive.Amount;
+import guide.tm.domain.primitive.Quantity;
 import jakarta.validation.constraints.AssertTrue;
 
 /**

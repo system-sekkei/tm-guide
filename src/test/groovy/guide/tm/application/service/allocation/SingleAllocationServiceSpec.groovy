@@ -13,7 +13,6 @@ import guide.tm.domain.model.customer.Customer
 import guide.tm.domain.model.customer.CustomerName
 import guide.tm.domain.model.customer.CustomerNumber
 import guide.tm.domain.model.customer.CustomerType
-import guide.tm.domain.model.primitive.Quantity
 import guide.tm.domain.model.product.detail.ProductCode
 import guide.tm.domain.model.product.detail.ProductName
 import guide.tm.domain.model.product.individual.SingleProduct
@@ -22,6 +21,7 @@ import guide.tm.domain.model.salesorder.content.OrderedDate
 import guide.tm.domain.model.salesorder.content.SalesOrderContent
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber
 import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemContent
+import guide.tm.domain.primitive.Quantity
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.transaction.annotation.Transactional

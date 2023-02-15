@@ -2,7 +2,7 @@ package guide.tm.domain.model.allocation.location;
 
 
 import guide.tm.domain.model.allocation.warehouse.WareHouseCode;
-import guide.tm.domain.model.primitive.Quantity;
+import guide.tm.domain.primitive.Quantity;
 
 /**
  * 引当場所

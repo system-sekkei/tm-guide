@@ -1,8 +1,8 @@
 package guide.tm.domain.model.allocation.salesorder.bundle;
 
 import guide.tm.domain.model.allocation.bundle.BundleAllocation;
-import guide.tm.domain.model.primitive.Quantity;
 import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItem;
+import guide.tm.domain.primitive.Quantity;
 
 /**
  * セット品の受注明細と引当

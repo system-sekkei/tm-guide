@@ -1,10 +1,10 @@
 package guide.tm.domain.model.salesorder.order;
 
-import guide.tm.domain.model.primitive.Amount;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItems;
 import guide.tm.domain.model.salesorder.orderitem.SingleProductOrderItems;
 import guide.tm.domain.model.tax.context.TaxContext;
+import guide.tm.domain.primitive.Amount;
 
 /**
  * 受注

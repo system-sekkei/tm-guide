@@ -1,7 +1,7 @@
 package guide.tm.domain.model.allocation.location;
 
-import guide.tm.domain.model.primitive.Quantity;
 import guide.tm.domain.model.product.detail.ProductCode;
+import guide.tm.domain.primitive.Quantity;
 
 public class ProductAllocation {
     ProductCode productCode;

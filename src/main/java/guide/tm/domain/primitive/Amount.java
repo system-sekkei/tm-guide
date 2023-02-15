@@ -1,4 +1,4 @@
-package guide.tm.domain.model.primitive;
+package guide.tm.domain.primitive;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

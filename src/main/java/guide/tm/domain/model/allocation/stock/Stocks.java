@@ -2,7 +2,7 @@ package guide.tm.domain.model.allocation.stock;
 
 import guide.tm.domain.model.allocation.location.AllocatedLocation;
 import guide.tm.domain.model.allocation.location.AllocatedLocations;
-import guide.tm.domain.model.primitive.Quantity;
+import guide.tm.domain.primitive.Quantity;
 
 import java.util.ArrayList;
 import java.util.List;

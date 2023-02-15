@@ -1,6 +1,6 @@
 package guide.tm.domain.model.allocation.location;
 
-import guide.tm.domain.model.primitive.Quantity;
+import guide.tm.domain.primitive.Quantity;
 
 import java.util.List;
 

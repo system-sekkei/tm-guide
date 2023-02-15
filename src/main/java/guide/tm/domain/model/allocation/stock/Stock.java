@@ -1,8 +1,8 @@
 package guide.tm.domain.model.allocation.stock;
 
 import guide.tm.domain.model.allocation.warehouse.WareHouseCode;
-import guide.tm.domain.model.primitive.Quantity;
 import guide.tm.domain.model.product.detail.ProductCode;
+import guide.tm.domain.primitive.Quantity;
 
 /**
  * 在庫

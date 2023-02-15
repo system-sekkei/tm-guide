@@ -1,9 +1,9 @@
 package guide.tm.domain.model.shipping.item;
 
-import guide.tm.domain.model.primitive.Quantity;
 import guide.tm.domain.model.product.individual.SingleProduct;
 import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemNumber;
 import guide.tm.domain.model.salesorder.orderitem.SingleOrderItem;
+import guide.tm.domain.primitive.Quantity;
 
 /**
  * 出荷明細

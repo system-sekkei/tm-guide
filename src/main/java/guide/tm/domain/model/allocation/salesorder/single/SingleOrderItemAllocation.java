@@ -1,8 +1,8 @@
 package guide.tm.domain.model.allocation.salesorder.single;
 
 import guide.tm.domain.model.allocation.single.SingleAllocation;
-import guide.tm.domain.model.primitive.Quantity;
 import guide.tm.domain.model.salesorder.orderitem.SingleOrderItem;
+import guide.tm.domain.primitive.Quantity;
 
 /**
  * 受注明細と引当

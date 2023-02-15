@@ -1,6 +1,6 @@
 package guide.tm.domain.model.tax.context;
 
-import guide.tm.domain.model.primitive.Rate;
+import guide.tm.domain.primitive.Rate;
 
 import java.math.BigDecimal;
 

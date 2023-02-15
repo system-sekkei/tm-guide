@@ -1,7 +1,7 @@
 package guide.tm.domain.model.tax.context;
 
-import guide.tm.domain.model.primitive.Amount;
-import guide.tm.domain.model.primitive.TotalAmount;
+import guide.tm.domain.primitive.Amount;
+import guide.tm.domain.primitive.TotalAmount;
 import jakarta.validation.constraints.NotNull;
 
 /**
