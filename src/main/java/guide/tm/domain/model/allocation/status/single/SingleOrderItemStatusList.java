@@ -2,7 +2,6 @@ package guide.tm.domain.model.allocation.status.single;
 
 import guide.tm.domain.model.allocation.single.SingleAllocations;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,10 +9,6 @@ import java.util.List;
  */
 public class SingleOrderItemStatusList {
     List<SingleOrderItemStatus> list;
-
-    public SingleOrderItemStatusList() {
-        this(new ArrayList<>());
-    }
 
     public SingleOrderItemStatusList(List<SingleOrderItemStatus> list) {
         this.list = list;
@@ -42,11 +37,6 @@ public class SingleOrderItemStatusList {
                         .filter(it -> !it.isShippingInstructed())
                         .map(SingleOrderItemStatus::singleAllocation)
                         .toList());
-    }
-
-    private boolean contains(SingleOrderItemStatus singleOrderItemStatus) {
-        return list.stream()
-                .anyMatch(it -> it.singleOrderItem.isSame(singleOrderItemStatus.singleOrderItem()));
     }
 
     public boolean isEmpty() {

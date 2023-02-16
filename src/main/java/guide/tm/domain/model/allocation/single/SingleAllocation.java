@@ -14,6 +14,21 @@ public class SingleAllocation {
     SalesOrderItemNumber salesOrderItemNumber;
     ProductAllocation productAllocation;
 
+    public SingleAllocation() {
+        this(new SingleAllocationNumber(), new SalesOrderNumber(), new SalesOrderItemNumber(), new ProductAllocation());
+    }
+
+    public SingleAllocation(
+            SingleAllocationNumber singleAllocationNumber,
+            SalesOrderNumber salesOrderNumber,
+            SalesOrderItemNumber salesOrderItemNumber,
+            ProductAllocation productAllocation) {
+        this.singleAllocationNumber = singleAllocationNumber;
+        this.salesOrderNumber = salesOrderNumber;
+        this.salesOrderItemNumber = salesOrderItemNumber;
+        this.productAllocation = productAllocation;
+    }
+
     public Quantity allocatedQuantity() {
         return productAllocation.allocatedQuantity();
     }

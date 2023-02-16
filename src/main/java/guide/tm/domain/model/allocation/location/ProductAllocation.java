@@ -7,6 +7,15 @@ public class ProductAllocation {
     ProductCode productCode;
     AllocatedLocations allocatedLocations;
 
+    public ProductAllocation() {
+        this(new ProductCode(), new AllocatedLocations());
+    }
+
+    public ProductAllocation(ProductCode productCode, AllocatedLocations allocatedLocations) {
+        this.productCode = productCode;
+        this.allocatedLocations = allocatedLocations;
+    }
+
     public Quantity allocatedQuantity() {
         return allocatedLocations.allocatedQuantity();
     }

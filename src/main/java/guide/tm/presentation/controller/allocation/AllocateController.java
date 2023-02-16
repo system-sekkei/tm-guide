@@ -2,7 +2,7 @@ package guide.tm.presentation.controller.allocation;
 
 import guide.tm.application.scenario.salesorder.SalesOrderScenario;
 import guide.tm.application.service.allocation.AllocationService;
-import guide.tm.domain.model.salesorder.order.SalesOrder;
+import guide.tm.domain.model.allocation.status.SalesOrderStatus;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +23,8 @@ class AllocateController {
 
     @PostMapping
     String allocateSalesOrder(@PathVariable SalesOrderNumber salesOrderNumber) {
-        SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderNumber);
-        allocationService.allocateSalesOrder(salesOrder, salesOrderNumber);
+        SalesOrderStatus salesOrderStatus = salesOrderScenario.status(salesOrderNumber);
+        allocationService.allocateSalesOrder(salesOrderStatus, salesOrderNumber);
         return "redirect:/sales-orders/{salesOrderNumber}/allocations";
     }
 

@@ -13,6 +13,22 @@ public class BundleAllocation {
     ProductCode bundleProductCode;
     ProductAllocations productAllocations;
 
+    BundleAllocation() {
+        this(new BundleAllocationNumber(), new SalesOrderNumber(), new SalesOrderItemNumber(), new ProductCode(), new ProductAllocations());
+    }
+
+    public BundleAllocation(
+            BundleAllocationNumber bundleAllocationNumber,
+            SalesOrderNumber salesOrderNumber,
+            SalesOrderItemNumber salesOrderItemNumber,
+            ProductCode bundleProductCode,
+            ProductAllocations productAllocations) {
+        this.bundleAllocationNumber = bundleAllocationNumber;
+        this.salesOrderNumber = salesOrderNumber;
+        this.salesOrderItemNumber = salesOrderItemNumber;
+        this.bundleProductCode = bundleProductCode;
+        this.productAllocations = productAllocations;
+    }
 
     public boolean isAllocated(Quantity orderedQuantity) {
         return productAllocations.isAllAllocated(orderedQuantity);

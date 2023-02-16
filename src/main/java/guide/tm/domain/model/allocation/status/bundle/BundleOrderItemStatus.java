@@ -24,9 +24,7 @@ public class BundleOrderItemStatus {
      * 引当完了しているかを返却する
      */
     public boolean isAllAllocated() {
-        return bundleProductOrderItem.bundleProduct().bundleProductItems().list().stream().allMatch(
-                product -> bundleAllocation.isAllocated(bundleProductOrderItem.quantity())
-        );
+        return bundleAllocation.isAllocated(bundleProductOrderItem.quantity());
     }
 
     /**

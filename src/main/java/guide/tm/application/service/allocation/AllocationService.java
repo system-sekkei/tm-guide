@@ -6,8 +6,12 @@ import guide.tm.domain.model.allocation.bundle.BundleAllocations;
 import guide.tm.domain.model.allocation.location.AllocatedLocations;
 import guide.tm.domain.model.allocation.single.SingleAllocations;
 import guide.tm.domain.model.allocation.status.Allocations;
+import guide.tm.domain.model.allocation.status.SalesOrderStatus;
+import guide.tm.domain.model.allocation.status.bundle.BundleOrderItemStatus;
+import guide.tm.domain.model.allocation.status.bundle.BundleOrderItemStatusList;
+import guide.tm.domain.model.allocation.status.single.SingleOrderItemStatus;
+import guide.tm.domain.model.allocation.status.single.SingleOrderItemStatusList;
 import guide.tm.domain.model.allocation.stock.Stocks;
-import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItem;
 import guide.tm.domain.model.salesorder.orderitem.SingleOrderItem;
@@ -30,15 +34,21 @@ public class AllocationService {
     /**
      * 受注の引当を行う
      */
-    public void allocateSalesOrder(SalesOrder salesOrder, SalesOrderNumber salesOrderNumber) {
-        salesOrder.singleProductOrderItems().list().forEach(it -> allocate(it, salesOrderNumber));
-        salesOrder.bundleProductOrderItems().list().forEach(it -> allocate(it, salesOrderNumber));
+    public void allocateSalesOrder(SalesOrderStatus salesOrderStatus, SalesOrderNumber salesOrderNumber) {
+        SingleOrderItemStatusList singleOrderItemStatusList = salesOrderStatus.singleOrderItemStatusList();
+        BundleOrderItemStatusList bundleOrderItemStatusList = salesOrderStatus.bundleOrderItemStatusList();
+
+        singleOrderItemStatusList.list().forEach(singleOrderItemStatus -> allocate(singleOrderItemStatus, salesOrderNumber));
+        bundleOrderItemStatusList.list().forEach(bundleOrderItemStatus -> allocate(bundleOrderItemStatus, salesOrderNumber));
     }
 
     /**
      * 個別商品の引当を行う
      */
-    public void allocate(SingleOrderItem singleOrderItem, SalesOrderNumber salesOrderNumber) {
+    private void allocate(SingleOrderItemStatus singleOrderItemStatus, SalesOrderNumber salesOrderNumber) {
+        SingleOrderItem singleOrderItem = singleOrderItemStatus.singleOrderItem();
+        if (singleOrderItemStatus.isAllAllocated()) return;
+
         Stocks stocks = stockService.stocksOf(singleOrderItem.product());
         AllocatedLocations allocatedLocations = stocks.allocate(singleOrderItem.quantity());
         allocationRepository.register(allocatedLocations, salesOrderNumber, singleOrderItem);
@@ -54,7 +64,10 @@ public class AllocationService {
     /**
      * セット商品の引当を行う
      */
-    public void allocate(BundleProductOrderItem bundleProductOrderItem, SalesOrderNumber salesOrderNumber) {
+    public void allocate(BundleOrderItemStatus bundleOrderItemStatus, SalesOrderNumber salesOrderNumber) {
+        BundleProductOrderItem bundleProductOrderItem = bundleOrderItemStatus.bundleProductOrderItem();
+        if (bundleOrderItemStatus.isAllAllocated()) return;
+
         BundleAllocationNumber bundleAllocationNumber =
                 allocationRepository.registerBundleAllocation(salesOrderNumber, bundleProductOrderItem);
         bundleProductOrderItem.bundleProduct().bundleProductItems().list().forEach(singleProduct -> {
