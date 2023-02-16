@@ -1,7 +1,7 @@
 package guide.tm.infrastructure.datasource.shipping;
 
-import guide.tm.domain.model.allocation.status.bundle.BundleOrderItemStatus;
-import guide.tm.domain.model.allocation.status.single.SingleOrderItemStatus;
+import guide.tm.domain.model.allocation.bundle.BundleAllocation;
+import guide.tm.domain.model.allocation.single.SingleAllocation;
 import guide.tm.domain.model.shipping.content.Shipping;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -17,10 +17,10 @@ interface ShippingMapper {
 
     void registerShippedAllocations(
             @Param("shippingNumber") UUID shippingNumber,
-            @Param("singleOrderItemStatus") SingleOrderItemStatus singleOrderItemStatus);
+            @Param("singleAllocation") SingleAllocation singleAllocation);
 
     void registerShippedBundleAllocations(
             @Param("shippingNumber") UUID shippingNumber,
-            @Param("bundleOrderItemStatus") BundleOrderItemStatus bundleOrderItemStatus);
+            @Param("bundleAllocation") BundleAllocation bundleAllocation);
 
 }

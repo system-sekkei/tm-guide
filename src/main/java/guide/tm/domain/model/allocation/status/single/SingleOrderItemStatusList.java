@@ -1,5 +1,7 @@
 package guide.tm.domain.model.allocation.status.single;
 
+import guide.tm.domain.model.allocation.single.SingleAllocations;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,11 +34,13 @@ public class SingleOrderItemStatusList {
     }
 
     /**
-     * 未出荷の個別商品の受注明細と引当のリスト
+     * 未出荷の個別商品の引当のリスト
      */
-    public SingleOrderItemStatusList notShippedItemAllocations(SingleOrderItemStatusList shippedSalesOrderItems) {
-        return new SingleOrderItemStatusList(
-                list.stream().filter(it -> !shippedSalesOrderItems.contains(it))
+    public SingleAllocations notShippedItemAllocations() {
+        return new SingleAllocations(
+                list.stream()
+                        .filter(it -> !it.isShippingInstructed())
+                        .map(SingleOrderItemStatus::singleAllocation)
                         .toList());
     }
 

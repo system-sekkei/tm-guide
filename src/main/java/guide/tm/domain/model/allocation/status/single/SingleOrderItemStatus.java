@@ -23,6 +23,10 @@ public class SingleOrderItemStatus {
         return singleOrderItem;
     }
 
+    public SingleAllocation singleAllocation() {
+        return singleAllocation;
+    }
+
     /**
      * 引当完了しているかを返却する
      */
@@ -47,4 +51,9 @@ public class SingleOrderItemStatus {
     public ShippingStatus shippingStatus() {
         return shippingStatus;
     }
+
+    public boolean isShippingInstructed() {
+        return shippingStatus.isInstructed();
+    }
+
 }

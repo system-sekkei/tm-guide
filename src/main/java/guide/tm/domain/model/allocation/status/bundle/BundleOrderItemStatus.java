@@ -54,7 +54,15 @@ public class BundleOrderItemStatus {
         return bundleProductOrderItem;
     }
 
+    public BundleAllocation bundleAllocation() {
+        return bundleAllocation;
+    }
+
     public ShippingStatus shippingStatus() {
         return shippingStatus;
+    }
+
+    public boolean isShippingInstructed() {
+        return shippingStatus.isInstructed();
     }
 }

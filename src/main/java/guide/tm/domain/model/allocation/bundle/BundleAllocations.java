@@ -20,4 +20,12 @@ public class BundleAllocations {
                 .findFirst()
                 .orElse(new BundleAllocation());
     }
+
+    public List<BundleAllocation> list() {
+        return list;
+    }
+
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
 }

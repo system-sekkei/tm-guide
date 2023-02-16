@@ -1,7 +1,7 @@
 package guide.tm.application.service.shipping;
 
-import guide.tm.domain.model.allocation.status.bundle.BundleOrderItemStatusList;
-import guide.tm.domain.model.allocation.status.single.SingleOrderItemStatusList;
+import guide.tm.domain.model.allocation.bundle.BundleAllocations;
+import guide.tm.domain.model.allocation.single.SingleAllocations;
 import guide.tm.domain.model.shipping.content.Shipping;
 import guide.tm.domain.model.shipping.content.ShippingNumber;
 import org.springframework.stereotype.Service;
@@ -22,9 +22,9 @@ public class ShippingService {
      */
     public ShippingNumber register(
             Shipping shipping,
-            SingleOrderItemStatusList singleOrderItemStatusList,
-            BundleOrderItemStatusList bundleOrderItemStatusList) {
-        return shippingRepository.register(shipping, singleOrderItemStatusList, bundleOrderItemStatusList);
+            SingleAllocations singleAllocations,
+            BundleAllocations bundleAllocations) {
+        return shippingRepository.register(shipping, singleAllocations, bundleAllocations);
     }
 
 }

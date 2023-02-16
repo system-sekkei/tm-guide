@@ -1,5 +1,7 @@
 package guide.tm.domain.model.allocation.status.bundle;
 
+import guide.tm.domain.model.allocation.bundle.BundleAllocations;
+
 import java.util.List;
 
 /**
@@ -26,16 +28,15 @@ public class BundleOrderItemStatusList {
                         .toList());
     }
 
-    public BundleOrderItemStatusList notShippedItemAllocations(BundleOrderItemStatusList shippedBundleItems) {
-        return new BundleOrderItemStatusList(
-                list.stream().filter(it -> !shippedBundleItems.contains(it))
+    public BundleAllocations notShippedItemAllocations() {
+        return new BundleAllocations(
+                list.stream()
+                        .filter(it -> !it.isShippingInstructed())
+                        .map(BundleOrderItemStatus::bundleAllocation)
                         .toList());
     }
 
-    private boolean contains(BundleOrderItemStatus bundleOrderItemStatus) {
-        return list.stream()
-                .anyMatch(it -> it.bundleProductOrderItem.isSame(bundleOrderItemStatus.bundleProductOrderItem()));
-    }
+
 
     public boolean isEmpty() {
         return list.isEmpty();

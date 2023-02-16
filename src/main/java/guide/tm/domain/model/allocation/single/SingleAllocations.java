@@ -20,4 +20,12 @@ public class SingleAllocations {
                 .findFirst()
                 .orElse(new SingleAllocation());
     }
+
+    public List<SingleAllocation> list() {
+        return list;
+    }
+
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
 }

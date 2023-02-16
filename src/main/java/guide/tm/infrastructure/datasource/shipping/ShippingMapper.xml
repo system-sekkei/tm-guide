@@ -18,7 +18,7 @@
         INSERT INTO 出荷指示.出荷指示済引当 (出荷番号, 引当番号)
         VALUES (
                 #{shippingNumber},
-                #{singleOrderItemStatus.singleAllocation.singleAllocationNumber.value}
+                #{singleAllocation.singleAllocationNumber.value}
                 )
     </insert>
 
@@ -26,7 +26,7 @@
         INSERT INTO 出荷指示.出荷指示済セット商品引当 (出荷番号, 引当番号)
         VALUES (
                 #{shippingNumber},
-                #{bundleOrderItemStatus.bundleAllocation.bundleAllocationNumber.value}
+                #{bundleAllocation.bundleAllocationNumber.value}
                 )
     </insert>
 
