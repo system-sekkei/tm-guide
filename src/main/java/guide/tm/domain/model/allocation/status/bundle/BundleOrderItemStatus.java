@@ -1,20 +1,23 @@
-package guide.tm.domain.model.allocation.salesorder.bundle;
+package guide.tm.domain.model.allocation.status.bundle;
 
 import guide.tm.domain.model.allocation.bundle.BundleAllocation;
+import guide.tm.domain.model.allocation.status.ShippingStatus;
 import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItem;
 import guide.tm.domain.primitive.Quantity;
 
 /**
  * セット品の受注明細と引当
  */
-public class BundleOrderItemAllocation {
+public class BundleOrderItemStatus {
 
     BundleProductOrderItem bundleProductOrderItem;
     BundleAllocation bundleAllocation;
+    ShippingStatus shippingStatus;
 
-    public BundleOrderItemAllocation(BundleProductOrderItem bundleProductOrderItem, BundleAllocation bundleAllocation) {
+    public BundleOrderItemStatus(BundleProductOrderItem bundleProductOrderItem, BundleAllocation bundleAllocation, ShippingStatus shippingStatus) {
         this.bundleProductOrderItem = bundleProductOrderItem;
         this.bundleAllocation = bundleAllocation;
+        this.shippingStatus = shippingStatus;
     }
 
     /**
@@ -49,5 +52,9 @@ public class BundleOrderItemAllocation {
 
     public BundleProductOrderItem bundleProductOrderItem() {
         return bundleProductOrderItem;
+    }
+
+    public ShippingStatus shippingStatus() {
+        return shippingStatus;
     }
 }

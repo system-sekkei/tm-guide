@@ -1,19 +1,22 @@
-package guide.tm.domain.model.allocation.salesorder.single;
+package guide.tm.domain.model.allocation.status.single;
 
 import guide.tm.domain.model.allocation.single.SingleAllocation;
+import guide.tm.domain.model.allocation.status.ShippingStatus;
 import guide.tm.domain.model.salesorder.orderitem.SingleOrderItem;
 import guide.tm.domain.primitive.Quantity;
 
 /**
- * 個別商品の受注明細と引当
+ * 個別商品の引当/出荷状況
  */
-public class SingleOrderItemAllocation {
+public class SingleOrderItemStatus {
     SingleOrderItem singleOrderItem;
     SingleAllocation singleAllocation;
+    ShippingStatus shippingStatus;
 
-    public SingleOrderItemAllocation(SingleOrderItem singleOrderItem, SingleAllocation singleAllocation) {
+    public SingleOrderItemStatus(SingleOrderItem singleOrderItem, SingleAllocation singleAllocation, ShippingStatus shippingStatus) {
         this.singleOrderItem = singleOrderItem;
         this.singleAllocation = singleAllocation;
+        this.shippingStatus = shippingStatus;
     }
 
     public SingleOrderItem singleOrderItem() {
@@ -39,5 +42,9 @@ public class SingleOrderItemAllocation {
      */
     public Quantity remainingQuantity() {
         return singleOrderItem.quantity().subtract(allocatedQuantity());
+    }
+
+    public ShippingStatus shippingStatus() {
+        return shippingStatus;
     }
 }

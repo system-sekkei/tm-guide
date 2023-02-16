@@ -1,7 +1,7 @@
 package guide.tm.application.service.shipping;
 
-import guide.tm.domain.model.allocation.salesorder.bundle.BundleOrderItemAllocations;
-import guide.tm.domain.model.allocation.salesorder.single.SingleOrderItemAllocations;
+import guide.tm.domain.model.allocation.status.bundle.BundleOrderItemStatusList;
+import guide.tm.domain.model.allocation.status.single.SingleOrderItemStatusList;
 import guide.tm.domain.model.shipping.content.Shipping;
 import guide.tm.domain.model.shipping.content.ShippingNumber;
 import org.springframework.stereotype.Service;
@@ -22,16 +22,9 @@ public class ShippingService {
      */
     public ShippingNumber register(
             Shipping shipping,
-            SingleOrderItemAllocations singleOrderItemAllocations,
-            BundleOrderItemAllocations bundleOrderItemAllocations) {
-        return shippingRepository.register(shipping, singleOrderItemAllocations, bundleOrderItemAllocations);
-    }
-
-    /**
-     * 出荷を取得する
-     */
-    public Shipping shippingOf(ShippingNumber shippingNumber) {
-        return shippingRepository.shippingOf(shippingNumber);
+            SingleOrderItemStatusList singleOrderItemStatusList,
+            BundleOrderItemStatusList bundleOrderItemStatusList) {
+        return shippingRepository.register(shipping, singleOrderItemStatusList, bundleOrderItemStatusList);
     }
 
 }

@@ -5,6 +5,7 @@ import guide.tm.domain.model.allocation.bundle.BundleAllocationNumber;
 import guide.tm.domain.model.allocation.bundle.BundleAllocations;
 import guide.tm.domain.model.allocation.location.AllocatedLocations;
 import guide.tm.domain.model.allocation.single.SingleAllocations;
+import guide.tm.domain.model.allocation.status.Allocations;
 import guide.tm.domain.model.allocation.stock.Stocks;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
@@ -68,5 +69,9 @@ public class AllocationService {
      */
     public BundleAllocations bundleAllocations(SalesOrderNumber salesOrderNumber) {
         return allocationRepository.bundleAllocations(salesOrderNumber);
+    }
+
+    public Allocations allocationsOf(SalesOrderNumber salesOrderNumber) {
+        return new Allocations(singleAllocationsOf(salesOrderNumber), bundleAllocations(salesOrderNumber));
     }
 }

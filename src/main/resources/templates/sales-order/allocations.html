@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>引当状況</title>
+  <title>引当/出荷状況</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
@@ -10,37 +10,37 @@
 <body>
 
 <div class="container">
-  <h1 class="display-3">引当状況</h1>
+  <h1 class="display-3">引当/出荷状況</h1>
 
   <div class="mb-3 row">
     <label for="customerName" class="col-sm-2 col-form-label">顧客名称</label>
     <div class="col-sm-4">
-      <span id="customerName" class="font-weight-bold" th:text="${salesOrder.salesOrderContent.customer.name}">岸田 文雄</span>
+      <span id="customerName" class="font-weight-bold" th:text="${salesOrderStatus.salesOrder.salesOrderContent.customer.name}">岸田 文雄</span>
     </div>
     <label for="orderedDate" class="col-sm-2 col-form-label">受注日</label>
     <div class="col-sm-4">
-      <span id="orderedDate" class="font-weight-bold" th:text="${salesOrder.salesOrderContent.orderedDate}">2023-01-01</span>
+      <span id="orderedDate" class="font-weight-bold" th:text="${salesOrderStatus.salesOrder.salesOrderContent.orderedDate}">2023-01-01</span>
     </div>
   </div>
 
   <div class="mb-3 row">
     <label for="total" class="col-sm-2 col-form-label">受注金額</label>
     <div class="col-sm-2">
-      <input type="text" readonly class="form-control-plaintext" id="total" th:value="${salesOrder.totalAmount}">
+      <input type="text" readonly class="form-control-plaintext" id="total" th:value="${salesOrderStatus.salesOrder.totalAmount}">
     </div>
   </div>
   <div class="mb-3 row">
     <label for="amountExcludingTax" class="col-sm-2 col-form-label">税抜き金額</label>
     <div class="col-sm-2">
-      <input type="text" readonly class="form-control-plaintext" id="amountExcludingTax" th:value="${salesOrder.amountExcludingTax}">
+      <input type="text" readonly class="form-control-plaintext" id="amountExcludingTax" th:value="${salesOrderStatus.salesOrder.amountExcludingTax}">
     </div>
     <label for="tax" class="col-sm-2 col-form-label">消費税</label>
     <div class="col-sm-2">
-      <input type="text" readonly class="form-control-plaintext" id="tax" th:value="${salesOrder.tax}">
+      <input type="text" readonly class="form-control-plaintext" id="tax" th:value="${salesOrderStatus.salesOrder.tax}">
     </div>
     <label for="shippingFee" class="col-sm-2 col-form-label">送料</label>
     <div class="col-sm-2">
-      <input type="text" readonly class="form-control-plaintext" id="shippingFee" th:value="${salesOrder.shippingFee.amount}">
+      <input type="text" readonly class="form-control-plaintext" id="shippingFee" th:value="${salesOrderStatus.salesOrder.shippingFee.amount}">
     </div>
   </div>
 
@@ -52,43 +52,48 @@
       <th>商品名称</th>
       <th class="text-end">商品単価</th>
       <th class="text-end">数量</th>
-      <th class="text-center">引当済み</th>
+      <th class="text-center">引当</th>
       <th class="text-end">引当数量</th>
       <th class="text-end">引当残</th>
+      <th class="text-center">出荷指示</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="singleOrderItemAllocation: ${salesOrderAllocation.singleOrderItemAllocations.list}">
+    <tr th:each="singleOrderItemStatus: ${salesOrderStatus.singleOrderItemStatusList.list}">
       <td class="text-center">
         <i class="bi bi-bag-check"></i>
       </td>
-      <td th:text="${singleOrderItemAllocation.singleOrderItem.product.name}">個別商品名</td>
-      <td class="text-end" th:text="${singleOrderItemAllocation.singleOrderItem.product.unitPrice}">879</td>
-      <td class="text-end" th:text="${singleOrderItemAllocation.singleOrderItem.quantity}">2</td>
-      <td class="text-center" th:if="${singleOrderItemAllocation.isAllAllocated}">
-        <span class="btn btn-info">引当済み</span>
+      <td th:text="${singleOrderItemStatus.singleOrderItem.product.name}">個別商品名</td>
+      <td class="text-end" th:text="${singleOrderItemStatus.singleOrderItem.product.unitPrice}">879</td>
+      <td class="text-end" th:text="${singleOrderItemStatus.singleOrderItem.quantity}">2</td>
+      <td class="text-center" >
+        <span class="btn btn-info" th:if="${singleOrderItemStatus.isAllAllocated}">引当済み</span>
+        <span class="btn btn-warning" th:unless="${singleOrderItemStatus.isAllAllocated}">引当残あり</span>
       </td>
-      <td class="text-center" th:unless="${singleOrderItemAllocation.isAllAllocated}">
-        <label class="btn btn-warning">引当残あり</label>
+      <td class="text-end" th:text="${singleOrderItemStatus.allocatedQuantity}">2</td>
+      <td class="text-end" th:text="${singleOrderItemStatus.remainingQuantity}">2</td>
+      <td class="text-center">
+        <span class="btn btn-info" th:if="${singleOrderItemStatus.shippingStatus.isInstructed}">指示済</span>
+        <span class="btn btn-warning" th:unless="${singleOrderItemStatus.shippingStatus.isInstructed}">未指示</span>
       </td>
-      <td class="text-end" th:text="${singleOrderItemAllocation.allocatedQuantity}">2</td>
-      <td class="text-end" th:text="${singleOrderItemAllocation.remainingQuantity}">2</td>
     </tr>
-    <tr th:each="bundleOrderItemAllocation: ${salesOrderAllocation.bundleOrderItemAllocations.list}">
+    <tr th:each="bundleOrderItemStatus: ${salesOrderStatus.bundleOrderItemStatusList.list}">
       <td class="text-center">
         <i class="bi bi-bag-check"></i>
       </td>
-      <td th:text="${bundleOrderItemAllocation.bundleProductOrderItem.bundleProduct.name}">個別商品名</td>
-      <td class="text-end" th:text="${bundleOrderItemAllocation.bundleProductOrderItem.bundleProduct.unitPrice}">879</td>
-      <td class="text-end" th:text="${bundleOrderItemAllocation.bundleProductOrderItem.quantity}">2</td>
-      <td class="text-center" th:if="${bundleOrderItemAllocation.isAllAllocated}">
-        <span class="btn btn-info">引当済み</span>
+      <td th:text="${bundleOrderItemStatus.bundleProductOrderItem.bundleProduct.name}">個別商品名</td>
+      <td class="text-end" th:text="${bundleOrderItemStatus.bundleProductOrderItem.bundleProduct.unitPrice}">879</td>
+      <td class="text-end" th:text="${bundleOrderItemStatus.bundleProductOrderItem.quantity}">2</td>
+      <td class="text-center">
+        <span class="btn btn-info" th:if="${bundleOrderItemStatus.isAllAllocated}">引当済み</span>
+        <span class="btn btn-warning" th:unless="${bundleOrderItemStatus.isAllAllocated}">引当残あり</span>
       </td>
-      <td class="text-center" th:unless="${bundleOrderItemAllocation.isAllAllocated}">
-        <label class="btn btn-warning">引当残あり</label>
+      <td class="text-end" th:text="${bundleOrderItemStatus.allocatedQuantity}">2</td>
+      <td class="text-end" th:text="${bundleOrderItemStatus.remainingQuantity}">2</td>
+      <td class="text-center">
+        <span class="btn btn-info" th:if="${bundleOrderItemStatus.shippingStatus.isInstructed}">指示済</span>
+        <span class="btn btn-warning" th:unless="${bundleOrderItemStatus.shippingStatus.isInstructed}">未指示</span>
       </td>
-      <td class="text-end" th:text="${bundleOrderItemAllocation.allocatedQuantity}">2</td>
-      <td class="text-end" th:text="${bundleOrderItemAllocation.remainingQuantity}">2</td>
     </tr>
 
     </tbody>
@@ -100,26 +105,6 @@
     <button type="submit" class="btn btn-primary">出荷登録</button>
   </form>
 
-  <hr>
-
-  <h2 class="display-3">出荷状況</h2>
-<!--  <table class="table table-striped table-hover" th:unless="${shippingItems.isEmpty}">-->
-<!--    <thead>-->
-<!--    <tr>-->
-<!--      <th>商品名称</th>-->
-<!--      <th class="text-end">数量</th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody>-->
-<!--    <tr th:each="shippingItem: ${shippingItems.list}">-->
-<!--      <td th:text="${shippingItem.individualProduct.name}">個別商品名</td>-->
-<!--      <td class="text-end" th:text="${shippingItem.shippingQuantity()}">2</td>-->
-<!--    </tr>-->
-
-<!--    </tbody>-->
-<!--    <tfoot>-->
-<!--    </tfoot>-->
-<!--  </table>-->
 </div>
 
 

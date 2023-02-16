@@ -18,7 +18,7 @@
         INSERT INTO 出荷指示.出荷指示済引当 (出荷番号, 引当番号)
         VALUES (
                 #{shippingNumber},
-                #{singleOrderItemAllocation.singleAllocation.singleAllocationNumber.value}
+                #{singleOrderItemStatus.singleAllocation.singleAllocationNumber.value}
                 )
     </insert>
 
@@ -26,15 +26,8 @@
         INSERT INTO 出荷指示.出荷指示済セット商品引当 (出荷番号, 引当番号)
         VALUES (
                 #{shippingNumber},
-                #{bundleOrderItemAllocation.bundleAllocation.bundleAllocationNumber.value}
+                #{bundleOrderItemStatus.bundleAllocation.bundleAllocationNumber.value}
                 )
     </insert>
 
-    <select id="shippingOf" resultType="guide.tm.domain.model.shipping.content.Shipping">
-       SELECT
-           出荷番号 AS "",
-           出荷日 AS "shippingDate.value"
-       FROM 出荷.出荷
-       WHERE 出荷番号 = #{shippingNumber.value}
-    </select>
 </mapper>

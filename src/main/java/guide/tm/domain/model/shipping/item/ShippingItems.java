@@ -1,52 +1,24 @@
 package guide.tm.domain.model.shipping.item;
 
-import guide.tm.domain.model.product.individual.SingleProduct;
+import guide.tm.domain.model.allocation.status.ShippingStatus;
+import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItem;
+import guide.tm.domain.model.salesorder.orderitem.SingleOrderItem;
 
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * 出荷明細のリスト
- */
 public class ShippingItems {
+    SingleShippingItems singleShippingItems;
+    BundleShippingItems bundleShippingItems;
 
-    List<ShippingItem> list;
-
-    @Deprecated ShippingItems() {
-        this(new ArrayList<>());
+    public ShippingItems(SingleShippingItems singleShippingItems, BundleShippingItems bundleShippingItems) {
+        this.singleShippingItems = singleShippingItems;
+        this.bundleShippingItems = bundleShippingItems;
     }
 
-    public ShippingItems(List<ShippingItem> list) {
-        this.list = list;
+
+    public ShippingStatus statusOfSingleOrderItem(SingleOrderItem singleOrderItem) {
+        return singleShippingItems.statusOf(singleOrderItem);
     }
 
-    public List<ShippingItem> list() {
-        return list;
-    }
-
-    public boolean isEmpty() {
-        return list.isEmpty();
-    }
-
-    public ShippingItems toBeShipped(ShippingItems shippedItems) {
-        return new ShippingItems(
-                list.stream().filter(shippingItem -> {
-                    if (!shippedItems.contains(shippingItem.singleProduct)) return true;
-                    ShippingItem shippedItem = shippedItems.shippingItemOf(shippingItem.singleProduct);
-                    return !shippedItem.shippingQuantity.isEqual(shippedItem.shippingQuantity);
-                }).toList());
-    }
-
-    private boolean contains(SingleProduct product) {
-        return list.stream()
-                .anyMatch(shippingItem -> shippingItem.singleProduct.code().isSame(product.code()));
-    }
-
-    private ShippingItem shippingItemOf(SingleProduct product) {
-        return list.stream()
-                .filter(shippingItem -> shippingItem.singleProduct.code().isSame(product.code()))
-                .findFirst()
-                .orElseThrow()
-                ;
+    public ShippingStatus statusOfBundleOrderItem(BundleProductOrderItem bundleProductOrderItem) {
+        return bundleShippingItems.statusOf(bundleProductOrderItem);
     }
 }
