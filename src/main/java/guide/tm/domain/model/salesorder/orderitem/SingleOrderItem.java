@@ -39,4 +39,8 @@ public class SingleOrderItem {
     public Quantity quantity() {
         return salesOrderItemContent.quantity;
     }
+
+    public boolean isSame(SingleOrderItem singleOrderItem) {
+        return salesOrderItemNumber.isSame(singleOrderItem.salesOrderItemNumber);
+    }
 }

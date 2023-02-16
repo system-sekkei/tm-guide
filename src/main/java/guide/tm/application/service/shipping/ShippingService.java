@@ -1,13 +1,13 @@
 package guide.tm.application.service.shipping;
 
-import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.allocation.salesorder.bundle.BundleOrderItemAllocations;
+import guide.tm.domain.model.allocation.salesorder.single.SingleOrderItemAllocations;
 import guide.tm.domain.model.shipping.content.Shipping;
 import guide.tm.domain.model.shipping.content.ShippingNumber;
-import guide.tm.domain.model.shipping.item.ShippingItems;
 import org.springframework.stereotype.Service;
 
 /**
- * 出荷サービス
+ * 出荷指示サービス
  */
 @Service
 public class ShippingService {
@@ -17,12 +17,15 @@ public class ShippingService {
         this.shippingRepository = shippingRepository;
     }
 
-//    /**
-//     * 出荷を登録する
-//     */
-//    public ShippingNumber register(Shipping shipping, SalesOrderItemAllocations salesOrderItemAllocations, BundleOrderItemAllocations bundleOrderItemAllocations) {
-//        return shippingRepository.register(shipping, salesOrderItemAllocations, bundleOrderItemAllocations);
-//    }
+    /**
+     * 出荷指示を登録する
+     */
+    public ShippingNumber register(
+            Shipping shipping,
+            SingleOrderItemAllocations singleOrderItemAllocations,
+            BundleOrderItemAllocations bundleOrderItemAllocations) {
+        return shippingRepository.register(shipping, singleOrderItemAllocations, bundleOrderItemAllocations);
+    }
 
     /**
      * 出荷を取得する
@@ -31,7 +34,4 @@ public class ShippingService {
         return shippingRepository.shippingOf(shippingNumber);
     }
 
-    public void registerItems(ShippingNumber shippingNumber, SalesOrderNumber salesOrderNumber, ShippingItems shippingItems) {
-        shippingRepository.registerShippingItems(shippingNumber, salesOrderNumber, shippingItems);
-    }
 }

@@ -35,13 +35,4 @@ public class SalesOrderScenario {
         return new SalesOrder(salesOrderContent, taxContext, singleProductOrderItems, bundleProductOrderItems);
     }
 
-//    public CustomerSalesOrders customerSalesOrders() {
-//        SalesOrderSummaries salesOrderSummaries = salesOrderService.salesOrderSummaries();
-//        Customers customers = salesOrderSummaries.customers();
-//        return new CustomerSalesOrders(
-//                customers.list().stream()
-//                        .map(customer -> new CustomerSalesOrder(customer, salesOrderSummaries.of(customer)))
-//                        .toList());
-//    }
-
 }

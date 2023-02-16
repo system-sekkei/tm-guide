@@ -5,7 +5,7 @@ import guide.tm.domain.model.salesorder.orderitem.SingleOrderItem;
 import guide.tm.domain.primitive.Quantity;
 
 /**
- * 受注明細と引当
+ * 個別商品の受注明細と引当
  */
 public class SingleOrderItemAllocation {
     SingleOrderItem singleOrderItem;

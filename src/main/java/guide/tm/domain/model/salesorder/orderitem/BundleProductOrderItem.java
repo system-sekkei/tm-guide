@@ -44,4 +44,8 @@ public class BundleProductOrderItem {
     public BundleProductOrderItemContent bundleProductOrderItemContent() {
         return bundleProductOrderItemContent;
     }
+
+    public boolean isSame(BundleProductOrderItem bundleProductOrderItem) {
+        return salesOrderItemNumber.isSame(bundleProductOrderItem.salesOrderItemNumber);
+    }
 }

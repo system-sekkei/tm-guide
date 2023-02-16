@@ -4,7 +4,19 @@ import guide.tm.application.scenario.salesorder.SalesOrderScenario;
 import guide.tm.application.service.allocation.AllocationService;
 import guide.tm.application.service.shipping.ShippingItemService;
 import guide.tm.application.service.shipping.ShippingService;
+import guide.tm.domain.model.allocation.bundle.BundleAllocations;
+import guide.tm.domain.model.allocation.salesorder.SalesOrderAllocation;
+import guide.tm.domain.model.allocation.salesorder.bundle.BundleOrderItemAllocations;
+import guide.tm.domain.model.allocation.salesorder.single.SingleOrderItemAllocations;
+import guide.tm.domain.model.allocation.single.SingleAllocations;
+import guide.tm.domain.model.salesorder.order.SalesOrder;
+import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.shipping.content.Shipping;
+import guide.tm.domain.model.shipping.content.ShippingDate;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class ShippingScenario {
@@ -28,32 +40,31 @@ public class ShippingScenario {
     /**
      * 出荷を登録する
      */
-//    public void registerShippingOf(SalesOrderNumber salesOrderNumber) {
-//
-//        SalesOrderAllocation salesOrderAllocation = salesOrderAllocation(salesOrderNumber);
-//
-//        SalesOrderItems shippedSalesOrderItems = new SalesOrderItems(List.of()); //TODO
-//        SalesOrderItemAllocations allocated = salesOrderAllocation.salesOrderItemAllocations().allocated();
-//        SalesOrderItemAllocations salesOrderItemsToShip = allocated.notShippedItemAllocations(shippedSalesOrderItems);
-//
-//
-//        BundleProductOrderItems shippedBundleItems = new BundleProductOrderItems(List.of()); //TODO
-//        BundleOrderItemAllocations allocatedBundleOrderItem = salesOrderAllocation.bundleProductOrderItemAllocations().allocated();
-//        BundleOrderItemAllocations bundleItemsToShip = allocatedBundleOrderItem.notShippedItemAllocations(shippedBundleItems);
-//
-//        if (isAlreadyShipped(salesOrderItemsToShip, bundleItemsToShip)) return;
-//        ShippingNumber shippingNumber =
-//                shippingService.register(new Shipping(salesOrderNumber, new ShippingDate(LocalDate.now())), salesOrderItemsToShip, bundleItemsToShip);
-//    }
-//
-//    private boolean isAlreadyShipped(SalesOrderItemAllocations salesOrderItemsToShip, BundleOrderItemAllocations bundleItemsToShip) {
-//        return salesOrderItemsToShip.isEmpty() && bundleItemsToShip.isEmpty();
-//    }
-//
-//    SalesOrderAllocation salesOrderAllocation(SalesOrderNumber salesOrderNumber) {
-//        SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderNumber);
-//        Allocations allocations = allocationService.allocationsOf(salesOrderNumber);
-//        BundleAllocations bundleAllocations = allocationService.bundleAllocations(salesOrderNumber);
-//        return new SalesOrderAllocation(salesOrderNumber, salesOrder, allocations, bundleAllocations);
-//    }
+    public void registerShippingOf(SalesOrderNumber salesOrderNumber) {
+
+        SalesOrderAllocation salesOrderAllocation = salesOrderAllocation(salesOrderNumber);
+
+        SingleOrderItemAllocations shippedSingleOrderItems = new SingleOrderItemAllocations(); //TODO
+        SingleOrderItemAllocations allocated = salesOrderAllocation.singleOrderItemAllocations().allocated();
+        SingleOrderItemAllocations singleOrderItemsToShip = allocated.notShippedItemAllocations(shippedSingleOrderItems);
+
+
+        BundleOrderItemAllocations shippedBundleItems = new BundleOrderItemAllocations(List.of()); //TODO
+        BundleOrderItemAllocations allocatedBundleOrderItem = salesOrderAllocation.bundleOrderItemAllocations().allocated();
+        BundleOrderItemAllocations bundleItemsToShip = allocatedBundleOrderItem.notShippedItemAllocations(shippedBundleItems);
+
+        if (isAlreadyShipped(singleOrderItemsToShip, bundleItemsToShip)) return;
+        shippingService.register(new Shipping(salesOrderNumber, new ShippingDate(LocalDate.now())), singleOrderItemsToShip, bundleItemsToShip);
+    }
+
+    private boolean isAlreadyShipped(SingleOrderItemAllocations singleOrderItemsToShip, BundleOrderItemAllocations bundleItemsToShip) {
+        return singleOrderItemsToShip.isEmpty() && bundleItemsToShip.isEmpty();
+    }
+
+    SalesOrderAllocation salesOrderAllocation(SalesOrderNumber salesOrderNumber) {
+        SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderNumber);
+        SingleAllocations singleAllocations = allocationService.singleAllocationsOf(salesOrderNumber);
+        BundleAllocations bundleAllocations = allocationService.bundleAllocations(salesOrderNumber);
+        return new SalesOrderAllocation(salesOrderNumber, salesOrder, singleAllocations, bundleAllocations);
+    }
 }
