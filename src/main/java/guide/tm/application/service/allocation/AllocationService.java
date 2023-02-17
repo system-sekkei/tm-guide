@@ -1,20 +1,20 @@
 package guide.tm.application.service.allocation;
 
 import guide.tm.application.service.stock.StockService;
+import guide.tm.domain.model.allocation.Allocations;
 import guide.tm.domain.model.allocation.bundle.BundleAllocationNumber;
 import guide.tm.domain.model.allocation.bundle.BundleAllocations;
 import guide.tm.domain.model.allocation.location.AllocatedLocations;
 import guide.tm.domain.model.allocation.single.SingleAllocations;
-import guide.tm.domain.model.allocation.status.Allocations;
-import guide.tm.domain.model.allocation.status.SalesOrderStatus;
-import guide.tm.domain.model.allocation.status.bundle.BundleOrderItemStatus;
-import guide.tm.domain.model.allocation.status.bundle.BundleOrderItemStatusList;
-import guide.tm.domain.model.allocation.status.single.SingleOrderItemStatus;
-import guide.tm.domain.model.allocation.status.single.SingleOrderItemStatusList;
 import guide.tm.domain.model.allocation.stock.Stocks;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItem;
 import guide.tm.domain.model.salesorder.orderitem.SingleOrderItem;
+import guide.tm.domain.model.status.SalesOrderStatus;
+import guide.tm.domain.model.status.bundle.BundleOrderItemStatus;
+import guide.tm.domain.model.status.bundle.BundleOrderItemStatusList;
+import guide.tm.domain.model.status.single.SingleOrderItemStatus;
+import guide.tm.domain.model.status.single.SingleOrderItemStatusList;
 import org.springframework.stereotype.Service;
 
 /**

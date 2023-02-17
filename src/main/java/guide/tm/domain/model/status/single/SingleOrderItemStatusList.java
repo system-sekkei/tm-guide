@@ -1,4 +1,4 @@
-package guide.tm.domain.model.allocation.status.single;
+package guide.tm.domain.model.status.single;
 
 import guide.tm.domain.model.allocation.single.SingleAllocations;
 

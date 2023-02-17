@@ -1,8 +1,8 @@
-package guide.tm.domain.model.allocation.status.bundle;
+package guide.tm.domain.model.status.bundle;
 
 import guide.tm.domain.model.allocation.bundle.BundleAllocation;
-import guide.tm.domain.model.allocation.status.ShippingStatus;
 import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItem;
+import guide.tm.domain.model.shipping.item.ShippingStatus;
 import guide.tm.domain.primitive.Quantity;
 
 /**

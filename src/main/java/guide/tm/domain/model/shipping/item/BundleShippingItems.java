@@ -1,6 +1,5 @@
 package guide.tm.domain.model.shipping.item;
 
-import guide.tm.domain.model.allocation.status.ShippingStatus;
 import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItem;
 
 import java.util.List;

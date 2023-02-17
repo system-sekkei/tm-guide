@@ -6,12 +6,12 @@ import guide.tm.application.service.shipping.ShippingItemService;
 import guide.tm.application.service.shipping.ShippingService;
 import guide.tm.domain.model.allocation.bundle.BundleAllocations;
 import guide.tm.domain.model.allocation.single.SingleAllocations;
-import guide.tm.domain.model.allocation.status.SalesOrderStatus;
-import guide.tm.domain.model.allocation.status.bundle.BundleOrderItemStatusList;
-import guide.tm.domain.model.allocation.status.single.SingleOrderItemStatusList;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.shipping.content.Shipping;
 import guide.tm.domain.model.shipping.content.ShippingDate;
+import guide.tm.domain.model.status.SalesOrderStatus;
+import guide.tm.domain.model.status.bundle.BundleOrderItemStatusList;
+import guide.tm.domain.model.status.single.SingleOrderItemStatusList;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

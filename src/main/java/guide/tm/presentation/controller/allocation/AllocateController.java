@@ -2,8 +2,8 @@ package guide.tm.presentation.controller.allocation;
 
 import guide.tm.application.scenario.salesorder.SalesOrderScenario;
 import guide.tm.application.service.allocation.AllocationService;
-import guide.tm.domain.model.allocation.status.SalesOrderStatus;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.status.SalesOrderStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

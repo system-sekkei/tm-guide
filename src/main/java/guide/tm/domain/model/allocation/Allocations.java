@@ -1,4 +1,4 @@
-package guide.tm.domain.model.allocation.status;
+package guide.tm.domain.model.allocation;
 
 import guide.tm.domain.model.allocation.bundle.BundleAllocations;
 import guide.tm.domain.model.allocation.single.SingleAllocations;
@@ -10,5 +10,13 @@ public class Allocations {
     public Allocations(SingleAllocations singleAllocations, BundleAllocations bundleAllocations) {
         this.singleAllocations = singleAllocations;
         this.bundleAllocations = bundleAllocations;
+    }
+
+    public SingleAllocations singleAllocations() {
+        return singleAllocations;
+    }
+
+    public BundleAllocations bundleAllocations() {
+        return bundleAllocations;
     }
 }

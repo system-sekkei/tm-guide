@@ -1,4 +1,4 @@
-package guide.tm.domain.model.allocation.status.bundle;
+package guide.tm.domain.model.status.bundle;
 
 import guide.tm.domain.model.allocation.bundle.BundleAllocations;
 

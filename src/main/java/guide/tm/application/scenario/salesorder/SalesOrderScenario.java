@@ -4,14 +4,14 @@ import guide.tm.application.service.allocation.AllocationService;
 import guide.tm.application.service.salesorder.SalesOrderItemService;
 import guide.tm.application.service.salesorder.SalesOrderService;
 import guide.tm.application.service.shipping.ShippingItemService;
-import guide.tm.domain.model.allocation.status.Allocations;
-import guide.tm.domain.model.allocation.status.SalesOrderStatus;
+import guide.tm.domain.model.allocation.Allocations;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItems;
 import guide.tm.domain.model.salesorder.orderitem.SingleProductOrderItems;
 import guide.tm.domain.model.shipping.item.ShippingItems;
+import guide.tm.domain.model.status.SalesOrderStatus;
 import guide.tm.domain.model.tax.context.TaxContext;
 import org.springframework.stereotype.Service;
 

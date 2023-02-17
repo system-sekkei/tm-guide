@@ -1,4 +1,4 @@
-package guide.tm.domain.model.allocation.status;
+package guide.tm.domain.model.shipping.item;
 
 public enum ShippingStatus {
     出荷指示済,

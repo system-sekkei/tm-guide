@@ -1,14 +1,16 @@
-package guide.tm.domain.model.allocation.status;
+package guide.tm.domain.model.status;
 
+import guide.tm.domain.model.allocation.Allocations;
 import guide.tm.domain.model.allocation.bundle.BundleAllocation;
 import guide.tm.domain.model.allocation.single.SingleAllocation;
-import guide.tm.domain.model.allocation.status.bundle.BundleOrderItemStatus;
-import guide.tm.domain.model.allocation.status.bundle.BundleOrderItemStatusList;
-import guide.tm.domain.model.allocation.status.single.SingleOrderItemStatus;
-import guide.tm.domain.model.allocation.status.single.SingleOrderItemStatusList;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.shipping.item.ShippingItems;
+import guide.tm.domain.model.shipping.item.ShippingStatus;
+import guide.tm.domain.model.status.bundle.BundleOrderItemStatus;
+import guide.tm.domain.model.status.bundle.BundleOrderItemStatusList;
+import guide.tm.domain.model.status.single.SingleOrderItemStatus;
+import guide.tm.domain.model.status.single.SingleOrderItemStatusList;
 
 /**
  * 受注状況
@@ -31,7 +33,7 @@ public class SalesOrderStatus {
         return new SingleOrderItemStatusList(
                 salesOrder.singleProductOrderItems().list().stream()
                         .map(singleOrderItem -> {
-                            SingleAllocation allocation = allocations.singleAllocations.allocationOf(singleOrderItem);
+                            SingleAllocation allocation = allocations.singleAllocations().allocationOf(singleOrderItem);
                             ShippingStatus shippingStatus = shippingItems.statusOfSingleOrderItem(singleOrderItem);
                             return new SingleOrderItemStatus(singleOrderItem, allocation, shippingStatus);
                         }).toList());
@@ -44,7 +46,7 @@ public class SalesOrderStatus {
         return new BundleOrderItemStatusList(
                 salesOrder.bundleProductOrderItems().list().stream()
                         .map(bundleProductOrderItem -> {
-                            BundleAllocation allocation = allocations.bundleAllocations.allocationOf(bundleProductOrderItem);
+                            BundleAllocation allocation = allocations.bundleAllocations().allocationOf(bundleProductOrderItem);
                             ShippingStatus shippingStatus = shippingItems.statusOfBundleOrderItem(bundleProductOrderItem);
                             return new BundleOrderItemStatus(bundleProductOrderItem, allocation, shippingStatus);
                         }).toList());
