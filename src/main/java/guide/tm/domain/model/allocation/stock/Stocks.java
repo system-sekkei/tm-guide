@@ -22,6 +22,7 @@ public class Stocks {
      * 引当する
      *
      * 引当して、引当場所のリストを返却する
+     * 届け先住所に近い倉庫から引当を行う
      */
     public AllocatedLocations allocate(Quantity orderedQuantity) {
         List<AllocatedLocation> result = new ArrayList<>();
