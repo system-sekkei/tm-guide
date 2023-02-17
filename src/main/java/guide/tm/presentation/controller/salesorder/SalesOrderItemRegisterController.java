@@ -9,10 +9,8 @@ import guide.tm.domain.model.product.single.SingleProducts;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItemContent;
-import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItem;
 import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItemContent;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
@@ -38,9 +36,29 @@ class SalesOrderItemRegisterController {
         this.bundleProductService = bundleProductService;
     }
 
-    @ModelAttribute("salesOrderItem")
-    SingleOrderItem salesOrderItem() {
-        return new SingleOrderItem();
+    @ModelAttribute("singleOrderItemContent")
+    SingleOrderItemContent singleOrderItemContent() {
+        return new SingleOrderItemContent();
+    }
+
+    @ModelAttribute("bundleProductOrderItemContent")
+    BundleProductOrderItemContent bundleProductOrderItemContent() {
+        return new BundleProductOrderItemContent();
+    }
+
+    @ModelAttribute("salesOrder")
+    SalesOrder salesOrder(@PathVariable("salesOrderNumber") SalesOrderNumber salesOrderNumber) {
+        return salesOrderScenario.salesOrderOf(salesOrderNumber);
+    }
+
+    @ModelAttribute("products")
+    SingleProducts singleProducts() {
+        return productService.products();
+    }
+
+    @ModelAttribute("bundleProducts")
+    BundleProducts bundleProducts() {
+        return bundleProductService.bundleProducts();
     }
 
     /**
@@ -49,17 +67,11 @@ class SalesOrderItemRegisterController {
     @PostMapping("new")
     String register(
             @PathVariable("salesOrderNumber") SalesOrderNumber salesOrderNumber,
-            @ModelAttribute("salesOrderItemContent") @Validated SingleOrderItemContent singleOrderItemContent,
-                    BindingResult salesOrderItemResult,
-                    Model model) {
+            @ModelAttribute("singleOrderItemContent") @Validated SingleOrderItemContent singleOrderItemContent,
+            BindingResult singleOrderItemResult
+            ) {
 
-        if (salesOrderItemResult.hasErrors()) {
-            SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderNumber);
-            model.addAttribute("salesOrder", salesOrder);
-            SingleProducts singleProducts = productService.products();
-            model.addAttribute("products", singleProducts);
-            BundleProducts bundleProducts = bundleProductService.bundleProducts();
-            model.addAttribute("bundleProducts", bundleProducts);
+        if (singleOrderItemResult.hasErrors()) {
             return "sales-order/sales-order";
         }
 
@@ -74,16 +86,10 @@ class SalesOrderItemRegisterController {
     String registerBundle(
             @PathVariable("salesOrderNumber") SalesOrderNumber salesOrderNumber,
             @ModelAttribute("bundleProductOrderItemContent") @Validated BundleProductOrderItemContent bundleProductOrderItemContent,
-            BindingResult salesOrderItemResult,
-            Model model) {
+            BindingResult bundleOrderItemResult
+            ) {
 
-        if (salesOrderItemResult.hasErrors()) {
-            SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderNumber);
-            model.addAttribute("salesOrder", salesOrder);
-            SingleProducts singleProducts = productService.products();
-            model.addAttribute("products", singleProducts);
-            BundleProducts bundleProducts = bundleProductService.bundleProducts();
-            model.addAttribute("bundleProducts", bundleProducts);
+        if (bundleOrderItemResult.hasErrors()) {
             return "sales-order/sales-order";
         }
 
@@ -91,8 +97,8 @@ class SalesOrderItemRegisterController {
         return String.format("redirect:/sales-orders/%s", salesOrderNumber);
     }
 
-    @InitBinder({"salesOrderItemContent", "bundleProductOrderItemContent"})
-    public void bindTaxContext(WebDataBinder binder) {
+    @InitBinder({"singleOrderItemContent", "bundleProductOrderItemContent"})
+    public void bindOrderItem(WebDataBinder binder) {
         binder.setAllowedFields(
                 "product.code.value",
                 "quantity.value"
