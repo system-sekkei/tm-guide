@@ -2,6 +2,9 @@ package guide.tm.domain.model.customer;
 
 import java.util.List;
 
+/**
+ * 顧客の一覧
+ */
 public class Customers {
     List<Customer> list;
 

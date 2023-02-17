@@ -1,5 +1,8 @@
 package guide.tm.domain.model.salesorder.orderitem.number;
 
+/**
+ * 受注明細番号
+ */
 public class SalesOrderItemNumber {
     String value;
 

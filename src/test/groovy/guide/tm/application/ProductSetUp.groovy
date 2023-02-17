@@ -1,7 +1,7 @@
 package guide.tm.application
 
 import guide.tm.application.service.product.bundle.BundleProductService
-import guide.tm.application.service.product.individual.ProductService
+import guide.tm.application.service.product.single.ProductService
 import guide.tm.domain.model.product.bundle.BundleProduct
 import guide.tm.domain.model.product.single.SingleProduct
 import org.springframework.beans.factory.annotation.Autowired

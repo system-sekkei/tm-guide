@@ -29,6 +29,9 @@ public class SingleAllocation {
         this.productAllocation = productAllocation;
     }
 
+    /**
+     * 引当数量
+     */
     public Quantity allocatedQuantity() {
         return productAllocation.allocatedQuantity();
     }

@@ -1,4 +1,4 @@
-package guide.tm.application.service.product.individual;
+package guide.tm.application.service.product.single;
 
 import guide.tm.domain.model.product.single.SingleProduct;
 import guide.tm.domain.model.product.single.SingleProducts;

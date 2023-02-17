@@ -44,6 +44,9 @@ public class AllocationService {
 
     /**
      * 個別商品の引当を行う
+     *
+     * - 引当残がない場合は何もしない
+     * - 引当残数の引当を行う
      */
     private void allocate(SingleOrderItemStatus singleOrderItemStatus, SalesOrderNumber salesOrderNumber) {
         SingleOrderItem singleOrderItem = singleOrderItemStatus.singleOrderItem();
@@ -63,6 +66,9 @@ public class AllocationService {
 
     /**
      * セット商品の引当を行う
+     *
+     * - 引当残がない場合は何もしない
+     * - 引当残数の引当を行う
      */
     public void allocate(BundleOrderItemStatus bundleOrderItemStatus, SalesOrderNumber salesOrderNumber) {
         BundleProductOrderItem bundleProductOrderItem = bundleOrderItemStatus.bundleProductOrderItem();

@@ -28,6 +28,9 @@ public class BundleOrderItemStatusList {
                         .toList());
     }
 
+    /**
+     * 出荷指示のないセット商品の引当を取得する
+     */
     public BundleAllocations notShippedItemAllocations() {
         return new BundleAllocations(
                 list.stream()
@@ -35,8 +38,6 @@ public class BundleOrderItemStatusList {
                         .map(BundleOrderItemStatus::bundleAllocation)
                         .toList());
     }
-
-
 
     public boolean isEmpty() {
         return list.isEmpty();

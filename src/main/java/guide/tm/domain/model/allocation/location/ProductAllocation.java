@@ -3,6 +3,9 @@ package guide.tm.domain.model.allocation.location;
 import guide.tm.domain.model.product.detail.ProductCode;
 import guide.tm.domain.primitive.Quantity;
 
+/**
+ * 商品の引当
+ */
 public class ProductAllocation {
     ProductCode productCode;
     AllocatedLocations allocatedLocations;

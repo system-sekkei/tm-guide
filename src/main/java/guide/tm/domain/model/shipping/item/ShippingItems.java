@@ -6,6 +6,9 @@ import guide.tm.domain.model.shipping.bundle.BundleShippingItems;
 import guide.tm.domain.model.shipping.single.SingleShippingItems;
 import guide.tm.domain.model.shipping.status.ShippingStatus;
 
+/**
+ * 出荷指示明細
+ */
 public class ShippingItems {
     SingleShippingItems singleShippingItems;
     BundleShippingItems bundleShippingItems;

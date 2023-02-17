@@ -5,6 +5,9 @@ import guide.tm.domain.primitive.Quantity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 商品の引当リスト
+ */
 public class ProductAllocations {
     List<ProductAllocation> list;
 

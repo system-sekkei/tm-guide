@@ -16,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
+/**
+ * 出荷指示シナリオ
+ */
 @Service
 public class ShippingScenario {
 
@@ -37,6 +40,9 @@ public class ShippingScenario {
 
     /**
      * 出荷を登録する
+     *
+     * - 全ての引当が出荷済の場合、何もしない
+     * - 出荷指示のない引当に対して、出荷指示を行う
      */
     public void registerShippingOf(SalesOrderNumber salesOrderNumber) {
 

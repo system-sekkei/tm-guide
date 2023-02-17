@@ -2,7 +2,7 @@ package guide.tm.presentation.controller.salesorder;
 
 import guide.tm.application.scenario.salesorder.SalesOrderScenario;
 import guide.tm.application.service.product.bundle.BundleProductService;
-import guide.tm.application.service.product.individual.ProductService;
+import guide.tm.application.service.product.single.ProductService;
 import guide.tm.application.service.salesorder.SalesOrderService;
 import guide.tm.domain.model.product.bundle.BundleProducts;
 import guide.tm.domain.model.product.single.SingleProducts;
