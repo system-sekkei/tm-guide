@@ -1,13 +1,10 @@
 package guide.tm.application.service.shipping
 
 import guide.tm.application.CustomerSetUp
-import guide.tm.application.ShippingCompanySetUp
 import guide.tm.domain.model.customer.Customer
 import guide.tm.domain.model.customer.CustomerName
 import guide.tm.domain.model.customer.CustomerNumber
 import guide.tm.domain.model.customer.CustomerType
-import guide.tm.domain.model.shipping.company.ShippingCompany
-import guide.tm.domain.model.shipping.company.ShippingCompanyCode
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.transaction.annotation.Transactional
@@ -23,13 +20,8 @@ class 出荷サービスSpec extends Specification {
     @Autowired
     CustomerSetUp 顧客準備
 
-    @Autowired
-    ShippingCompanySetUp 運送会社準備
-
     def 顧客番号 = new CustomerNumber("39d3f994-6cd3-4a56-a2b5-d493f030cbc8")
     def 顧客 = new Customer(顧客番号, new CustomerName("梅宮 留美"), CustomerType.個人)
-    def 運送会社コード = new ShippingCompanyCode("96259625")
-    def 運送会社 = new ShippingCompany(運送会社コード, "ヤマト運輸")
 
     def setup() {
         顧客準備.顧客のテストデータの準備(顧客)

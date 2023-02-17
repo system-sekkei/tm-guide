@@ -1,6 +1,10 @@
 package guide.tm.application.service.shipping
 
-import guide.tm.application.*
+
+import guide.tm.application.CustomerSetUp
+import guide.tm.application.ProductSetUp
+import guide.tm.application.StockSetup
+import guide.tm.application.WareHouseSetUp
 import guide.tm.application.service.salesorder.SalesOrderItemService
 import guide.tm.application.service.salesorder.SalesOrderService
 import guide.tm.domain.model.allocation.warehouse.WareHouse
@@ -69,8 +73,6 @@ class 出荷明細サービスSpec extends Specification {
 
     @Autowired
     ShippingService 出荷サービス
-    @Autowired
-    ShippingCompanySetUp 運送会社準備
 
     def 顧客番号 = new CustomerNumber("39d3f994-6cd3-4a56-a2b5-d493f030cbc8")
     def 顧客 = new Customer(顧客番号, new CustomerName("梅宮 留美"), CustomerType.個人)
