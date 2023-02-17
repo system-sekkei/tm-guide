@@ -1,6 +1,5 @@
 package guide.tm.infrastructure.datasource.salesorder;
 
-import guide.tm.domain.model.customer.CustomerNumber;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummary;
@@ -29,6 +28,4 @@ interface SalesOrderMapper {
             @Param("taxContext") TaxContext taxContext,
             @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber);
 
-    List<SalesOrderSummary> salesOrderSummariesOf(
-            @Param("customerNumber") CustomerNumber customerNumber);
 }

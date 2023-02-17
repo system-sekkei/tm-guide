@@ -1,6 +1,7 @@
-package guide.tm.domain.model.salesorder.orderitem;
+package guide.tm.domain.model.salesorder.orderitem.single;
 
-import guide.tm.domain.model.product.individual.SingleProduct;
+import guide.tm.domain.model.product.single.SingleProduct;
+import guide.tm.domain.model.salesorder.orderitem.number.SalesOrderItemNumber;
 import guide.tm.domain.primitive.Amount;
 import guide.tm.domain.primitive.Quantity;
 
@@ -10,22 +11,22 @@ import guide.tm.domain.primitive.Quantity;
 public class SingleOrderItem {
 
     SalesOrderItemNumber salesOrderItemNumber;
-    SalesOrderItemContent salesOrderItemContent;
+    SingleOrderItemContent singleOrderItemContent;
 
     public SingleOrderItem() {
-        this(new SalesOrderItemNumber(), new SalesOrderItemContent());
+        this(new SalesOrderItemNumber(), new SingleOrderItemContent());
     }
 
-    public SingleOrderItem(SalesOrderItemNumber salesOrderItemNumber, SalesOrderItemContent salesOrderItemContent) {
+    public SingleOrderItem(SalesOrderItemNumber salesOrderItemNumber, SingleOrderItemContent singleOrderItemContent) {
         this.salesOrderItemNumber = salesOrderItemNumber;
-        this.salesOrderItemContent = salesOrderItemContent;
+        this.singleOrderItemContent = singleOrderItemContent;
     }
 
     /**
      * 税抜き金額
      */
     Amount amountExcludingTax() {
-        return salesOrderItemContent.amountExcludingTax();
+        return singleOrderItemContent.amountExcludingTax();
     }
 
     public SalesOrderItemNumber salesOrderItemNumber() {
@@ -33,11 +34,11 @@ public class SingleOrderItem {
     }
 
     public SingleProduct product() {
-        return salesOrderItemContent.product;
+        return singleOrderItemContent.product;
     }
 
     public Quantity quantity() {
-        return salesOrderItemContent.quantity;
+        return singleOrderItemContent.quantity;
     }
 
     public boolean isSame(SingleOrderItem singleOrderItem) {

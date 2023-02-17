@@ -1,8 +1,11 @@
-package guide.tm.domain.model.allocation;
+package guide.tm.domain.model.allocation.content;
 
 import guide.tm.domain.model.allocation.bundle.BundleAllocations;
 import guide.tm.domain.model.allocation.single.SingleAllocations;
 
+/**
+ * 引当
+ */
 public class Allocations {
     SingleAllocations singleAllocations;
     BundleAllocations bundleAllocations;

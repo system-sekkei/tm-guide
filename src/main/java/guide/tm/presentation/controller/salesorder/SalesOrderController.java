@@ -5,13 +5,13 @@ import guide.tm.application.service.product.bundle.BundleProductService;
 import guide.tm.application.service.product.individual.ProductService;
 import guide.tm.application.service.salesorder.SalesOrderService;
 import guide.tm.domain.model.product.bundle.BundleProducts;
-import guide.tm.domain.model.product.individual.IndividualProducts;
+import guide.tm.domain.model.product.single.SingleProducts;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
-import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItemContent;
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemContent;
-import guide.tm.domain.model.status.SalesOrderStatus;
+import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItemContent;
+import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItemContent;
+import guide.tm.domain.model.status.orderstatus.SalesOrderStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,8 +49,8 @@ class SalesOrderController {
     }
 
     @ModelAttribute("salesOrderItemContent")
-    SalesOrderItemContent salesOrderItemContent() {
-        return new SalesOrderItemContent();
+    SingleOrderItemContent salesOrderItemContent() {
+        return new SingleOrderItemContent();
     }
 
     @ModelAttribute("bundleProductOrderItemContent")
@@ -63,8 +63,8 @@ class SalesOrderController {
                       Model model) {
         SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderNumber);
         model.addAttribute("salesOrder", salesOrder);
-        IndividualProducts individualProducts = productService.products();
-        model.addAttribute("products", individualProducts);
+        SingleProducts singleProducts = productService.products();
+        model.addAttribute("products", singleProducts);
         BundleProducts bundleProducts = bundleProductService.bundleProducts();
         model.addAttribute("bundleProducts", bundleProducts);
         return "sales-order/sales-order";

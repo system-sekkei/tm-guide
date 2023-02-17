@@ -1,10 +1,10 @@
 package guide.tm.application.service.product.individual;
 
-import guide.tm.domain.model.product.individual.IndividualProducts;
-import guide.tm.domain.model.product.individual.SingleProduct;
+import guide.tm.domain.model.product.single.SingleProduct;
+import guide.tm.domain.model.product.single.SingleProducts;
 
 public interface ProductRepository {
     void register(SingleProduct singleProduct);
 
-    IndividualProducts products();
+    SingleProducts products();
 }

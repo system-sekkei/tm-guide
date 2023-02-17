@@ -3,7 +3,7 @@ package guide.tm.application
 import guide.tm.application.service.product.bundle.BundleProductService
 import guide.tm.application.service.product.individual.ProductService
 import guide.tm.domain.model.product.bundle.BundleProduct
-import guide.tm.domain.model.product.individual.SingleProduct
+import guide.tm.domain.model.product.single.SingleProduct
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 

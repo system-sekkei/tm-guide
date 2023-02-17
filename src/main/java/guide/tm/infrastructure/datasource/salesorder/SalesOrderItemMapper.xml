@@ -9,18 +9,18 @@
         VALUES (
                 #{salesOrderNumber.value},
                 #{saleOrderItemNumber},
-                #{salesOrderItemContent.product.code.value},
-                #{salesOrderItemContent.quantity.value}
+                #{singleOrderItemContent.product.code.value},
+                #{singleOrderItemContent.quantity.value}
                 )
     </insert>
 
-    <select id="salesOrderItemsOf" resultType="guide.tm.domain.model.salesorder.orderitem.SingleOrderItem">
+    <select id="salesOrderItemsOf" resultType="guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItem">
         SELECT
             受注明細番号 AS "salesOrderItemNumber.value",
-            商品.商品コード AS "salesOrderItemContent.product.code.value",
-            商品名称 AS "salesOrderItemContent.product.name.value",
-            商品単価 AS "salesOrderItemContent.product.unitPrice.amount.value",
-            受注数量 AS "salesOrderItemContent.quantity.value"
+            商品.商品コード AS "singleOrderItemContent.product.code.value",
+            商品名称 AS "singleOrderItemContent.product.name.value",
+            商品単価 AS "singleOrderItemContent.product.unitPrice.amount.value",
+            受注数量 AS "singleOrderItemContent.quantity.value"
         FROM 受注.受注明細
         INNER JOIN 商品.商品 ON 商品.商品コード = 受注明細.商品コード
         WHERE 受注番号 = #{salesOrderNumber.value}
@@ -36,14 +36,14 @@
                )
     </insert>
 
-    <resultMap id="BundleProductOrderItem" type="guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItem">
+    <resultMap id="BundleProductOrderItem" type="guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItem">
         <id property="salesOrderItemNumber.value" column="受注明細番号"/>
         <result property="bundleProductOrderItemContent.product.code.value" column="セット商品コード"/>
         <result property="bundleProductOrderItemContent.product.name.value" column="セット商品名称"/>
         <result property="bundleProductOrderItemContent.product.unitPrice.amount.value" column="セット商品単価"/>
         <result property="bundleProductOrderItemContent.quantity.value" column="受注数量"/>
         <collection property="bundleProductOrderItemContent.product.bundleProductItems.list"
-                    ofType="guide.tm.domain.model.product.individual.SingleProduct">
+                    ofType="guide.tm.domain.model.product.single.SingleProduct">
             <id property="code.value" column="個別商品コード"/>
             <result property="name.value" column="個別商品名称"/>
             <result property="unitPrice.amount.value" column="個別商品単価"/>

@@ -1,6 +1,5 @@
 package guide.tm.application.service.salesorder;
 
-import guide.tm.domain.model.customer.CustomerNumber;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
@@ -12,24 +11,24 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SalesOrderService {
-    SalesOrderRepository salesORderRepository;
+    SalesOrderRepository salesOrderRepository;
 
     SalesOrderService(SalesOrderRepository salesOrderRepository) {
-        this.salesORderRepository = salesOrderRepository;
+        this.salesOrderRepository = salesOrderRepository;
     }
 
     /**
      * 受注を登録する
      */
     public SalesOrderNumber registerSalesOrder(SalesOrderContent salesOrder) {
-        return salesORderRepository.registerSalesOrder(salesOrder);
+        return salesOrderRepository.registerSalesOrder(salesOrder);
     }
 
     /**
      * 受注を取得する
      */
     public SalesOrderContent salesOrderOf(SalesOrderNumber salesOrderNumber) {
-        return salesORderRepository.salesOrderOf(salesOrderNumber);
+        return salesOrderRepository.salesOrderOf(salesOrderNumber);
     }
 
 
@@ -37,25 +36,20 @@ public class SalesOrderService {
      * 受注の一覧を取得する
      */
     public SalesOrderSummaries salesOrderSummaries() {
-        return salesORderRepository.salesOrderSummaries();
-    }
-
-
-    /**
-     * 受注の一覧を取得する
-     */
-    public SalesOrderSummaries salesOrderSummariesOf(CustomerNumber customerNumber) {
-        return salesORderRepository.salesOrderSummariesOf(customerNumber);
+        return salesOrderRepository.salesOrderSummaries();
     }
 
     /**
      * 受注時の消費税を取得する
      */
     public TaxContext taxContextOf(SalesOrderNumber salesOrderNumber) {
-        return salesORderRepository.taxContextOf(salesOrderNumber);
+        return salesOrderRepository.taxContextOf(salesOrderNumber);
     }
 
+    /**
+     * 消費税を登録する
+     */
     public void registerTax(TaxContext taxContext, SalesOrderNumber salesOrderNumber) {
-        salesORderRepository.registerTax(taxContext, salesOrderNumber);
+        salesOrderRepository.registerTax(taxContext, salesOrderNumber);
     }
 }

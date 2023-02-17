@@ -1,10 +1,10 @@
 package guide.tm.infrastructure.datasource.salesorder;
 
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
-import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItem;
-import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItemContent;
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemContent;
-import guide.tm.domain.model.salesorder.orderitem.SingleOrderItem;
+import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItem;
+import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItemContent;
+import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItem;
+import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItemContent;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,7 +17,7 @@ interface SalesOrderItemMapper {
     void register(
             @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber,
             @Param("saleOrderItemNumber") UUID saleOrderItemNumber,
-            @Param("salesOrderItemContent") SalesOrderItemContent salesOrderItemContent);
+            @Param("salesOrderItemContent") SingleOrderItemContent singleOrderItemContent);
 
     List<SingleOrderItem> salesOrderItemsOf(
             @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber);

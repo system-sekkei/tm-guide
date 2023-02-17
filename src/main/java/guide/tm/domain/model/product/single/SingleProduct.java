@@ -1,4 +1,4 @@
-package guide.tm.domain.model.product.individual;
+package guide.tm.domain.model.product.single;
 
 import guide.tm.domain.model.product.detail.ProductCode;
 import guide.tm.domain.model.product.detail.ProductName;

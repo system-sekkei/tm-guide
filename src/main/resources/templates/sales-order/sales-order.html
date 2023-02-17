@@ -91,7 +91,7 @@
   </form>
   <hr>
 
-  <form method="post" th:action="@{/sales-orders/__${salesOrderNumber}__/items/new}" th:object="${salesOrderItemContent}">
+  <form method="post" th:action="@{/sales-orders/__${salesOrderNumber}__/items/new}" th:object="${singleOrderItemContent}">
     <div class="mb-3">
       <label for="singleProduct" class="form-label">商品名称</label>
       <select class="form-control" id="singleProduct" name="product.code.value">

@@ -1,4 +1,4 @@
-package guide.tm.domain.model.salesorder.orderitem;
+package guide.tm.domain.model.salesorder.orderitem.bundle;
 
 import guide.tm.domain.model.product.bundle.BundleProduct;
 import guide.tm.domain.primitive.Amount;

@@ -3,7 +3,7 @@ package guide.tm.infrastructure.datasource.stock;
 import guide.tm.application.service.stock.StockRepository;
 import guide.tm.domain.model.allocation.stock.Stock;
 import guide.tm.domain.model.allocation.stock.Stocks;
-import guide.tm.domain.model.product.individual.SingleProduct;
+import guide.tm.domain.model.product.single.SingleProduct;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

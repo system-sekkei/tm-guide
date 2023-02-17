@@ -4,6 +4,9 @@ import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.shipping.item.ShippingItems;
 import org.springframework.stereotype.Service;
 
+/**
+ * 出荷指示サービス
+ */
 @Service
 public class ShippingItemService {
     ShippingItemRepository shippingItemRepository;
@@ -12,6 +15,9 @@ public class ShippingItemService {
         this.shippingItemRepository = shippingItemRepository;
     }
 
+    /**
+     * 出荷指示明細を取得する
+     */
     public ShippingItems shippingItems(SalesOrderNumber salesOrderNumber) {
         return shippingItemRepository.shippingItems(salesOrderNumber);
     }

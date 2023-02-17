@@ -1,4 +1,4 @@
-package guide.tm.domain.model.salesorder.order;
+package guide.tm.domain.model.salesorder.content;
 
 import guide.tm.domain.primitive.Amount;
 

@@ -5,10 +5,10 @@ import guide.tm.domain.model.allocation.bundle.BundleAllocationNumber;
 import guide.tm.domain.model.allocation.bundle.BundleAllocations;
 import guide.tm.domain.model.allocation.location.AllocatedLocations;
 import guide.tm.domain.model.allocation.single.SingleAllocations;
-import guide.tm.domain.model.product.individual.SingleProduct;
+import guide.tm.domain.model.product.single.SingleProduct;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
-import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItem;
-import guide.tm.domain.model.salesorder.orderitem.SingleOrderItem;
+import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItem;
+import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItem;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
@@ -26,9 +26,9 @@ public class AllocationDataSource implements AllocationRepository {
     public void register(AllocatedLocations allocatedLocations, SalesOrderNumber salesOrderNumber, SingleOrderItem singleOrderItem) {
         UUID allocationNumber = UUID.randomUUID();
         allocationMapper.registerSingleAllocation(allocationNumber, salesOrderNumber, singleOrderItem);
-        allocatedLocations.list().forEach(allocatedLocation -> {
-            allocationMapper.registerSingleAllocationItem(allocationNumber, allocatedLocation);
-        });
+        allocatedLocations.list().forEach(allocatedLocation ->
+            allocationMapper.registerSingleAllocationItem(allocationNumber, allocatedLocation)
+        );
     }
 
     @Override
@@ -44,9 +44,9 @@ public class AllocationDataSource implements AllocationRepository {
             AllocatedLocations allocatedLocations,
             SalesOrderNumber salesOrderNumber,
             SingleProduct singleProduct) {
-        allocatedLocations.list().forEach(allocatedLocation -> {
-            allocationMapper.registerBundleAllocationItem(bundleAllocationNumber, allocatedLocation, salesOrderNumber, singleProduct);
-        });
+        allocatedLocations.list().forEach(allocatedLocation ->
+            allocationMapper.registerBundleAllocationItem(bundleAllocationNumber, allocatedLocation, salesOrderNumber, singleProduct)
+        );
     }
 
     @Override

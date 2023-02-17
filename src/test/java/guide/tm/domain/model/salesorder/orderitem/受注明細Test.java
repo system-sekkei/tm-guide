@@ -2,8 +2,12 @@ package guide.tm.domain.model.salesorder.orderitem;
 
 import guide.tm.domain.model.product.detail.ProductCode;
 import guide.tm.domain.model.product.detail.ProductName;
-import guide.tm.domain.model.product.individual.SingleProduct;
 import guide.tm.domain.model.product.price.UnitPrice;
+import guide.tm.domain.model.product.single.SingleProduct;
+import guide.tm.domain.model.salesorder.orderitem.number.SalesOrderItemNumber;
+import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItem;
+import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItemContent;
+import guide.tm.domain.model.salesorder.orderitem.single.SingleProductOrderItems;
 import guide.tm.domain.model.tax.context.TaxContext;
 import guide.tm.domain.model.tax.context.TaxRateType;
 import guide.tm.domain.model.tax.context.TaxSumType;
@@ -20,11 +24,11 @@ class 受注明細Test {
     SingleProductOrderItems sut = new SingleProductOrderItems(List.of(
             new SingleOrderItem(
                     new SalesOrderItemNumber(),
-                    new SalesOrderItemContent(new SingleProduct(new ProductCode("821010"), new ProductName("専用ボトル"), new UnitPrice(4455)), new Quantity(1))
+                    new SingleOrderItemContent(new SingleProduct(new ProductCode("821010"), new ProductName("専用ボトル"), new UnitPrice(4455)), new Quantity(1))
             ),
             new SingleOrderItem(
                     new SalesOrderItemNumber(),
-                    new SalesOrderItemContent(new SingleProduct(new ProductCode("821011"), new ProductName("専用ボトルキャップ"), new UnitPrice(1203)), new Quantity(2))
+                    new SingleOrderItemContent(new SingleProduct(new ProductCode("821011"), new ProductName("専用ボトルキャップ"), new UnitPrice(1203)), new Quantity(2))
             )
     ));
 

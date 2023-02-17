@@ -3,9 +3,12 @@ package guide.tm.domain.model.allocation.bundle;
 import guide.tm.domain.model.allocation.location.ProductAllocations;
 import guide.tm.domain.model.product.detail.ProductCode;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemNumber;
+import guide.tm.domain.model.salesorder.orderitem.number.SalesOrderItemNumber;
 import guide.tm.domain.primitive.Quantity;
 
+/**
+ * セット商品の引当
+ */
 public class BundleAllocation {
     BundleAllocationNumber bundleAllocationNumber;
     SalesOrderNumber salesOrderNumber;

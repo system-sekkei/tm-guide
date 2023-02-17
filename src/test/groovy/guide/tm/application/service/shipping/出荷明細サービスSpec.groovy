@@ -11,14 +11,12 @@ import guide.tm.domain.model.customer.CustomerNumber
 import guide.tm.domain.model.customer.CustomerType
 import guide.tm.domain.model.product.detail.ProductCode
 import guide.tm.domain.model.product.detail.ProductName
-import guide.tm.domain.model.product.individual.SingleProduct
 import guide.tm.domain.model.product.price.UnitPrice
+import guide.tm.domain.model.product.single.SingleProduct
 import guide.tm.domain.model.salesorder.content.OrderedDate
 import guide.tm.domain.model.salesorder.content.SalesOrderContent
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemContent
-import guide.tm.domain.model.shipping.company.ShippingCompany
-import guide.tm.domain.model.shipping.company.ShippingCompanyCode
+import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItemContent
 import guide.tm.domain.model.shipping.content.Shipping
 import guide.tm.domain.model.shipping.content.ShippingDate
 import guide.tm.domain.primitive.Quantity
@@ -44,14 +42,14 @@ class 出荷明細サービスSpec extends Specification {
             new ProductName("専用ボトル"),
             new UnitPrice(4400))
 
-    def 受注明細_専用ボトル = new SalesOrderItemContent(専用ボトル, new Quantity(42))
+    def 受注明細_専用ボトル = new SingleOrderItemContent(専用ボトル, new Quantity(42))
 
     def 専用ボトルキャップ = new SingleProduct(
             new ProductCode("821010"),
             new ProductName("専用ボトルキャップ"),
             new UnitPrice(1200))
 
-    def 受注明細_専用ボトルキャップ = new SalesOrderItemContent(専用ボトルキャップ, new Quantity(23))
+    def 受注明細_専用ボトルキャップ = new SingleOrderItemContent(専用ボトルキャップ, new Quantity(23))
 
     @Autowired
     StockSetup 在庫準備
@@ -76,8 +74,6 @@ class 出荷明細サービスSpec extends Specification {
 
     def 顧客番号 = new CustomerNumber("39d3f994-6cd3-4a56-a2b5-d493f030cbc8")
     def 顧客 = new Customer(顧客番号, new CustomerName("梅宮 留美"), CustomerType.個人)
-    def 運送会社コード = new ShippingCompanyCode("96259625")
-    def 運送会社 = new ShippingCompany(運送会社コード, "ヤマト運輸")
 
     void setup() {
         顧客準備.顧客のテストデータの準備(顧客)

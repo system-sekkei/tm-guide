@@ -4,10 +4,10 @@ import guide.tm.domain.model.allocation.bundle.BundleAllocationNumber;
 import guide.tm.domain.model.allocation.bundle.BundleAllocations;
 import guide.tm.domain.model.allocation.location.AllocatedLocations;
 import guide.tm.domain.model.allocation.single.SingleAllocations;
-import guide.tm.domain.model.product.individual.SingleProduct;
+import guide.tm.domain.model.product.single.SingleProduct;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
-import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItem;
-import guide.tm.domain.model.salesorder.orderitem.SingleOrderItem;
+import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItem;
+import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItem;
 
 public interface AllocationRepository {
     /**

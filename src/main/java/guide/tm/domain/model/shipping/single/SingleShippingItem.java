@@ -1,7 +1,7 @@
-package guide.tm.domain.model.shipping.item;
+package guide.tm.domain.model.shipping.single;
 
-import guide.tm.domain.model.product.individual.SingleProduct;
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemNumber;
+import guide.tm.domain.model.product.single.SingleProduct;
+import guide.tm.domain.model.salesorder.orderitem.number.SalesOrderItemNumber;
 
 /**
  * 出荷指示

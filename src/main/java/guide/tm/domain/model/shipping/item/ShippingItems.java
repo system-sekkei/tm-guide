@@ -1,7 +1,10 @@
 package guide.tm.domain.model.shipping.item;
 
-import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItem;
-import guide.tm.domain.model.salesorder.orderitem.SingleOrderItem;
+import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItem;
+import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItem;
+import guide.tm.domain.model.shipping.bundle.BundleShippingItems;
+import guide.tm.domain.model.shipping.single.SingleShippingItems;
+import guide.tm.domain.model.shipping.status.ShippingStatus;
 
 public class ShippingItems {
     SingleShippingItems singleShippingItems;

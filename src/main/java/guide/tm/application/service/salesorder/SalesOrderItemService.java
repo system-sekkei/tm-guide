@@ -1,10 +1,10 @@
 package guide.tm.application.service.salesorder;
 
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
-import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItemContent;
-import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItems;
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemContent;
-import guide.tm.domain.model.salesorder.orderitem.SingleProductOrderItems;
+import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItemContent;
+import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItems;
+import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItemContent;
+import guide.tm.domain.model.salesorder.orderitem.single.SingleProductOrderItems;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,8 +22,8 @@ public class SalesOrderItemService {
     /**
      * 受注明細を登録する
      */
-    public void register(SalesOrderNumber salesOrderNumber, SalesOrderItemContent salesOrderItemContent) {
-        salesOrderItemRepository.registerBundleProductOrderItem(salesOrderNumber, salesOrderItemContent);
+    public void register(SalesOrderNumber salesOrderNumber, SingleOrderItemContent singleOrderItemContent) {
+        salesOrderItemRepository.registerBundleProductOrderItem(salesOrderNumber, singleOrderItemContent);
     }
 
     /**

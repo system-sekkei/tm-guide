@@ -1,7 +1,6 @@
 package guide.tm.infrastructure.datasource.salesorder;
 
 import guide.tm.application.service.salesorder.SalesOrderRepository;
-import guide.tm.domain.model.customer.CustomerNumber;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
@@ -46,8 +45,4 @@ public class SalesOrderDataSource implements SalesOrderRepository {
         salesOrderMapper.registerTax(taxContext, salesOrderNumber);
     }
 
-    @Override
-    public SalesOrderSummaries salesOrderSummariesOf(CustomerNumber customerNumber) {
-        return new SalesOrderSummaries(salesOrderMapper.salesOrderSummariesOf(customerNumber));
-    }
 }

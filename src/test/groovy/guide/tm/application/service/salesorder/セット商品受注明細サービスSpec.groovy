@@ -10,11 +10,11 @@ import guide.tm.domain.model.product.bundle.BundleProduct
 import guide.tm.domain.model.product.bundle.BundleProductItems
 import guide.tm.domain.model.product.detail.ProductCode
 import guide.tm.domain.model.product.detail.ProductName
-import guide.tm.domain.model.product.individual.SingleProduct
 import guide.tm.domain.model.product.price.UnitPrice
+import guide.tm.domain.model.product.single.SingleProduct
 import guide.tm.domain.model.salesorder.content.OrderedDate
 import guide.tm.domain.model.salesorder.content.SalesOrderContent
-import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItemContent
+import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItemContent
 import guide.tm.domain.primitive.Quantity
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest

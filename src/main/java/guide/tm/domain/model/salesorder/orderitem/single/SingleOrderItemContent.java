@@ -1,6 +1,6 @@
-package guide.tm.domain.model.salesorder.orderitem;
+package guide.tm.domain.model.salesorder.orderitem.single;
 
-import guide.tm.domain.model.product.individual.SingleProduct;
+import guide.tm.domain.model.product.single.SingleProduct;
 import guide.tm.domain.primitive.Amount;
 import guide.tm.domain.primitive.Quantity;
 import jakarta.validation.constraints.AssertTrue;
@@ -8,15 +8,15 @@ import jakarta.validation.constraints.AssertTrue;
 /**
  * 受注明細の内容
  */
-public class SalesOrderItemContent {
+public class SingleOrderItemContent {
     SingleProduct product;
     Quantity quantity;
 
-    public SalesOrderItemContent() {
+    public SingleOrderItemContent() {
         this(new SingleProduct(), new Quantity());
     }
 
-    SalesOrderItemContent(SingleProduct product, Quantity quantity) {
+    public SingleOrderItemContent(SingleProduct product, Quantity quantity) {
         this.product = product;
         this.quantity = quantity;
     }

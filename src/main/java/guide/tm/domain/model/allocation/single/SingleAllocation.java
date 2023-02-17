@@ -2,7 +2,7 @@ package guide.tm.domain.model.allocation.single;
 
 import guide.tm.domain.model.allocation.location.ProductAllocation;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemNumber;
+import guide.tm.domain.model.salesorder.orderitem.number.SalesOrderItemNumber;
 import guide.tm.domain.primitive.Quantity;
 
 /**

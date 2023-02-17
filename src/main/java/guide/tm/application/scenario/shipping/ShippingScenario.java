@@ -9,8 +9,8 @@ import guide.tm.domain.model.allocation.single.SingleAllocations;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.shipping.content.Shipping;
 import guide.tm.domain.model.shipping.content.ShippingDate;
-import guide.tm.domain.model.status.SalesOrderStatus;
 import guide.tm.domain.model.status.bundle.BundleOrderItemStatusList;
+import guide.tm.domain.model.status.orderstatus.SalesOrderStatus;
 import guide.tm.domain.model.status.single.SingleOrderItemStatusList;
 import org.springframework.stereotype.Service;
 
@@ -48,11 +48,11 @@ public class ShippingScenario {
         BundleOrderItemStatusList allocatedBundleOrderItem = salesOrderStatus.bundleOrderItemStatusList().allocated();
         BundleAllocations bundleAllocationsToShip = allocatedBundleOrderItem.notShippedItemAllocations();
 
-        if (isAlreadyShipped(singleAllocationsToShip, bundleAllocationsToShip)) return;
+        if (isAllShipped(singleAllocationsToShip, bundleAllocationsToShip)) return;
         shippingService.register(new Shipping(salesOrderNumber, new ShippingDate(LocalDate.now())), singleAllocationsToShip, bundleAllocationsToShip);
     }
 
-    private boolean isAlreadyShipped(SingleAllocations singleAllocationsToShip, BundleAllocations bundleAllocationsToShip) {
+    private boolean isAllShipped(SingleAllocations singleAllocationsToShip, BundleAllocations bundleAllocationsToShip) {
         return singleAllocationsToShip.isEmpty() && bundleAllocationsToShip.isEmpty();
     }
 

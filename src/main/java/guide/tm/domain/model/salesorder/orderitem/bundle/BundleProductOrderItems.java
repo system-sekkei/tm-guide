@@ -1,4 +1,4 @@
-package guide.tm.domain.model.salesorder.orderitem;
+package guide.tm.domain.model.salesorder.orderitem.bundle;
 
 import guide.tm.domain.model.tax.context.TaxContext;
 import guide.tm.domain.primitive.Amount;
@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 受注明細のリスト
+ * セット商品の受注明細一覧
  */
-public class SingleProductOrderItems {
-    List<SingleOrderItem> list;
+public class BundleProductOrderItems {
+    List<BundleProductOrderItem> list;
 
-    public SingleProductOrderItems(List<SingleOrderItem> list) {
+    public BundleProductOrderItems(List<BundleProductOrderItem> list) {
         this.list = list;
     }
 
@@ -39,22 +39,17 @@ public class SingleProductOrderItems {
     }
 
 
+    /**
+     * 税抜き総額
+     */
     TotalAmount totalAmountExcludingTax() {
         return new TotalAmount(list.stream()
-                .map(SingleOrderItem::amountExcludingTax)
+                .map(BundleProductOrderItem::amountExcludingTax)
                 .collect(Collectors.toUnmodifiableSet()));
     }
 
-    public List<SingleOrderItem> list() {
+    public List<BundleProductOrderItem> list() {
         return list;
     }
 
-    public boolean isEmpty() {
-        return list.isEmpty();
-    }
-
-    public boolean contains(SingleOrderItem singleOrderItem) {
-        return list.stream()
-                .anyMatch(it -> it.salesOrderItemNumber().isSame(singleOrderItem.salesOrderItemNumber()));
-    }
 }

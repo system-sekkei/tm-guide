@@ -1,8 +1,8 @@
 package guide.tm.domain.model.status.single;
 
 import guide.tm.domain.model.allocation.single.SingleAllocation;
-import guide.tm.domain.model.salesorder.orderitem.SingleOrderItem;
-import guide.tm.domain.model.shipping.item.ShippingStatus;
+import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItem;
+import guide.tm.domain.model.shipping.status.ShippingStatus;
 import guide.tm.domain.primitive.Quantity;
 
 /**

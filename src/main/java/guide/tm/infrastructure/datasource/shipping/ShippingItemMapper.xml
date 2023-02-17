@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="guide.tm.infrastructure.datasource.shipping.ShippingItemMapper">
 
-    <select id="singleShippingItems" resultType="guide.tm.domain.model.shipping.item.SingleShippingItem">
+    <select id="singleShippingItems" resultType="guide.tm.domain.model.shipping.single.SingleShippingItem">
         SELECT
             出荷番号,
             受注番号,
@@ -19,7 +19,7 @@
         WHERE 受注番号 = #{salesOrderNumber.value}
     </select>
 
-    <select id="bundleShippingItems" resultType="guide.tm.domain.model.shipping.item.BundleShippingItem">
+    <select id="bundleShippingItems" resultType="guide.tm.domain.model.shipping.bundle.BundleShippingItem">
         SELECT
             出荷番号,
             受注番号,

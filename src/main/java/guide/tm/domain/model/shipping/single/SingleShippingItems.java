@@ -1,6 +1,7 @@
-package guide.tm.domain.model.shipping.item;
+package guide.tm.domain.model.shipping.single;
 
-import guide.tm.domain.model.salesorder.orderitem.SingleOrderItem;
+import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItem;
+import guide.tm.domain.model.shipping.status.ShippingStatus;
 
 import java.util.ArrayList;
 import java.util.List;

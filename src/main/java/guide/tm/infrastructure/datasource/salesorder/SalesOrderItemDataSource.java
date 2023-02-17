@@ -2,10 +2,10 @@ package guide.tm.infrastructure.datasource.salesorder;
 
 import guide.tm.application.service.salesorder.SalesOrderItemRepository;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
-import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItemContent;
-import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItems;
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemContent;
-import guide.tm.domain.model.salesorder.orderitem.SingleProductOrderItems;
+import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItemContent;
+import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItems;
+import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItemContent;
+import guide.tm.domain.model.salesorder.orderitem.single.SingleProductOrderItems;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
@@ -20,9 +20,9 @@ public class SalesOrderItemDataSource implements SalesOrderItemRepository {
     }
 
     @Override
-    public void registerBundleProductOrderItem(SalesOrderNumber salesOrderNumber, SalesOrderItemContent salesOrderItemContent) {
+    public void registerBundleProductOrderItem(SalesOrderNumber salesOrderNumber, SingleOrderItemContent singleOrderItemContent) {
         UUID saleOrderItemNumber = UUID.randomUUID();
-        salesOrderItemMapper.register(salesOrderNumber, saleOrderItemNumber, salesOrderItemContent);
+        salesOrderItemMapper.register(salesOrderNumber, saleOrderItemNumber, singleOrderItemContent);
     }
 
     @Override

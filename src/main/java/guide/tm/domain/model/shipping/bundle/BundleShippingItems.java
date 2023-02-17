@@ -1,9 +1,13 @@
-package guide.tm.domain.model.shipping.item;
+package guide.tm.domain.model.shipping.bundle;
 
-import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItem;
+import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItem;
+import guide.tm.domain.model.shipping.status.ShippingStatus;
 
 import java.util.List;
 
+/**
+ * セット商品の出荷明細のリスト
+ */
 public class BundleShippingItems {
     List<BundleShippingItem> list;
 

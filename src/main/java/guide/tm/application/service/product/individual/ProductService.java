@@ -1,7 +1,7 @@
 package guide.tm.application.service.product.individual;
 
-import guide.tm.domain.model.product.individual.IndividualProducts;
-import guide.tm.domain.model.product.individual.SingleProduct;
+import guide.tm.domain.model.product.single.SingleProduct;
+import guide.tm.domain.model.product.single.SingleProducts;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,7 +22,7 @@ public class ProductService {
         productRepository.register(singleProduct);
     }
 
-    public IndividualProducts products() {
+    public SingleProducts products() {
         return productRepository.products();
     }
 }

@@ -5,12 +5,12 @@ import guide.tm.application.service.product.bundle.BundleProductService;
 import guide.tm.application.service.product.individual.ProductService;
 import guide.tm.application.service.salesorder.SalesOrderItemService;
 import guide.tm.domain.model.product.bundle.BundleProducts;
-import guide.tm.domain.model.product.individual.IndividualProducts;
+import guide.tm.domain.model.product.single.SingleProducts;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
-import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItemContent;
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemContent;
-import guide.tm.domain.model.salesorder.orderitem.SingleOrderItem;
+import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItemContent;
+import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItem;
+import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItemContent;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -49,21 +49,21 @@ class SalesOrderItemRegisterController {
     @PostMapping("new")
     String register(
             @PathVariable("salesOrderNumber") SalesOrderNumber salesOrderNumber,
-            @ModelAttribute("salesOrderItemContent") @Validated SalesOrderItemContent salesOrderItemContent,
+            @ModelAttribute("salesOrderItemContent") @Validated SingleOrderItemContent singleOrderItemContent,
                     BindingResult salesOrderItemResult,
                     Model model) {
 
         if (salesOrderItemResult.hasErrors()) {
             SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderNumber);
             model.addAttribute("salesOrder", salesOrder);
-            IndividualProducts individualProducts = productService.products();
-            model.addAttribute("products", individualProducts);
+            SingleProducts singleProducts = productService.products();
+            model.addAttribute("products", singleProducts);
             BundleProducts bundleProducts = bundleProductService.bundleProducts();
             model.addAttribute("bundleProducts", bundleProducts);
             return "sales-order/sales-order";
         }
 
-        salesOrderItemService.register(salesOrderNumber, salesOrderItemContent);
+        salesOrderItemService.register(salesOrderNumber, singleOrderItemContent);
         return String.format("redirect:/sales-orders/%s", salesOrderNumber);
     }
 
@@ -80,8 +80,8 @@ class SalesOrderItemRegisterController {
         if (salesOrderItemResult.hasErrors()) {
             SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderNumber);
             model.addAttribute("salesOrder", salesOrder);
-            IndividualProducts individualProducts = productService.products();
-            model.addAttribute("products", individualProducts);
+            SingleProducts singleProducts = productService.products();
+            model.addAttribute("products", singleProducts);
             BundleProducts bundleProducts = bundleProductService.bundleProducts();
             model.addAttribute("bundleProducts", bundleProducts);
             return "sales-order/sales-order";

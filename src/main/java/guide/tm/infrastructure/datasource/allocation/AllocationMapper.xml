@@ -10,7 +10,7 @@
                 #{allocationNumber},
                 #{salesOrderNumber.value},
                 #{singleOrderItem.salesOrderItemNumber.value},
-                #{singleOrderItem.salesOrderItemContent.product.code.value}
+                #{singleOrderItem.singleOrderItemContent.product.code.value}
                )
     </insert>
 

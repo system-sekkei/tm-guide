@@ -4,14 +4,14 @@ import guide.tm.application.service.allocation.AllocationService;
 import guide.tm.application.service.salesorder.SalesOrderItemService;
 import guide.tm.application.service.salesorder.SalesOrderService;
 import guide.tm.application.service.shipping.ShippingItemService;
-import guide.tm.domain.model.allocation.Allocations;
+import guide.tm.domain.model.allocation.content.Allocations;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
-import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItems;
-import guide.tm.domain.model.salesorder.orderitem.SingleProductOrderItems;
+import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItems;
+import guide.tm.domain.model.salesorder.orderitem.single.SingleProductOrderItems;
 import guide.tm.domain.model.shipping.item.ShippingItems;
-import guide.tm.domain.model.status.SalesOrderStatus;
+import guide.tm.domain.model.status.orderstatus.SalesOrderStatus;
 import guide.tm.domain.model.tax.context.TaxContext;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +47,9 @@ public class SalesOrderScenario {
         return new SalesOrder(salesOrderContent, taxContext, singleProductOrderItems, bundleProductOrderItems);
     }
 
+    /**
+     * 受注の状態を取得する
+     */
     public SalesOrderStatus status(SalesOrderNumber salesOrderNumber) {
         SalesOrder salesOrder = salesOrderOf(salesOrderNumber);
         Allocations allocations = allocationService.allocationsOf(salesOrderNumber);

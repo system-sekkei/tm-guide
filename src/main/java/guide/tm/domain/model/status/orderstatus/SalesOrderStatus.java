@@ -1,12 +1,12 @@
-package guide.tm.domain.model.status;
+package guide.tm.domain.model.status.orderstatus;
 
-import guide.tm.domain.model.allocation.Allocations;
 import guide.tm.domain.model.allocation.bundle.BundleAllocation;
+import guide.tm.domain.model.allocation.content.Allocations;
 import guide.tm.domain.model.allocation.single.SingleAllocation;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.shipping.item.ShippingItems;
-import guide.tm.domain.model.shipping.item.ShippingStatus;
+import guide.tm.domain.model.shipping.status.ShippingStatus;
 import guide.tm.domain.model.status.bundle.BundleOrderItemStatus;
 import guide.tm.domain.model.status.bundle.BundleOrderItemStatusList;
 import guide.tm.domain.model.status.single.SingleOrderItemStatus;

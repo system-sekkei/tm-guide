@@ -15,12 +15,12 @@ import guide.tm.domain.model.customer.CustomerNumber
 import guide.tm.domain.model.customer.CustomerType
 import guide.tm.domain.model.product.detail.ProductCode
 import guide.tm.domain.model.product.detail.ProductName
-import guide.tm.domain.model.product.individual.SingleProduct
 import guide.tm.domain.model.product.price.UnitPrice
+import guide.tm.domain.model.product.single.SingleProduct
 import guide.tm.domain.model.salesorder.content.OrderedDate
 import guide.tm.domain.model.salesorder.content.SalesOrderContent
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber
-import guide.tm.domain.model.salesorder.orderitem.SalesOrderItemContent
+import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItemContent
 import guide.tm.domain.primitive.Quantity
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -57,7 +57,7 @@ class SingleAllocationServiceSpec extends Specification {
     @Autowired
     SalesOrderItemService 受注明細Service
 
-    def 受注明細_専用ボトル = new SalesOrderItemContent(専用ボトル, new Quantity(42))
+    def 受注明細_専用ボトル = new SingleOrderItemContent(専用ボトル, new Quantity(42))
 
     void setup() {
         def 顧客 = new Customer(new CustomerNumber("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"), new CustomerName("梅宮 留美"), CustomerType.個人)

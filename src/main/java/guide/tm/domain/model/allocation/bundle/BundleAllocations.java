@@ -1,6 +1,6 @@
 package guide.tm.domain.model.allocation.bundle;
 
-import guide.tm.domain.model.salesorder.orderitem.BundleProductOrderItem;
+import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItem;
 
 import java.util.List;
 
