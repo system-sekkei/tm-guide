@@ -48,7 +48,7 @@ class SalesOrderController {
         return "sales-order/sales-order-list";
     }
 
-    @ModelAttribute("salesOrderItemContent")
+    @ModelAttribute("singleOrderItemContent")
     SingleOrderItemContent salesOrderItemContent() {
         return new SingleOrderItemContent();
     }

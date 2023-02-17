@@ -17,7 +17,7 @@ interface SalesOrderItemMapper {
     void register(
             @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber,
             @Param("saleOrderItemNumber") UUID saleOrderItemNumber,
-            @Param("salesOrderItemContent") SingleOrderItemContent singleOrderItemContent);
+            @Param("singleOrderItemContent") SingleOrderItemContent singleOrderItemContent);
 
     List<SingleOrderItem> salesOrderItemsOf(
             @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber);
