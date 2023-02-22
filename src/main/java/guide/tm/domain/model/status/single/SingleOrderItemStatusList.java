@@ -3,6 +3,7 @@ package guide.tm.domain.model.status.single;
 import guide.tm.domain.model.allocation.single.SingleAllocations;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * 個別商品の受注明細と引当のリスト
@@ -41,5 +42,9 @@ public class SingleOrderItemStatusList {
 
     public boolean isEmpty() {
         return list.isEmpty();
+    }
+
+    public void forEach(Consumer<SingleOrderItemStatus> consumer) {
+        list.forEach(consumer);
     }
 }

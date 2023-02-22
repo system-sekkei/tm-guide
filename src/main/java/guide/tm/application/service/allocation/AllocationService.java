@@ -38,8 +38,8 @@ public class AllocationService {
         SingleOrderItemStatusList singleOrderItemStatusList = salesOrderStatus.singleOrderItemStatusList();
         BundleOrderItemStatusList bundleOrderItemStatusList = salesOrderStatus.bundleOrderItemStatusList();
 
-        singleOrderItemStatusList.list().forEach(singleOrderItemStatus -> allocate(singleOrderItemStatus, salesOrderNumber));
-        bundleOrderItemStatusList.list().forEach(bundleOrderItemStatus -> allocate(bundleOrderItemStatus, salesOrderNumber));
+        singleOrderItemStatusList.forEach(singleOrderItemStatus -> allocate(singleOrderItemStatus, salesOrderNumber));
+        bundleOrderItemStatusList.forEach(bundleOrderItemStatus -> allocate(bundleOrderItemStatus, salesOrderNumber));
     }
 
     /**

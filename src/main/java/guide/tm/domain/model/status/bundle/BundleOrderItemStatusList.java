@@ -3,6 +3,7 @@ package guide.tm.domain.model.status.bundle;
 import guide.tm.domain.model.allocation.bundle.BundleAllocations;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * セット品の受注明細と引当のリスト
@@ -41,5 +42,9 @@ public class BundleOrderItemStatusList {
 
     public boolean isEmpty() {
         return list.isEmpty();
+    }
+
+    public void forEach(Consumer<BundleOrderItemStatus> consumer) {
+        list.forEach(consumer);
     }
 }
