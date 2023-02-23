@@ -21,8 +21,8 @@ import guide.tm.domain.model.salesorder.content.OrderedDate
 import guide.tm.domain.model.salesorder.content.SalesOrderContent
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber
 import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItemContent
-import guide.tm.domain.model.shipping.content.Shipping
 import guide.tm.domain.model.shipping.content.ShippingDate
+import guide.tm.domain.model.shipping.content.ShippingInstructionContent
 import guide.tm.domain.primitive.Quantity
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -98,7 +98,7 @@ class 出荷明細サービスSpec extends Specification {
     def "出荷明細を登録する"() {
         given:
         def 出荷日 = new ShippingDate(LocalDate.of(2023, Month.MARCH, 2))
-        def 出荷 = new Shipping(顧客番号, 出荷日, 運送会社コード)
+        def 出荷 = new ShippingInstructionContent(顧客番号, 出荷日, 運送会社コード)
 
         def 出荷番号 = 出荷サービス.register(出荷, salesOrderItemsToShip, bundleItemsToShip)
 

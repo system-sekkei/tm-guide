@@ -7,8 +7,8 @@ import guide.tm.application.service.shipping.ShippingService;
 import guide.tm.domain.model.allocation.bundle.BundleAllocations;
 import guide.tm.domain.model.allocation.single.SingleAllocations;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
-import guide.tm.domain.model.shipping.content.Shipping;
 import guide.tm.domain.model.shipping.content.ShippingDate;
+import guide.tm.domain.model.shipping.content.ShippingInstructionContent;
 import guide.tm.domain.model.status.bundle.BundleOrderItemStatusList;
 import guide.tm.domain.model.status.orderstatus.SalesOrderStatus;
 import guide.tm.domain.model.status.single.SingleOrderItemStatusList;
@@ -55,7 +55,7 @@ public class ShippingScenario {
         BundleAllocations bundleAllocationsToShip = allocatedBundleOrderItem.notShippedItemAllocations();
 
         if (isAllShipped(singleAllocationsToShip, bundleAllocationsToShip)) return;
-        shippingService.register(new Shipping(salesOrderNumber, new ShippingDate(LocalDate.now())), singleAllocationsToShip, bundleAllocationsToShip);
+        shippingService.register(new ShippingInstructionContent(salesOrderNumber, new ShippingDate(LocalDate.now())), singleAllocationsToShip, bundleAllocationsToShip);
     }
 
     private boolean isAllShipped(SingleAllocations singleAllocationsToShip, BundleAllocations bundleAllocationsToShip) {

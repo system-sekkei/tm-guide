@@ -11,7 +11,11 @@
                 #{shipping.salesOrderNumber.value},
                 #{shipping.shippingDate.value}
                )
+    </insert>
 
+    <insert id="recordUnshippingSate">
+        INSERT INTO 出荷指示._未出荷 (出荷番号)
+        VALUES (#{shippingNumber})
     </insert>
 
     <insert id="registerShippedAllocations">
@@ -29,5 +33,27 @@
                 #{bundleAllocation.bundleAllocationNumber.value}
                 )
     </insert>
+
+    <insert id="markShipping">
+        INSERT INTO 出荷指示.出荷済 (出荷番号)
+        VALUES (#{shippingNumber.value})
+    </insert>
+
+    <delete id="deleteUnshippingState">
+        DELETE FROM 出荷指示._未出荷 WHERE 出荷番号 = #{shippingNumber.value}
+    </delete>
+
+    <select id="shippingInstructions" resultType="guide.tm.domain.model.shipping.content.ShippingInstructionSummary">
+        SELECT 出荷指示.出荷番号 AS "shippingNumber.value",
+               出荷日 AS "shippingInstructionContent.shippingDate.value",
+               受注.受注番号 AS "shippingInstructionContent.salesOrderNumber.value",
+               受注日 AS "orderedDate.value",
+               顧客.顧客番号 AS "customer.code.value",
+               顧客名称 AS "customer.name.value"
+        FROM 出荷指示.出荷指示
+        INNER JOIN 受注.受注 ON 出荷指示.受注番号 = 受注.受注番号
+        INNER JOIN 顧客.顧客 ON 受注.顧客番号 = 顧客.顧客番号
+        INNER JOIN 出荷指示._未出荷 ON 出荷指示.出荷番号 = 出荷指示._未出荷.出荷番号
+    </select>
 
 </mapper>

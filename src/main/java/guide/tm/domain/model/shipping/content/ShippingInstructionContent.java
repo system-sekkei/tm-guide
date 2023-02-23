@@ -5,17 +5,21 @@ import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 /**
  * 出荷
  */
-public class Shipping {
+public class ShippingInstructionContent {
     SalesOrderNumber salesOrderNumber;
     ShippingDate shippingDate;
 
-    @Deprecated Shipping() {
+    @Deprecated
+    ShippingInstructionContent() {
         this(new SalesOrderNumber(), new ShippingDate());
     }
 
-    public Shipping(SalesOrderNumber salesOrderNumber, ShippingDate shippingDate) {
+    public ShippingInstructionContent(SalesOrderNumber salesOrderNumber, ShippingDate shippingDate) {
         this.salesOrderNumber = salesOrderNumber;
         this.shippingDate = shippingDate;
     }
 
+    public ShippingDate shippingDate() {
+        return shippingDate;
+    }
 }
