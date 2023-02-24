@@ -10,7 +10,7 @@
                 #{bundleProduct.code.value},
                 #{bundleProduct.name.value},
                 #{bundleProduct.unitPrice.amount.value},
-                #{product.taxRateType}
+                #{bundleProduct.taxRateType}
                )
     </insert>
 

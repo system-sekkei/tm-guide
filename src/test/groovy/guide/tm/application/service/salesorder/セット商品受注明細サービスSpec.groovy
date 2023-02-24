@@ -15,6 +15,7 @@ import guide.tm.domain.model.product.single.SingleProduct
 import guide.tm.domain.model.salesorder.content.OrderedDate
 import guide.tm.domain.model.salesorder.content.SalesOrderContent
 import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItemContent
+import guide.tm.domain.model.tax.context.TaxRateType
 import guide.tm.domain.primitive.Quantity
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -40,18 +41,23 @@ class セット商品受注明細サービスSpec extends Specification {
     def 尾西のご飯 = new SingleProduct(
             new ProductCode("821009"),
             new ProductName("尾西のご飯"),
-            new UnitPrice(4400))
+            new UnitPrice(4400),
+            TaxRateType.軽減税率
+    )
 
     def サタケのマジックパスタ = new SingleProduct(
             new ProductCode("821010"),
             new ProductName("サタケのマジックパスタ"),
-            new UnitPrice(1200))
+            new UnitPrice(1200),
+            TaxRateType.軽減税率
+    )
 
     def 非常食セット = new BundleProduct(
             new ProductCode("9807987"),
             new ProductName("非常食セット_受注明細"),
             new BundleProductItems(List.of(尾西のご飯, サタケのマジックパスタ)),
-            new UnitPrice(5200)
+            new UnitPrice(5200),
+            TaxRateType.軽減税率
     )
 
     def 顧客 = new Customer(

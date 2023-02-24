@@ -13,6 +13,7 @@ import guide.tm.domain.model.product.single.SingleProduct
 import guide.tm.domain.model.salesorder.content.OrderedDate
 import guide.tm.domain.model.salesorder.content.SalesOrderContent
 import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItemContent
+import guide.tm.domain.model.tax.context.TaxRateType
 import guide.tm.domain.primitive.Quantity
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -38,12 +39,16 @@ class 受注明細サービスSpec extends Specification {
     def 専用ボトル = new SingleProduct(
             new ProductCode("821009"),
             new ProductName("専用ボトル"),
-            new UnitPrice(4400))
+            new UnitPrice(4400),
+            TaxRateType.通常税率
+    )
 
     def 専用ボトルキャップ = new SingleProduct(
             new ProductCode("821010"),
             new ProductName("専用ボトルキャップ"),
-            new UnitPrice(1200))
+            new UnitPrice(1200),
+            TaxRateType.通常税率
+    )
 
     def 顧客 = new Customer(
             new CustomerNumber("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"),

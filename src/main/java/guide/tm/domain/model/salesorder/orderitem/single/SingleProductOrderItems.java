@@ -39,7 +39,7 @@ public class SingleProductOrderItems {
     }
 
     Amount amountIncludingNormalTax(TaxSumType taxSumType) {
-        TaxContext taxContext = new TaxContext(TaxRateType.軽減税率, taxSumType);
+        TaxContext taxContext = new TaxContext(TaxRateType.通常税率, taxSumType);
         return taxContext.includingTaxOf(normalTaxRateItems().totalAmountExcludingTax());
     }
 

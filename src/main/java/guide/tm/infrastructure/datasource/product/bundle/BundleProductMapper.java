@@ -17,5 +17,5 @@ interface BundleProductMapper {
 
     void registerCombination(
             @Param("productCode") ProductCode productCode,
-            @Param("individualProduct") SingleProduct singleProduct);
+            @Param("singleProduct") SingleProduct singleProduct);
 }
