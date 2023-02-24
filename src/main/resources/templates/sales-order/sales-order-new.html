@@ -40,27 +40,28 @@
     </div>
     </div>
 
-    <div th:object="${taxContext}">
-    <label for="taxRateType" class="form-label">消費税率区分</label>
-      <div class="mb-3" id="taxRateType">
-        <span th:each="taxRateType : ${taxRateTypes}">
-          <label>
-            <input type="radio" th:field="*{taxRateType}" th:value="${taxRateType.name}"/>
-            <span th:text="${taxRateType.name}"></span>
-          </label>
-       </span>
-      </div>
+<!--    <div th:object="${taxContext}">-->
+<!--    <label for="taxRateType" class="form-label">消費税率区分</label>-->
+<!--      <div class="mb-3" id="taxRateType">-->
+<!--        <span th:each="taxRateType : ${taxRateTypes}">-->
+<!--          <label>-->
+<!--            <input type="radio" th:field="*{taxRateType}" th:value="${taxRateType.name}"/>-->
+<!--            <span th:text="${taxRateType.name}"></span>-->
+<!--          </label>-->
+<!--       </span>-->
+<!--      </div>-->
 
     <label for="taxSumType" class="form-label">消費税計算方式</label>
     <div class="mb-3" id="taxSumType">
        <span th:each="taxSumType : ${taxSumTypes}">
           <label>
-            <input type="radio" th:field="*{taxSumType}" th:value="${taxSumType.name}"/>
+<!--            <input type="radio" th:field="*{taxSumType}" th:value="${taxSumType.name}"/>-->
+            <input type="radio" th:name="taxSumType" th:value="${taxSumType.name}"/>
             <span th:text="${taxSumType.name}"></span>
           </label>
        </span>
     </div>
-    </div>
+<!--    </div>-->
 
     <button type="submit" class="btn btn-primary">登録</button>
   </form>

@@ -12,7 +12,7 @@ import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItems
 import guide.tm.domain.model.salesorder.orderitem.single.SingleProductOrderItems;
 import guide.tm.domain.model.shipping.item.ShippingItems;
 import guide.tm.domain.model.status.orderstatus.SalesOrderStatus;
-import guide.tm.domain.model.tax.context.TaxContext;
+import guide.tm.domain.model.tax.context.TaxSumType;
 import org.springframework.stereotype.Service;
 
 /**
@@ -41,10 +41,10 @@ public class SalesOrderScenario {
      */
     public SalesOrder salesOrderOf(SalesOrderNumber salesOrderNumber) {
         SalesOrderContent salesOrderContent = salesOrderService.salesOrderOf(salesOrderNumber);
-        TaxContext taxContext = salesOrderService.taxContextOf(salesOrderNumber);
+        TaxSumType taxSumType  = salesOrderService.taxSumTypeOf(salesOrderNumber);
         SingleProductOrderItems singleProductOrderItems = salesOrderItemService.salesOrderItemsOf(salesOrderNumber);
         BundleProductOrderItems bundleProductOrderItems = salesOrderItemService.bundleProductOrderItemsOf(salesOrderNumber);
-        return new SalesOrder(salesOrderContent, taxContext, singleProductOrderItems, bundleProductOrderItems);
+        return new SalesOrder(salesOrderContent, taxSumType, singleProductOrderItems, bundleProductOrderItems);
     }
 
     /**

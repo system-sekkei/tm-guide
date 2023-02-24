@@ -44,4 +44,12 @@ public class SingleOrderItem {
     public boolean isSame(SingleOrderItem singleOrderItem) {
         return salesOrderItemNumber.isSame(singleOrderItem.salesOrderItemNumber);
     }
+
+    public boolean isReducedTaxRateItem() {
+        return singleOrderItemContent.isReducedTaxRateItem();
+    }
+
+    public boolean isNormalTaxRateItem() {
+        return singleOrderItemContent.isNormalTaxRateItem();
+    }
 }

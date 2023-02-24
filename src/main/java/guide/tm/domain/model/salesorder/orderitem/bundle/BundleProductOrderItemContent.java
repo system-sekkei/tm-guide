@@ -28,6 +28,14 @@ public class BundleProductOrderItemContent {
         return product.unitPrice().multiply(quantity);
     }
 
+    public boolean isReducedTaxRateItem() {
+        return product.isReducedTaxRateProduct();
+    }
+
+    public boolean isNormalTaxRateItem() {
+        return product.isNormalTaxRateProduct();
+    }
+
     @AssertTrue(message = "1以上の数値を入力してください")
     boolean isQuantitySpecified() {
         return quantity.isGreaterEqualThan(new Quantity(1));

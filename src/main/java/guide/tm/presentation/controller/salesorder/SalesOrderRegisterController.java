@@ -55,28 +55,28 @@ class SalesOrderRegisterController {
     @PostMapping("new")
     String register(@ModelAttribute("salesOrderContent") @Validated SalesOrderContent salesOrderContent,
                     BindingResult salesOrderContentResult,
-                    @ModelAttribute("taxContext") @Validated TaxContext taxContext,
+                    @ModelAttribute("taxSumType") @Validated TaxSumType taxSumType,
                     BindingResult taxContextResult,
                     Model model) {
         if (salesOrderContentResult.hasErrors() || taxContextResult.hasErrors()) {
             model.addAttribute("salesOrderContentResult", salesOrderContentResult);
-            model.addAttribute("taxContextResult", taxContextResult);
+            model.addAttribute("taxSumType", taxSumType);
             return "sales-order/sales-order-new";
         }
 
         SalesOrderNumber salesOrderNumber = salesOrderService.registerSalesOrder(salesOrderContent);
-        salesOrderService.registerTax(taxContext, salesOrderNumber);
+        salesOrderService.registerTax(taxSumType, salesOrderNumber);
 
         return String.format("redirect:/sales-orders/%s", salesOrderNumber);
     }
 
-    @InitBinder("taxContext")
-    public void bindTaxContext(WebDataBinder binder) {
-        binder.setAllowedFields(
-                "taxRateType",
-                "taxSumType"
-        );
-    }
+//    @InitBinder("taxContext")
+//    public void bindTaxContext(WebDataBinder binder) {
+//        binder.setAllowedFields(
+//                "taxRateType",
+//                "taxSumType"
+//        );
+//    }
 
     @InitBinder("salesOrderContent")
     public void bindSalesOrderContent(WebDataBinder binder) {

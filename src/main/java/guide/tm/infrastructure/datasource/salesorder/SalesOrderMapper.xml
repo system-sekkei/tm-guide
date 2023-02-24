@@ -34,21 +34,18 @@
                  INNER JOIN 顧客.顧客 ON 受注.顧客番号 = 顧客.顧客番号
     </select>
 
-    <select id="taxContextOf" resultType="guide.tm.domain.model.tax.context.TaxContext">
+    <select id="taxSumTypeOf" resultType="guide.tm.domain.model.tax.context.TaxSumType">
         SELECT
-            受注番号,
-            税率区分 AS "taxRateType",
             計算方式 AS "taxSumType"
-        FROM 受注.消費税
+        FROM 受注.消費税計算方式
         WHERE 受注番号 = #{salesOrderNumber.value}
     </select>
 
     <insert id="registerTax">
-        INSERT INTO 受注.消費税 (受注番号, 税率区分, 計算方式)
+        INSERT INTO 受注.消費税計算方式 (受注番号, 計算方式)
         VALUES (
                 #{salesOrderNumber.value},
-                #{taxContext.taxRateType},
-                #{taxContext.taxSumType}
+                #{taxSumType}
                )
     </insert>
 

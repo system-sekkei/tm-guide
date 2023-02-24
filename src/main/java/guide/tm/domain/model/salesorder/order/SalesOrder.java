@@ -4,7 +4,7 @@ import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.content.ShippingFee;
 import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItems;
 import guide.tm.domain.model.salesorder.orderitem.single.SingleProductOrderItems;
-import guide.tm.domain.model.tax.context.TaxContext;
+import guide.tm.domain.model.tax.context.TaxSumType;
 import guide.tm.domain.primitive.Amount;
 
 /**
@@ -12,17 +12,17 @@ import guide.tm.domain.primitive.Amount;
  */
 public class SalesOrder {
     SalesOrderContent salesOrderContent;
-    TaxContext taxContext;
+    TaxSumType taxSumType;
     SingleProductOrderItems singleProductOrderItems;
     BundleProductOrderItems bundleProductOrderItems;
 
     public SalesOrder(
             SalesOrderContent salesOrderContent,
-            TaxContext taxContext,
+            TaxSumType taxSumType,
             SingleProductOrderItems singleProductOrderItems,
             BundleProductOrderItems bundleProductOrderItems) {
         this.salesOrderContent = salesOrderContent;
-        this.taxContext = taxContext;
+        this.taxSumType = taxSumType;
         this.singleProductOrderItems = singleProductOrderItems;
         this.bundleProductOrderItems = bundleProductOrderItems;
     }
@@ -40,8 +40,8 @@ public class SalesOrder {
      * 税込金額
      */
     public Amount amountIncludingTax() {
-        Amount individualAmount = singleProductOrderItems.amountIncludingTax(taxContext);
-        Amount bundleAmount = bundleProductOrderItems.amountIncludingTax(taxContext);
+        Amount individualAmount = singleProductOrderItems.amountIncludingTax(taxSumType);
+        Amount bundleAmount = bundleProductOrderItems.amountIncludingTax(taxSumType);
         return individualAmount.add(bundleAmount);
     }
 
@@ -49,8 +49,8 @@ public class SalesOrder {
      * 税額
      */
     public Amount tax() {
-        Amount individualAmount = singleProductOrderItems.taxOf(taxContext);
-        Amount bundleAmount = bundleProductOrderItems.taxOf(taxContext);
+        Amount individualAmount = singleProductOrderItems.taxOf(taxSumType);
+        Amount bundleAmount = bundleProductOrderItems.taxOf(taxSumType);
         return individualAmount.add(bundleAmount);
     }
 
@@ -72,8 +72,8 @@ public class SalesOrder {
         return salesOrderContent;
     }
 
-    public TaxContext taxContext() {
-        return taxContext;
+    public TaxSumType taxSumType() {
+        return taxSumType;
     }
 
     public SingleProductOrderItems singleProductOrderItems() {

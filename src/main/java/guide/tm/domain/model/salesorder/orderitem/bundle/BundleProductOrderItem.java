@@ -49,4 +49,12 @@ public class BundleProductOrderItem {
     public boolean isSame(BundleProductOrderItem bundleProductOrderItem) {
         return salesOrderItemNumber.isSame(bundleProductOrderItem.salesOrderItemNumber);
     }
+
+    public boolean isReducedTaxRateItem() {
+        return bundleProductOrderItemContent.isReducedTaxRateItem();
+    }
+
+    public boolean isNormalTaxRateItem() {
+        return bundleProductOrderItemContent.isNormalTaxRateItem();
+    }
 }

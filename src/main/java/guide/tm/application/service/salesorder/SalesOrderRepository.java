@@ -3,7 +3,7 @@ package guide.tm.application.service.salesorder;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
-import guide.tm.domain.model.tax.context.TaxContext;
+import guide.tm.domain.model.tax.context.TaxSumType;
 
 public interface SalesOrderRepository {
     SalesOrderNumber registerSalesOrder(SalesOrderContent salesOrder);
@@ -12,8 +12,7 @@ public interface SalesOrderRepository {
 
     SalesOrderSummaries salesOrderSummaries();
 
-    TaxContext taxContextOf(SalesOrderNumber salesOrderNumber);
+    void registerTax(TaxSumType taxSumType, SalesOrderNumber salesOrderNumber);
 
-    void registerTax(TaxContext taxContext, SalesOrderNumber salesOrderNumber);
-
+    TaxSumType taxSumTypeOf(SalesOrderNumber salesOrderNumber);
 }

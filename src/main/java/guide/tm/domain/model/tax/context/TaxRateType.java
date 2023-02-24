@@ -21,4 +21,12 @@ public enum TaxRateType {
     public Rate rate() {
         return new Rate(new BigDecimal(percent).scaleByPowerOfTen(-2));
     }
+
+    public boolean is軽減税率() {
+        return this == 軽減税率;
+    }
+
+    public boolean is通常税率() {
+        return this == 通常税率;
+    }
 }

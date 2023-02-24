@@ -1,6 +1,8 @@
 package guide.tm.domain.model.salesorder.orderitem.single;
 
 import guide.tm.domain.model.tax.context.TaxContext;
+import guide.tm.domain.model.tax.context.TaxRateType;
+import guide.tm.domain.model.tax.context.TaxSumType;
 import guide.tm.domain.primitive.Amount;
 import guide.tm.domain.primitive.TotalAmount;
 
@@ -27,15 +29,25 @@ public class SingleProductOrderItems {
     /**
      * 税込金額
      */
-    public Amount amountIncludingTax(TaxContext taxContext) {
-        return taxContext.includingTaxOf(totalAmountExcludingTax());
+    public Amount amountIncludingTax(TaxSumType taxSumType) {
+        return amountIncludingReducedTax(taxSumType).add(amountIncludingNormalTax(taxSumType));
+    }
+
+    Amount amountIncludingReducedTax(TaxSumType taxSumType) {
+        TaxContext taxContext = new TaxContext(TaxRateType.軽減税率, taxSumType);
+        return taxContext.includingTaxOf(reducesTaxRateItems().totalAmountExcludingTax());
+    }
+
+    Amount amountIncludingNormalTax(TaxSumType taxSumType) {
+        TaxContext taxContext = new TaxContext(TaxRateType.軽減税率, taxSumType);
+        return taxContext.includingTaxOf(normalTaxRateItems().totalAmountExcludingTax());
     }
 
     /**
      * 税額
      */
-    public Amount taxOf(TaxContext taxContext) {
-        return taxContext.taxOf(totalAmountExcludingTax());
+    public Amount taxOf(TaxSumType taxSumType) {
+        return reducedTaxOf(taxSumType).add(normalTaxOf(taxSumType));
     }
 
 
@@ -43,6 +55,26 @@ public class SingleProductOrderItems {
         return new TotalAmount(list.stream()
                 .map(SingleOrderItem::amountExcludingTax)
                 .collect(Collectors.toUnmodifiableSet()));
+    }
+
+    Amount reducedTaxOf(TaxSumType taxSumType) {
+        TaxContext taxContext = new TaxContext(TaxRateType.軽減税率, taxSumType);
+        return taxContext.taxOf(reducesTaxRateItems().totalAmountExcludingTax());
+    }
+
+    Amount normalTaxOf(TaxSumType taxSumType) {
+        TaxContext taxContext = new TaxContext(TaxRateType.通常税率, taxSumType);
+        return taxContext.taxOf(normalTaxRateItems().totalAmountExcludingTax());
+    }
+
+    SingleProductOrderItems reducesTaxRateItems() {
+        return new SingleProductOrderItems(
+                list.stream().filter(SingleOrderItem::isReducedTaxRateItem).toList());
+    }
+
+    SingleProductOrderItems normalTaxRateItems() {
+        return new SingleProductOrderItems(
+                list.stream().filter(SingleOrderItem::isNormalTaxRateItem).toList());
     }
 
     public List<SingleOrderItem> list() {
@@ -53,8 +85,4 @@ public class SingleProductOrderItems {
         return list.isEmpty();
     }
 
-    public boolean contains(SingleOrderItem singleOrderItem) {
-        return list.stream()
-                .anyMatch(it -> it.salesOrderItemNumber().isSame(singleOrderItem.salesOrderItemNumber()));
-    }
 }
