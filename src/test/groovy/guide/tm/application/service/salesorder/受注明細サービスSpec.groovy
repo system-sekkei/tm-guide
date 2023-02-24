@@ -73,7 +73,7 @@ class 受注明細サービスSpec extends Specification {
         sut.register(受注番号, 受注明細_専用ボトルキャップ)
 
         then: "受注明細を取得する"
-        def 登録された受注明細 = sut.salesOrderItemsOf(受注番号)
+        def 登録された受注明細 = sut.singleProductOrderItemsOf(受注番号)
 
         assert 登録された受注明細.list.size() == 2
 

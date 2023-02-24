@@ -36,8 +36,8 @@ public class SalesOrderItemService {
     /**
      * 受注明細を取得する
      */
-    public SingleProductOrderItems salesOrderItemsOf(SalesOrderNumber salesOrderNumber) {
-        return salesOrderItemRepository.salesOrderItemsOf(salesOrderNumber);
+    public SingleProductOrderItems singleProductOrderItemsOf(SalesOrderNumber salesOrderNumber) {
+        return salesOrderItemRepository.singleProductOrderItemsOf(salesOrderNumber);
     }
 
     /**

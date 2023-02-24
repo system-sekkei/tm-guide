@@ -9,7 +9,7 @@ import guide.tm.domain.model.salesorder.orderitem.single.SingleProductOrderItems
 public interface SalesOrderItemRepository {
     void registerBundleProductOrderItem(SalesOrderNumber salesOrderNumber, SingleOrderItemContent singleOrderItemContent);
 
-    SingleProductOrderItems salesOrderItemsOf(SalesOrderNumber salesOrderNumber);
+    SingleProductOrderItems singleProductOrderItemsOf(SalesOrderNumber salesOrderNumber);
 
     void registerBundleProductOrderItem(SalesOrderNumber salesOrderNumber, BundleProductOrderItemContent bundleProductOrderItemContent);
 

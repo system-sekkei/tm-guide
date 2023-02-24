@@ -89,7 +89,7 @@ class SingleAllocationServiceSpec extends Specification {
 
     def "引当を登録する"() {
         given:
-        def 受注明細 = 受注明細Service.salesOrderItemsOf(受注番号).list.get(0)
+        def 受注明細 = 受注明細Service.singleProductOrderItemsOf(受注番号).list.get(0)
         def 受注明細状況 = new SingleOrderItemStatus(受注明細, new SingleAllocation(), ShippingStatus.出荷未指示)
 
         when: "引当して、結果を登録する"

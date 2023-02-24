@@ -9,6 +9,7 @@ import guide.tm.domain.model.product.detail.ProductCode
 import guide.tm.domain.model.product.detail.ProductName
 import guide.tm.domain.model.product.price.UnitPrice
 import guide.tm.domain.model.product.single.SingleProduct
+import guide.tm.domain.model.tax.context.TaxRateType
 import guide.tm.domain.primitive.Quantity
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -34,12 +35,16 @@ class 在庫サービスSpec extends Specification {
     def 専用ボトル = new SingleProduct(
             new ProductCode("821009"),
             new ProductName("専用ボトル"),
-            new UnitPrice(4400))
+            new UnitPrice(4400),
+            TaxRateType.通常税率
+    )
 
     def 専用ボトルキャップ = new SingleProduct(
             new ProductCode("821010"),
             new ProductName("専用ボトルキャップ"),
-            new UnitPrice(1200))
+            new UnitPrice(1200),
+            TaxRateType.通常税率
+    )
 
     def setup() {
         wareHouseSetUp.倉庫のテストデータの準備(List.of(東日本倉庫, 西日本倉庫))

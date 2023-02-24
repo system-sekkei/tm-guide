@@ -1,12 +1,14 @@
 package guide.tm.application.service.shipping
 
-
 import guide.tm.application.CustomerSetUp
 import guide.tm.application.ProductSetUp
 import guide.tm.application.StockSetup
 import guide.tm.application.WareHouseSetUp
+import guide.tm.application.scenario.salesorder.SalesOrderScenario
+import guide.tm.application.service.allocation.AllocationService
 import guide.tm.application.service.salesorder.SalesOrderItemService
 import guide.tm.application.service.salesorder.SalesOrderService
+import guide.tm.domain.model.allocation.stock.Stock
 import guide.tm.domain.model.allocation.warehouse.WareHouse
 import guide.tm.domain.model.allocation.warehouse.WareHouseCode
 import guide.tm.domain.model.customer.Customer
@@ -23,6 +25,7 @@ import guide.tm.domain.model.salesorder.order.SalesOrderNumber
 import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItemContent
 import guide.tm.domain.model.shipping.content.ShippingDate
 import guide.tm.domain.model.shipping.content.ShippingInstructionContent
+import guide.tm.domain.model.tax.context.TaxRateType
 import guide.tm.domain.primitive.Quantity
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -38,20 +41,29 @@ class 出荷明細サービスSpec extends Specification {
 
     @Autowired
     ShippingItemService sut
+    @Autowired
+    AllocationService allocationService
+
+    @Autowired
+    SalesOrderScenario salesOrderScenario
 
     SalesOrderNumber 受注番号
 
     def 専用ボトル = new SingleProduct(
             new ProductCode("821009"),
             new ProductName("専用ボトル"),
-            new UnitPrice(4400))
+            new UnitPrice(4400),
+            TaxRateType.通常税率
+    )
 
     def 受注明細_専用ボトル = new SingleOrderItemContent(専用ボトル, new Quantity(42))
 
     def 専用ボトルキャップ = new SingleProduct(
             new ProductCode("821010"),
             new ProductName("専用ボトルキャップ"),
-            new UnitPrice(1200))
+            new UnitPrice(1200),
+            TaxRateType.通常税率
+    )
 
     def 受注明細_専用ボトルキャップ = new SingleOrderItemContent(専用ボトルキャップ, new Quantity(23))
 
@@ -88,7 +100,16 @@ class 出荷明細サービスSpec extends Specification {
         商品準備.商品のテストデータの準備(専用ボトル)
         商品準備.商品のテストデータの準備(専用ボトルキャップ)
 
-        運送会社準備.運送会社のテストデータの準備(運送会社)
+        在庫準備.在庫のテストデータの準備(List.of(
+                new Stock(専用ボトル.code(), 東日本倉庫.wareHouseCode, new Quantity(23)),
+                new Stock(専用ボトル.code(), 西日本倉庫.wareHouseCode, new Quantity(8)),
+                new Stock(専用ボトル.code(), 中日本倉庫.wareHouseCode, new Quantity(38)),
+                new Stock(専用ボトルキャップ.code(), 東日本倉庫.wareHouseCode, new Quantity(2)),
+                new Stock(専用ボトルキャップ.code(), 西日本倉庫.wareHouseCode, new Quantity(60)),
+                new Stock(専用ボトルキャップ.code(), 中日本倉庫.wareHouseCode, new Quantity(18)),
+            )
+        )
+
         def 受注 = new SalesOrderContent(顧客, new OrderedDate("2023-01-12"))
         受注番号 = 受注Service.registerSalesOrder(受注)
         受注明細Service.register(受注番号, 受注明細_専用ボトル)
@@ -98,25 +119,28 @@ class 出荷明細サービスSpec extends Specification {
     def "出荷明細を登録する"() {
         given:
         def 出荷日 = new ShippingDate(LocalDate.of(2023, Month.MARCH, 2))
-        def 出荷 = new ShippingInstructionContent(顧客番号, 出荷日, 運送会社コード)
+        def 出荷 = new ShippingInstructionContent(受注番号, 出荷日)
 
-        def 出荷番号 = 出荷サービス.register(出荷, salesOrderItemsToShip, bundleItemsToShip)
+        and: "引当して、結果を登録する"
+        def 受注明細状況 = salesOrderScenario.status(受注番号)
+        allocationService.allocateSalesOrder(受注明細状況, 受注番号)
 
-        def 受注明細リスト = 受注明細Service.salesOrderItemsOf(受注番号)
+        and: "引当を取得できる"
+        def 個別商品引当結果= allocationService.singleAllocationsOf(受注番号)
+        def セット商品引当結果= allocationService.bundleAllocations(受注番号)
+
+        def 出荷番号 = 出荷サービス.register(出荷, 個別商品引当結果, セット商品引当結果)
 
 
-        when:"出荷明細を登録する"
-        sut.register(出荷番号, 受注番号, 受注明細リスト.list.get(0))
-        sut.register(出荷番号, 受注番号, 受注明細リスト.list.get(1))
-
+        when: "出荷明細を取得する"
+        def shippingItems = sut.shippingItems(受注番号)
         then: "出荷明細を2件取得できる"
-        def shippingItems = sut.shippingItemsOf(出荷番号)
-        assert shippingItems.list.size() == 2
+        assert shippingItems.singleShippingItems.list.size() == 5
 
         and: "専用ボトルの出荷数は42"
-        shippingItems.list.find { it.individualProduct.code.value == "821009" }.shippingQuantity.value == 42
+        shippingItems.singleShippingItems.list.findAll { it.singleProduct.code.value == "821009" }.size() == 3
 
         and: "専用ボトルキャップの出荷数は23"
-        shippingItems.list.find { it.individualProduct.code.value == "821010" }.shippingQuantity.value == 23
+        shippingItems.singleShippingItems.list.findAll { it.singleProduct.code.value == "821010" }.size() == 2
     }
 }

@@ -42,7 +42,7 @@ public class SalesOrderScenario {
     public SalesOrder salesOrderOf(SalesOrderNumber salesOrderNumber) {
         SalesOrderContent salesOrderContent = salesOrderService.salesOrderOf(salesOrderNumber);
         TaxSumType taxSumType  = salesOrderService.taxSumTypeOf(salesOrderNumber);
-        SingleProductOrderItems singleProductOrderItems = salesOrderItemService.salesOrderItemsOf(salesOrderNumber);
+        SingleProductOrderItems singleProductOrderItems = salesOrderItemService.singleProductOrderItemsOf(salesOrderNumber);
         BundleProductOrderItems bundleProductOrderItems = salesOrderItemService.bundleProductOrderItemsOf(salesOrderNumber);
         return new SalesOrder(salesOrderContent, taxSumType, singleProductOrderItems, bundleProductOrderItems);
     }

@@ -26,7 +26,7 @@ public class SalesOrderItemDataSource implements SalesOrderItemRepository {
     }
 
     @Override
-    public SingleProductOrderItems salesOrderItemsOf(SalesOrderNumber salesOrderNumber) {
+    public SingleProductOrderItems singleProductOrderItemsOf(SalesOrderNumber salesOrderNumber) {
         return new SingleProductOrderItems(salesOrderItemMapper.salesOrderItemsOf(salesOrderNumber));
     }
 
