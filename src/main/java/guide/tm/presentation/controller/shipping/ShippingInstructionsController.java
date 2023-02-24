@@ -32,7 +32,7 @@ class ShippingInstructionsController {
     }
 
     @InitBinder({"shippingNumber"})
-    public void bindOrderItem(WebDataBinder binder) {
+    void bindOrderItem(WebDataBinder binder) {
         binder.setAllowedFields(
                 "value"
         );
