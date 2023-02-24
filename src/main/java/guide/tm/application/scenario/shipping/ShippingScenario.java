@@ -4,17 +4,10 @@ import guide.tm.application.scenario.salesorder.SalesOrderScenario;
 import guide.tm.application.service.allocation.AllocationService;
 import guide.tm.application.service.shipping.ShippingItemService;
 import guide.tm.application.service.shipping.ShippingService;
-import guide.tm.domain.model.allocation.bundle.BundleAllocations;
-import guide.tm.domain.model.allocation.single.SingleAllocations;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
-import guide.tm.domain.model.shipping.content.ShippingDate;
-import guide.tm.domain.model.shipping.content.ShippingInstructionContent;
-import guide.tm.domain.model.status.bundle.BundleOrderItemStatusList;
+import guide.tm.domain.model.shipping.content.ShippingInstruction;
 import guide.tm.domain.model.status.orderstatus.SalesOrderStatus;
-import guide.tm.domain.model.status.single.SingleOrderItemStatusList;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
 
 /**
  * 出荷指示シナリオ
@@ -48,18 +41,11 @@ public class ShippingScenario {
 
         SalesOrderStatus salesOrderStatus = salesOrderScenario.status(salesOrderNumber);
 
-        SingleOrderItemStatusList allocated = salesOrderStatus.singleOrderItemStatusList().allocated();
-        SingleAllocations singleAllocationsToShip = allocated.notShippedItemAllocations();
+        ShippingInstruction shippingInstruction = salesOrderStatus.create();
 
-        BundleOrderItemStatusList allocatedBundleOrderItem = salesOrderStatus.bundleOrderItemStatusList().allocated();
-        BundleAllocations bundleAllocationsToShip = allocatedBundleOrderItem.notShippedItemAllocations();
+        if (shippingInstruction.isAllShipped()) return;
+        shippingService.register(shippingInstruction);
 
-        if (isAllShipped(singleAllocationsToShip, bundleAllocationsToShip)) return;
-        shippingService.register(new ShippingInstructionContent(salesOrderNumber, new ShippingDate(LocalDate.now())), singleAllocationsToShip, bundleAllocationsToShip);
-    }
-
-    private boolean isAllShipped(SingleAllocations singleAllocationsToShip, BundleAllocations bundleAllocationsToShip) {
-        return singleAllocationsToShip.isEmpty() && bundleAllocationsToShip.isEmpty();
     }
 
 }

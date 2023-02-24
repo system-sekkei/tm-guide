@@ -1,9 +1,7 @@
 package guide.tm.infrastructure.datasource.shipping;
 
 import guide.tm.application.service.shipping.ShippingRepository;
-import guide.tm.domain.model.allocation.bundle.BundleAllocations;
-import guide.tm.domain.model.allocation.single.SingleAllocations;
-import guide.tm.domain.model.shipping.content.ShippingInstructionContent;
+import guide.tm.domain.model.shipping.content.ShippingInstruction;
 import guide.tm.domain.model.shipping.content.ShippingInstructionSummaries;
 import guide.tm.domain.model.shipping.content.ShippingNumber;
 import org.springframework.stereotype.Repository;
@@ -20,17 +18,14 @@ public class ShippingDataSource implements ShippingRepository {
     }
 
     @Override
-    public ShippingNumber register(
-            ShippingInstructionContent shippingInstructionContent,
-            SingleAllocations singleAllocations,
-            BundleAllocations bundleAllocations) {
+    public ShippingNumber register(ShippingInstruction shippingInstruction) {
         UUID shippingNumber = UUID.randomUUID();
-        shippingMapper.register(shippingInstructionContent, shippingNumber);
+        shippingMapper.register(shippingInstruction.shippingInstructionContent(), shippingNumber);
 
-        singleAllocations.list().forEach(allocation ->
+        shippingInstruction.singleAllocations().list().forEach(allocation ->
                 shippingMapper.registerShippedAllocations(shippingNumber, allocation));
 
-        bundleAllocations.list().forEach(allocation ->
+        shippingInstruction.bundleAllocations().list().forEach(allocation ->
                 shippingMapper.registerShippedBundleAllocations(shippingNumber, allocation));
 
         shippingMapper.recordUnshippingSate(shippingNumber);
@@ -47,6 +42,5 @@ public class ShippingDataSource implements ShippingRepository {
     public ShippingInstructionSummaries shippingInstructionSummaries() {
         return new ShippingInstructionSummaries(shippingMapper.shippingInstructions());
     }
-
 
 }

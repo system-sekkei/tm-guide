@@ -1,8 +1,6 @@
 package guide.tm.application.service.shipping;
 
-import guide.tm.domain.model.allocation.bundle.BundleAllocations;
-import guide.tm.domain.model.allocation.single.SingleAllocations;
-import guide.tm.domain.model.shipping.content.ShippingInstructionContent;
+import guide.tm.domain.model.shipping.content.ShippingInstruction;
 import guide.tm.domain.model.shipping.content.ShippingInstructionSummaries;
 import guide.tm.domain.model.shipping.content.ShippingNumber;
 import org.springframework.stereotype.Service;
@@ -21,11 +19,8 @@ public class ShippingService {
     /**
      * 出荷指示を登録する
      */
-    public ShippingNumber register(
-            ShippingInstructionContent shippingInstructionContent,
-            SingleAllocations singleAllocations,
-            BundleAllocations bundleAllocations) {
-        return shippingRepository.register(shippingInstructionContent, singleAllocations, bundleAllocations);
+    public ShippingNumber register(ShippingInstruction shippingInstruction) {
+        return shippingRepository.register(shippingInstruction);
     }
 
     public ShippingInstructionSummaries shippingInstructionSummaries() {

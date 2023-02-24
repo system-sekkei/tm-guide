@@ -1,16 +1,23 @@
 package guide.tm.domain.model.status.orderstatus;
 
 import guide.tm.domain.model.allocation.bundle.BundleAllocation;
+import guide.tm.domain.model.allocation.bundle.BundleAllocations;
 import guide.tm.domain.model.allocation.content.Allocations;
 import guide.tm.domain.model.allocation.single.SingleAllocation;
+import guide.tm.domain.model.allocation.single.SingleAllocations;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.shipping.content.ShippingDate;
+import guide.tm.domain.model.shipping.content.ShippingInstruction;
+import guide.tm.domain.model.shipping.content.ShippingInstructionContent;
 import guide.tm.domain.model.shipping.item.ShippingItems;
 import guide.tm.domain.model.shipping.status.ShippingStatus;
 import guide.tm.domain.model.status.bundle.BundleOrderItemStatus;
 import guide.tm.domain.model.status.bundle.BundleOrderItemStatusList;
 import guide.tm.domain.model.status.single.SingleOrderItemStatus;
 import guide.tm.domain.model.status.single.SingleOrderItemStatusList;
+
+import java.time.LocalDate;
 
 /**
  * 受注状況
@@ -50,6 +57,30 @@ public class SalesOrderStatus {
                             ShippingStatus shippingStatus = shippingItems.statusOfBundleOrderItem(bundleProductOrderItem);
                             return new BundleOrderItemStatus(bundleProductOrderItem, allocation, shippingStatus);
                         }).toList());
+    }
+
+    /**
+     * 出荷指示を作成する
+     *
+     * - 引当済
+     * - 未出荷
+     * の引当を対象として、出荷指示を作成する
+     */
+    public ShippingInstruction create() {
+        SingleOrderItemStatusList allocated = singleOrderItemStatusList().allocated();
+        SingleAllocations singleAllocationsToShip = allocated.notShippedItemAllocations();
+
+        BundleOrderItemStatusList allocatedBundleOrderItem = bundleOrderItemStatusList().allocated();
+        BundleAllocations bundleAllocationsToShip = allocatedBundleOrderItem.notShippedItemAllocations();
+
+        return new ShippingInstruction(
+                new ShippingInstructionContent(salesOrderNumber(), new ShippingDate(LocalDate.now())),
+                singleAllocationsToShip,
+                bundleAllocationsToShip);
+    }
+
+    public SalesOrderNumber salesOrderNumber() {
+        return salesOrderNumber;
     }
 
     public SalesOrder salesOrder() {
