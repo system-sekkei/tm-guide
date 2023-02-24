@@ -6,6 +6,7 @@ import guide.tm.application.StockSetup
 import guide.tm.application.WareHouseSetUp
 import guide.tm.application.service.salesorder.SalesOrderItemService
 import guide.tm.application.service.salesorder.SalesOrderService
+import guide.tm.domain.model.allocation.single.SingleAllocation
 import guide.tm.domain.model.allocation.stock.Stock
 import guide.tm.domain.model.allocation.warehouse.WareHouse
 import guide.tm.domain.model.allocation.warehouse.WareHouseCode
@@ -21,6 +22,9 @@ import guide.tm.domain.model.salesorder.content.OrderedDate
 import guide.tm.domain.model.salesorder.content.SalesOrderContent
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber
 import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItemContent
+import guide.tm.domain.model.shipping.status.ShippingStatus
+import guide.tm.domain.model.status.single.SingleOrderItemStatus
+import guide.tm.domain.model.tax.context.TaxRateType
 import guide.tm.domain.primitive.Quantity
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -39,7 +43,9 @@ class SingleAllocationServiceSpec extends Specification {
     def 専用ボトル = new SingleProduct(
             new ProductCode("821009"),
             new ProductName("専用ボトル"),
-            new UnitPrice(4400))
+            new UnitPrice(4400),
+            TaxRateType.通常税率
+    )
 
     @Autowired
     StockSetup 在庫準備
@@ -84,14 +90,17 @@ class SingleAllocationServiceSpec extends Specification {
     def "引当を登録する"() {
         given:
         def 受注明細 = 受注明細Service.salesOrderItemsOf(受注番号).list.get(0)
+        def 受注明細状況 = new SingleOrderItemStatus(受注明細, new SingleAllocation(), ShippingStatus.出荷未指示)
 
         when: "引当して、結果を登録する"
-        sut.allocate(受注明細, 受注番号)
+        sut.allocate(受注明細状況, 受注番号)
 
         then: "引当を取得できる"
         def 引当結果= sut.singleAllocationsOf(受注番号)
-        and: "引当が3件"
-        assert 引当結果.list().size() == 3
+        and: "引当を1件取得する"
+        assert 引当結果.list().size() == 1
+        and: "引当場所を3件取得する"
+        assert 引当結果.list().get(0).productAllocation.allocatedLocations.list().size() == 3
 
     }
 }

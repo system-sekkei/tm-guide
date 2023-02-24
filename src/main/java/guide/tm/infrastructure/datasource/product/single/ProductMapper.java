@@ -1,4 +1,4 @@
-package guide.tm.infrastructure.datasource.product;
+package guide.tm.infrastructure.datasource.product.single;
 
 import guide.tm.domain.model.product.single.SingleProduct;
 import org.apache.ibatis.annotations.Mapper;

@@ -5,11 +5,12 @@
 <mapper namespace="guide.tm.infrastructure.datasource.product.bundle.BundleProductMapper">
 
     <insert id="register">
-        INSERT INTO 商品.セット商品 (商品コード, 商品名称, 商品単価)
+        INSERT INTO 商品.セット商品 (商品コード, 商品名称, 商品単価, 税率区分)
         VALUES (
                 #{bundleProduct.code.value},
                 #{bundleProduct.name.value},
-                #{bundleProduct.unitPrice.amount.value}
+                #{bundleProduct.unitPrice.amount.value},
+                #{product.taxRateType}
                )
     </insert>
 
