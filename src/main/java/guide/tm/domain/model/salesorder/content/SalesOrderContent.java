@@ -9,14 +9,16 @@ import jakarta.validation.constraints.AssertFalse;
 public class SalesOrderContent {
     Customer customer;
     OrderedDate orderedDate;
+    ShippingAddress shippingAddress;
 
     public SalesOrderContent() {
-        this(new Customer(), new OrderedDate());
+        this(new Customer(), new OrderedDate(), new ShippingAddress());
     }
 
-    public SalesOrderContent(Customer customer, OrderedDate orderedDate) {
+    public SalesOrderContent(Customer customer, OrderedDate orderedDate, ShippingAddress shippingAddress) {
         this.customer = customer;
         this.orderedDate = orderedDate;
+        this.shippingAddress = shippingAddress;
     }
 
     public Customer customer() {
@@ -25,6 +27,10 @@ public class SalesOrderContent {
 
     public OrderedDate orderedDate() {
         return orderedDate;
+    }
+
+    public ShippingAddress shippingAddress() {
+        return shippingAddress;
     }
 
     @AssertFalse(message = "顧客名称を入力してください")

@@ -5,11 +5,13 @@
 <mapper namespace="guide.tm.infrastructure.datasource.salesorder.SalesOrderMapper">
 
     <insert id="registerSalesOrder">
-        INSERT INTO 受注.受注 (受注番号, 顧客番号, 受注日)
+        INSERT INTO 受注.受注 (受注番号, 顧客番号, 受注日, 都道府県, 住所)
         VALUES (
                    #{salesOrderNumber},
                    #{salesOrder.customer.code.value},
-                   #{salesOrder.orderedDate.value}
+                   #{salesOrder.orderedDate.value},
+                   #{salesOrder.shippingAddress.prefecture},
+                   #{salesOrder.shippingAddress.addressLine}
                )
     </insert>
 
@@ -18,7 +20,9 @@
             受注番号,
             受注.顧客番号 AS "customer.code.value",
             顧客名称 AS "customer.name.value",
-            受注日 AS "orderedDate.value"
+            受注日 AS "orderedDate.value",
+            都道府県 AS "shippingAddress.prefecture",
+            住所 AS "shippingAddress.addressLine"
         FROM 受注.受注
         INNER JOIN 顧客.顧客 ON 受注.顧客番号 = 顧客.顧客番号
         WHERE 受注番号 = #{salesOrderNumber.value}

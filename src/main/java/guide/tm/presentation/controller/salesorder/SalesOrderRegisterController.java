@@ -3,7 +3,9 @@ package guide.tm.presentation.controller.salesorder;
 import guide.tm.application.service.customer.CustomerService;
 import guide.tm.application.service.salesorder.SalesOrderService;
 import guide.tm.domain.model.customer.CustomerSummaries;
+import guide.tm.domain.model.salesorder.content.Prefecture;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
+import guide.tm.domain.model.salesorder.content.ShippingAddress;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.tax.context.TaxContext;
 import guide.tm.domain.model.tax.context.TaxRateType;
@@ -42,6 +44,11 @@ class SalesOrderRegisterController {
         return customerService.customerSummaries();
     }
 
+    @ModelAttribute("prefectures")
+    Prefecture[] prefectures() {
+        return Prefecture.values();
+    }
+
     @GetMapping("new")
     String newSalesOrder(Model model) {
         model.addAttribute("salesOrderContent", new SalesOrderContent());
@@ -57,8 +64,10 @@ class SalesOrderRegisterController {
                     BindingResult salesOrderContentResult,
                     @ModelAttribute("taxSumType") @Validated TaxSumType taxSumType,
                     BindingResult taxContextResult,
+                    @ModelAttribute("shippingAddress") @Validated ShippingAddress shippingAddress,
+                    BindingResult shippingAddressResult,
                     Model model) {
-        if (salesOrderContentResult.hasErrors() || taxContextResult.hasErrors()) {
+        if (salesOrderContentResult.hasErrors() || taxContextResult.hasErrors() || shippingAddressResult.hasErrors()) {
             model.addAttribute("salesOrderContentResult", salesOrderContentResult);
             model.addAttribute("taxSumType", taxSumType);
             return "sales-order/sales-order-new";
@@ -70,18 +79,12 @@ class SalesOrderRegisterController {
         return String.format("redirect:/sales-orders/%s", salesOrderNumber);
     }
 
-//    @InitBinder("taxContext")
-//    public void bindTaxContext(WebDataBinder binder) {
-//        binder.setAllowedFields(
-//                "taxRateType",
-//                "taxSumType"
-//        );
-//    }
-
     @InitBinder("salesOrderContent")
     public void bindSalesOrderContent(WebDataBinder binder) {
         binder.setAllowedFields(
                 "customer.code.value",
+                "shippingAddress.prefecture",
+                "shippingAddress.addressLine",
                 "orderedDate.value"
         );
     }

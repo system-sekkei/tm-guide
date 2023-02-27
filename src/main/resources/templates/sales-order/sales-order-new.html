@@ -32,6 +32,22 @@
       </select>
     </div>
 
+      <div class="mb-3">
+        <label for="shippingPrefecture" class="form-label">届け先都道府県</label>
+        <select class="form-control" id="shippingPrefecture" name="shippingAddress.prefecture">
+          <option value selected></option>
+          <option th:each="prefecture: ${prefectures}"
+                  th:value="${prefecture.name}"
+                  th:inline="text">
+            [[${prefecture.name}]]
+          </option>
+        </select>
+        <label for="shippingAddressLine" class="form-label">届け先住所</label>
+        <input type="text" class="form-control" id="shippingAddressLine"
+               th:classappend="${#fields.hasErrors('shippingAddress.addressLine')}? fieldError"
+               name="shippingAddress.addressLine">
+      </div>
+
     <div class="mb-3">
       <label for="orderedDate" class="form-label">受注日</label>
       <input type="date" class="form-control" id="orderedDate"

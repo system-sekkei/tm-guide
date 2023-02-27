@@ -24,6 +24,13 @@
   </div>
 
   <div class="mb-3 row">
+    <label for="shippingAddressLine" class="col-sm-2 col-form-label">届け先住所</label>
+    <div class="col-sm-4">
+      <span id="shippingAddressLine" class="font-weight-bold" th:text="${salesOrder.salesOrderContent.shippingAddress}">東京都千代田区1-1-1</span>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
     <label for="total" class="col-sm-2 col-form-label">受注金額</label>
     <div class="col-sm-2">
       <input type="text" readonly class="form-control-plaintext" id="total" th:value="${salesOrder.totalAmount}">
