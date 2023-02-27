@@ -18,4 +18,8 @@ public enum Prefecture {
     Prefecture(Region region) {
         this.region = region;
     }
+
+    public int distanceFrom(Prefecture other) {
+        return this.region.distanceFrom(other.region);
+    }
 }
