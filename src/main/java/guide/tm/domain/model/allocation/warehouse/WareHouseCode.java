@@ -13,4 +13,8 @@ public class WareHouseCode {
     public WareHouseCode(String value) {
         this.value = value;
     }
+
+    public boolean isSame(WareHouseCode other) {
+        return value.equals(other.value);
+    }
 }

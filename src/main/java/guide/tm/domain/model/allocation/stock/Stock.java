@@ -17,12 +17,13 @@ public class Stock {
 
     @Deprecated(since = "for myBatis")
     Stock() {
-        this(new ProductCode(), new WareHouseCode(), new Quantity());
+        this(new ProductCode(), new WareHouseCode(), Prefecture.北海道, new Quantity());
     }
 
-    public Stock(ProductCode productCode, WareHouseCode wareHouseCode, Quantity quantity) {
+    public Stock(ProductCode productCode, WareHouseCode wareHouseCode, Prefecture wareHousePrefecture, Quantity quantity) {
         this.productCode = productCode;
         this.wareHouseCode = wareHouseCode;
+        this.wareHousePrefecture = wareHousePrefecture;
         this.quantity = quantity;
     }
 }

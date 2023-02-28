@@ -24,4 +24,8 @@ public class AllocatedLocation {
     public Quantity allocatedQuantity() {
         return allocatedQuantity;
     }
+
+    public WareHouseCode wareHouseCode() {
+        return wareHouseCode;
+    }
 }
