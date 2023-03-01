@@ -24,4 +24,8 @@ public class OrderedDate {
     public boolean isEmpty() {
         return value == null;
     }
+
+    public boolean isEqual(OrderedDate other) {
+        return value.isEqual(other.value);
+    }
 }
