@@ -37,6 +37,7 @@ class 在庫サービスTest {
     商品Fixture 商品準備;
 
     WareHouse 東日本倉庫 = new WareHouse(new WareHouseCode("654321"), "東日本倉庫", "千葉県");
+    WareHouse 西日本倉庫 = new WareHouse(new WareHouseCode("098765"), "西日本倉庫", "奈良県");
 
     SingleProduct 専用ボトル = new SingleProduct(
             new ProductCode("821009"),
