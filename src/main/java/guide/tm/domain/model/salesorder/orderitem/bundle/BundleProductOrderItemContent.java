@@ -16,7 +16,7 @@ public class BundleProductOrderItemContent {
         this(new BundleProduct(), new Quantity());
     }
 
-    BundleProductOrderItemContent(BundleProduct product, Quantity quantity) {
+    public BundleProductOrderItemContent(BundleProduct product, Quantity quantity) {
         this.product = product;
         this.quantity = quantity;
     }
