@@ -26,4 +26,8 @@ public class ProductAllocation {
     public boolean isAllocated(Quantity quantity) {
         return allocatedQuantity().isEqual(quantity);
     }
+
+    public AllocatedLocations allocatedLocations() {
+        return allocatedLocations;
+    }
 }

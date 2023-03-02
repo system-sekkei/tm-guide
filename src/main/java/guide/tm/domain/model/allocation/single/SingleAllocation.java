@@ -35,4 +35,8 @@ public class SingleAllocation {
     public Quantity allocatedQuantity() {
         return productAllocation.allocatedQuantity();
     }
+
+    public ProductAllocation productAllocation() {
+        return productAllocation;
+    }
 }

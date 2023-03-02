@@ -23,6 +23,9 @@ public class ShippingService {
         return shippingRepository.register(shippingInstruction);
     }
 
+    /**
+     * 出荷指示のリストを取得する
+     */
     public ShippingInstructionSummaries shippingInstructionSummaries() {
         return shippingRepository.shippingInstructionSummaries();
     }

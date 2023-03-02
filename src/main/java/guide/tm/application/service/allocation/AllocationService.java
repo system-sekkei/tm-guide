@@ -51,7 +51,7 @@ public class AllocationService {
      * - 引当残がない場合は何もしない
      * - 引当残数の引当を行う
      */
-    private void allocate(SingleOrderItemStatus singleOrderItemStatus, SalesOrderNumber salesOrderNumber, ShippingAddress shippingAddress) {
+    public void allocate(SingleOrderItemStatus singleOrderItemStatus, SalesOrderNumber salesOrderNumber, ShippingAddress shippingAddress) {
         SingleOrderItem singleOrderItem = singleOrderItemStatus.singleOrderItem();
         if (singleOrderItemStatus.isAllAllocated()) return;
 

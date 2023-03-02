@@ -26,4 +26,12 @@ public class ShippingItems {
     public ShippingStatus statusOfBundleOrderItem(BundleProductOrderItem bundleProductOrderItem) {
         return bundleShippingItems.statusOf(bundleProductOrderItem);
     }
+
+    public SingleShippingItems singleShippingItems() {
+        return singleShippingItems;
+    }
+
+    public BundleShippingItems bundleShippingItems() {
+        return bundleShippingItems;
+    }
 }
