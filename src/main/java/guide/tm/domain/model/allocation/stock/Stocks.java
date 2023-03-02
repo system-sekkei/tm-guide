@@ -59,4 +59,7 @@ public class Stocks {
         );
     }
 
+    public List<Stock> list() {
+        return list;
+    }
 }

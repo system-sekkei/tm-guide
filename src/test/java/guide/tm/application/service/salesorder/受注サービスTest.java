@@ -1,6 +1,6 @@
 package guide.tm.application.service.salesorder;
 
-import guide.tm.application.setup.顧客Fixture;
+import guide.tm.application.fixture.顧客Fixture;
 import guide.tm.domain.model.customer.Customer;
 import guide.tm.domain.model.customer.CustomerName;
 import guide.tm.domain.model.customer.CustomerNumber;

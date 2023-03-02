@@ -52,4 +52,8 @@ public class SingleOrderItem {
     public boolean isNormalTaxRateItem() {
         return singleOrderItemContent.isNormalTaxRateItem();
     }
+
+    public SingleOrderItemContent singleOrderItemContent() {
+        return singleOrderItemContent;
+    }
 }

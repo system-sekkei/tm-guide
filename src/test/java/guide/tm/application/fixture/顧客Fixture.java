@@ -1,4 +1,4 @@
-package guide.tm.application.setup;
+package guide.tm.application.fixture;
 
 import guide.tm.application.service.customer.CustomerService;
 import guide.tm.domain.model.customer.Customer;

@@ -40,4 +40,8 @@ public class SingleOrderItemContent {
     boolean isQuantitySpecified() {
         return quantity.isGreaterEqualThan(new Quantity(1));
     }
+
+    public Quantity quantity() {
+        return quantity;
+    }
 }

@@ -26,4 +26,12 @@ public class Stock {
         this.wareHousePrefecture = wareHousePrefecture;
         this.quantity = quantity;
     }
+
+    public WareHouseCode wareHouseCode() {
+        return wareHouseCode;
+    }
+
+    public Quantity quantity() {
+        return quantity;
+    }
 }

@@ -13,4 +13,8 @@ public class WareHouse {
         this.name = name;
         this.address = address;
     }
+
+    public WareHouseCode wareHouseCode() {
+        return wareHouseCode;
+    }
 }
