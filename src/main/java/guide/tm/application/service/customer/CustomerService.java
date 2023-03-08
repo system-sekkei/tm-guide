@@ -1,6 +1,7 @@
 package guide.tm.application.service.customer;
 
 import guide.tm.domain.model.customer.Customer;
+import guide.tm.domain.model.customer.CustomerSearchCriteria;
 import guide.tm.domain.model.customer.CustomerSummaries;
 import org.springframework.stereotype.Service;
 
@@ -27,5 +28,9 @@ public class CustomerService {
      */
     public CustomerSummaries customerSummaries() {
         return customerRepository.summaries();
+    }
+
+    public CustomerSummaries customerSummaries(CustomerSearchCriteria customerSearchCriteria) {
+        return customerRepository.customerSummariesOf(customerSearchCriteria);
     }
 }

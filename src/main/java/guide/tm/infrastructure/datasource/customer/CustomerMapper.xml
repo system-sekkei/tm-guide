@@ -16,7 +16,21 @@
     <select id="summaries" resultType="guide.tm.domain.model.customer.CustomerSummary">
         SELECT
             顧客番号 AS "code.value",
-            顧客名称 AS "name.value"
+            顧客姓 AS "name.value",
+            顧客名
         FROM 顧客.顧客
+    </select>
+
+    <select id="customerSummariesOf" resultType="guide.tm.domain.model.customer.CustomerSummary">
+
+        SELECT
+            顧客番号 AS "code.value",
+            顧客姓 AS "name.lastName",
+            顧客名 AS "name.firstName",
+            顧客姓カナ AS "nameKana.lastName",
+            顧客名カナ AS "nameKana.firstName"
+        FROM 顧客.顧客
+        WHERE 顧客姓カナ LIKE CONCAT('%', #{customerSearchCriteria.customerName}, '%')
+            OR 顧客名カナ LIKE CONCAT('%', #{customerSearchCriteria.customerName}, '%')
     </select>
 </mapper>

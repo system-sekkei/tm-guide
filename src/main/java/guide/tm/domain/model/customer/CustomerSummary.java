@@ -6,13 +6,15 @@ package guide.tm.domain.model.customer;
 public class CustomerSummary {
     CustomerNumber code;
     CustomerName name;
+    CustomerName nameKana;
 
     @Deprecated CustomerSummary() {
     }
 
-    public CustomerSummary(CustomerNumber code, CustomerName name) {
+    public CustomerSummary(CustomerNumber code, CustomerName name, CustomerName nameKana) {
         this.code = code;
         this.name = name;
+        this.nameKana = nameKana;
     }
 
     public CustomerNumber code() {
