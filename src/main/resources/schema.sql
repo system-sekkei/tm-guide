@@ -56,13 +56,25 @@ CREATE TABLE 顧客.顧客区分
 CREATE TABLE 顧客.顧客
 (
     顧客番号 UUID NOT NULL,
-    顧客名称 VARCHAR(20) NOT NULL,
+    顧客姓 VARCHAR(20) NOT NULL,
+    顧客名 VARCHAR(20) NOT NULL,
+    顧客姓カナ VARCHAR(20) NOT NULL,
+    顧客名カナ VARCHAR(20) NOT NULL,
     個人法人区分 CHARACTER(2) NOT NULL,
     PRIMARY KEY (顧客番号),
     FOREIGN KEY (個人法人区分) REFERENCES 顧客.顧客区分 (個人法人区分),
     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE 顧客.顧客住所
+(
+    顧客番号 UUID NOT NULL,
+    都道府県 VARCHAR(20) NOT NULL,
+    住所 VARCHAR(40) NOT NULL,
+    PRIMARY KEY (顧客番号),
+    FOREIGN KEY (顧客番号) REFERENCES 顧客.顧客 (顧客番号),
+    作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
 
 CREATE SCHEMA 受注;
 CREATE TABLE 受注.受注

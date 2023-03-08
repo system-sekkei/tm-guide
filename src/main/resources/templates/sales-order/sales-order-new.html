@@ -30,6 +30,9 @@
           [[${customer.name}]]
         </option>
       </select>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#customerModal">
+        顧客検索
+      </button>
     </div>
 
       <div class="mb-3">
@@ -56,32 +59,45 @@
     </div>
     </div>
 
-<!--    <div th:object="${taxContext}">-->
-<!--    <label for="taxRateType" class="form-label">消費税率区分</label>-->
-<!--      <div class="mb-3" id="taxRateType">-->
-<!--        <span th:each="taxRateType : ${taxRateTypes}">-->
-<!--          <label>-->
-<!--            <input type="radio" th:field="*{taxRateType}" th:value="${taxRateType.name}"/>-->
-<!--            <span th:text="${taxRateType.name}"></span>-->
-<!--          </label>-->
-<!--       </span>-->
-<!--      </div>-->
-
     <label for="taxSumType" class="form-label">消費税計算方式</label>
     <div class="mb-3" id="taxSumType">
        <span th:each="taxSumType : ${taxSumTypes}">
           <label>
-<!--            <input type="radio" th:field="*{taxSumType}" th:value="${taxSumType.name}"/>-->
             <input type="radio" th:name="taxSumType" th:value="${taxSumType.name}"/>
             <span th:text="${taxSumType.name}"></span>
           </label>
        </span>
     </div>
-<!--    </div>-->
 
     <button type="submit" class="btn btn-primary">登録</button>
   </form>
 </div>
+
+
+<div class="modal" tabindex="-1" id="customerModal">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">商品選択</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" >
+          <div class="mb-3">
+            <label for="" class="form-label">顧客名称</label>
+          </div>
+          <button type="submit" class="btn btn-primary">検索</button>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
