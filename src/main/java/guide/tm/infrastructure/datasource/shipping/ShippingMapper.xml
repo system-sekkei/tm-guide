@@ -49,7 +49,10 @@
                受注.受注番号 AS "shippingInstructionContent.salesOrderNumber.value",
                受注日 AS "orderedDate.value",
                顧客.顧客番号 AS "customer.code.value",
-               顧客名称 AS "customer.name.value"
+               顧客姓 AS "customer.name.lastName",
+               顧客名 AS "customer.name.firstName",
+               顧客姓カナ AS "customer.nameKana.lastName",
+               顧客名カナ AS "customer.nameKana.firstName"
         FROM 出荷指示.出荷指示
         INNER JOIN 受注.受注 ON 出荷指示.受注番号 = 受注.受注番号
         INNER JOIN 顧客.顧客 ON 受注.顧客番号 = 顧客.顧客番号
