@@ -93,13 +93,13 @@
   </table>
 
   <hr>
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productModal">
+  <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#productModal">
     商品追加
   </button>
   <hr>
 
   <form method="post" th:action="@{/allocate/sales-orders/__${salesOrderNumber}__}">
-    <button type="submit" class="btn btn-success">引当（受注登録完了）</button>
+    <button type="submit" class="btn btn-primary">引当（受注登録完了）</button>
   </form>
 
   <div class="modal" tabindex="-1" id="productModal">

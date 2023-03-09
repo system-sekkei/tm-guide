@@ -10,7 +10,7 @@
 <body>
 
 <div class="container">
-  <h1 class="display-2">受注登録</h1>
+  <h1 class="display-3">受注登録</h1>
 
   <form method="post" th:action="@{/sales-orders/new}">
     <div th:object="${salesOrderContent}">
@@ -37,7 +37,7 @@
       </div>
 
       <div class="mb-3">
-        <label for="shippingPrefecture" class="form-label">届け先都道府県</label>
+        <label for="shippingPrefecture" class="form-label">届け先住所</label>
         <div class="row">
           <span class="col-2">
           <select class="form-control" id="shippingPrefecture" name="shippingAddress.prefecture">
@@ -49,13 +49,10 @@
             </option>
           </select>
           </span>
-        </div>
-        <label for="shippingAddressLine" class="form-label">届け先住所</label>
-        <div class="row">
           <span class="col-6">
             <input type="text" class="form-control" id="shippingAddressLine"
                th:classappend="${#fields.hasErrors('shippingAddress.addressLine')}? fieldError"
-               name="shippingAddress.addressLine">
+               name="shippingAddress.addressLine" placeholder="千代田区1-1-1">
           </span>
         </div>
       </div>
@@ -82,7 +79,7 @@
        </span>
     </div>
 
-    <button type="submit" class="btn btn-primary">登録</button>
+    <button type="submit" class="btn btn-primary">明細登録へ</button>
   </form>
 </div>
 
@@ -148,47 +145,48 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
 
+<!--/* 顧客モーダル */-->
 <script>
-    document.getElementById("customer-search-button").addEventListener('click', async () => {
-        const name = document.getElementById("customerNameCriteria").value
-        const res = await searchCustomers(name)
-        const customers = res.list
+  document.getElementById("customer-search-button").addEventListener('click', async () => {
+    const name = document.getElementById("customerNameCriteria").value
+    const res = await searchCustomers(name)
+    const customers = res.list
 
-        const template = document.getElementById('template');
+    const template = document.getElementById('template');
 
-        const summaries = document.getElementById('customer-summaries');
-        while (summaries.firstChild) {
-            summaries.removeChild(summaries.firstChild)
-        }
-        for (let i = 0; i < customers.length; i++) {
-            // template要素の内容を複製
-            const clone = template.content.cloneNode(true);
-
-            // 複製したtemplate要素にデータを挿入
-            // console.log(customers[i].name.first_name)
-            clone.querySelector('.last-name').textContent = customers[i].name.last_name;
-            clone.querySelector('.first-name').textContent = customers[i].name.first_name;
-            clone.querySelector('.customer-code').textContent = customers[i].code.value;
-            clone.querySelector('.select').value = i;
-            clone.querySelector('.select').id = `select-button-${i}`;
-
-            clone.querySelector('.select').addEventListener('click', () => {
-                document.getElementById("customer-code").value = customers[i].code.value
-                document.getElementById("customer-name").value = customers[i].name.last_name + ' ' + customers[i].name.first_name
-            })
-
-            // div#containerの中に追加
-            summaries.appendChild(clone);
-        }
-    })
-    const searchCustomers = async (customerName) => {
-        const params = {customerName: customerName};
-        const query = new URLSearchParams(params);
-        const response = await fetch(`/customers?${query}`, {
-            method: "GET",
-        })
-        return response.json()
+    const summaries = document.getElementById('customer-summaries');
+    while (summaries.firstChild) {
+      summaries.removeChild(summaries.firstChild)
     }
+    for (let i = 0; i < customers.length; i++) {
+      // template要素の内容を複製
+      const clone = template.content.cloneNode(true);
+
+      // 複製したtemplate要素にデータを挿入
+      // console.log(customers[i].name.first_name)
+      clone.querySelector('.last-name').textContent = customers[i].name.last_name;
+      clone.querySelector('.first-name').textContent = customers[i].name.first_name;
+      clone.querySelector('.customer-code').textContent = customers[i].code.value;
+      clone.querySelector('.select').value = i;
+      clone.querySelector('.select').id = `select-button-${i}`;
+
+      clone.querySelector('.select').addEventListener('click', () => {
+        document.getElementById("customer-code").value = customers[i].code.value
+        document.getElementById("customer-name").value = customers[i].name.last_name + ' ' + customers[i].name.first_name
+      })
+
+      // div#containerの中に追加
+      summaries.appendChild(clone);
+    }
+  })
+  const searchCustomers = async (customerName) => {
+    const params = {customerName: customerName};
+    const query = new URLSearchParams(params);
+    const response = await fetch(`/customers?${query}`, {
+      method: "GET",
+    })
+    return response.json()
+  }
 </script>
 
 </body>
