@@ -6,15 +6,17 @@ package guide.tm.domain.model.customer;
 public class Customer {
     CustomerNumber code;
     CustomerName name;
+    CustomerName nameKana;
     CustomerType type;
 
     public Customer() {
-        this(new CustomerNumber(), new CustomerName(), CustomerType.個人);
+        this(new CustomerNumber(), new CustomerName(), new CustomerName() ,CustomerType.個人);
     }
 
-    public Customer(CustomerNumber code, CustomerName name, CustomerType type) {
+    public Customer(CustomerNumber code, CustomerName name, CustomerName nameKana, CustomerType type) {
         this.code = code;
         this.name = name;
+        this.nameKana = nameKana;
         this.type = type;
     }
 

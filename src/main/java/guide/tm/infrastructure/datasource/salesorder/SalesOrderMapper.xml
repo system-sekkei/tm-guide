@@ -19,7 +19,10 @@
         SELECT
             受注番号,
             受注.顧客番号 AS "customer.code.value",
-            顧客名称 AS "customer.name.value",
+            顧客姓 AS "customer.name.lastName",
+            顧客名 AS "customer.name.firstName",
+            顧客姓カナ AS "customer.nameKana.lastName",
+            顧客名カナ AS "customer.nameKana.firstName",
             受注日 AS "orderedDate.value",
             都道府県 AS "shippingAddress.prefecture",
             住所 AS "shippingAddress.addressLine"
@@ -32,7 +35,10 @@
         SELECT
             受注番号 AS "salesOrderNumber.value",
             受注.顧客番号 AS "customer.code.value",
-            顧客名称 AS "customer.name.value",
+            顧客姓 AS "customer.name.lastName",
+            顧客名 AS "customer.name.firstName",
+            顧客姓カナ AS "customer.nameKana.lastName",
+            顧客名カナ AS "customer.nameKana.firstName",
             受注日 AS "orderedDate.value"
         FROM 受注.受注
                  INNER JOIN 顧客.顧客 ON 受注.顧客番号 = 顧客.顧客番号
