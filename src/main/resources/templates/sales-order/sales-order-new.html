@@ -21,12 +21,18 @@
         error messages
       </div>
       <div class="mb-3">
-        <label for="customer-name" class="form-label">顧客名称</label>
-
+        <label class="form-label">顧客名称</label>
         <div class="row">
-          <span class="col-3">
-            <input type="hidden" class="form-control" id="customer-code" name="customer.code.value" readonly>
-            <input type="text" class="form-control" id="customer-name" name="customer.name" readonly>
+          <span class="col-1">
+            <input type="hidden" class="form-control" id="customer-code" th:field="*{customer.code.value}" readonly>
+            <input type="text" class="form-control " id="customer-last-name" th:field="*{customer.name.lastName}"
+                   data-bs-toggle="modal" data-bs-target="#customerModal"
+                   readonly>
+          </span>
+          <span class="col-1">
+            <input type="text" class="form-control " id="customer-first-name" th:field="*{customer.name.firstName}"
+                   data-bs-toggle="modal" data-bs-target="#customerModal"
+                   readonly>
           </span>
           <span class="col-2">
             <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#customerModal">
@@ -37,35 +43,46 @@
       </div>
 
       <div class="mb-3">
-        <label for="shippingPrefecture" class="form-label">届け先住所</label>
-        <div class="row">
-          <span class="col-2">
-          <select class="form-control" id="shippingPrefecture" name="shippingAddress.prefecture">
-            <option value selected></option>
-            <option th:each="prefecture: ${prefectures}"
-                    th:value="${prefecture.name}"
-                    th:inline="text">
-              [[${prefecture.name}]]
-            </option>
-          </select>
-          </span>
-          <span class="col-6">
-            <input type="text" class="form-control" id="shippingAddressLine"
-               th:classappend="${#fields.hasErrors('shippingAddress.addressLine')}? fieldError"
-               name="shippingAddress.addressLine" placeholder="千代田区1-1-1">
-          </span>
-        </div>
-      </div>
-
-      <div class="mb-3">
         <label for="orderedDate" class="form-label">受注日</label>
         <div class="row">
           <span class="col-3">
             <input type="date" class="form-control" id="orderedDate"
-               th:classappend="${#fields.hasErrors('orderedDate.value')}? fieldError"
-               name="orderedDate.value">
+               th:classappend="${#fields.hasErrors('orderedDate*')}? 'is-invalid'"
+               th:field="*{orderedDate.value}">
           </span>
         </div>
+      </div>
+
+    <div class="mb-3" >
+      <div class="row">
+          <span class="col-2">
+          <label for="shippingPrefecture" class="form-label">届け先都道府県</label>
+          <select class="form-control" id="shippingPrefecture" name="shippingAddress.prefecture"
+                  th:value="*{shippingAddress.prefecture}"
+                  th:classappend="${#fields.hasErrors('shippingAddress.prefecture*')}? 'is-invalid'"
+          >
+            <option value ></option>
+            <option th:each="prefecture: ${prefectures}"
+                    th:value="${prefecture.name}"
+                    th:inline="text"
+                    th:selected="${prefecture == salesOrderContent.shippingAddress.prefecture}"
+            >
+              [[${prefecture.name}]]
+            </option>
+          </select>
+          <ul class="invalid-feedback" th:if="${#fields.hasErrors('shippingAddress.prefecture*')}">
+            <li th:each="err : ${#fields.errors('shippingAddress.prefecture*')}" th:text="${err}" class="error"></li>
+          </ul>
+          </span>
+        <span class="col-6">
+            <label for="shippingAddressLine" class="form-label">届け先住所</label>
+            <input type="text" class="form-control" id="shippingAddressLine"
+                   th:classappend="${#fields.hasErrors('shippingAddress.addressLineSpecified')}? 'is-invalid'"
+                   th:field="*{shippingAddress.addressLine}" placeholder="千代田区1-1-1">
+            <ul class="invalid-feedback" th:if="${#fields.hasErrors('shippingAddress.addressLineSpecified')}">
+              <li th:each="err : ${#fields.errors('shippingAddress.addressLine*')}" th:text="${err}" class="error"></li>
+            </ul>
+          </span>
       </div>
     </div>
 
@@ -73,12 +90,13 @@
     <div class="mb-3" id="taxSumType">
        <span th:each="taxSumType : ${taxSumTypes}">
           <label>
-            <input type="radio" th:name="taxSumType" th:value="${taxSumType.name}"/>
+            <input type="radio" th:name="taxSumType" th:value="${taxSumType.name}" th:checked="${taxSumType.isTotalSum}"/>
             <span th:text="${taxSumType.name}"></span>
           </label>
        </span>
     </div>
 
+    </div>
     <button type="submit" class="btn btn-primary">明細登録へ</button>
   </form>
 </div>
@@ -172,7 +190,8 @@
 
       clone.querySelector('.select').addEventListener('click', () => {
         document.getElementById("customer-code").value = customers[i].code.value
-        document.getElementById("customer-name").value = customers[i].name.last_name + ' ' + customers[i].name.first_name
+        document.getElementById("customer-last-name").value = customers[i].name.last_name
+        document.getElementById("customer-first-name").value = customers[i].name.first_name
       })
 
       // div#containerの中に追加

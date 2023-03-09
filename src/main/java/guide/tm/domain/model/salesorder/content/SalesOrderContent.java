@@ -1,6 +1,7 @@
 package guide.tm.domain.model.salesorder.content;
 
 import guide.tm.domain.model.customer.Customer;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.AssertFalse;
 
 /**
@@ -9,6 +10,7 @@ import jakarta.validation.constraints.AssertFalse;
 public class SalesOrderContent {
     Customer customer;
     OrderedDate orderedDate;
+    @Valid
     ShippingAddress shippingAddress;
 
     public SalesOrderContent() {

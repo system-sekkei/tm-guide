@@ -60,6 +60,7 @@ class SalesOrderItemRegisterController {
     @InitBinder({"salesOrderItemRequest"})
     void bindOrderItem(WebDataBinder binder) {
         binder.setAllowedFields(
+                "productName.value",
                 "productCode.value",
                 "quantity.value",
                 "productType"

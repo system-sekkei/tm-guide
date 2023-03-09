@@ -23,4 +23,8 @@ public enum TaxSumType {
     public Amount taxOf(TotalAmount totalAmount, TaxRateType taxRateType) {
         return taxMethod.taxOf(totalAmount, taxRateType.rate());
     }
+
+    public boolean isTotalSum() {
+        return this == 総額計算;
+    }
 }

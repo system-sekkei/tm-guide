@@ -5,7 +5,6 @@ import guide.tm.application.service.salesorder.SalesOrderService;
 import guide.tm.domain.model.customer.CustomerSummaries;
 import guide.tm.domain.model.salesorder.content.Prefecture;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
-import guide.tm.domain.model.salesorder.content.ShippingAddress;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.tax.context.TaxContext;
 import guide.tm.domain.model.tax.context.TaxRateType;
@@ -62,14 +61,9 @@ class SalesOrderRegisterController {
     @PostMapping("new")
     String register(@ModelAttribute("salesOrderContent") @Validated SalesOrderContent salesOrderContent,
                     BindingResult salesOrderContentResult,
-                    @ModelAttribute("taxSumType") @Validated TaxSumType taxSumType,
-                    BindingResult taxContextResult,
-                    @ModelAttribute("shippingAddress") @Validated ShippingAddress shippingAddress,
-                    BindingResult shippingAddressResult,
-                    Model model) {
-        if (salesOrderContentResult.hasErrors() || taxContextResult.hasErrors() || shippingAddressResult.hasErrors()) {
-            model.addAttribute("salesOrderContentResult", salesOrderContentResult);
-            model.addAttribute("taxSumType", taxSumType);
+                    @ModelAttribute("taxSumType") TaxSumType taxSumType,
+                    BindingResult taxContextResult) {
+        if (salesOrderContentResult.hasErrors() || taxContextResult.hasErrors()) {
             return "sales-order/sales-order-new";
         }
 
@@ -83,6 +77,8 @@ class SalesOrderRegisterController {
     public void bindSalesOrderContent(WebDataBinder binder) {
         binder.setAllowedFields(
                 "customer.code.value",
+                "customer.name.lastName",
+                "customer.name.firstName",
                 "shippingAddress.prefecture",
                 "shippingAddress.addressLine",
                 "orderedDate.value"

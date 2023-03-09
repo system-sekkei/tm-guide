@@ -20,4 +20,12 @@ public class CustomerName {
     public String toString() {
         return "%s %s".formatted(lastName, firstName);
     }
+
+    public String firstName() {
+        return firstName;
+    }
+
+    public String lastName() {
+        return lastName;
+    }
 }

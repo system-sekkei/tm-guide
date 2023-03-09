@@ -93,11 +93,17 @@
   </table>
 
   <form method="post" th:action="@{/sales-orders/__${salesOrderNumber}__/items}" th:object="${salesOrderItemRequest}">
+    <div th:each="err : ${#fields.errors('*')}"
+         th:text="${err}"
+         th:class="text-danger"
+         th:if="${#fields.hasErrors('*')}">
+      error messages
+    </div>
   <div class="row">
     <span class="col-4">
-      <input type="text" class="form-control" id="product-name" name="">
-      <input type="hidden" class="form-control" id="product-code" name="productCode.value">
-      <input type="hidden" class="form-control" id="product-type" name="productType">
+      <input type="text" class="form-control" id="product-name" th:field="*{productName.value}" readonly>
+      <input type="hidden" class="form-control" id="product-code" th:field="*{productCode.value}">
+      <input type="hidden" class="form-control" id="product-type" th:field="*{productType}">
     </span>
     <span class="col-2">
       <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#productModal">
