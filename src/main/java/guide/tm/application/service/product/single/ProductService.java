@@ -2,6 +2,8 @@ package guide.tm.application.service.product.single;
 
 import guide.tm.domain.model.product.single.SingleProduct;
 import guide.tm.domain.model.product.single.SingleProducts;
+import guide.tm.domain.model.product.summary.ProductSearchCriteria;
+import guide.tm.domain.model.product.summary.ProductSummaries;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,5 +26,9 @@ public class ProductService {
 
     public SingleProducts products() {
         return productRepository.products();
+    }
+
+    public ProductSummaries searchBy(ProductSearchCriteria productSearchCriteria) {
+        return productRepository.searchBy(productSearchCriteria);
     }
 }

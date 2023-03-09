@@ -2,9 +2,8 @@ package guide.tm.infrastructure.datasource.salesorder;
 
 import guide.tm.application.service.salesorder.SalesOrderItemRepository;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
-import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItemContent;
 import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItems;
-import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItemContent;
+import guide.tm.domain.model.salesorder.orderitem.request.SalesOrderItemRequest;
 import guide.tm.domain.model.salesorder.orderitem.single.SingleProductOrderItems;
 import org.springframework.stereotype.Repository;
 
@@ -20,26 +19,24 @@ public class SalesOrderItemDataSource implements SalesOrderItemRepository {
     }
 
     @Override
-    public void registerBundleProductOrderItem(SalesOrderNumber salesOrderNumber, SingleOrderItemContent singleOrderItemContent) {
-        UUID saleOrderItemNumber = UUID.randomUUID();
-        salesOrderItemMapper.register(salesOrderNumber, saleOrderItemNumber, singleOrderItemContent);
-    }
-
-    @Override
     public SingleProductOrderItems singleProductOrderItemsOf(SalesOrderNumber salesOrderNumber) {
         return new SingleProductOrderItems(salesOrderItemMapper.salesOrderItemsOf(salesOrderNumber));
     }
 
     @Override
-    public void registerBundleProductOrderItem(
-            SalesOrderNumber salesOrderNumber, BundleProductOrderItemContent bundleProductOrderItemContent) {
-        UUID saleOrderItemNumber = UUID.randomUUID();
-        salesOrderItemMapper.registerBundleProductOrderItem(salesOrderNumber, saleOrderItemNumber, bundleProductOrderItemContent);
-
+    public BundleProductOrderItems bundleProductOrderItemsOf(SalesOrderNumber salesOrderNumber) {
+        return new BundleProductOrderItems(salesOrderItemMapper.bundleProductOrderItemsOf(salesOrderNumber));
     }
 
     @Override
-    public BundleProductOrderItems bundleProductOrderItemsOf(SalesOrderNumber salesOrderNumber) {
-        return new BundleProductOrderItems(salesOrderItemMapper.bundleProductOrderItemsOf(salesOrderNumber));
+    public void registerSingleProductOrder(SalesOrderNumber salesOrderNumber, SalesOrderItemRequest salesOrderItemRequest) {
+        UUID saleOrderItemNumber = UUID.randomUUID();
+        salesOrderItemMapper.registerSingleProductOrder(salesOrderNumber, saleOrderItemNumber, salesOrderItemRequest);
+    }
+
+    @Override
+    public void registerBundleProductOrder(SalesOrderNumber salesOrderNumber, SalesOrderItemRequest salesOrderItemRequest) {
+        UUID saleOrderItemNumber = UUID.randomUUID();
+        salesOrderItemMapper.registerBundleProductOrder(salesOrderNumber, saleOrderItemNumber, salesOrderItemRequest);
     }
 }

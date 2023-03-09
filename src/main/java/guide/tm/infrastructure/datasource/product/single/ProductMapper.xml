@@ -22,7 +22,25 @@
         FROM 商品.商品
     </select>
 
+    <select id="searchSingleProducts" resultType="guide.tm.domain.model.product.summary.ProductSummary">
+        SELECT
+            商品コード AS "productCode.value",
+            商品名称 AS "productName.value",
+            商品単価 AS "unitPrice.amount.value",
+            '個別' AS "productType"
+        FROM 商品.商品
+        WHERE 商品.商品名称 LIKE CONCAT('%', #{productSearchCriteria.productName}, '%')
+    </select>
 
+    <select id="searchBundleProducts" resultType="guide.tm.domain.model.product.summary.ProductSummary">
+        SELECT
+            商品コード AS "productCode.value",
+            商品名称 AS "productName.value",
+            商品単価 AS "unitPrice.amount.value",
+            'セット' AS "productType"
+        FROM 商品.セット商品
+        WHERE セット商品.商品名称 LIKE CONCAT('%', #{productSearchCriteria.productName}, '%')
+    </select>
 
 
 </mapper>

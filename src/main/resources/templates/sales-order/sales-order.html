@@ -57,8 +57,8 @@
       <tr>
         <th></th>
         <th>商品名称</th>
-        <th class="text-end">商品単価</th>
         <th class="text-end">数量</th>
+        <th class="text-end">商品単価</th>
       </tr>
     </thead>
     <tbody>
@@ -67,8 +67,8 @@
           <i class="bi bi-bag-check"></i>
         </td>
         <td th:text="${singleOrderItem.product.name}">個別商品名</td>
-        <td class="text-end" th:text="${singleOrderItem.product.unitPrice}">879</td>
         <td class="text-end" th:text="${singleOrderItem.quantity}">2</td>
+        <td class="text-end" th:text="${singleOrderItem.product.unitPrice}">879</td>
       </tr>
       <th:block th:each="bundleProductOrderItem: ${salesOrder.bundleProductOrderItems.list}">
         <tr>
@@ -76,8 +76,8 @@
             <i class="bi bi-bag-check"></i>
           </td>
           <td th:text="${bundleProductOrderItem.bundleProduct.name}">セット商品名</td>
-          <td class="text-end" th:text="${bundleProductOrderItem.bundleProduct.unitPrice}">879</td>
           <td class="text-end" th:text="${bundleProductOrderItem.quantity}">2</td>
+          <td class="text-end" th:text="${bundleProductOrderItem.bundleProduct.unitPrice}">879</td>
         </tr>
         <tr th:each="product: ${bundleProductOrderItem.bundleProduct.bundleProductItems.list}">
           <td class="text-center">
@@ -92,77 +92,87 @@
     </tfoot>
   </table>
 
-  <hr>
-  <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#productModal">
-    商品追加
-  </button>
+  <form method="post" th:action="@{/sales-orders/__${salesOrderNumber}__/items}" th:object="${salesOrderItemRequest}">
+  <div class="row">
+    <span class="col-4">
+      <input type="text" class="form-control" id="product-name" name="">
+      <input type="hidden" class="form-control" id="product-code" name="productCode.value">
+      <input type="hidden" class="form-control" id="product-type" name="productType">
+    </span>
+    <span class="col-2">
+      <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#productModal">
+        商品検索
+      </button>
+    </span>
+    <span class="col-2">
+      <input type="number" class="form-control text-center" name="quantity.value">
+    </span>
+    <span class="col-2">
+      <button type="submit" class="btn btn-primary">商品追加</button>
+    </span>
+  </div>
+  </form>
+
   <hr>
 
   <form method="post" th:action="@{/allocate/sales-orders/__${salesOrderNumber}__}">
     <button type="submit" class="btn btn-primary">引当（受注登録完了）</button>
   </form>
 
+
+  <!--/* 商品モーダル */-->
   <div class="modal" tabindex="-1" id="productModal">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">商品選択</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form method="post" th:action="@{/sales-orders/__${salesOrderNumber}__/items/new}" th:object="${singleOrderItemContent}">
-            <div class="mb-3">
-              <label for="singleProduct" class="form-label">商品名称</label>
-              <select class="form-control" id="singleProduct" name="product.code.value">
-                <option th:each="product: ${products.list}"
-                        th:value="${product.code}"
-                        th:inline="text">
-                  [[${product.name}]] (¥[[${product.unitPrice}]])
-                </option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label for="quantity" class="form-label">数量</label>
-              <input type="number" class="form-control" id="quantity" th:field="*{quantity.value}">
-              <div th:each="err : ${#fields.errors('*')}"
-                   th:text="${err}"
-                   th:class="text-danger"
-                   th:if="${#fields.hasErrors('*')}">
-                error messages
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary">明細登録</button>
-          </form>
+          <div class="mb-3">
+            <label for="productNameCriteria" class="form-label">商品名称</label>
+          </div>
+          <div class="row">
+          <span class="col-4">
+            <input type="text" class="form-control " name="productName" id="productNameCriteria">
+          </span>
+            <span class="col-2">
+            <button type="submit" class="btn btn-primary" id="product-search-button">検索</button>
+          </span>
+          </div>
 
-          <form method="post" th:action="@{/sales-orders/__${salesOrderNumber}__/items/new-bundle}" th:object="${bundleProductOrderItemContent}">
-            <div class="mb-3">
-              <label for="bundleProduct" class="form-label">セット商品名称</label>
-              <select class="form-control" id="bundleProduct" name="product.code.value">
-                <option th:each="bundleProduct: ${bundleProducts.list}"
-                        th:value="${bundleProduct.code}"
-                        th:inline="text">
-                  [[${bundleProduct.name}]] (¥[[${bundleProduct.unitPrice}]])
-                </option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label for="quantity-bundle" class="form-label">数量</label>
-              <input type="number" class="form-control" id="quantity-bundle" th:field="*{quantity.value}">
-              <div th:each="err : ${#fields.errors('*')}"
-                   th:text="${err}"
-                   th:class="text-danger"
-                   th:if="${#fields.hasErrors('*')}">
-                error messages
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary">セット商品登録</button>
-          </form>
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+              <th>商品名</th>
+              <th>価格</th>
+              <th>個別/セット</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody id="product-summaries">
+            </tbody>
+          </table>
+
         </div>
+
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
         </div>
       </div>
     </div>
+    <!--/* テンプレート */-->
+    <template id="template">
+      <tr>
+        <td class="product-name"></td>
+        <td class="price"></td>
+        <td class="productType"></td>
+        <td>
+          <input type="hidden" name="product-code" class="product-code">
+          <button type="button" class="select btn btn-info" data-bs-dismiss="modal">選択</button>
+        </td>
+      </tr>
+    </template>
   </div>
 
 </div>
@@ -170,5 +180,50 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
 
+
+<!--/* 商品モーダル */-->
+<script>
+  document.getElementById("product-search-button").addEventListener('click', async () => {
+    const name = document.getElementById("productNameCriteria").value
+    const res = await searchCustomers(name)
+    const products = res.list
+
+    console.log({ products })
+    const template = document.getElementById('template');
+
+    const summaries = document.getElementById('product-summaries');
+    while (summaries.firstChild) {
+      summaries.removeChild(summaries.firstChild)
+    }
+    for (let i = 0; i < products.length; i++) {
+      const clone = template.content.cloneNode(true);
+
+      // 複製したtemplate要素にデータを挿入
+      clone.querySelector('.product-name').textContent = products[i].product_name.value;
+      clone.querySelector('.price').textContent = products[i].unit_price.amount.value;
+      clone.querySelector('.productType').textContent = products[i].product_type;
+      clone.querySelector('.product-code').textContent = products[i].product_code.value;
+      clone.querySelector('.select').value = i;
+      clone.querySelector('.select').id = `select-button-${i}`;
+
+      clone.querySelector('.select').addEventListener('click', () => {
+        document.getElementById("product-code").value = products[i].product_code.value
+        document.getElementById("product-name").value = products[i].product_name.value;
+        document.getElementById("product-type").value = products[i].product_type;
+      })
+
+      // div#containerの中に追加
+      summaries.appendChild(clone);
+    }
+  })
+  const searchCustomers = async (productName) => {
+    const params = {productNameName: productName};
+    const query = new URLSearchParams(params);
+    const response = await fetch(`/products?${query}`, {
+      method: "GET",
+    })
+    return response.json()
+  }
+</script>
 </body>
 </html>
