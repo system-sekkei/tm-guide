@@ -22,4 +22,8 @@ public class ProductCode {
     public boolean isSame(ProductCode other) {
         return value.equals(other.value);
     }
+
+    public boolean isEmpty() {
+        return value.isEmpty();
+    }
 }

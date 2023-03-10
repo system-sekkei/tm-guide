@@ -38,4 +38,9 @@ public class SalesOrderItemRequest {
         return quantity.isGreaterEqualThan(new Quantity(1));
     }
 
+
+    @AssertTrue(message = "商品を入力してください")
+    boolean isProductSpecified() {
+        return !productCode.isEmpty();
+    }
 }
