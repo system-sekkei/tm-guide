@@ -18,6 +18,7 @@
         <th></th>
         <th>受注日</th>
         <th>顧客名称</th>
+        <th>引当状況</th>
       </tr>
     </thead>
     <tbody>
@@ -29,6 +30,12 @@
         </td>
         <td th:text="${salesOrderSummary.orderedDate}">2022-12-22</td>
         <td th:text="${salesOrderSummary.customer.name}">本田正勝</td>
+        <td>
+          <a th:href="@{|sales-orders/${salesOrderSummary.salesOrderNumber}/allocations|}"
+            class="btn btn-outline-primary">
+            引当状況
+          </a>
+        </td>
       </tr>
     </tbody>
   </table>
