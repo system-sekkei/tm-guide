@@ -30,7 +30,9 @@
             顧客姓カナ AS "nameKana.lastName",
             顧客名カナ AS "nameKana.firstName"
         FROM 顧客.顧客
-        WHERE 顧客姓カナ LIKE CONCAT('%', #{customerSearchCriteria.customerName}, '%')
-            OR 顧客名カナ LIKE CONCAT('%', #{customerSearchCriteria.customerName}, '%')
+        WHERE 顧客姓 LIKE CONCAT('%', #{customerSearchCriteria.customerName}, '%')
+           OR 顧客名 LIKE CONCAT('%', #{customerSearchCriteria.customerName}, '%')
+           OR 顧客姓カナ LIKE CONCAT('%', #{customerSearchCriteria.customerName}, '%')
+           OR 顧客名カナ LIKE CONCAT('%', #{customerSearchCriteria.customerName}, '%')
     </select>
 </mapper>
