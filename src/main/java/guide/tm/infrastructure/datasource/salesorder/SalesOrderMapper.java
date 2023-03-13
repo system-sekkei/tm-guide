@@ -2,6 +2,7 @@ package guide.tm.infrastructure.datasource.salesorder;
 
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.order.SalesOrderSearchCriteria;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummary;
 import guide.tm.domain.model.tax.context.TaxSumType;
 import org.apache.ibatis.annotations.Mapper;
@@ -19,7 +20,8 @@ interface SalesOrderMapper {
 
     SalesOrderContent salesOrderOf(@Param("salesOrderNumber") SalesOrderNumber salesOrderNumber);
 
-    List<SalesOrderSummary> salesOrderSummaries();
+    List<SalesOrderSummary> salesOrderSummaries(
+            @Param("salesOrderSearchCriteria") SalesOrderSearchCriteria salesOrderSearchCriteria);
 
     TaxSumType taxSumTypeOf(
             @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber);

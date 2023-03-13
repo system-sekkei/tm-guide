@@ -2,6 +2,7 @@ package guide.tm.application.service.salesorder;
 
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.order.SalesOrderSearchCriteria;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
 import guide.tm.domain.model.tax.context.TaxSumType;
 import org.springframework.stereotype.Service;
@@ -35,8 +36,8 @@ public class SalesOrderService {
     /**
      * 受注の一覧を取得する
      */
-    public SalesOrderSummaries salesOrderSummaries() {
-        return salesOrderRepository.salesOrderSummaries();
+    public SalesOrderSummaries salesOrderSummaries(SalesOrderSearchCriteria salesOrderSearchCriteria) {
+        return salesOrderRepository.salesOrderSummaries(salesOrderSearchCriteria);
     }
 
     /**

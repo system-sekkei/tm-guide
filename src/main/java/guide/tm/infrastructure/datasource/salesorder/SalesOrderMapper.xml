@@ -32,16 +32,30 @@
     </select>
 
     <select id="salesOrderSummaries" resultType="guide.tm.domain.model.salesorder.order.SalesOrderSummary">
-        SELECT
-            受注番号 AS "salesOrderNumber.value",
-            受注.顧客番号 AS "customer.code.value",
-            顧客姓 AS "customer.name.lastName",
-            顧客名 AS "customer.name.firstName",
-            顧客姓カナ AS "customer.nameKana.lastName",
-            顧客名カナ AS "customer.nameKana.firstName",
-            受注日 AS "orderedDate.value"
+        SELECT 受注番号      AS "salesOrderNumber.value",
+               受注.顧客番号 AS "customer.code.value",
+               顧客姓        AS "customer.name.lastName",
+               顧客名        AS "customer.name.firstName",
+               顧客姓カナ      AS "customer.nameKana.lastName",
+               顧客名カナ      AS "customer.nameKana.firstName",
+               受注日        AS "orderedDate.value"
         FROM 受注.受注
                  INNER JOIN 顧客.顧客 ON 受注.顧客番号 = 顧客.顧客番号
+        <where>
+              (
+                  顧客姓 LIKE CONCAT('%', #{salesOrderSearchCriteria.customerName}, '%')
+                      OR 顧客名 LIKE CONCAT('%', #{salesOrderSearchCriteria.customerName}, '%')
+                      OR 顧客姓カナ LIKE CONCAT('%', #{salesOrderSearchCriteria.customerName}, '%')
+                      OR 顧客名カナ LIKE CONCAT('%', #{salesOrderSearchCriteria.customerName}, '%')
+              )
+            <if test="!salesOrderSearchCriteria.from.isEmpty()">
+                AND #{salesOrderSearchCriteria.from.value} <![CDATA[ <= ]]> 受注日
+            </if>
+            <if test="!salesOrderSearchCriteria.to.isEmpty()">
+                 AND 受注日 <![CDATA[ <= ]]> #{salesOrderSearchCriteria.to.value}
+            </if>
+        </where>
+
     </select>
 
     <select id="taxSumTypeOf" resultType="guide.tm.domain.model.tax.context.TaxSumType">

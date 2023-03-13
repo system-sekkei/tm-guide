@@ -3,6 +3,7 @@ package guide.tm.infrastructure.datasource.salesorder;
 import guide.tm.application.service.salesorder.SalesOrderRepository;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.order.SalesOrderSearchCriteria;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
 import guide.tm.domain.model.tax.context.TaxSumType;
 import org.springframework.stereotype.Repository;
@@ -31,8 +32,8 @@ public class SalesOrderDataSource implements SalesOrderRepository {
     }
 
     @Override
-    public SalesOrderSummaries salesOrderSummaries() {
-        return new SalesOrderSummaries(salesOrderMapper.salesOrderSummaries());
+    public SalesOrderSummaries salesOrderSummaries(SalesOrderSearchCriteria salesOrderSearchCriteria) {
+        return new SalesOrderSummaries(salesOrderMapper.salesOrderSummaries(salesOrderSearchCriteria));
     }
 
     @Override

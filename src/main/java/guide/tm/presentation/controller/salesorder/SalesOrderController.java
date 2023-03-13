@@ -4,14 +4,14 @@ import guide.tm.application.scenario.salesorder.SalesOrderScenario;
 import guide.tm.application.service.salesorder.SalesOrderService;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.order.SalesOrderSearchCriteria;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
 import guide.tm.domain.model.salesorder.orderitem.request.SalesOrderItemRequest;
 import guide.tm.domain.model.status.orderstatus.SalesOrderStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("sales-orders")
@@ -29,8 +29,10 @@ class SalesOrderController {
     }
 
     @GetMapping
-    String salesOrderList(Model model) {
-        SalesOrderSummaries salesOrderSummaries = salesOrderService.salesOrderSummaries();
+    String salesOrderList(
+            @ModelAttribute("salesOrderSearchCriteria") SalesOrderSearchCriteria salesOrderSearchCriteria,
+            Model model) {
+        SalesOrderSummaries salesOrderSummaries = salesOrderService.salesOrderSummaries(salesOrderSearchCriteria);
         model.addAttribute("salesOrderSummaries", salesOrderSummaries);
         return "sales-order/sales-order-list";
     }
@@ -52,4 +54,12 @@ class SalesOrderController {
         return "sales-order/allocations";
     }
 
+    @InitBinder("salesOrderSearchCriteria")
+    void bindSalesOrderContent(WebDataBinder binder) {
+        binder.setAllowedFields(
+                "from.value",
+                "to.value",
+                "customerName"
+        );
+    }
 }

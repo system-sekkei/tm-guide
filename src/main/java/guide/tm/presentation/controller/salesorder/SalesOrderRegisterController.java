@@ -74,7 +74,7 @@ class SalesOrderRegisterController {
     }
 
     @InitBinder("salesOrderContent")
-    public void bindSalesOrderContent(WebDataBinder binder) {
+    void bindSalesOrderContent(WebDataBinder binder) {
         binder.setAllowedFields(
                 "customer.code.value",
                 "customer.name.lastName",
