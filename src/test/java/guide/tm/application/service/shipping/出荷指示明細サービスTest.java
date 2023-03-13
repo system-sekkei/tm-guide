@@ -1,9 +1,5 @@
 package guide.tm.application.service.shipping;
 
-import guide.tm.application.fixture.倉庫Fixture;
-import guide.tm.application.fixture.商品Fixture;
-import guide.tm.application.fixture.在庫Fixture;
-import guide.tm.application.fixture.顧客Fixture;
 import guide.tm.application.scenario.salesorder.SalesOrderScenario;
 import guide.tm.application.service.allocation.AllocationService;
 import guide.tm.application.service.salesorder.SalesOrderItemService;
@@ -21,12 +17,13 @@ import guide.tm.domain.model.product.detail.ProductCode;
 import guide.tm.domain.model.product.detail.ProductName;
 import guide.tm.domain.model.product.price.UnitPrice;
 import guide.tm.domain.model.product.single.SingleProduct;
+import guide.tm.domain.model.product.summary.ProductType;
 import guide.tm.domain.model.salesorder.content.OrderedDate;
 import guide.tm.domain.model.salesorder.content.Prefecture;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.content.ShippingAddress;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
-import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItemContent;
+import guide.tm.domain.model.salesorder.orderitem.request.SalesOrderItemRequest;
 import guide.tm.domain.model.shipping.content.ShippingDate;
 import guide.tm.domain.model.shipping.content.ShippingInstruction;
 import guide.tm.domain.model.shipping.content.ShippingInstructionContent;
@@ -67,8 +64,6 @@ class 出荷指示明細サービスTest {
             TaxRateType.通常税率
     );
 
-    SingleOrderItemContent 受注明細_専用ボトル = new SingleOrderItemContent(専用ボトル, new Quantity(42));
-
     SingleProduct 専用ボトルキャップ = new SingleProduct(
             new ProductCode("821010"),
             new ProductName("専用ボトルキャップ"),
@@ -76,18 +71,16 @@ class 出荷指示明細サービスTest {
             TaxRateType.通常税率
     );
 
-    SingleOrderItemContent 受注明細_専用ボトルキャップ = new SingleOrderItemContent(専用ボトルキャップ, new Quantity(23));
+    @Autowired
+    guide.tm.application.setup.在庫準備 在庫準備;
 
     @Autowired
-    在庫Fixture 在庫準備;
+    guide.tm.application.setup.商品準備 商品準備;
 
     @Autowired
-    商品Fixture 商品準備;
-
+    guide.tm.application.setup.倉庫準備 倉庫準備;
     @Autowired
-    倉庫Fixture 倉庫準備;
-    @Autowired
-    顧客Fixture 顧客準備;
+    guide.tm.application.setup.顧客準備 顧客準備;
 
     @Autowired
     SalesOrderService 受注Service;
@@ -98,7 +91,7 @@ class 出荷指示明細サービスTest {
     ShippingService 出荷サービス;
 
     CustomerNumber 顧客番号 = new CustomerNumber("39d3f994-6cd3-4a56-a2b5-d493f030cbc8");
-    Customer 顧客 = new Customer(顧客番号, new CustomerName("梅宮 留美"), CustomerType.個人);
+    Customer 顧客 = new Customer(顧客番号, new CustomerName("留美", "梅宮"), new CustomerName("ルミ", "ウメミヤ"), CustomerType.個人);
 
     @BeforeEach
     void setup() {
@@ -124,8 +117,13 @@ class 出荷指示明細サービスTest {
 
         SalesOrderContent 受注 = new SalesOrderContent(顧客, new OrderedDate("2023-01-12"), new ShippingAddress(Prefecture.京都府, "伏見"));
         受注番号 = 受注Service.registerSalesOrder(受注);
-        受注明細Service.register(受注番号, 受注明細_専用ボトル);
-        受注明細Service.register(受注番号, 受注明細_専用ボトルキャップ);
+        SalesOrderItemRequest 受注明細_専用ボトル登録リクエスト =
+                new SalesOrderItemRequest(専用ボトル.name(), 専用ボトル.code(),  new Quantity(42), ProductType.個別);
+        SalesOrderItemRequest 受注明細_専用ボトルキャップ登録リクエスト =
+                new SalesOrderItemRequest(専用ボトルキャップ.name(), 専用ボトルキャップ.code(), new Quantity(23), ProductType.個別);
+
+        受注明細Service.register(受注番号, 受注明細_専用ボトル登録リクエスト);
+        受注明細Service.register(受注番号, 受注明細_専用ボトルキャップ登録リクエスト);
     }
 
     @Test

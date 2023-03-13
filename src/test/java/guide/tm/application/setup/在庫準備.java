@@ -1,4 +1,4 @@
-package guide.tm.application.fixture;
+package guide.tm.application.setup;
 
 import guide.tm.application.service.stock.StockService;
 import guide.tm.domain.model.allocation.stock.Stock;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class 在庫Fixture {
+public class 在庫準備 {
     @Autowired
     StockService service;
 

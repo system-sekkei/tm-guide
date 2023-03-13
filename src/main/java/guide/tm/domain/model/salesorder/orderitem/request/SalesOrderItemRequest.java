@@ -13,6 +13,17 @@ public class SalesOrderItemRequest {
     Quantity quantity;
     ProductType productType;
 
+    public SalesOrderItemRequest() {
+        this(new ProductName(), new ProductCode(), new Quantity(), ProductType.個別);
+    }
+
+    public SalesOrderItemRequest(ProductName productName, ProductCode productCode, Quantity quantity, ProductType productType) {
+        this.productName = productName;
+        this.productCode = productCode;
+        this.quantity = quantity;
+        this.productType = productType;
+    }
+
     public boolean isSingleProduct() {
         return productType.is個別();
     }

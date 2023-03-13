@@ -1,6 +1,5 @@
 package guide.tm.application.service.salesorder;
 
-import guide.tm.application.fixture.顧客Fixture;
 import guide.tm.domain.model.customer.Customer;
 import guide.tm.domain.model.customer.CustomerName;
 import guide.tm.domain.model.customer.CustomerNumber;
@@ -26,9 +25,9 @@ class 受注サービスTest {
     SalesOrderService sut;
 
     @Autowired
-    顧客Fixture 顧客準備;
+    guide.tm.application.setup.顧客準備 顧客準備;
 
-    Customer 顧客 = new Customer(new CustomerNumber("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"), new CustomerName("梅宮 留美"), CustomerType.個人);
+    Customer 顧客 = new Customer(new CustomerNumber("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"), new CustomerName("留美", "梅宮"), new CustomerName("ルミ", "ウメミヤ"), CustomerType.個人);
 
     @BeforeEach
     void テストデータの準備() {

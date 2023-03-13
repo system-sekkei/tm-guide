@@ -1,4 +1,4 @@
-package guide.tm.application.fixture;
+package guide.tm.application.setup;
 
 import guide.tm.application.service.product.bundle.BundleProductService;
 import guide.tm.application.service.product.single.ProductService;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class 商品Fixture {
+public class 商品準備 {
 
     @Autowired
     ProductService productService;

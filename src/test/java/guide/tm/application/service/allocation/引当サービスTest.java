@@ -1,9 +1,5 @@
 package guide.tm.application.service.allocation;
 
-import guide.tm.application.fixture.倉庫Fixture;
-import guide.tm.application.fixture.商品Fixture;
-import guide.tm.application.fixture.在庫Fixture;
-import guide.tm.application.fixture.顧客Fixture;
 import guide.tm.application.service.salesorder.SalesOrderItemService;
 import guide.tm.application.service.salesorder.SalesOrderService;
 import guide.tm.domain.model.allocation.single.SingleAllocation;
@@ -19,13 +15,14 @@ import guide.tm.domain.model.product.detail.ProductCode;
 import guide.tm.domain.model.product.detail.ProductName;
 import guide.tm.domain.model.product.price.UnitPrice;
 import guide.tm.domain.model.product.single.SingleProduct;
+import guide.tm.domain.model.product.summary.ProductType;
 import guide.tm.domain.model.salesorder.content.OrderedDate;
 import guide.tm.domain.model.salesorder.content.Prefecture;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.content.ShippingAddress;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.orderitem.request.SalesOrderItemRequest;
 import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItem;
-import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItemContent;
 import guide.tm.domain.model.shipping.status.ShippingStatus;
 import guide.tm.domain.model.status.single.SingleOrderItemStatus;
 import guide.tm.domain.model.tax.context.TaxRateType;
@@ -57,26 +54,24 @@ class 引当サービスTest {
     );
 
     @Autowired
-    在庫Fixture 在庫準備;
+    guide.tm.application.setup.在庫準備 在庫準備;
 
     @Autowired
-    商品Fixture 商品準備;
+    guide.tm.application.setup.商品準備 商品準備;
 
     @Autowired
-    倉庫Fixture 倉庫準備;
+    guide.tm.application.setup.倉庫準備 倉庫準備;
     @Autowired
-    顧客Fixture 顧客準備;
+    guide.tm.application.setup.顧客準備 顧客準備;
 
     @Autowired
     SalesOrderService 受注Service;
     @Autowired
     SalesOrderItemService 受注明細Service;
 
-    SingleOrderItemContent 受注明細_専用ボトル = new SingleOrderItemContent(専用ボトル, new Quantity(42));
-
     @BeforeEach
     void setup() {
-        Customer 顧客 = new Customer(new CustomerNumber("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"), new CustomerName("梅宮 留美"), CustomerType.個人);
+        Customer 顧客 = new Customer(new CustomerNumber("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"), new CustomerName("留美", "梅宮"), new CustomerName("ルミ", "ウメミヤ"), CustomerType.個人);
         顧客準備.顧客のテストデータの準備(顧客);
 
         WareHouse 東日本倉庫 = new WareHouse(new WareHouseCode("654321"), "東日本倉庫", "千葉県");
@@ -94,7 +89,10 @@ class 引当サービスTest {
         );
         SalesOrderContent 受注 = new SalesOrderContent(顧客, new OrderedDate("2023-01-12"), new ShippingAddress(Prefecture.三重県, "津"));
         受注番号 = 受注Service.registerSalesOrder(受注);
-        受注明細Service.register(受注番号, 受注明細_専用ボトル);
+        SalesOrderItemRequest 受注明細_専用ボトル登録リクエスト =
+                new SalesOrderItemRequest(new ProductName("専用ボトル"), new ProductCode("821009"),  new Quantity(42), ProductType.個別);
+
+        受注明細Service.register(受注番号, 受注明細_専用ボトル登録リクエスト);
     }
 
     @Test

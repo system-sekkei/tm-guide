@@ -1,7 +1,5 @@
 package guide.tm.application.service.stock;
 
-import guide.tm.application.fixture.倉庫Fixture;
-import guide.tm.application.fixture.商品Fixture;
 import guide.tm.domain.model.allocation.stock.Stock;
 import guide.tm.domain.model.allocation.stock.Stocks;
 import guide.tm.domain.model.allocation.warehouse.WareHouse;
@@ -31,10 +29,10 @@ class 在庫サービスTest {
     StockService sut;
 
     @Autowired
-    倉庫Fixture 倉庫準備;
+    guide.tm.application.setup.倉庫準備 倉庫準備;
 
     @Autowired
-    商品Fixture 商品準備;
+    guide.tm.application.setup.商品準備 商品準備;
 
     WareHouse 東日本倉庫 = new WareHouse(new WareHouseCode("654321"), "東日本倉庫", "千葉県");
     WareHouse 西日本倉庫 = new WareHouse(new WareHouseCode("098765"), "西日本倉庫", "奈良県");

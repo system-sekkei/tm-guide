@@ -1,4 +1,4 @@
-package guide.tm.application.fixture;
+package guide.tm.application.setup;
 
 import guide.tm.application.service.warehouse.WareHouseService;
 import guide.tm.domain.model.allocation.warehouse.WareHouse;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class 倉庫Fixture {
+public class 倉庫準備 {
     @Autowired
     WareHouseService service;
 

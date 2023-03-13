@@ -1,7 +1,5 @@
 package guide.tm.application.service.salesorder;
 
-import guide.tm.application.fixture.商品Fixture;
-import guide.tm.application.fixture.顧客Fixture;
 import guide.tm.domain.model.customer.Customer;
 import guide.tm.domain.model.customer.CustomerName;
 import guide.tm.domain.model.customer.CustomerNumber;
@@ -12,14 +10,15 @@ import guide.tm.domain.model.product.detail.ProductCode;
 import guide.tm.domain.model.product.detail.ProductName;
 import guide.tm.domain.model.product.price.UnitPrice;
 import guide.tm.domain.model.product.single.SingleProduct;
+import guide.tm.domain.model.product.summary.ProductType;
 import guide.tm.domain.model.salesorder.content.OrderedDate;
 import guide.tm.domain.model.salesorder.content.Prefecture;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.content.ShippingAddress;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItem;
-import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItemContent;
 import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItems;
+import guide.tm.domain.model.salesorder.orderitem.request.SalesOrderItemRequest;
 import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItemContent;
 import guide.tm.domain.model.salesorder.orderitem.single.SingleProductOrderItems;
 import guide.tm.domain.model.tax.context.TaxRateType;
@@ -47,10 +46,10 @@ class 受注明細サービスTest {
     SalesOrderService salesOrderService;
 
     @Autowired
-    商品Fixture 商品準備;
+    guide.tm.application.setup.商品準備 商品準備;
 
     @Autowired
-    顧客Fixture 顧客準備;
+    guide.tm.application.setup.顧客準備 顧客準備;
 
     @Nested
     class 個別商品 {
@@ -71,7 +70,7 @@ class 受注明細サービスTest {
 
         Customer 顧客 = new Customer(
                 new CustomerNumber("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"),
-                new CustomerName("梅宮 留美"),
+                new CustomerName("留美", "梅宮"), new CustomerName("ルミ", "ウメミヤ"),
                 CustomerType.個人);
 
 
@@ -85,13 +84,16 @@ class 受注明細サービスTest {
         void 受注明細を登録する() {
             // given:
             SalesOrderContent 受注 = new SalesOrderContent(顧客, new OrderedDate("2023-01-12"), new ShippingAddress(Prefecture.埼玉県, "さいたま市"));
-            SingleOrderItemContent 受注明細_専用ボトル = new SingleOrderItemContent(専用ボトル, new Quantity(1));
-            SingleOrderItemContent 受注明細_専用ボトルキャップ = new SingleOrderItemContent(専用ボトルキャップ, new Quantity(2));
+
+            SalesOrderItemRequest 受注明細_専用ボトル登録リクエスト =
+                    new SalesOrderItemRequest(専用ボトル.name(), 専用ボトル.code(),  new Quantity(1), ProductType.個別);
+            SalesOrderItemRequest 受注明細_専用ボトルキャップ登録リクエスト =
+                    new SalesOrderItemRequest(専用ボトルキャップ.name(), 専用ボトルキャップ.code(), new Quantity(2), ProductType.個別);
 
             // when: "受注明細を登録する"
             SalesOrderNumber 受注番号 = salesOrderService.registerSalesOrder(受注);
-            sut.register(受注番号, 受注明細_専用ボトル);
-            sut.register(受注番号, 受注明細_専用ボトルキャップ);
+            sut.register(受注番号, 受注明細_専用ボトル登録リクエスト);
+            sut.register(受注番号, 受注明細_専用ボトルキャップ登録リクエスト);
 
             // then: "受注明細を取得する"
             SingleProductOrderItems 登録された受注明細 = sut.singleProductOrderItemsOf(受注番号);
@@ -145,7 +147,7 @@ class 受注明細サービスTest {
 
         Customer 顧客 = new Customer(
                 new CustomerNumber("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"),
-                new CustomerName("梅宮 留美"),
+                new CustomerName("留美", "梅宮"), new CustomerName("ルミ", "ウメミヤ"),
                 CustomerType.個人);
 
         @BeforeEach
@@ -159,11 +161,13 @@ class 受注明細サービスTest {
         void セット品受注明細を登録する() {
             //given:
             SalesOrderContent 受注 = new SalesOrderContent(顧客, new OrderedDate("2023-01-12"), new ShippingAddress(Prefecture.大分県, "別府"));
-            BundleProductOrderItemContent 非常食セット_受注明細 = new BundleProductOrderItemContent(非常食セット, new Quantity(1));
+
+            SalesOrderItemRequest 受注明細_専用ボトルキャップ登録リクエスト =
+                    new SalesOrderItemRequest(非常食セット.name(), 非常食セット.code(),  new Quantity(1), ProductType.セット);
 
             // when: "セット品受注明細を登録する"
             SalesOrderNumber 受注番号 = salesOrderService.registerSalesOrder(受注);
-            sut.registerBundleProductOrderItem(受注番号, 非常食セット_受注明細);
+            sut.register(受注番号, 受注明細_専用ボトルキャップ登録リクエスト);
 
             // then: "セット品受注明細を取得する"
             BundleProductOrderItems 登録された受注明細 = sut.bundleProductOrderItemsOf(受注番号);
