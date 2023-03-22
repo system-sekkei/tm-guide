@@ -52,6 +52,7 @@
     <thead>
     <tr>
       <th></th>
+      <th>受注番号</th>
       <th>受注日</th>
       <th>顧客名称</th>
       <th>引当状況</th>
@@ -64,6 +65,7 @@
           <i class="bi bi-bag-check" style="font-size: 1.5rem;"></i>
         </a>
       </td>
+      <td class="align-middle"><a th:href="@{|/sales-orders/${salesOrderSummary.salesOrderNumber}|}">12345678978</a></td>
       <td th:text="${salesOrderSummary.orderedDate}" class="align-middle">2022-12-22</td>
       <td th:text="${salesOrderSummary.customer.name}" class="align-middle">本田正勝</td>
       <td>
