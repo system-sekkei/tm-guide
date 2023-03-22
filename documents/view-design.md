@@ -1,14 +1,14 @@
 ## 画面展開名
 
-|  画面名       | パターン名                                        |
-|------------|----------------------------------------------|
-|  メニュー      | -                                            |
-|  受注登録      | [M-E 展開](https://www.sociomedia.co.jp/1671)  |
-|  受注一覧      | [RM-V 展開](https://www.sociomedia.co.jp/1677) |
-|  顧客検索      | [RV 展開](https://www.sociomedia.co.jp/1676)   |
-|  受注明細登録    | [M-E 展開](https://www.sociomedia.co.jp/1671)  |
-|  引当/出荷指示状況 | [M-E 展開](https://www.sociomedia.co.jp/1671)  |
-|  出荷状況      | [M-E 展開](https://www.sociomedia.co.jp/1671)  |
+| 画面名       | パターン名                                      |
+|-----------|--------------------------------------------|
+| メニュー      | -                                          |
+| 受注登録      | [E 展開]()                                   |
+| 受注一覧      | [RM 展開]()                                  |
+| 顧客検索      | [RM 展開](https://www.sociomedia.co.jp/1676) |
+| 受注明細登録    | [VE 展開](https://www.sociomedia.co.jp/1671) |
+| 引当/出荷指示状況 | [ME 展開](https://www.sociomedia.co.jp/1671) |
+| 出荷状況      | [ME 展開](https://www.sociomedia.co.jp/1671) |
 
 
 | 操作名  | Operation   |
@@ -17,6 +17,7 @@
 | 閲覧   | Viewer      | 
 | 編集   | Editor      |
 | 一覧操作 | Manipulator |
+| 画面遷移 | - (hyphen)  |
 
 
 ## コンポーネント
