@@ -68,11 +68,11 @@ CREATE TABLE 顧客.顧客
 
 CREATE TABLE 顧客.顧客住所
 (
-    顧客番号 UUID NOT NULL,
+    顧客ID UUID NOT NULL,
     都道府県 VARCHAR(20) NOT NULL,
     住所 VARCHAR(40) NOT NULL,
-    PRIMARY KEY (顧客番号),
-    FOREIGN KEY (顧客番号) REFERENCES 顧客.顧客 (顧客ID),
+    PRIMARY KEY (顧客ID),
+    FOREIGN KEY (顧客ID) REFERENCES 顧客.顧客 (顧客ID),
     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -80,6 +80,7 @@ CREATE SCHEMA 受注;
 CREATE TABLE 受注.受注
 (
     受注ID UUID NOT NULL,
+    受注番号 VARCHAR(8) NOT NULL,
     顧客ID UUID NOT NULL,
     受注日 DATE NOT NULL,
     都道府県 VARCHAR(5) NOT NULL,
