@@ -103,21 +103,21 @@
     </thead>
     <tbody>
     <tr th:each="singleOrderItemStatus: ${salesOrderStatus.singleOrderItemStatusList.list}">
-      <td class="text-center">
+      <td class="text-center align-middle">
         <i class="bi bi-bag-check"></i>
       </td>
-      <td th:text="${singleOrderItemStatus.singleOrderItem.product.name}">個別商品名</td>
-      <td class="text-end" th:text="${singleOrderItemStatus.singleOrderItem.product.unitPrice}">879</td>
-      <td class="text-end" th:text="${singleOrderItemStatus.singleOrderItem.quantity}">2</td>
+      <td class="align-middle" th:text="${singleOrderItemStatus.singleOrderItem.product.name}">個別商品名</td>
+      <td class="text-end align-middle" th:text="${singleOrderItemStatus.singleOrderItem.product.unitPrice}">879</td>
+      <td class="text-end align-middle" th:text="${singleOrderItemStatus.singleOrderItem.quantity}">2</td>
       <td class="text-center" >
-        <span class="btn btn-info" th:if="${singleOrderItemStatus.isAllAllocated}">引当済み</span>
-        <span class="btn btn-warning" th:unless="${singleOrderItemStatus.isAllAllocated}">引当残あり</span>
+        <h4><span class="badge bg-info " th:if="${singleOrderItemStatus.isAllAllocated}">引当済み</span></h4>
+        <h4><span class="badge bg-warning " th:unless="${singleOrderItemStatus.isAllAllocated}">引当残あり</span></h4>
       </td>
-      <td class="text-end" th:text="${singleOrderItemStatus.allocatedQuantity}">2</td>
-      <td class="text-end" th:text="${singleOrderItemStatus.remainingQuantity}">2</td>
+      <td class="text-end align-middle" th:text="${singleOrderItemStatus.allocatedQuantity}">2</td>
+      <td class="text-end align-middle" th:text="${singleOrderItemStatus.remainingQuantity}">2</td>
       <td class="text-center">
-        <span class="btn btn-info" th:if="${singleOrderItemStatus.shippingStatus.isInstructed}">指示済</span>
-        <span class="btn btn-warning" th:unless="${singleOrderItemStatus.shippingStatus.isInstructed}"aria-disabled="true">未指示</span>
+        <h4><span class="badge bg-info" th:if="${singleOrderItemStatus.shippingStatus.isInstructed}">指示済</span></h4>
+        <h4><span class="badge bg-warning " th:unless="${singleOrderItemStatus.shippingStatus.isInstructed}" >未指示</span></h4>
       </td>
     </tr>
     <tr th:each="bundleOrderItemStatus: ${salesOrderStatus.bundleOrderItemStatusList.list}">
@@ -144,7 +144,7 @@
     </tfoot>
   </table>
 
-  <form method="post" th:action="@{/shipping/sales-order/__${salesOrderNumber}__}">
+  <form method="post" th:action="@{/shipping/sales-order/__${salesOrderId}__}">
     <button type="submit" class="btn btn-primary">出荷指示</button>
     <a href="" th:href="@{/shipping/instructions}" class="btn btn-outline-primary">出荷状況</a>
   </form>
