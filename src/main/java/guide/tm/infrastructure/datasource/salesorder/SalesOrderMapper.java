@@ -2,6 +2,7 @@ package guide.tm.infrastructure.datasource.salesorder;
 
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.order.SalesOrderId;
+import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.order.SalesOrderSearchCriteria;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummary;
 import guide.tm.domain.model.tax.context.TaxSumType;
@@ -16,6 +17,7 @@ interface SalesOrderMapper {
 
     void registerSalesOrder(
             @Param("salesOrderId") UUID salesOrderId,
+            @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber,
             @Param("salesOrder") SalesOrderContent salesOrder);
 
     SalesOrderContent salesOrderOf(@Param("salesOrderId") SalesOrderId salesOrderId);
@@ -30,4 +32,5 @@ interface SalesOrderMapper {
             @Param("taxSumType") TaxSumType taxSumType,
             @Param("salesOrderId") SalesOrderId salesOrderId);
 
+    long newSaleOrderNumber();
 }

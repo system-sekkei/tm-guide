@@ -3,6 +3,7 @@ package guide.tm.infrastructure.datasource.salesorder;
 import guide.tm.application.service.salesorder.SalesOrderRepository;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.order.SalesOrderId;
+import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.order.SalesOrderSearchCriteria;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
 import guide.tm.domain.model.tax.context.TaxSumType;
@@ -22,7 +23,8 @@ public class SalesOrderDataSource implements SalesOrderRepository {
     @Override
     public SalesOrderId registerSalesOrder(SalesOrderContent salesOrder) {
         UUID salesOrderId = UUID.randomUUID();
-        salesOrderMapper.registerSalesOrder(salesOrderId, salesOrder);
+        SalesOrderNumber salesOrderNumber = new SalesOrderNumber(String.valueOf(salesOrderMapper.newSaleOrderNumber()));
+        salesOrderMapper.registerSalesOrder(salesOrderId, salesOrderNumber, salesOrder);
         return new SalesOrderId(salesOrderId.toString());
     }
 

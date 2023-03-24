@@ -5,9 +5,10 @@
 <mapper namespace="guide.tm.infrastructure.datasource.salesorder.SalesOrderMapper">
 
     <insert id="registerSalesOrder">
-        INSERT INTO 受注.受注 (受注ID, 顧客ID, 受注日, 都道府県, 住所)
+        INSERT INTO 受注.受注 (受注ID, 受注番号, 顧客ID, 受注日, 都道府県, 住所)
         VALUES (
                    #{salesOrderId},
+                   #{salesOrderNumber.value},
                    #{salesOrder.customer.code.value},
                    #{salesOrder.orderedDate.value},
                    #{salesOrder.shippingAddress.prefecture},
@@ -74,5 +75,9 @@
                 #{taxSumType}
                )
     </insert>
+
+    <select id="newSaleOrderNumber" resultType="long">
+        SELECT nextval('受注.受注明細番号')
+    </select>
 
 </mapper>
