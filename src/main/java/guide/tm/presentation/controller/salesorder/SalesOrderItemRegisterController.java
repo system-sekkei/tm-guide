@@ -4,7 +4,7 @@ import guide.tm.application.scenario.salesorder.SalesOrderScenario;
 import guide.tm.application.service.product.single.ProductService;
 import guide.tm.application.service.salesorder.SalesOrderItemService;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
-import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.salesorder.orderitem.request.SalesOrderItemRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("sales-orders/{salesOrderNumber}/items")
+@RequestMapping("sales-orders/{salesOrderId}/items")
 class SalesOrderItemRegisterController {
 
     SalesOrderScenario salesOrderScenario;
@@ -35,8 +35,8 @@ class SalesOrderItemRegisterController {
     }
 
     @ModelAttribute("salesOrder")
-    SalesOrder salesOrder(@PathVariable("salesOrderNumber") SalesOrderNumber salesOrderNumber) {
-        return salesOrderScenario.salesOrderOf(salesOrderNumber);
+    SalesOrder salesOrder(@PathVariable("salesOrderId") SalesOrderId salesOrderId) {
+        return salesOrderScenario.salesOrderOf(salesOrderId);
     }
 
     /**
@@ -44,7 +44,7 @@ class SalesOrderItemRegisterController {
      */
     @PostMapping
     String newSalesItem(
-            @PathVariable("salesOrderNumber") SalesOrderNumber salesOrderNumber,
+            @PathVariable("salesOrderId") SalesOrderId salesOrderId,
             @ModelAttribute("salesOrderItemRequest") @Validated SalesOrderItemRequest salesOrderItemRequest,
             BindingResult salesOrderItemRequestResult
     ) {
@@ -53,8 +53,8 @@ class SalesOrderItemRegisterController {
             return "sales-order/sales-order";
         }
 
-        salesOrderItemService.register(salesOrderNumber, salesOrderItemRequest);
-        return String.format("redirect:/sales-orders/%s", salesOrderNumber);
+        salesOrderItemService.register(salesOrderId, salesOrderItemRequest);
+        return String.format("redirect:/sales-orders/%s", salesOrderId);
     }
 
     @InitBinder({"salesOrderItemRequest"})

@@ -22,6 +22,7 @@ import guide.tm.domain.model.salesorder.content.OrderedDate;
 import guide.tm.domain.model.salesorder.content.Prefecture;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.content.ShippingAddress;
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.orderitem.request.SalesOrderItemRequest;
 import guide.tm.domain.model.shipping.content.ShippingDate;
@@ -55,7 +56,7 @@ class 出荷指示明細サービスTest {
     @Autowired
     SalesOrderScenario salesOrderScenario;
 
-    SalesOrderNumber 受注番号;
+    SalesOrderId 受注ID;
 
     SingleProduct 専用ボトル = new SingleProduct(
             new ProductCode("821009"),
@@ -115,41 +116,41 @@ class 出荷指示明細サービスTest {
                 )
         );
 
-        SalesOrderContent 受注 = new SalesOrderContent(顧客, new OrderedDate("2023-01-12"), new ShippingAddress(Prefecture.京都府, "伏見"));
-        受注番号 = 受注Service.registerSalesOrder(受注);
+        SalesOrderContent 受注 = new SalesOrderContent(new SalesOrderNumber("12122323"), 顧客, new OrderedDate("2023-01-12"), new ShippingAddress(Prefecture.京都府, "伏見"));
+        受注ID = 受注Service.registerSalesOrder(受注);
         SalesOrderItemRequest 受注明細_専用ボトル登録リクエスト =
                 new SalesOrderItemRequest(専用ボトル.name(), 専用ボトル.code(),  new Quantity(42), ProductType.個別);
         SalesOrderItemRequest 受注明細_専用ボトルキャップ登録リクエスト =
                 new SalesOrderItemRequest(専用ボトルキャップ.name(), 専用ボトルキャップ.code(), new Quantity(23), ProductType.個別);
 
-        受注明細Service.register(受注番号, 受注明細_専用ボトル登録リクエスト);
-        受注明細Service.register(受注番号, 受注明細_専用ボトルキャップ登録リクエスト);
+        受注明細Service.register(受注ID, 受注明細_専用ボトル登録リクエスト);
+        受注明細Service.register(受注ID, 受注明細_専用ボトルキャップ登録リクエスト);
     }
 
     @Test
     void 出荷明細を登録する() {
         // given:
         ShippingDate 出荷日 = new ShippingDate(LocalDate.of(2023, Month.MARCH, 2));
-        ShippingInstructionContent 出荷 = new ShippingInstructionContent(受注番号, 出荷日);
+        ShippingInstructionContent 出荷 = new ShippingInstructionContent(受注ID, 出荷日);
 
         // and: "引当して、結果を登録する"
-        SalesOrderStatus 受注明細状況 = salesOrderScenario.status(受注番号);
-        allocationService.allocateSalesOrder(受注明細状況, 受注番号);
+        SalesOrderStatus 受注明細状況 = salesOrderScenario.status(受注ID);
+        allocationService.allocateSalesOrder(受注明細状況, 受注ID);
 
         // and: "引当を取得できる"
-        SingleAllocations 個別商品引当結果 = allocationService.singleAllocationsOf(受注番号);
-        BundleAllocations セット商品引当結果 = allocationService.bundleAllocations(受注番号);
+        SingleAllocations 個別商品引当結果 = allocationService.singleAllocationsOf(受注ID);
+        BundleAllocations セット商品引当結果 = allocationService.bundleAllocations(受注ID);
 
         ShippingNumber 出荷番号 = 出荷サービス.register(
                 new ShippingInstruction(
-                        new ShippingInstructionContent(受注番号, new ShippingDate(LocalDate.of(2023, 3, 1))),
+                        new ShippingInstructionContent(受注ID, new ShippingDate(LocalDate.of(2023, 3, 1))),
                         個別商品引当結果,
                         セット商品引当結果
                 ));
 
 
         // when: "出荷明細を取得する"
-        ShippingItems shippingItems = sut.shippingItems(受注番号);
+        ShippingItems shippingItems = sut.shippingItems(受注ID);
         then:
         // "出荷明細を5件取得できる"
         assertEquals(5, shippingItems.singleShippingItems().list().size());

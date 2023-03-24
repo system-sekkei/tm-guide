@@ -1,21 +1,21 @@
 package guide.tm.domain.model.shipping.content;
 
-import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
 
 /**
  * 出荷
  */
 public class ShippingInstructionContent {
-    SalesOrderNumber salesOrderNumber;
+    SalesOrderId salesOrderId;
     ShippingDate shippingDate;
 
     @Deprecated
     ShippingInstructionContent() {
-        this(new SalesOrderNumber(), new ShippingDate());
+        this(new SalesOrderId(), new ShippingDate());
     }
 
-    public ShippingInstructionContent(SalesOrderNumber salesOrderNumber, ShippingDate shippingDate) {
-        this.salesOrderNumber = salesOrderNumber;
+    public ShippingInstructionContent(SalesOrderId salesOrderId, ShippingDate shippingDate) {
+        this.salesOrderId = salesOrderId;
         this.shippingDate = shippingDate;
     }
 

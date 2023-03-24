@@ -8,6 +8,7 @@ import guide.tm.domain.model.salesorder.content.OrderedDate;
 import guide.tm.domain.model.salesorder.content.Prefecture;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.content.ShippingAddress;
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,13 +37,13 @@ class 受注サービスTest {
 
     @Test
     void 受注を登録する() {
-        SalesOrderContent 受注 = new SalesOrderContent(顧客, new OrderedDate("2023-01-12"), new ShippingAddress(Prefecture.大分県, "九重"));
+        SalesOrderContent 受注 = new SalesOrderContent(new SalesOrderNumber("98789878"), 顧客, new OrderedDate("2023-01-12"), new ShippingAddress(Prefecture.大分県, "九重"));
 
         //"受注を登録する"
-        SalesOrderNumber 受注番号 = sut.registerSalesOrder(受注);
+        SalesOrderId 受注ID = sut.registerSalesOrder(受注);
 
         // "受注を取得する"
-        SalesOrderContent 登録された受注 = sut.salesOrderOf(受注番号);
+        SalesOrderContent 登録された受注 = sut.salesOrderOf(受注ID);
 
         assertTrue(登録された受注.customer().code().isSame(new CustomerNumber("39d3f994-6cd3-4a56-a2b5-d493f030cbc8")));
         assertEquals("梅宮 留美", 登録された受注.customer().name().toString());

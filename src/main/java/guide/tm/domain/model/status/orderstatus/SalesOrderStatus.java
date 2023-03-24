@@ -6,7 +6,7 @@ import guide.tm.domain.model.allocation.content.Allocations;
 import guide.tm.domain.model.allocation.single.SingleAllocation;
 import guide.tm.domain.model.allocation.single.SingleAllocations;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
-import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.shipping.content.ShippingDate;
 import guide.tm.domain.model.shipping.content.ShippingInstruction;
 import guide.tm.domain.model.shipping.content.ShippingInstructionContent;
@@ -23,14 +23,14 @@ import java.time.LocalDate;
  * 受注状況
  */
 public class SalesOrderStatus {
-    SalesOrderNumber salesOrderNumber;
+    SalesOrderId salesOrderId;
     SalesOrder salesOrder;
     Allocations allocations;
     ShippingItems shippingItems;
 
     public SalesOrderStatus(
-            SalesOrderNumber salesOrderNumber, SalesOrder salesOrder, Allocations allocations, ShippingItems shippingItems) {
-        this.salesOrderNumber = salesOrderNumber;
+            SalesOrderId salesOrderId, SalesOrder salesOrder, Allocations allocations, ShippingItems shippingItems) {
+        this.salesOrderId = salesOrderId;
         this.salesOrder = salesOrder;
         this.allocations = allocations;
         this.shippingItems = shippingItems;
@@ -74,13 +74,13 @@ public class SalesOrderStatus {
         BundleAllocations bundleAllocationsToShip = allocatedBundleOrderItem.notShippedItemAllocations();
 
         return new ShippingInstruction(
-                new ShippingInstructionContent(salesOrderNumber(), new ShippingDate(LocalDate.now())),
+                new ShippingInstructionContent(salesOrderId(), new ShippingDate(LocalDate.now())),
                 singleAllocationsToShip,
                 bundleAllocationsToShip);
     }
 
-    public SalesOrderNumber salesOrderNumber() {
-        return salesOrderNumber;
+    public SalesOrderId salesOrderId() {
+        return salesOrderId;
     }
 
     public SalesOrder salesOrder() {

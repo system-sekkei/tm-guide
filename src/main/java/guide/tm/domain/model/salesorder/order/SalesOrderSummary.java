@@ -8,9 +8,14 @@ import guide.tm.domain.model.salesorder.content.OrderedDate;
  */
 public class SalesOrderSummary {
 
+    SalesOrderId salesOrderId;
     SalesOrderNumber salesOrderNumber;
     Customer customer;
     OrderedDate orderedDate;
+
+    public SalesOrderId salesOrderId() {
+        return salesOrderId;
+    }
 
     public SalesOrderNumber salesOrderNumber() {
         return salesOrderNumber;

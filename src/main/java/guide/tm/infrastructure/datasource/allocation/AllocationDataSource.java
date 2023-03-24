@@ -6,7 +6,7 @@ import guide.tm.domain.model.allocation.bundle.BundleAllocations;
 import guide.tm.domain.model.allocation.location.AllocatedLocations;
 import guide.tm.domain.model.allocation.single.SingleAllocations;
 import guide.tm.domain.model.product.single.SingleProduct;
-import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItem;
 import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItem;
 import org.springframework.stereotype.Repository;
@@ -23,18 +23,18 @@ public class AllocationDataSource implements AllocationRepository {
     }
 
     @Override
-    public void register(AllocatedLocations allocatedLocations, SalesOrderNumber salesOrderNumber, SingleOrderItem singleOrderItem) {
+    public void register(AllocatedLocations allocatedLocations, SalesOrderId salesOrderId, SingleOrderItem singleOrderItem) {
         UUID allocationNumber = UUID.randomUUID();
-        allocationMapper.registerSingleAllocation(allocationNumber, salesOrderNumber, singleOrderItem);
+        allocationMapper.registerSingleAllocation(allocationNumber, salesOrderId, singleOrderItem);
         allocatedLocations.list().forEach(allocatedLocation ->
             allocationMapper.registerSingleAllocationItem(allocationNumber, allocatedLocation)
         );
     }
 
     @Override
-    public BundleAllocationNumber registerBundleAllocation(SalesOrderNumber salesOrderNumber, BundleProductOrderItem bundleProductOrderItem) {
+    public BundleAllocationNumber registerBundleAllocation(SalesOrderId salesOrderId, BundleProductOrderItem bundleProductOrderItem) {
         UUID allocationNumber = UUID.randomUUID();
-        allocationMapper.registerBundleAllocation(allocationNumber, salesOrderNumber, bundleProductOrderItem);
+        allocationMapper.registerBundleAllocation(allocationNumber, salesOrderId, bundleProductOrderItem);
         return new BundleAllocationNumber(allocationNumber.toString());
     }
 
@@ -42,21 +42,21 @@ public class AllocationDataSource implements AllocationRepository {
     public void registerBundleAllocationItem(
             BundleAllocationNumber bundleAllocationNumber,
             AllocatedLocations allocatedLocations,
-            SalesOrderNumber salesOrderNumber,
+            SalesOrderId salesOrderId,
             SingleProduct singleProduct) {
         allocatedLocations.list().forEach(allocatedLocation ->
-            allocationMapper.registerBundleAllocationItem(bundleAllocationNumber, allocatedLocation, salesOrderNumber, singleProduct)
+            allocationMapper.registerBundleAllocationItem(bundleAllocationNumber, allocatedLocation, salesOrderId, singleProduct)
         );
     }
 
     @Override
-    public SingleAllocations singleAllocationsOf(SalesOrderNumber salesOrderNumber) {
-        return new SingleAllocations(allocationMapper.singleAllocationsOf(salesOrderNumber));
+    public SingleAllocations singleAllocationsOf(SalesOrderId salesOrderId) {
+        return new SingleAllocations(allocationMapper.singleAllocationsOf(salesOrderId));
     }
 
     @Override
-    public BundleAllocations bundleAllocations(SalesOrderNumber salesOrderNumber) {
-        return new BundleAllocations(allocationMapper.bundleAllocationsOf(salesOrderNumber));
+    public BundleAllocations bundleAllocations(SalesOrderId salesOrderId) {
+        return new BundleAllocations(allocationMapper.bundleAllocationsOf(salesOrderId));
     }
 
 }

@@ -1,7 +1,7 @@
 package guide.tm.infrastructure.datasource.salesorder;
 
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
-import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.salesorder.order.SalesOrderSearchCriteria;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummary;
 import guide.tm.domain.model.tax.context.TaxSumType;
@@ -15,19 +15,19 @@ import java.util.UUID;
 interface SalesOrderMapper {
 
     void registerSalesOrder(
-            @Param("salesOrderNumber") UUID salesOrderNumber,
+            @Param("salesOrderId") UUID salesOrderId,
             @Param("salesOrder") SalesOrderContent salesOrder);
 
-    SalesOrderContent salesOrderOf(@Param("salesOrderNumber") SalesOrderNumber salesOrderNumber);
+    SalesOrderContent salesOrderOf(@Param("salesOrderId") SalesOrderId salesOrderId);
 
     List<SalesOrderSummary> salesOrderSummaries(
             @Param("salesOrderSearchCriteria") SalesOrderSearchCriteria salesOrderSearchCriteria);
 
     TaxSumType taxSumTypeOf(
-            @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber);
+            @Param("salesOrderId") SalesOrderId salesOrderId);
 
     void registerTax(
             @Param("taxSumType") TaxSumType taxSumType,
-            @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber);
+            @Param("salesOrderId") SalesOrderId salesOrderId);
 
 }

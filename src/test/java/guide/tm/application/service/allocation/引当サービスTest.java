@@ -20,6 +20,7 @@ import guide.tm.domain.model.salesorder.content.OrderedDate;
 import guide.tm.domain.model.salesorder.content.Prefecture;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.content.ShippingAddress;
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.orderitem.request.SalesOrderItemRequest;
 import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItem;
@@ -44,7 +45,7 @@ class 引当サービスTest {
     @Autowired
     AllocationService sut;
 
-    SalesOrderNumber 受注番号;
+    SalesOrderId 受注ID;
 
     SingleProduct 専用ボトル = new SingleProduct(
             new ProductCode("821009"),
@@ -87,24 +88,24 @@ class 引当サービスTest {
                         new Stock(new ProductCode("821009"), new WareHouseCode("254i66"), Prefecture.奈良県, new Quantity(13))
                 )
         );
-        SalesOrderContent 受注 = new SalesOrderContent(顧客, new OrderedDate("2023-01-12"), new ShippingAddress(Prefecture.三重県, "津"));
-        受注番号 = 受注Service.registerSalesOrder(受注);
+        SalesOrderContent 受注 = new SalesOrderContent(new SalesOrderNumber("78789898"), 顧客, new OrderedDate("2023-01-12"), new ShippingAddress(Prefecture.三重県, "津"));
+        受注ID = 受注Service.registerSalesOrder(受注);
         SalesOrderItemRequest 受注明細_専用ボトル登録リクエスト =
                 new SalesOrderItemRequest(new ProductName("専用ボトル"), new ProductCode("821009"),  new Quantity(42), ProductType.個別);
 
-        受注明細Service.register(受注番号, 受注明細_専用ボトル登録リクエスト);
+        受注明細Service.register(受注ID, 受注明細_専用ボトル登録リクエスト);
     }
 
     @Test
     void 個別商品の引当を登録する() {
-        SingleOrderItem 受注明細 = 受注明細Service.singleProductOrderItemsOf(受注番号).list().get(0);
+        SingleOrderItem 受注明細 = 受注明細Service.singleProductOrderItemsOf(受注ID).list().get(0);
         SingleOrderItemStatus 受注明細状況 = new SingleOrderItemStatus(受注明細, new SingleAllocation(), ShippingStatus.出荷未指示);
 
         // when: "引当して、結果を登録する"
-        sut.allocate(受注明細状況, 受注番号, new ShippingAddress(Prefecture.三重県, "津"));
+        sut.allocate(受注明細状況, 受注ID, new ShippingAddress(Prefecture.三重県, "津"));
 
         // then: "引当を取得できる"
-        SingleAllocations 引当結果 = sut.singleAllocationsOf(受注番号);
+        SingleAllocations 引当結果 = sut.singleAllocationsOf(受注ID);
         // and: "引当を1件取得する"
         assertEquals(1, 引当結果.list().size());
         // and: "引当場所を3件取得する"

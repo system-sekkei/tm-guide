@@ -5,7 +5,7 @@ import guide.tm.application.service.salesorder.SalesOrderService;
 import guide.tm.domain.model.customer.CustomerSummaries;
 import guide.tm.domain.model.salesorder.content.Prefecture;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
-import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.tax.context.TaxContext;
 import guide.tm.domain.model.tax.context.TaxRateType;
 import guide.tm.domain.model.tax.context.TaxSumType;
@@ -67,10 +67,10 @@ class SalesOrderRegisterController {
             return "sales-order/sales-order-new";
         }
 
-        SalesOrderNumber salesOrderNumber = salesOrderService.registerSalesOrder(salesOrderContent);
-        salesOrderService.registerTax(taxSumType, salesOrderNumber);
+        SalesOrderId salesOrderId = salesOrderService.registerSalesOrder(salesOrderContent);
+        salesOrderService.registerTax(taxSumType, salesOrderId);
 
-        return String.format("redirect:/sales-orders/%s", salesOrderNumber);
+        return String.format("redirect:/sales-orders/%s", salesOrderId);
     }
 
     @InitBinder("salesOrderContent")

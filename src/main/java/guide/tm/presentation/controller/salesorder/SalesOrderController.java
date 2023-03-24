@@ -3,7 +3,7 @@ package guide.tm.presentation.controller.salesorder;
 import guide.tm.application.scenario.salesorder.SalesOrderScenario;
 import guide.tm.application.service.salesorder.SalesOrderService;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
-import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.salesorder.order.SalesOrderSearchCriteria;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
 import guide.tm.domain.model.salesorder.orderitem.request.SalesOrderItemRequest;
@@ -37,19 +37,19 @@ class SalesOrderController {
         return "sales-order/sales-order-list";
     }
 
-    @GetMapping("{salesOrderNumber}")
-    String salesOrder(@PathVariable("salesOrderNumber") SalesOrderNumber salesOrderNumber,
+    @GetMapping("{salesOrderId}")
+    String salesOrder(@PathVariable("salesOrderId") SalesOrderId salesOrderId,
                       Model model) {
-        SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderNumber);
+        SalesOrder salesOrder = salesOrderScenario.salesOrderOf(salesOrderId);
         model.addAttribute("salesOrder", salesOrder);
         model.addAttribute("salesOrderItemRequest", new SalesOrderItemRequest());
         return "sales-order/sales-order";
     }
 
-    @GetMapping("{salesOrderNumber}/allocations")
-    String allocations(@PathVariable("salesOrderNumber") SalesOrderNumber salesOrderNumber,
+    @GetMapping("{salesOrderId}/allocations")
+    String allocations(@PathVariable("salesOrderId") SalesOrderId salesOrderId,
                        Model model) {
-        SalesOrderStatus status = salesOrderScenario.status(salesOrderNumber);
+        SalesOrderStatus status = salesOrderScenario.status(salesOrderId);
         model.addAttribute("salesOrderStatus", status);
         return "sales-order/allocations";
     }

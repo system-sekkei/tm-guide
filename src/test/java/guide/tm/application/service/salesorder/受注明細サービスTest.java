@@ -15,6 +15,7 @@ import guide.tm.domain.model.salesorder.content.OrderedDate;
 import guide.tm.domain.model.salesorder.content.Prefecture;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.content.ShippingAddress;
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItem;
 import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItems;
@@ -83,7 +84,7 @@ class 受注明細サービスTest {
         @Test
         void 受注明細を登録する() {
             // given:
-            SalesOrderContent 受注 = new SalesOrderContent(顧客, new OrderedDate("2023-01-12"), new ShippingAddress(Prefecture.埼玉県, "さいたま市"));
+            SalesOrderContent 受注 = new SalesOrderContent(new SalesOrderNumber("77779898"), 顧客, new OrderedDate("2023-01-12"), new ShippingAddress(Prefecture.埼玉県, "さいたま市"));
 
             SalesOrderItemRequest 受注明細_専用ボトル登録リクエスト =
                     new SalesOrderItemRequest(専用ボトル.name(), 専用ボトル.code(),  new Quantity(1), ProductType.個別);
@@ -91,12 +92,12 @@ class 受注明細サービスTest {
                     new SalesOrderItemRequest(専用ボトルキャップ.name(), 専用ボトルキャップ.code(), new Quantity(2), ProductType.個別);
 
             // when: "受注明細を登録する"
-            SalesOrderNumber 受注番号 = salesOrderService.registerSalesOrder(受注);
-            sut.register(受注番号, 受注明細_専用ボトル登録リクエスト);
-            sut.register(受注番号, 受注明細_専用ボトルキャップ登録リクエスト);
+            SalesOrderId 受注ID = salesOrderService.registerSalesOrder(受注);
+            sut.register(受注ID, 受注明細_専用ボトル登録リクエスト);
+            sut.register(受注ID, 受注明細_専用ボトルキャップ登録リクエスト);
 
             // then: "受注明細を取得する"
-            SingleProductOrderItems 登録された受注明細 = sut.singleProductOrderItemsOf(受注番号);
+            SingleProductOrderItems 登録された受注明細 = sut.singleProductOrderItemsOf(受注ID);
 
             assertEquals(2, 登録された受注明細.list().size());
 
@@ -160,17 +161,17 @@ class 受注明細サービスTest {
         @Test
         void セット品受注明細を登録する() {
             //given:
-            SalesOrderContent 受注 = new SalesOrderContent(顧客, new OrderedDate("2023-01-12"), new ShippingAddress(Prefecture.大分県, "別府"));
+            SalesOrderContent 受注 = new SalesOrderContent(new SalesOrderNumber("88889898"), 顧客, new OrderedDate("2023-01-12"), new ShippingAddress(Prefecture.大分県, "別府"));
 
             SalesOrderItemRequest 受注明細_専用ボトルキャップ登録リクエスト =
                     new SalesOrderItemRequest(非常食セット.name(), 非常食セット.code(),  new Quantity(1), ProductType.セット);
 
             // when: "セット品受注明細を登録する"
-            SalesOrderNumber 受注番号 = salesOrderService.registerSalesOrder(受注);
-            sut.register(受注番号, 受注明細_専用ボトルキャップ登録リクエスト);
+            SalesOrderId 受注ID = salesOrderService.registerSalesOrder(受注);
+            sut.register(受注ID, 受注明細_専用ボトルキャップ登録リクエスト);
 
             // then: "セット品受注明細を取得する"
-            BundleProductOrderItems 登録された受注明細 = sut.bundleProductOrderItemsOf(受注番号);
+            BundleProductOrderItems 登録された受注明細 = sut.bundleProductOrderItemsOf(受注ID);
 
             assertEquals(1, 登録された受注明細.list().size());
 

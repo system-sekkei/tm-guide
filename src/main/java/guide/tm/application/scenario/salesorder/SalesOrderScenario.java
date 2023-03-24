@@ -7,7 +7,7 @@ import guide.tm.application.service.shipping.ShippingItemService;
 import guide.tm.domain.model.allocation.content.Allocations;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
-import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItems;
 import guide.tm.domain.model.salesorder.orderitem.single.SingleProductOrderItems;
 import guide.tm.domain.model.shipping.item.ShippingItems;
@@ -39,22 +39,22 @@ public class SalesOrderScenario {
     /**
      * 受注を取得する
      */
-    public SalesOrder salesOrderOf(SalesOrderNumber salesOrderNumber) {
-        SalesOrderContent salesOrderContent = salesOrderService.salesOrderOf(salesOrderNumber);
-        TaxSumType taxSumType  = salesOrderService.taxSumTypeOf(salesOrderNumber);
-        SingleProductOrderItems singleProductOrderItems = salesOrderItemService.singleProductOrderItemsOf(salesOrderNumber);
-        BundleProductOrderItems bundleProductOrderItems = salesOrderItemService.bundleProductOrderItemsOf(salesOrderNumber);
+    public SalesOrder salesOrderOf(SalesOrderId salesOrderId) {
+        SalesOrderContent salesOrderContent = salesOrderService.salesOrderOf(salesOrderId);
+        TaxSumType taxSumType  = salesOrderService.taxSumTypeOf(salesOrderId);
+        SingleProductOrderItems singleProductOrderItems = salesOrderItemService.singleProductOrderItemsOf(salesOrderId);
+        BundleProductOrderItems bundleProductOrderItems = salesOrderItemService.bundleProductOrderItemsOf(salesOrderId);
         return new SalesOrder(salesOrderContent, taxSumType, singleProductOrderItems, bundleProductOrderItems);
     }
 
     /**
      * 受注の状態を取得する
      */
-    public SalesOrderStatus status(SalesOrderNumber salesOrderNumber) {
-        SalesOrder salesOrder = salesOrderOf(salesOrderNumber);
-        Allocations allocations = allocationService.allocationsOf(salesOrderNumber);
-        ShippingItems shippingItems = shippingItemService.shippingItems(salesOrderNumber);
-        return new SalesOrderStatus(salesOrderNumber, salesOrder, allocations, shippingItems);
+    public SalesOrderStatus status(SalesOrderId salesOrderId) {
+        SalesOrder salesOrder = salesOrderOf(salesOrderId);
+        Allocations allocations = allocationService.allocationsOf(salesOrderId);
+        ShippingItems shippingItems = shippingItemService.shippingItems(salesOrderId);
+        return new SalesOrderStatus(salesOrderId, salesOrder, allocations, shippingItems);
     }
 
 }

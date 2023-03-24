@@ -8,7 +8,7 @@
         INSERT INTO 引当.個別商品引当 (引当番号, 受注番号, 受注明細番号, 商品コード)
         VALUES (
                 #{allocationNumber},
-                #{salesOrderNumber.value},
+                #{salesOrderId.value},
                 #{singleOrderItem.salesOrderItemNumber.value},
                 #{singleOrderItem.singleOrderItemContent.product.code.value}
                )
@@ -27,7 +27,7 @@
         INSERT INTO 引当.セット商品引当 (引当番号, 受注番号, 受注明細番号, 商品コード)
         VALUES (
                 #{allocationNumber},
-                #{salesOrderNumber.value},
+                #{salesOrderId.value},
                 #{bundleProductOrderItem.salesOrderItemNumber.value},
                 #{bundleProductOrderItem.bundleProductOrderItemContent.product.code.value}
                )
@@ -63,7 +63,7 @@
                引当数量
         FROM 引当.個別商品引当
                  INNER JOIN 引当.個別商品引当明細 ON 個別商品引当.引当番号 = 個別商品引当明細.引当番号
-        WHERE 受注番号 = #{salesOrderNumber.value}
+        WHERE 受注番号 = #{salesOrderId.value}
     </select>
 
     <resultMap id="BundleAllocation" type="guide.tm.domain.model.allocation.bundle.BundleAllocation">
@@ -90,6 +90,6 @@
                引当数量
         FROM 引当.セット商品引当
                  INNER JOIN 引当.セット商品引当明細 ON セット商品引当.引当番号 = セット商品引当明細.引当番号
-        WHERE 受注番号 = #{salesOrderNumber.value}
+        WHERE 受注番号 = #{salesOrderId.value}
     </select>
 </mapper>

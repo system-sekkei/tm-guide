@@ -5,7 +5,7 @@ import guide.tm.domain.model.allocation.bundle.BundleAllocationNumber;
 import guide.tm.domain.model.allocation.location.AllocatedLocation;
 import guide.tm.domain.model.allocation.single.SingleAllocation;
 import guide.tm.domain.model.product.single.SingleProduct;
-import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItem;
 import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItem;
 import org.apache.ibatis.annotations.Mapper;
@@ -19,7 +19,7 @@ interface AllocationMapper {
 
     void registerSingleAllocation(
             @Param("allocationNumber") UUID allocationNumber,
-            @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber,
+            @Param("salesOrderId") SalesOrderId salesOrderId,
             @Param("singleOrderItem") SingleOrderItem singleOrderItem);
 
     void registerSingleAllocationItem(
@@ -28,18 +28,18 @@ interface AllocationMapper {
 
     void registerBundleAllocation(
             @Param("allocationNumber") UUID allocationNumber,
-            @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber,
+            @Param("salesOrderId") SalesOrderId salesOrderId,
             @Param("bundleProductOrderItem") BundleProductOrderItem bundleProductOrderItem);
 
     void registerBundleAllocationItem(
             @Param("bundleAllocationNumber") BundleAllocationNumber bundleAllocationNumber,
             @Param("allocatedLocation") AllocatedLocation allocatedLocation,
-            @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber,
+            @Param("salesOrderId") SalesOrderId salesOrderId,
             @Param("singleProduct") SingleProduct singleProduct);
 
     List<SingleAllocation> singleAllocationsOf(
-            @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber);
+            @Param("salesOrderId") SalesOrderId salesOrderId);
 
     List<BundleAllocation> bundleAllocationsOf(
-            @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber);
+            @Param("salesOrderId") SalesOrderId salesOrderId);
 }

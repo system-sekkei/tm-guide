@@ -16,7 +16,7 @@
             INNER JOIN 引当.個別商品引当 ON 出荷指示済引当.引当番号 = 個別商品引当.引当番号
             INNER JOIN 引当.個別商品引当明細 ON 個別商品引当.引当番号 = 個別商品引当明細.引当番号
             INNER JOIN 商品.商品 ON 個別商品引当.商品コード = 商品.商品コード
-        WHERE 受注番号 = #{salesOrderNumber.value}
+        WHERE 受注番号 = #{salesOrderId.value}
     </select>
 
     <select id="bundleShippingItems" resultType="guide.tm.domain.model.shipping.bundle.BundleShippingItem">
@@ -31,7 +31,7 @@
                  INNER JOIN 引当.セット商品引当 ON 出荷指示済セット商品引当.引当番号 = セット商品引当.引当番号
                  INNER JOIN 引当.セット商品引当明細 ON セット商品引当.引当番号 = セット商品引当明細.引当番号
                  INNER JOIN 商品.セット商品 ON セット商品引当.商品コード = セット商品.商品コード
-        WHERE 受注番号 = #{salesOrderNumber.value}
+        WHERE 受注番号 = #{salesOrderId.value}
     </select>
 
 </mapper>

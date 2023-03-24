@@ -7,7 +7,7 @@
     <insert id="registerSalesOrder">
         INSERT INTO 受注.受注 (受注ID, 顧客ID, 受注日, 都道府県, 住所)
         VALUES (
-                   #{salesOrderNumber},
+                   #{salesOrderId},
                    #{salesOrder.customer.code.value},
                    #{salesOrder.orderedDate.value},
                    #{salesOrder.shippingAddress.prefecture},
@@ -18,6 +18,7 @@
     <select id="salesOrderOf" resultType="guide.tm.domain.model.salesorder.content.SalesOrderContent">
         SELECT
             受注ID,
+            受注番号    AS "salesOrderNumber.value",
             受注.顧客ID AS "customer.code.value",
             顧客姓 AS "customer.name.lastName",
             顧客名 AS "customer.name.firstName",
@@ -28,11 +29,12 @@
             住所 AS "shippingAddress.addressLine"
         FROM 受注.受注
         INNER JOIN 顧客.顧客 ON 受注.顧客ID = 顧客.顧客ID
-        WHERE 受注ID = #{salesOrderNumber.value}
+        WHERE 受注ID = #{salesOrderId.value}
     </select>
 
     <select id="salesOrderSummaries" resultType="guide.tm.domain.model.salesorder.order.SalesOrderSummary">
-        SELECT 受注ID      AS "salesOrderNumber.value",
+        SELECT 受注ID      AS "salesOrderId.value",
+               受注番号    AS "salesOrderNumber.value",
                受注.顧客ID AS "customer.code.value",
                顧客姓        AS "customer.name.lastName",
                顧客名        AS "customer.name.firstName",
@@ -62,13 +64,13 @@
         SELECT
             計算方式 AS "taxSumType"
         FROM 受注.消費税計算方式
-        WHERE 受注番号 = #{salesOrderNumber.value}
+        WHERE 受注番号 = #{salesOrderId.value}
     </select>
 
     <insert id="registerTax">
         INSERT INTO 受注.消費税計算方式 (受注番号, 計算方式)
         VALUES (
-                #{salesOrderNumber.value},
+                #{salesOrderId.value},
                 #{taxSumType}
                )
     </insert>

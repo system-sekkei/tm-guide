@@ -1,16 +1,16 @@
 package guide.tm.application.service.salesorder;
 
-import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItems;
 import guide.tm.domain.model.salesorder.orderitem.request.SalesOrderItemRequest;
 import guide.tm.domain.model.salesorder.orderitem.single.SingleProductOrderItems;
 
 public interface SalesOrderItemRepository {
-    SingleProductOrderItems singleProductOrderItemsOf(SalesOrderNumber salesOrderNumber);
+    SingleProductOrderItems singleProductOrderItemsOf(SalesOrderId salesOrderId);
 
-    BundleProductOrderItems bundleProductOrderItemsOf(SalesOrderNumber salesOrderNumber);
+    BundleProductOrderItems bundleProductOrderItemsOf(SalesOrderId salesOrderId);
 
-    void registerSingleProductOrder(SalesOrderNumber salesOrderNumber, SalesOrderItemRequest salesOrderItemRequest);
+    void registerSingleProductOrder(SalesOrderId salesOrderId, SalesOrderItemRequest salesOrderItemRequest);
 
-    void registerBundleProductOrder(SalesOrderNumber salesOrderNumber, SalesOrderItemRequest salesOrderItemRequest);
+    void registerBundleProductOrder(SalesOrderId salesOrderId, SalesOrderItemRequest salesOrderItemRequest);
 }

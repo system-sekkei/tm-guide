@@ -1,6 +1,6 @@
 package guide.tm.infrastructure.datasource.salesorder;
 
-import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItem;
 import guide.tm.domain.model.salesorder.orderitem.request.SalesOrderItemRequest;
 import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItem;
@@ -14,18 +14,18 @@ import java.util.UUID;
 interface SalesOrderItemMapper {
 
     List<SingleOrderItem> salesOrderItemsOf(
-            @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber);
+            @Param("salesOrderId") SalesOrderId salesOrderId);
 
     List<BundleProductOrderItem> bundleProductOrderItemsOf(
-            @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber);
+            @Param("salesOrderId") SalesOrderId salesOrderId);
 
     void registerSingleProductOrder(
-            @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber,
+            @Param("salesOrderId") SalesOrderId salesOrderId,
             @Param("saleOrderItemNumber") UUID saleOrderItemNumber,
             @Param("salesOrderItemRequest") SalesOrderItemRequest salesOrderItemRequest);
 
     void registerBundleProductOrder(
-            @Param("salesOrderNumber") SalesOrderNumber salesOrderNumber,
+            @Param("salesOrderId") SalesOrderId salesOrderId,
             @Param("saleOrderItemNumber") UUID saleOrderItemNumber,
             @Param("salesOrderItemRequest") SalesOrderItemRequest salesOrderItemRequest);
 }

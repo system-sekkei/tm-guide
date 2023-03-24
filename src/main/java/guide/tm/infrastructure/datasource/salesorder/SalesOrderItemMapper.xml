@@ -13,13 +13,13 @@
             受注数量 AS "singleOrderItemContent.quantity.value"
         FROM 受注.受注明細
         INNER JOIN 商品.商品 ON 商品.商品コード = 受注明細.商品コード
-        WHERE 受注ID = #{salesOrderNumber.value}
+        WHERE 受注ID = #{salesOrderId.value}
     </select>
 
     <insert id="registerSingleProductOrder">
         INSERT INTO 受注.受注明細 (受注ID, 受注明細番号, 商品コード, 受注数量)
         VALUES (
-                   #{salesOrderNumber.value},
+                   #{salesOrderId.value},
                    #{saleOrderItemNumber},
                    #{salesOrderItemRequest.productCode.value},
                    #{salesOrderItemRequest.quantity.value}
@@ -29,7 +29,7 @@
     <insert id="registerBundleProductOrder">
         INSERT INTO 受注.セット商品受注明細 (受注番号, 受注明細番号, 商品コード, 受注数量)
         VALUES (
-                   #{salesOrderNumber.value},
+                   #{salesOrderId.value},
                    #{saleOrderItemNumber},
                    #{salesOrderItemRequest.productCode.value},
                    #{salesOrderItemRequest.quantity.value}
@@ -65,7 +65,7 @@
         INNER JOIN 商品.セット商品 ON セット商品受注明細.商品コード = セット商品.商品コード
         INNER JOIN 商品.セット商品組合せ ON セット商品.商品コード = セット商品組合せ.セット商品コード
         INNER JOIN 商品.商品 ON 商品.商品コード = セット商品組合せ.商品コード
-        WHERE 受注.受注ID = #{salesOrderNumber.value}
+        WHERE 受注.受注ID = #{salesOrderId.value}
     </select>
 
 </mapper>

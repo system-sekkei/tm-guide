@@ -1,6 +1,7 @@
 package guide.tm.domain.model.salesorder.content;
 
 import guide.tm.domain.model.customer.Customer;
+import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.AssertFalse;
 
@@ -8,16 +9,18 @@ import jakarta.validation.constraints.AssertFalse;
  * 受注
  */
 public class SalesOrderContent {
+    SalesOrderNumber salesOrderNumber;
     Customer customer;
     OrderedDate orderedDate;
     @Valid
     ShippingAddress shippingAddress;
 
     public SalesOrderContent() {
-        this(new Customer(), new OrderedDate(), new ShippingAddress());
+        this(new SalesOrderNumber(), new Customer(), new OrderedDate(), new ShippingAddress());
     }
 
-    public SalesOrderContent(Customer customer, OrderedDate orderedDate, ShippingAddress shippingAddress) {
+    public SalesOrderContent(SalesOrderNumber salesOrderNumber, Customer customer, OrderedDate orderedDate, ShippingAddress shippingAddress) {
+        this.salesOrderNumber = salesOrderNumber;
         this.customer = customer;
         this.orderedDate = orderedDate;
         this.shippingAddress = shippingAddress;

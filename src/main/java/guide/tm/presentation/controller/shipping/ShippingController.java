@@ -1,7 +1,7 @@
 package guide.tm.presentation.controller.shipping;
 
 import guide.tm.application.scenario.shipping.ShippingScenario;
-import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("shipping/sales-order/{salesOrderNumber}")
+@RequestMapping("shipping/sales-order/{salesOrderId}")
 class ShippingController {
 
     ShippingScenario shippingScenario;
@@ -20,9 +20,9 @@ class ShippingController {
 
     @PostMapping
     String registerShipping(
-            @PathVariable SalesOrderNumber salesOrderNumber,
+            @PathVariable("salesOrderId") SalesOrderId salesOrderId,
             RedirectAttributes redirectAttributes) {
-        shippingScenario.registerShippingOf(salesOrderNumber);
+        shippingScenario.registerShippingOf(salesOrderId);
         redirectAttributes.addFlashAttribute("message", "出荷指示を登録しました");
         return "redirect:/sales-orders/{salesOrderNumber}/allocations";
     }

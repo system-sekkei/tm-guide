@@ -1,7 +1,7 @@
 package guide.tm.application.service.salesorder;
 
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
-import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.salesorder.order.SalesOrderSearchCriteria;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
 import guide.tm.domain.model.tax.context.TaxSumType;
@@ -21,17 +21,16 @@ public class SalesOrderService {
     /**
      * 受注を登録する
      */
-    public SalesOrderNumber registerSalesOrder(SalesOrderContent salesOrder) {
+    public SalesOrderId registerSalesOrder(SalesOrderContent salesOrder) {
         return salesOrderRepository.registerSalesOrder(salesOrder);
     }
 
     /**
      * 受注を取得する
      */
-    public SalesOrderContent salesOrderOf(SalesOrderNumber salesOrderNumber) {
-        return salesOrderRepository.salesOrderOf(salesOrderNumber);
+    public SalesOrderContent salesOrderOf(SalesOrderId salesOrderId) {
+        return salesOrderRepository.salesOrderOf(salesOrderId);
     }
-
 
     /**
      * 受注の一覧を取得する
@@ -43,14 +42,14 @@ public class SalesOrderService {
     /**
      * 受注時の消費税を取得する
      */
-    public TaxSumType taxSumTypeOf(SalesOrderNumber salesOrderNumber) {
-        return salesOrderRepository.taxSumTypeOf(salesOrderNumber);
+    public TaxSumType taxSumTypeOf(SalesOrderId salesOrderId) {
+        return salesOrderRepository.taxSumTypeOf(salesOrderId);
     }
 
     /**
      * 消費税を登録する
      */
-    public void registerTax(TaxSumType taxSumType, SalesOrderNumber salesOrderNumber) {
-        salesOrderRepository.registerTax(taxSumType, salesOrderNumber);
+    public void registerTax(TaxSumType taxSumType, SalesOrderId salesOrderId) {
+        salesOrderRepository.registerTax(taxSumType, salesOrderId);
     }
 }

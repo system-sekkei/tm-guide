@@ -4,7 +4,7 @@ import guide.tm.application.scenario.salesorder.SalesOrderScenario;
 import guide.tm.application.service.allocation.AllocationService;
 import guide.tm.application.service.shipping.ShippingItemService;
 import guide.tm.application.service.shipping.ShippingService;
-import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.shipping.content.ShippingInstruction;
 import guide.tm.domain.model.status.orderstatus.SalesOrderStatus;
 import org.springframework.stereotype.Service;
@@ -37,9 +37,9 @@ public class ShippingScenario {
      * - 全ての引当が出荷済の場合、何もしない
      * - 出荷指示のない引当に対して、出荷指示を行う
      */
-    public void registerShippingOf(SalesOrderNumber salesOrderNumber) {
+    public void registerShippingOf(SalesOrderId salesOrderId) {
 
-        SalesOrderStatus salesOrderStatus = salesOrderScenario.status(salesOrderNumber);
+        SalesOrderStatus salesOrderStatus = salesOrderScenario.status(salesOrderId);
 
         ShippingInstruction shippingInstruction = salesOrderStatus.create();
 

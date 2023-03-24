@@ -117,7 +117,7 @@
       <td class="text-end" th:text="${singleOrderItemStatus.remainingQuantity}">2</td>
       <td class="text-center">
         <span class="btn btn-info" th:if="${singleOrderItemStatus.shippingStatus.isInstructed}">指示済</span>
-        <span class="btn btn-warning" th:unless="${singleOrderItemStatus.shippingStatus.isInstructed}">未指示</span>
+        <span class="btn btn-warning" th:unless="${singleOrderItemStatus.shippingStatus.isInstructed}"aria-disabled="true">未指示</span>
       </td>
     </tr>
     <tr th:each="bundleOrderItemStatus: ${salesOrderStatus.bundleOrderItemStatusList.list}">
