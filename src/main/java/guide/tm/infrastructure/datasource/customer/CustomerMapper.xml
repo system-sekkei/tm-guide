@@ -5,7 +5,7 @@
 <mapper namespace="guide.tm.infrastructure.datasource.customer.CustomerMapper">
 
     <insert id="register">
-        INSERT INTO 顧客.顧客 (顧客番号, 顧客姓, 顧客名, 顧客姓カナ, 顧客名カナ, 個人法人区分)
+        INSERT INTO 顧客.顧客 (顧客ID, 顧客姓, 顧客名, 顧客姓カナ, 顧客名カナ, 個人法人区分)
         VALUES (
                 #{customer.code.value},
                 #{customer.name.lastName},
@@ -18,7 +18,7 @@
 
     <select id="summaries" resultType="guide.tm.domain.model.customer.CustomerSummary">
         SELECT
-            顧客番号 AS "code.value",
+            顧客ID AS "code.value",
             顧客姓 AS "name.value",
             顧客名
         FROM 顧客.顧客
@@ -27,7 +27,7 @@
     <select id="customerSummariesOf" resultType="guide.tm.domain.model.customer.CustomerSummary">
 
         SELECT
-            顧客番号 AS "code.value",
+            顧客ID AS "code.value",
             顧客姓 AS "name.lastName",
             顧客名 AS "name.firstName",
             顧客姓カナ AS "nameKana.lastName",

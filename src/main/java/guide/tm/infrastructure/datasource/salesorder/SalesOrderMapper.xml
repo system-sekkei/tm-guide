@@ -5,7 +5,7 @@
 <mapper namespace="guide.tm.infrastructure.datasource.salesorder.SalesOrderMapper">
 
     <insert id="registerSalesOrder">
-        INSERT INTO 受注.受注 (受注番号, 顧客番号, 受注日, 都道府県, 住所)
+        INSERT INTO 受注.受注 (受注ID, 顧客ID, 受注日, 都道府県, 住所)
         VALUES (
                    #{salesOrderNumber},
                    #{salesOrder.customer.code.value},
@@ -17,8 +17,8 @@
 
     <select id="salesOrderOf" resultType="guide.tm.domain.model.salesorder.content.SalesOrderContent">
         SELECT
-            受注番号,
-            受注.顧客番号 AS "customer.code.value",
+            受注ID,
+            受注.顧客ID AS "customer.code.value",
             顧客姓 AS "customer.name.lastName",
             顧客名 AS "customer.name.firstName",
             顧客姓カナ AS "customer.nameKana.lastName",
@@ -27,20 +27,20 @@
             都道府県 AS "shippingAddress.prefecture",
             住所 AS "shippingAddress.addressLine"
         FROM 受注.受注
-        INNER JOIN 顧客.顧客 ON 受注.顧客番号 = 顧客.顧客番号
-        WHERE 受注番号 = #{salesOrderNumber.value}
+        INNER JOIN 顧客.顧客 ON 受注.顧客ID = 顧客.顧客ID
+        WHERE 受注ID = #{salesOrderNumber.value}
     </select>
 
     <select id="salesOrderSummaries" resultType="guide.tm.domain.model.salesorder.order.SalesOrderSummary">
-        SELECT 受注番号      AS "salesOrderNumber.value",
-               受注.顧客番号 AS "customer.code.value",
+        SELECT 受注ID      AS "salesOrderNumber.value",
+               受注.顧客ID AS "customer.code.value",
                顧客姓        AS "customer.name.lastName",
                顧客名        AS "customer.name.firstName",
                顧客姓カナ      AS "customer.nameKana.lastName",
                顧客名カナ      AS "customer.nameKana.firstName",
                受注日        AS "orderedDate.value"
         FROM 受注.受注
-                 INNER JOIN 顧客.顧客 ON 受注.顧客番号 = 顧客.顧客番号
+                 INNER JOIN 顧客.顧客 ON 受注.顧客ID = 顧客.顧客ID
         <where>
               (
                   顧客姓 LIKE CONCAT('%', #{salesOrderSearchCriteria.customerName}, '%')

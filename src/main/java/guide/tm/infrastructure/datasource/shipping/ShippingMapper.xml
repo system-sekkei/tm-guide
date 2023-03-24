@@ -46,16 +46,16 @@
     <select id="shippingInstructions" resultType="guide.tm.domain.model.shipping.content.ShippingInstructionSummary">
         SELECT 出荷指示.出荷番号 AS "shippingNumber.value",
                出荷日 AS "shippingInstructionContent.shippingDate.value",
-               受注.受注番号 AS "shippingInstructionContent.salesOrderNumber.value",
+               受注.受注ID AS "shippingInstructionContent.salesOrderNumber.value",
                受注日 AS "orderedDate.value",
-               顧客.顧客番号 AS "customer.code.value",
+               顧客.顧客ID AS "customer.code.value",
                顧客姓 AS "customer.name.lastName",
                顧客名 AS "customer.name.firstName",
                顧客姓カナ AS "customer.nameKana.lastName",
                顧客名カナ AS "customer.nameKana.firstName"
         FROM 出荷指示.出荷指示
-        INNER JOIN 受注.受注 ON 出荷指示.受注番号 = 受注.受注番号
-        INNER JOIN 顧客.顧客 ON 受注.顧客番号 = 顧客.顧客番号
+        INNER JOIN 受注.受注 ON 出荷指示.受注番号 = 受注.受注ID
+        INNER JOIN 顧客.顧客 ON 受注.顧客ID = 顧客.顧客ID
         INNER JOIN 出荷指示._未出荷 ON 出荷指示.出荷番号 = 出荷指示._未出荷.出荷番号
     </select>
 

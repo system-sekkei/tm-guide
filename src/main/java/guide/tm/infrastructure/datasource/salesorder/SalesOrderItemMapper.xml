@@ -61,11 +61,11 @@
             商品.商品単価 AS "個別商品単価",
             受注数量
         FROM 受注.セット商品受注明細
-        INNER JOIN 受注.受注 ON 受注.受注番号 = セット商品受注明細.受注番号
+        INNER JOIN 受注.受注 ON 受注.受注ID = セット商品受注明細.受注番号
         INNER JOIN 商品.セット商品 ON セット商品受注明細.商品コード = セット商品.商品コード
         INNER JOIN 商品.セット商品組合せ ON セット商品.商品コード = セット商品組合せ.セット商品コード
         INNER JOIN 商品.商品 ON 商品.商品コード = セット商品組合せ.商品コード
-        WHERE 受注.受注番号 = #{salesOrderNumber.value}
+        WHERE 受注.受注ID = #{salesOrderNumber.value}
     </select>
 
 </mapper>
