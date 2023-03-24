@@ -13,11 +13,11 @@
             受注数量 AS "singleOrderItemContent.quantity.value"
         FROM 受注.受注明細
         INNER JOIN 商品.商品 ON 商品.商品コード = 受注明細.商品コード
-        WHERE 受注番号 = #{salesOrderNumber.value}
+        WHERE 受注ID = #{salesOrderNumber.value}
     </select>
 
     <insert id="registerSingleProductOrder">
-        INSERT INTO 受注.受注明細 (受注番号, 受注明細番号, 商品コード, 受注数量)
+        INSERT INTO 受注.受注明細 (受注ID, 受注明細番号, 商品コード, 受注数量)
         VALUES (
                    #{salesOrderNumber.value},
                    #{saleOrderItemNumber},
