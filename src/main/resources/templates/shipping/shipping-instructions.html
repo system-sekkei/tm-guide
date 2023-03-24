@@ -22,7 +22,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="instructionSummary: ${shippingInstructionSummaries.list}">
+    <tr class="align-middle" th:each="instructionSummary: ${shippingInstructionSummaries.list}">
       <td class="text-center" th:text="${instructionSummary.customer.name}">顧客名称</td>
       <td class="text-center" th:text="${instructionSummary.orderedDate}">受注日</td>
       <td class="text-center" th:text="${instructionSummary.shippingInstructionContent.shippingDate}">出荷指示日</td>

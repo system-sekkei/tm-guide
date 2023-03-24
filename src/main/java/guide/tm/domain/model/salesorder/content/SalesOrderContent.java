@@ -26,6 +26,10 @@ public class SalesOrderContent {
         this.shippingAddress = shippingAddress;
     }
 
+    public SalesOrderNumber salesOrderNumber() {
+        return salesOrderNumber;
+    }
+
     public Customer customer() {
         return customer;
     }

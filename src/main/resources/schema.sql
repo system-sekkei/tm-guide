@@ -202,9 +202,9 @@ CREATE TABLE 出荷指示.出荷指示
 (
     出荷番号 UUID NOT NULL,
     出荷日 DATE NOT NULL,
-    受注番号 UUID NOT NULL,
+    受注ID UUID NOT NULL,
     PRIMARY KEY (出荷番号),
-    FOREIGN KEY (受注番号) REFERENCES 受注.受注 (受注ID),
+    FOREIGN KEY (受注ID) REFERENCES 受注.受注 (受注ID),
     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 

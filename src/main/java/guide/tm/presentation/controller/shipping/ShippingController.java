@@ -24,7 +24,7 @@ class ShippingController {
             RedirectAttributes redirectAttributes) {
         shippingScenario.registerShippingOf(salesOrderId);
         redirectAttributes.addFlashAttribute("message", "出荷指示を登録しました");
-        return "redirect:/sales-orders/{salesOrderNumber}/allocations";
+        return "redirect:/sales-orders/{salesOrderId}/allocations";
     }
 
 }

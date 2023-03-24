@@ -5,10 +5,10 @@
 <mapper namespace="guide.tm.infrastructure.datasource.shipping.ShippingMapper">
 
     <insert id="register">
-        INSERT INTO 出荷指示.出荷指示 (出荷番号, 受注番号, 出荷日)
+        INSERT INTO 出荷指示.出荷指示 (出荷番号, 受注ID, 出荷日)
         VALUES (
                 #{shippingNumber},
-                #{shipping.salesOrderNumber.value},
+                #{shipping.salesOrderId.value},
                 #{shipping.shippingDate.value}
                )
     </insert>
@@ -54,7 +54,7 @@
                顧客姓カナ AS "customer.nameKana.lastName",
                顧客名カナ AS "customer.nameKana.firstName"
         FROM 出荷指示.出荷指示
-        INNER JOIN 受注.受注 ON 出荷指示.受注番号 = 受注.受注ID
+        INNER JOIN 受注.受注 ON 出荷指示.受注ID = 受注.受注ID
         INNER JOIN 顧客.顧客 ON 受注.顧客ID = 顧客.顧客ID
         INNER JOIN 出荷指示._未出荷 ON 出荷指示.出荷番号 = 出荷指示._未出荷.出荷番号
     </select>
