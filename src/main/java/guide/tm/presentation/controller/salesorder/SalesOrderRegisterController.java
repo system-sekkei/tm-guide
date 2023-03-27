@@ -76,12 +76,12 @@ class SalesOrderRegisterController {
     @InitBinder("salesOrderContent")
     void bindSalesOrderContent(WebDataBinder binder) {
         binder.setAllowedFields(
-                "customer.code.value",
+                "customer.customerId",
                 "customer.name.lastName",
                 "customer.name.firstName",
                 "shippingAddress.prefecture",
                 "shippingAddress.addressLine",
-                "orderedDate.value"
+                "orderedDate"
         );
     }
 }

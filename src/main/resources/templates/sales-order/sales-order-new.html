@@ -24,7 +24,7 @@
         <label class="form-label">顧客名称</label>
         <div class="row">
           <span class="col-1">
-            <input type="hidden" class="form-control" id="customer-code" th:field="*{customer.customerId.value}" readonly>
+            <input type="hidden" class="form-control" id="customer-code" th:field="*{customer.customerId}" readonly>
             <input type="text" class="form-control " id="customer-last-name" th:field="*{customer.name.lastName}"
                    data-bs-toggle="modal" data-bs-target="#customerModal"
                    readonly>
@@ -48,7 +48,7 @@
           <span class="col-3">
             <input type="date" class="form-control" id="orderedDate"
                th:classappend="${#fields.hasErrors('orderedDate*')}? 'is-invalid'"
-               th:field="*{orderedDate.value}">
+               th:field="*{orderedDate}">
           </span>
         </div>
       </div>

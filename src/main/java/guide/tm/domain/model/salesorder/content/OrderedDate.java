@@ -18,6 +18,7 @@ public class OrderedDate {
 
     @Override
     public String toString() {
+        if (value == null) return "";
         return value.format(DateTimeFormatter.ISO_DATE);
     }
 
