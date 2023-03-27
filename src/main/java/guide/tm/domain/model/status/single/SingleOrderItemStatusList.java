@@ -47,4 +47,8 @@ public class SingleOrderItemStatusList {
     public void forEach(Consumer<SingleOrderItemStatus> consumer) {
         list.forEach(consumer);
     }
+
+    public boolean isAllAllocated() {
+        return list.stream().allMatch(SingleOrderItemStatus::isAllAllocated);
+    }
 }

@@ -40,4 +40,6 @@ public interface AllocationRepository {
      * セット商品の引当を取得する
      */
     BundleAllocations bundleAllocations(SalesOrderId salesOrderId);
+
+    void markAsCompleted(SalesOrderId salesOrderId);
 }

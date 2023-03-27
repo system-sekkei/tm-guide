@@ -47,4 +47,8 @@ public class BundleOrderItemStatusList {
     public void forEach(Consumer<BundleOrderItemStatus> consumer) {
         list.forEach(consumer);
     }
+
+    public boolean isAllAllocated() {
+        return list.stream().allMatch(BundleOrderItemStatus::isAllAllocated);
+    }
 }

@@ -59,4 +59,8 @@ public class AllocationDataSource implements AllocationRepository {
         return new BundleAllocations(allocationMapper.bundleAllocationsOf(salesOrderId));
     }
 
+    @Override
+    public void markAsCompleted(SalesOrderId salesOrderId) {
+        allocationMapper.markAsCompleted(salesOrderId);
+    }
 }

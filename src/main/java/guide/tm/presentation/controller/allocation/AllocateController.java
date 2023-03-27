@@ -1,7 +1,7 @@
 package guide.tm.presentation.controller.allocation;
 
+import guide.tm.application.scenario.allocation.AllocationScenario;
 import guide.tm.application.scenario.salesorder.SalesOrderScenario;
-import guide.tm.application.service.allocation.AllocationService;
 import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.status.orderstatus.SalesOrderStatus;
 import org.springframework.stereotype.Controller;
@@ -14,17 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 class AllocateController {
 
     SalesOrderScenario salesOrderScenario;
-    AllocationService allocationService;
+    AllocationScenario allocationScenario;
 
-    AllocateController(SalesOrderScenario salesOrderScenario, AllocationService allocationService) {
+    AllocateController(SalesOrderScenario salesOrderScenario, AllocationScenario allocationScenario) {
         this.salesOrderScenario = salesOrderScenario;
-        this.allocationService = allocationService;
+        this.allocationScenario = allocationScenario;
     }
 
     @PostMapping
     String allocateSalesOrder(@PathVariable("salesOrderId") SalesOrderId salesOrderId) {
         SalesOrderStatus salesOrderStatus = salesOrderScenario.status(salesOrderId);
-        allocationService.allocateSalesOrder(salesOrderStatus, salesOrderId);
+        allocationScenario.allocate(salesOrderStatus, salesOrderId);
         return "redirect:/sales-orders/{salesOrderId}/allocations";
     }
 

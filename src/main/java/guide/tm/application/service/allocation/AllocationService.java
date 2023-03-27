@@ -99,4 +99,11 @@ public class AllocationService {
     public Allocations allocationsOf(SalesOrderId salesOrderId) {
         return new Allocations(singleAllocationsOf(salesOrderId), bundleAllocations(salesOrderId));
     }
+
+    /**
+     * 引当完了を記録する
+     */
+    public void markAsCompleted(SalesOrderId salesOrderId) {
+        allocationRepository.markAsCompleted(salesOrderId);
+    }
 }

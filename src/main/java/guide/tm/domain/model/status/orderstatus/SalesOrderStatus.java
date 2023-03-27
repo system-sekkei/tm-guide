@@ -87,4 +87,7 @@ public class SalesOrderStatus {
         return salesOrder;
     }
 
+    public boolean isAllAllocated() {
+        return singleOrderItemStatusList().isAllAllocated() && bundleOrderItemStatusList().isAllAllocated();
+    }
 }

@@ -43,6 +43,11 @@
                )
     </insert>
 
+    <insert id="markAsCompleted">
+        INSERT INTO 引当.引当完了受注 (受注ID)
+        VALUES (#{salesOrderId.value})
+    </insert>
+
     <resultMap id="SingleAllocation" type="guide.tm.domain.model.allocation.single.SingleAllocation">
         <id property="singleAllocationNumber.value" column="引当番号"/>
         <result property="salesOrderNumber.value" column="受注番号"/>

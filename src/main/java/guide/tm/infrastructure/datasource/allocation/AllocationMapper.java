@@ -42,4 +42,6 @@ interface AllocationMapper {
 
     List<BundleAllocation> bundleAllocationsOf(
             @Param("salesOrderId") SalesOrderId salesOrderId);
+
+    void markAsCompleted(@Param("salesOrderId") SalesOrderId salesOrderId);
 }
