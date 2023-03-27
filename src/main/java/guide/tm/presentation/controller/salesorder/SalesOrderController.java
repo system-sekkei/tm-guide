@@ -57,8 +57,8 @@ class SalesOrderController {
     @InitBinder("salesOrderSearchCriteria")
     void bindSalesOrderContent(WebDataBinder binder) {
         binder.setAllowedFields(
-                "from.value",
-                "to.value",
+                "from",
+                "to",
                 "customerName"
         );
     }

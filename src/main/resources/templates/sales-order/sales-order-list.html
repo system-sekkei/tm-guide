@@ -19,7 +19,7 @@
         <label for="orderedDateFrom" class="form-label">受注日From</label>
           <input type="date" class="form-control" id="orderedDateFrom"
                  th:classappend="${#fields.hasErrors('orderedDate*')}? 'is-invalid'"
-                 th:field="*{from.value}">
+                 th:field="*{from}">
         </span>
         <span class="col-1  text-center">
         <label for="orderedDateFrom" class="form-label">&nbsp;</label>
@@ -31,7 +31,7 @@
         <label for="orderedDateFrom" class="form-label">受注日To</label>
             <input type="date" class="form-control" id="orderedDateTo"
                    th:classappend="${#fields.hasErrors('orderedDate*')}? 'is-invalid'"
-                   th:field="*{to.value}">
+                   th:field="*{to}">
         </span>
         <div class="col-md-4">
           <label for="customerNameCriteria" class="form-label">顧客名称</label>
