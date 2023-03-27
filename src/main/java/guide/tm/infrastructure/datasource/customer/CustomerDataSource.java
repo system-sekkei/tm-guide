@@ -2,6 +2,7 @@ package guide.tm.infrastructure.datasource.customer;
 
 import guide.tm.application.service.customer.CustomerRepository;
 import guide.tm.domain.model.customer.Customer;
+import guide.tm.domain.model.customer.CustomerNumber;
 import guide.tm.domain.model.customer.CustomerSearchCriteria;
 import guide.tm.domain.model.customer.CustomerSummaries;
 import org.springframework.stereotype.Repository;
@@ -17,7 +18,8 @@ public class CustomerDataSource implements CustomerRepository {
 
     @Override
     public void register(Customer customer) {
-        customerMapper.register(customer);
+        CustomerNumber customerNumber = new CustomerNumber(String.valueOf(customerMapper.newCustomerNumber()));
+        customerMapper.register(customer, customerNumber);
     }
 
     @Override

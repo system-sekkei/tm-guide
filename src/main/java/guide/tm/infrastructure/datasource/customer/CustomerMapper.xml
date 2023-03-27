@@ -5,9 +5,10 @@
 <mapper namespace="guide.tm.infrastructure.datasource.customer.CustomerMapper">
 
     <insert id="register">
-        INSERT INTO 顧客.顧客 (顧客ID, 顧客姓, 顧客名, 顧客姓カナ, 顧客名カナ, 個人法人区分)
+        INSERT INTO 顧客.顧客 (顧客ID, 顧客番号, 顧客姓, 顧客名, 顧客姓カナ, 顧客名カナ, 個人法人区分)
         VALUES (
                 #{customer.customerId.value},
+                #{customerNumber.value},
                 #{customer.name.lastName},
                 #{customer.name.firstName},
                 #{customer.name.lastName},
@@ -37,5 +38,9 @@
            OR 顧客名 LIKE CONCAT('%', #{customerSearchCriteria.customerName}, '%')
            OR 顧客姓カナ LIKE CONCAT('%', #{customerSearchCriteria.customerName}, '%')
            OR 顧客名カナ LIKE CONCAT('%', #{customerSearchCriteria.customerName}, '%')
+    </select>
+
+    <select id="newCustomerNumber" resultType="long">
+        SELECT nextval('顧客.顧客番号')
     </select>
 </mapper>
