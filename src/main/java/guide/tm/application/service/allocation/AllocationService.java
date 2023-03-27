@@ -7,6 +7,7 @@ import guide.tm.domain.model.allocation.content.Allocations;
 import guide.tm.domain.model.allocation.location.AllocatedLocations;
 import guide.tm.domain.model.allocation.single.SingleAllocations;
 import guide.tm.domain.model.allocation.stock.Stocks;
+import guide.tm.domain.model.allocation.summary.AllocationSummaries;
 import guide.tm.domain.model.salesorder.content.ShippingAddress;
 import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItem;
@@ -105,5 +106,12 @@ public class AllocationService {
      */
     public void markAsCompleted(SalesOrderId salesOrderId) {
         allocationRepository.markAsCompleted(salesOrderId);
+    }
+
+    /**
+     * 引当一覧を取得する
+     */
+    public AllocationSummaries search() {
+        return allocationRepository.search();
     }
 }

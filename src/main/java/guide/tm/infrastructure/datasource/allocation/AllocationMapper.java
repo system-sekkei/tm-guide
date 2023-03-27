@@ -4,6 +4,7 @@ import guide.tm.domain.model.allocation.bundle.BundleAllocation;
 import guide.tm.domain.model.allocation.bundle.BundleAllocationNumber;
 import guide.tm.domain.model.allocation.location.AllocatedLocation;
 import guide.tm.domain.model.allocation.single.SingleAllocation;
+import guide.tm.domain.model.allocation.summary.AllocationSummary;
 import guide.tm.domain.model.product.single.SingleProduct;
 import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItem;
@@ -44,4 +45,8 @@ interface AllocationMapper {
             @Param("salesOrderId") SalesOrderId salesOrderId);
 
     void markAsCompleted(@Param("salesOrderId") SalesOrderId salesOrderId);
+
+    List<AllocationSummary> searchAllocated();
+
+    List<AllocationSummary> searchNotAllocated(@Param("salesOrderIds") List<SalesOrderId> salesOrderIds);
 }

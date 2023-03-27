@@ -22,4 +22,8 @@ public class SalesOrderNumber {
     public boolean isSame(SalesOrderNumber other) {
         return value.equals(other.value);
     }
+
+    public int compareTo(SalesOrderNumber other) {
+        return value.compareTo(other.value);
+    }
 }

@@ -15,4 +15,5 @@ public class SalesOrderId {
     public String toString() {
         return value;
     }
+
 }

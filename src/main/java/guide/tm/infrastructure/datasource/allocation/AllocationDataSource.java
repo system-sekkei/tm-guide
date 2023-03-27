@@ -5,12 +5,15 @@ import guide.tm.domain.model.allocation.bundle.BundleAllocationNumber;
 import guide.tm.domain.model.allocation.bundle.BundleAllocations;
 import guide.tm.domain.model.allocation.location.AllocatedLocations;
 import guide.tm.domain.model.allocation.single.SingleAllocations;
+import guide.tm.domain.model.allocation.summary.AllocationSummaries;
+import guide.tm.domain.model.allocation.summary.AllocationSummary;
 import guide.tm.domain.model.product.single.SingleProduct;
 import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItem;
 import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItem;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -62,5 +65,13 @@ public class AllocationDataSource implements AllocationRepository {
     @Override
     public void markAsCompleted(SalesOrderId salesOrderId) {
         allocationMapper.markAsCompleted(salesOrderId);
+    }
+
+    @Override
+    public AllocationSummaries search() {
+        List<AllocationSummary> allocated = allocationMapper.searchAllocated();
+        List<SalesOrderId> salesOrderIds = allocated.stream().map(AllocationSummary::salesOrderId).toList();
+        List<AllocationSummary> notAllocated = allocationMapper.searchNotAllocated(salesOrderIds);
+        return new AllocationSummaries(allocated, notAllocated);
     }
 }

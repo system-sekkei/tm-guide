@@ -4,6 +4,7 @@ import guide.tm.domain.model.allocation.bundle.BundleAllocationNumber;
 import guide.tm.domain.model.allocation.bundle.BundleAllocations;
 import guide.tm.domain.model.allocation.location.AllocatedLocations;
 import guide.tm.domain.model.allocation.single.SingleAllocations;
+import guide.tm.domain.model.allocation.summary.AllocationSummaries;
 import guide.tm.domain.model.product.single.SingleProduct;
 import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItem;
@@ -42,4 +43,6 @@ public interface AllocationRepository {
     BundleAllocations bundleAllocations(SalesOrderId salesOrderId);
 
     void markAsCompleted(SalesOrderId salesOrderId);
+
+    AllocationSummaries search();
 }
