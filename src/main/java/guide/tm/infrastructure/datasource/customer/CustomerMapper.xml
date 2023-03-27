@@ -7,7 +7,7 @@
     <insert id="register">
         INSERT INTO 顧客.顧客 (顧客ID, 顧客姓, 顧客名, 顧客姓カナ, 顧客名カナ, 個人法人区分)
         VALUES (
-                #{customer.code.value},
+                #{customer.customerId.value},
                 #{customer.name.lastName},
                 #{customer.name.firstName},
                 #{customer.name.lastName},

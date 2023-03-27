@@ -44,7 +44,7 @@ public class SalesOrderContent {
 
     @AssertFalse(message = "顧客名称を入力してください")
     boolean isCustomerEmpty() {
-        return customer.code().isEmpty();
+        return customer.customerId().isEmpty();
     }
 
     @AssertFalse(message = "受注日を入力してください")

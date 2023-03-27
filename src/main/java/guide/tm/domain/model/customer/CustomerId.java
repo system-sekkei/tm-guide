@@ -3,14 +3,14 @@ package guide.tm.domain.model.customer;
 /**
  * 顧客番号
  */
-public class CustomerNumber {
+public class CustomerId {
     String value;
 
-    public CustomerNumber() {
+    public CustomerId() {
         this("");
     }
 
-    public CustomerNumber(String value) {
+    public CustomerId(String value) {
         this.value = value;
     }
 
@@ -23,7 +23,7 @@ public class CustomerNumber {
         return value.isEmpty();
     }
 
-    public boolean isSame(CustomerNumber other) {
+    public boolean isSame(CustomerId other) {
         return value.equals(other.value);
     }
 }

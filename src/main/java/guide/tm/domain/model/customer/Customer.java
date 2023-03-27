@@ -4,24 +4,24 @@ package guide.tm.domain.model.customer;
  * 顧客
  */
 public class Customer {
-    CustomerNumber code;
+    CustomerId customerId;
     CustomerName name;
     CustomerName nameKana;
     CustomerType type;
 
     public Customer() {
-        this(new CustomerNumber(), new CustomerName(), new CustomerName() ,CustomerType.個人);
+        this(new CustomerId(), new CustomerName(), new CustomerName() ,CustomerType.個人);
     }
 
-    public Customer(CustomerNumber code, CustomerName name, CustomerName nameKana, CustomerType type) {
-        this.code = code;
+    public Customer(CustomerId customerId, CustomerName name, CustomerName nameKana, CustomerType type) {
+        this.customerId = customerId;
         this.name = name;
         this.nameKana = nameKana;
         this.type = type;
     }
 
-    public CustomerNumber code() {
-        return code;
+    public CustomerId customerId() {
+        return customerId;
     }
 
     public CustomerName name() {
@@ -33,6 +33,6 @@ public class Customer {
     }
 
     public boolean isSame(Customer other) {
-        return code.isSame(other.code);
+        return customerId.isSame(other.customerId);
     }
 }

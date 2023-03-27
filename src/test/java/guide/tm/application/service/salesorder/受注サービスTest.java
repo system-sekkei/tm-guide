@@ -1,8 +1,8 @@
 package guide.tm.application.service.salesorder;
 
 import guide.tm.domain.model.customer.Customer;
+import guide.tm.domain.model.customer.CustomerId;
 import guide.tm.domain.model.customer.CustomerName;
-import guide.tm.domain.model.customer.CustomerNumber;
 import guide.tm.domain.model.customer.CustomerType;
 import guide.tm.domain.model.salesorder.content.OrderedDate;
 import guide.tm.domain.model.salesorder.content.Prefecture;
@@ -28,7 +28,7 @@ class 受注サービスTest {
     @Autowired
     guide.tm.application.setup.顧客準備 顧客準備;
 
-    Customer 顧客 = new Customer(new CustomerNumber("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"), new CustomerName("留美", "梅宮"), new CustomerName("ルミ", "ウメミヤ"), CustomerType.個人);
+    Customer 顧客 = new Customer(new CustomerId("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"), new CustomerName("留美", "梅宮"), new CustomerName("ルミ", "ウメミヤ"), CustomerType.個人);
 
     @BeforeEach
     void テストデータの準備() {
@@ -45,7 +45,7 @@ class 受注サービスTest {
         // "受注を取得する"
         SalesOrderContent 登録された受注 = sut.salesOrderOf(受注ID);
 
-        assertTrue(登録された受注.customer().code().isSame(new CustomerNumber("39d3f994-6cd3-4a56-a2b5-d493f030cbc8")));
+        assertTrue(登録された受注.customer().customerId().isSame(new CustomerId("39d3f994-6cd3-4a56-a2b5-d493f030cbc8")));
         assertEquals("梅宮 留美", 登録された受注.customer().name().toString());
         assertTrue(登録された受注.orderedDate().isEqual(new OrderedDate("2023-01-12")));
 
