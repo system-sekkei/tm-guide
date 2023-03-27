@@ -133,7 +133,7 @@
                  INNER JOIN 顧客.顧客 ON 受注.顧客ID = 顧客.顧客ID
         <where>
             <foreach item="salesOrderId" index="index" collection="salesOrderIds"
-                           open="受注ID in (" separator="," close=")">
+                           open="受注ID NOT IN  (" separator="," close=")">
                 #{salesOrderId.value}
             </foreach>
         </where>
