@@ -1,6 +1,7 @@
 package guide.tm.presentation.controller.allocation;
 
 import guide.tm.application.service.allocation.AllocationService;
+import guide.tm.domain.model.allocation.summary.AllocatedStatus;
 import guide.tm.domain.model.allocation.summary.AllocationCriteria;
 import guide.tm.domain.model.allocation.summary.AllocationSummaries;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,11 @@ class AllocationController {
         return new AllocationCriteria();
     }
 
+    @ModelAttribute("allocatedStatuses")
+    AllocatedStatus[] allocatedStatuses() {
+        return AllocatedStatus.values();
+    }
+
     @GetMapping
     String list(
             @ModelAttribute("allocationCriteria") AllocationCriteria allocationCriteria,
@@ -41,6 +47,7 @@ class AllocationController {
     @InitBinder("allocationCriteria")
     void bindSalesOrderContent(WebDataBinder binder) {
         binder.setAllowedFields(
+                "allocationStatusList",
                 "from.value",
                 "to.value"
         );

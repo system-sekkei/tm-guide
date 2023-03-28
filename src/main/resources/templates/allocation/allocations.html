@@ -34,17 +34,11 @@
                    th:name="to.value" th:value="*{to}">
         </span>
         <div class="col-md-4">
-          <label for="flexCheckDefault" class="form-label">引当状況</label>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              未引当
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            <label class="form-check-label" for="flexCheckChecked">
-              引当済
+          <label class="form-label">引当状況</label>
+          <div class="form-check" th:each="allocationStatus: ${allocatedStatuses}">
+            <input class="form-check-input" type="checkbox" th:field="*{allocationStatusList}" th:value="${allocationStatus}" />
+            <label  th:for="${#ids.prev('allocationStatusList')}"
+                    th:text="${allocationStatus.name}">引当済
             </label>
           </div>
         </div>

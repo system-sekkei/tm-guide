@@ -14,6 +14,7 @@ import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItem;
 import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItem;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -70,9 +71,19 @@ public class AllocationDataSource implements AllocationRepository {
 
     @Override
     public AllocationSummaries search(AllocationCriteria allocationCriteria) {
+        List<AllocationSummary> result = new ArrayList<>();
         List<AllocationSummary> allocated = allocationMapper.searchAllocated(allocationCriteria);
-        List<SalesOrderId> allocatedSalesOrderIds = allocated.stream().map(AllocationSummary::salesOrderId).toList();
-        List<AllocationSummary> notAllocated = allocationMapper.searchNotAllocated(allocatedSalesOrderIds, allocationCriteria);
-        return new AllocationSummaries(allocated, notAllocated);
+
+        if (allocationCriteria.containsAllocated()) {
+            result.addAll(allocated);
+        }
+
+        if (allocationCriteria.containsNotAllocated()) {
+            List<SalesOrderId> allocatedSalesOrderIds = allocated.stream().map(AllocationSummary::salesOrderId).toList();
+            List<AllocationSummary> notAllocated = allocationMapper.searchNotAllocated(allocatedSalesOrderIds, allocationCriteria);
+            result.addAll(notAllocated);
+        }
+
+        return new AllocationSummaries(result);
     }
 }
