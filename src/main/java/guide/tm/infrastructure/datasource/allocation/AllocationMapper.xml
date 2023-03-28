@@ -117,6 +117,18 @@
         FROM 受注.受注
             INNER JOIN 顧客.顧客 ON 受注.顧客ID = 顧客.顧客ID
         INNER JOIN 引当.引当完了受注 ON 受注.受注ID = 引当完了受注.受注ID
+        <where>
+            <if test="!allocationCriteria.from.isEmpty()">
+                <![CDATA[
+                  #{allocationCriteria.from.value} <= 受注日
+                ]]>
+            </if>
+            <if test="!allocationCriteria.to.isEmpty()">
+                <![CDATA[
+                  AND 受注日 <= #{allocationCriteria.to.value}
+                ]]>
+            </if>
+        </where>
     </select>
 
     <select id="searchNotAllocated" resultType="guide.tm.domain.model.allocation.summary.AllocationSummary">
@@ -136,6 +148,16 @@
                            open="受注ID NOT IN  (" separator="," close=")">
                 #{salesOrderId.value}
             </foreach>
+            <if test="!allocationCriteria.from.isEmpty()">
+                <![CDATA[
+                  AND #{allocationCriteria.from.value} <= 受注日
+                ]]>
+            </if>
+            <if test="!allocationCriteria.to.isEmpty()">
+                <![CDATA[
+                  AND 受注日 <= #{allocationCriteria.to.value}
+                ]]>
+            </if>
         </where>
     </select>
 </mapper>

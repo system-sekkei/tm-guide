@@ -5,6 +5,7 @@ import guide.tm.domain.model.allocation.bundle.BundleAllocationNumber;
 import guide.tm.domain.model.allocation.bundle.BundleAllocations;
 import guide.tm.domain.model.allocation.location.AllocatedLocations;
 import guide.tm.domain.model.allocation.single.SingleAllocations;
+import guide.tm.domain.model.allocation.summary.AllocationCriteria;
 import guide.tm.domain.model.allocation.summary.AllocationSummaries;
 import guide.tm.domain.model.allocation.summary.AllocationSummary;
 import guide.tm.domain.model.product.single.SingleProduct;
@@ -68,10 +69,10 @@ public class AllocationDataSource implements AllocationRepository {
     }
 
     @Override
-    public AllocationSummaries search() {
-        List<AllocationSummary> allocated = allocationMapper.searchAllocated();
-        List<SalesOrderId> salesOrderIds = allocated.stream().map(AllocationSummary::salesOrderId).toList();
-        List<AllocationSummary> notAllocated = allocationMapper.searchNotAllocated(salesOrderIds);
+    public AllocationSummaries search(AllocationCriteria allocationCriteria) {
+        List<AllocationSummary> allocated = allocationMapper.searchAllocated(allocationCriteria);
+        List<SalesOrderId> allocatedSalesOrderIds = allocated.stream().map(AllocationSummary::salesOrderId).toList();
+        List<AllocationSummary> notAllocated = allocationMapper.searchNotAllocated(allocatedSalesOrderIds, allocationCriteria);
         return new AllocationSummaries(allocated, notAllocated);
     }
 }

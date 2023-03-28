@@ -52,10 +52,14 @@
                       OR 顧客名カナ LIKE CONCAT('%', #{salesOrderSearchCriteria.customerName}, '%')
               )
             <if test="!salesOrderSearchCriteria.from.isEmpty()">
-                AND #{salesOrderSearchCriteria.from.value} <![CDATA[ <= ]]> 受注日
+                <![CDATA[
+                  AND #{salesOrderSearchCriteria.from.value} <= 受注日
+                ]]>
             </if>
             <if test="!salesOrderSearchCriteria.to.isEmpty()">
-                 AND 受注日 <![CDATA[ <= ]]> #{salesOrderSearchCriteria.to.value}
+                <![CDATA[
+                  AND 受注日 <= #{salesOrderSearchCriteria.to.value}
+                ]]>
             </if>
         </where>
 

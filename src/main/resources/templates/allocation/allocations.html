@@ -12,12 +12,14 @@
 
 <div class="container">
 
-  <form method="get" th:action="@{/sales-orders}" class="mt-3">
+  <form method="get" th:action="@{/allocations}" class="mt-3" th:object="${allocationCriteria}">
     <div class="mb-3 row">
       <div class="row">
         <span class="col-2">
         <label for="orderedDateFrom" class="form-label">受注日From</label>
-          <input type="date" class="form-control" id="orderedDateFrom">
+           <input type="date" class="form-control" id="orderedDateFrom"
+                  th:classappend="${#fields.hasErrors('orderedDate*')}? 'is-invalid'"
+                  th:name="from.value" th:value="*{from}">
         </span>
         <span class="col-1  text-center">
         <label for="orderedDateFrom" class="form-label">&nbsp;</label>
@@ -27,7 +29,9 @@
         </span>
         <span class="col-2">
         <label for="orderedDateFrom" class="form-label">受注日To</label>
-            <input type="date" class="form-control" id="orderedDateTo">
+            <input type="date" class="form-control" id="orderedDateTo"
+                   th:classappend="${#fields.hasErrors('orderedDate*')}? 'is-invalid'"
+                   th:name="to.value" th:value="*{to}">
         </span>
         <div class="col-md-4">
           <label for="flexCheckDefault" class="form-label">引当状況</label>
