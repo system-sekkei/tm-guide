@@ -64,7 +64,7 @@
     </thead>
     <tbody>
     <tr th:each="allocationSummary : ${allocationSummaries.list}">
-      <td class="align-middle"><a th:href="@{|/sales-orders/${allocationSummary.salesOrderSummary.salesOrderId}|}" th:text="${allocationSummary.salesOrderSummary.salesOrderNumber}">12345678978</a></td>
+      <td class="align-middle"><a th:href="@{|/sales-orders/${allocationSummary.salesOrderSummary.salesOrderId}/allocations|}" th:text="${allocationSummary.salesOrderSummary.salesOrderNumber}">12345678978</a></td>
       <td th:text="${allocationSummary.salesOrderSummary.orderedDate}" class="align-middle">2022-12-22</td>
       <td th:text="${allocationSummary.salesOrderSummary.customer.name}" class="align-middle">本田正勝</td>
       <td>
@@ -72,30 +72,6 @@
         <h5 th:if="${allocationSummary.allocatedStatus.isAllocated}"><span class="badge bg-success" th:text="${allocationSummary.allocatedStatus}">引当済</span></h5>
       </td>
     </tr>
-<!--    <tr>-->
-<!--      <td class="align-middle"><a href="">1234567</a></td>-->
-<!--      <td class="align-middle">2023-03-01</td>-->
-<!--      <td class="align-middle">山田 耕作</td>-->
-<!--      <td><h5><span class="badge bg-warning ">引当残あり</span></h5></td>-->
-<!--    </tr>-->
-<!--    <tr>-->
-<!--      <td class="align-middle"><a href="">1234610</a></td>-->
-<!--      <td class="align-middle">2023-03-02</td>-->
-<!--      <td class="align-middle">古谷 有</td>-->
-<!--      <td><h5><span class="badge bg-danger">未引当</span></h5></td>-->
-<!--    </tr>-->
-<!--    <tr>-->
-<!--      <td class="align-middle"><a href="">3461012</a></td>-->
-<!--      <td class="align-middle">2023-03-03</td>-->
-<!--      <td class="align-middle">大岡 睦</td>-->
-<!--      <td><h5><span class="badge bg-success">引当済</span></h5></td>-->
-<!--    </tr>-->
-<!--    <tr>-->
-<!--      <td class="align-middle"><a href="">610123</a></td>-->
-<!--      <td class="align-middle">2023-03-05</td>-->
-<!--      <td class="align-middle">川村 由香子</td>-->
-<!--      <td><h5><span class="badge bg-danger ">未引当</span></h5></td>-->
-<!--    </tr>-->
     </tbody>
   </table>
 

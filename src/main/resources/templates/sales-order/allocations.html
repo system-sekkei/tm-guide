@@ -109,13 +109,13 @@
       <td class="align-middle" th:text="${singleOrderItemStatus.singleOrderItem.product.name}">個別商品名</td>
       <td class="text-end align-middle" th:text="${singleOrderItemStatus.singleOrderItem.product.unitPrice}">879</td>
       <td class="text-end align-middle" th:text="${singleOrderItemStatus.singleOrderItem.quantity}">2</td>
-      <td class="text-center" >
+      <td class="text-center align-middle" >
         <h4><span class="badge bg-info " th:if="${singleOrderItemStatus.isAllAllocated}">引当済み</span></h4>
         <h4><span class="badge bg-warning " th:unless="${singleOrderItemStatus.isAllAllocated}">引当残あり</span></h4>
       </td>
       <td class="text-end align-middle" th:text="${singleOrderItemStatus.allocatedQuantity}">2</td>
       <td class="text-end align-middle" th:text="${singleOrderItemStatus.remainingQuantity}">2</td>
-      <td class="text-center">
+      <td class="text-center align-middle">
         <h4><span class="badge bg-info" th:if="${singleOrderItemStatus.shippingStatus.isInstructed}">指示済</span></h4>
         <h4><span class="badge bg-warning " th:unless="${singleOrderItemStatus.shippingStatus.isInstructed}" >未指示</span></h4>
       </td>
@@ -133,9 +133,9 @@
       </td>
       <td class="text-end" th:text="${bundleOrderItemStatus.allocatedQuantity}">2</td>
       <td class="text-end" th:text="${bundleOrderItemStatus.remainingQuantity}">2</td>
-      <td class="text-center">
-        <span class="btn btn-info" th:if="${bundleOrderItemStatus.shippingStatus.isInstructed}">指示済</span>
-        <span class="btn btn-warning" th:unless="${bundleOrderItemStatus.shippingStatus.isInstructed}">未指示</span>
+      <td class="text-center align-middle">
+        <span class="badge bg-info" th:if="${bundleOrderItemStatus.shippingStatus.isInstructed}">指示済</span>
+        <span class="badge bg-warning " th:unless="${bundleOrderItemStatus.shippingStatus.isInstructed}">未指示</span>
       </td>
     </tr>
 
