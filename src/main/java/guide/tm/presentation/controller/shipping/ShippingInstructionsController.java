@@ -3,6 +3,8 @@ package guide.tm.presentation.controller.shipping;
 import guide.tm.application.service.shipping.ShippingService;
 import guide.tm.domain.model.shipping.content.ShippingInstructionSummaries;
 import guide.tm.domain.model.shipping.content.ShippingNumber;
+import guide.tm.domain.model.shipping.summary.ShippingInstructionCriteria;
+import guide.tm.domain.model.shipping.summary.ShippingInstructionStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -18,8 +20,18 @@ class ShippingInstructionsController {
         this.shippingService = shippingService;
     }
 
+
+    @ModelAttribute("shippingInstructionStatuses")
+    ShippingInstructionStatus[] shippingInstructionStatuses() {
+        return ShippingInstructionStatus.values();
+    }
+
+
     @GetMapping
-    String list(Model model) {
+    String list(
+            @ModelAttribute("shippingInstructionCriteria") ShippingInstructionCriteria shippingInstructionCriteria,
+            Model model) {
+//        model.addAttribute("shippingInstructionCriteria", new ShippingInstructionCriteria());
         ShippingInstructionSummaries shippingInstructionSummaries = shippingService.shippingInstructionSummaries();
         model.addAttribute("shippingInstructionSummaries", shippingInstructionSummaries);
         return "shipping/shipping-instructions";
@@ -35,6 +47,15 @@ class ShippingInstructionsController {
     void bindOrderItem(WebDataBinder binder) {
         binder.setAllowedFields(
                 "value"
+        );
+    }
+
+    @InitBinder("shippingInstructionCriteria")
+    void bindSalesOrderContent(WebDataBinder binder) {
+        binder.setAllowedFields(
+                "shippingInstructionStatusList",
+                "from.value",
+                "to.value"
         );
     }
 }
