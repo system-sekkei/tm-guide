@@ -22,11 +22,6 @@ class AllocationController {
         this.allocationService = allocationService;
     }
 
-    @ModelAttribute("allocationCriteria")
-    AllocationCriteria allocationCriteria() {
-        return new AllocationCriteria();
-    }
-
     @ModelAttribute("allocatedStatuses")
     AllocatedStatus[] allocatedStatuses() {
         return AllocatedStatus.values();

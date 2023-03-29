@@ -4,6 +4,7 @@ import guide.tm.application.service.shipping.ShippingRepository;
 import guide.tm.domain.model.shipping.content.ShippingInstruction;
 import guide.tm.domain.model.shipping.content.ShippingInstructionSummaries;
 import guide.tm.domain.model.shipping.content.ShippingNumber;
+import guide.tm.domain.model.shipping.summary.ShippingInstructionCriteria;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
@@ -39,8 +40,8 @@ public class ShippingDataSource implements ShippingRepository {
     }
 
     @Override
-    public ShippingInstructionSummaries shippingInstructionSummaries() {
-        return new ShippingInstructionSummaries(shippingMapper.shippingInstructions());
+    public ShippingInstructionSummaries shippingInstructionSummaries(ShippingInstructionCriteria shippingInstructionCriteria) {
+        return new ShippingInstructionSummaries(shippingMapper.shippingInstructions(shippingInstructionCriteria));
     }
 
 }

@@ -3,6 +3,7 @@ package guide.tm.application.service.shipping;
 import guide.tm.domain.model.shipping.content.ShippingInstruction;
 import guide.tm.domain.model.shipping.content.ShippingInstructionSummaries;
 import guide.tm.domain.model.shipping.content.ShippingNumber;
+import guide.tm.domain.model.shipping.summary.ShippingInstructionCriteria;
 import org.springframework.stereotype.Service;
 
 /**
@@ -26,8 +27,8 @@ public class ShippingService {
     /**
      * 出荷指示のリストを取得する
      */
-    public ShippingInstructionSummaries shippingInstructionSummaries() {
-        return shippingRepository.shippingInstructionSummaries();
+    public ShippingInstructionSummaries shippingInstructionSummaries(ShippingInstructionCriteria shippingInstructionCriteria) {
+        return shippingRepository.shippingInstructionSummaries(shippingInstructionCriteria);
     }
 
     /**

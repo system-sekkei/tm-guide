@@ -5,6 +5,7 @@ import guide.tm.domain.model.allocation.single.SingleAllocation;
 import guide.tm.domain.model.shipping.content.ShippingInstructionContent;
 import guide.tm.domain.model.shipping.content.ShippingInstructionSummary;
 import guide.tm.domain.model.shipping.content.ShippingNumber;
+import guide.tm.domain.model.shipping.summary.ShippingInstructionCriteria;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -29,7 +30,8 @@ interface ShippingMapper {
     void markShipping(
             @Param("shippingNumber") ShippingNumber shippingNumber);
 
-    List<ShippingInstructionSummary> shippingInstructions();
+    List<ShippingInstructionSummary> shippingInstructions(
+            @Param("shippingInstructionCriteria") ShippingInstructionCriteria shippingInstructionCriteria);
 
     void recordUnshippingSate(
             @Param("shippingNumber") UUID shippingNumber);
