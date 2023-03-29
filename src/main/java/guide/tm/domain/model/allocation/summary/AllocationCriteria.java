@@ -2,6 +2,7 @@ package guide.tm.domain.model.allocation.summary;
 
 import guide.tm.domain.model.salesorder.content.OrderedDate;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class AllocationCriteria {
@@ -14,6 +15,7 @@ public class AllocationCriteria {
     public AllocationCriteria() {
         this.from = new OrderedDate();
         this.to = new OrderedDate();
+        this.allocationStatusList = Arrays.asList(AllocatedStatus.引当済, AllocatedStatus.引当残あり);
     }
 
     public OrderedDate from() {
