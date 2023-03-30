@@ -1,5 +1,6 @@
 package guide.tm.application.service.shipping;
 
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.shipping.content.ShippingInstruction;
 import guide.tm.domain.model.shipping.content.ShippingInstructionSummaries;
 import guide.tm.domain.model.shipping.content.ShippingNumber;
@@ -38,4 +39,10 @@ public class ShippingService {
         shippingRepository.markShipping(shippingNumber);
     }
 
+    /**
+     * 全明細が出荷指示済の受注を記録する
+     */
+    public void markAsInstructed(SalesOrderId salesOrderId) {
+        shippingRepository.markAsInstructed(salesOrderId);
+    }
 }

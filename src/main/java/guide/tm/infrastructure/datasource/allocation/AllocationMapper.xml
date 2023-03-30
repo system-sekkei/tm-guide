@@ -98,12 +98,6 @@
         WHERE 受注番号 = #{salesOrderId.value}
     </select>
 
-    <select id="search" resultType="guide.tm.domain.model.allocation.summary.AllocationSummary">
-        SELECT *
-        FROM 受注.受注
-        WHERE
-    </select>
-
     <select id="searchAllocated" resultType="guide.tm.domain.model.allocation.summary.AllocationSummary">
         SELECT 受注.受注ID      AS "salesOrderSummary.salesOrderId.value",
                受注番号    AS "salesOrderSummary.salesOrderNumber.value",

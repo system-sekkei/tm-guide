@@ -19,7 +19,7 @@ class ShippingController {
     }
 
     @PostMapping
-    String registerShipping(
+    String registerShippingInstruction(
             @PathVariable("salesOrderId") SalesOrderId salesOrderId,
             RedirectAttributes redirectAttributes) {
         shippingScenario.registerShippingOf(salesOrderId);

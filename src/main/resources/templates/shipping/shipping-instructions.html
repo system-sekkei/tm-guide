@@ -66,13 +66,18 @@
     </thead>
     <tbody>
     <tr class="align-middle" th:each="instructionSummary: ${shippingInstructionSummaries.list}">
-      <td class="text-center" th:text="${instructionSummary.orderedDate}">受注番号</td>
+      <td class="text-center">
+        <a th:href="@{|/sales-orders/${instructionSummary.salesOrderId}/allocations|}" th:text="${instructionSummary.shippingInstructionContent.salesOrderNumber}">受注番号12345678978</a>
+      </td>
       <td class="text-center" th:text="${instructionSummary.orderedDate}">受注日</td>
       <td class="text-center" th:text="${instructionSummary.customer.name}">顧客名称</td>
       <td class="text-center" th:text="${instructionSummary.shippingInstructionContent.shippingDate}">出荷指示日</td>
-      <td class="text-center "><h5><span class="badge bg-success">出荷指示済</span></h5></td>
+      <td class="text-center ">
+        <h5 th:unless="${instructionSummary.shippingInstructionStatus.isInstructed}"><span class="badge bg-warning" th:text="${instructionSummary.shippingInstructionStatus}">出荷指示残あり</span></h5>
+        <h5 th:if="${instructionSummary.shippingInstructionStatus.isInstructed}"><span class="badge bg-success" th:text="${instructionSummary.shippingInstructionStatus}">出荷指示済</span></h5>
+      </td>
       <td class="text-center" >
-        <form method="post" th:action="@{/shipping/instructions}">
+        <form method="post" th:action="@{/shipping/instructions}" th:if="${instructionSummary.shippingInstructionStatus.isInstructed}">
           <button type="submit" class="btn btn-primary" th:name="value" th:value="${instructionSummary.shippingNumber}">出荷済として消し込む</button>
         </form>
 

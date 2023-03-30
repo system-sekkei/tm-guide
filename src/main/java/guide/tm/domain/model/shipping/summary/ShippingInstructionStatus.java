@@ -6,4 +6,8 @@ package guide.tm.domain.model.shipping.summary;
 public enum ShippingInstructionStatus {
     出荷指示残あり,
     出荷指示済;
+
+    public boolean isInstructed() {
+        return this == 出荷指示済;
+    }
 }

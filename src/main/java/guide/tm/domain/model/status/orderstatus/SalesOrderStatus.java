@@ -7,6 +7,7 @@ import guide.tm.domain.model.allocation.single.SingleAllocation;
 import guide.tm.domain.model.allocation.single.SingleAllocations;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderId;
+import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import guide.tm.domain.model.shipping.content.ShippingDate;
 import guide.tm.domain.model.shipping.content.ShippingInstruction;
 import guide.tm.domain.model.shipping.content.ShippingInstructionContent;
@@ -74,7 +75,7 @@ public class SalesOrderStatus {
         BundleAllocations bundleAllocationsToShip = allocatedBundleOrderItem.notShippedItemAllocations();
 
         return new ShippingInstruction(
-                new ShippingInstructionContent(salesOrderId(), new ShippingDate(LocalDate.now())),
+                new ShippingInstructionContent(salesOrderId(), new SalesOrderNumber(), new ShippingDate(LocalDate.now())),
                 singleAllocationsToShip,
                 bundleAllocationsToShip);
     }

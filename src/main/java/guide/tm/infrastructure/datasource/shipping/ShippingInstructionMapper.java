@@ -2,6 +2,7 @@ package guide.tm.infrastructure.datasource.shipping;
 
 import guide.tm.domain.model.allocation.bundle.BundleAllocation;
 import guide.tm.domain.model.allocation.single.SingleAllocation;
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.shipping.content.ShippingInstructionContent;
 import guide.tm.domain.model.shipping.content.ShippingInstructionSummary;
 import guide.tm.domain.model.shipping.content.ShippingNumber;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Mapper
-interface ShippingMapper {
+interface ShippingInstructionMapper {
 
     void register(
             @Param("shipping") ShippingInstructionContent shippingInstructionContent,
@@ -30,12 +31,19 @@ interface ShippingMapper {
     void markShipping(
             @Param("shippingNumber") ShippingNumber shippingNumber);
 
-    List<ShippingInstructionSummary> shippingInstructions(
-            @Param("shippingInstructionCriteria") ShippingInstructionCriteria shippingInstructionCriteria);
-
     void recordUnshippingSate(
             @Param("shippingNumber") UUID shippingNumber);
 
     void deleteUnshippingState(
             @Param("shippingNumber") ShippingNumber shippingNumber);
+
+    void markAsInstructed(
+            @Param("salesOrderId") SalesOrderId salesOrderId);
+
+    List<ShippingInstructionSummary> searchInstructed(
+            @Param("shippingInstructionCriteria") ShippingInstructionCriteria shippingInstructionCriteria);
+
+    List<ShippingInstructionSummary> searchNotInstructed(
+            @Param("instructedSalesOrderIds") List<SalesOrderId> instructedSalesOrderIds,
+            @Param("shippingInstructionCriteria") ShippingInstructionCriteria shippingInstructionCriteria);
 }

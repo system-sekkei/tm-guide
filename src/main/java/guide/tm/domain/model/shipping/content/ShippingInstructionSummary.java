@@ -2,6 +2,8 @@ package guide.tm.domain.model.shipping.content;
 
 import guide.tm.domain.model.customer.Customer;
 import guide.tm.domain.model.salesorder.content.OrderedDate;
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
+import guide.tm.domain.model.shipping.summary.ShippingInstructionStatus;
 
 /**
  * 出荷指示
@@ -11,6 +13,8 @@ public class ShippingInstructionSummary {
     ShippingInstructionContent shippingInstructionContent;
     OrderedDate orderedDate;
     Customer customer;
+
+    ShippingInstructionStatus shippingInstructionStatus;
 
     public ShippingNumber shippingNumber() {
         return shippingNumber;
@@ -26,5 +30,13 @@ public class ShippingInstructionSummary {
 
     public Customer customer() {
         return customer;
+    }
+
+    public SalesOrderId salesOrderId() {
+        return shippingInstructionContent.salesOrderId;
+    }
+
+    public ShippingInstructionStatus shippingInstructionStatus() {
+        return shippingInstructionStatus;
     }
 }

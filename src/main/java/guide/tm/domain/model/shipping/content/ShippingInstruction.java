@@ -18,7 +18,7 @@ public class ShippingInstruction {
         this.bundleAllocations = bundleAllocations;
     }
 
-    public boolean isAllShipped() {
+    public boolean isAllInstructed() {
         return singleAllocations.isEmpty() && bundleAllocations.isEmpty();
     }
 

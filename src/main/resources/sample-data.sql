@@ -125,7 +125,8 @@ VALUES ('830e5e03-970c-411b-a64b-4cccfe0716a7', '97c1ed01-e28e-44c1-8ecb-dfebbec
 INSERT INTO 出荷指示._未出荷 (出荷番号)
 VALUES ('830e5e03-970c-411b-a64b-4cccfe0716a7');
 
-
+INSERT INTO 出荷指示._指示済受注 (受注ID)
+VALUES ('9be70cad-7fd9-4589-8913-a9d5cf7d128e');
 
 
 
