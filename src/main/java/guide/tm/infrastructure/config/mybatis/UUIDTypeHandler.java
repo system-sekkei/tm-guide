@@ -34,15 +34,7 @@ public class UUIDTypeHandler implements TypeHandler<UUID> {
     }
 
     private static UUID toUUID(String value) {
-        if (value == null) return null;
-        if (value.isEmpty()) return null;
-
-        try {
-            return UUID.fromString(value);
-        } catch (IllegalArgumentException e) {
-            LOG.warn("Bad UUID found: {}", value);
-        }
-        return null;
+        return UUID.fromString(value);
     }
 
 }

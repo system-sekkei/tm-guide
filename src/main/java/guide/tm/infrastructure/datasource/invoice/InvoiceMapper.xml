@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guide.tm.infrastructure.datasource.invoice.InvoiceMapper">
+
+    <select id="invoicedSummaries" resultType="guide.tm.domain.model.invoice.InvoiceSummary">
+        SELECT
+            請求.請求ID AS "invoiceId.value",
+            請求.請求番号 AS "invoiceId.number",
+            請求.請求日 AS "invoiceDate.value",
+            請求.受注年月 AS "orderedYearMonth.value",
+            顧客.顧客ID  AS "customerId.value",
+            顧客.顧客姓  AS "customerName.lastName",
+            顧客.顧客名 AS "customerName.firstName",
+            '請求済' AS "invoiceStatus"
+        FROM 請求.請求
+            INNER JOIN 請求.請求済受注 ON 請求.請求ID = 請求済受注.請求ID
+                 INNER JOIN 顧客.顧客 ON 請求.顧客ID = 顧客.顧客ID
+                 INNER JOIN 受注.受注 ON 請求済受注.受注ID = 受注.受注ID
+    </select>
+
+    <select id="notInvoicedSummaries" resultType="guide.tm.domain.model.invoice.InvoiceSummary">
+        SELECT
+            顧客.顧客ID  AS "customerId.value",
+            顧客.顧客姓  AS "customerName.lastName",
+            顧客.顧客名 AS "customerName.firstName",
+            date_trunc('month', 受注.受注日)::date AS "orderedYearMonth.value",
+            '未請求' AS "invoiceStatus"
+        FROM 出荷指示.出荷済
+                 INNER JOIN 出荷指示.出荷指示 ON 出荷指示.出荷番号 = 出荷済.出荷番号
+                 INNER JOIN 受注.受注 ON 出荷指示.受注ID = 受注.受注ID
+                 INNER JOIN 顧客.顧客 ON 受注.顧客ID = 顧客.顧客ID
+        GROUP BY 顧客.顧客ID, "orderedYearMonth.value"
+    </select>
+</mapper>

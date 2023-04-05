@@ -13,14 +13,4 @@
         DELETE FROM 出荷指示._未出荷 WHERE 出荷番号 = #{shippingNumber.value}
     </delete>
 
-    <select id="shippedOrders" resultType="guide.tm.domain.model.invoice.InvoiceSummary">
-        SELECT
-            顧客.顧客ID,
-            顧客.顧客名,
-            受注.受注日
-        FROM 出荷指示.出荷済
-        INNER JOIN 出荷指示.出荷指示 ON 出荷指示.出荷番号 = 出荷済.出荷番号
-        INNER JOIN 受注.受注 ON 出荷指示.受注ID = 受注.受注ID
-        INNER JOIN 顧客.顧客 ON 受注.顧客ID = 顧客.顧客ID
-    </select>
 </mapper>
