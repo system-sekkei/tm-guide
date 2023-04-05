@@ -37,8 +37,8 @@ class ShippingInstructionsController {
     }
 
     @PostMapping
-    String markShipping(@ModelAttribute("shippingNumber") ShippingNumber shippingNumber) {
-        shippingService.markShipping(shippingNumber);
+    String markAsShipped(@ModelAttribute("shippingNumber") ShippingNumber shippingNumber) {
+        shippingService.markAsShipped(shippingNumber);
         return "redirect:/shipping/instructions";
     }
 

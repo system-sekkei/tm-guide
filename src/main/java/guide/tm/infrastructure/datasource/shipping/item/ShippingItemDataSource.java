@@ -1,4 +1,4 @@
-package guide.tm.infrastructure.datasource.shipping;
+package guide.tm.infrastructure.datasource.shipping.item;
 
 import guide.tm.application.service.shipping.ShippingItemRepository;
 import guide.tm.domain.model.salesorder.order.SalesOrderId;

@@ -5,7 +5,7 @@
 <mapper namespace="guide.tm.infrastructure.datasource.allocation.AllocationMapper">
 
     <insert id="registerSingleAllocation">
-        INSERT INTO 引当.個別商品引当 (引当番号, 受注番号, 受注明細番号, 商品コード)
+        INSERT INTO 引当.個別商品引当 (引当番号, 受注ID, 受注明細番号, 商品コード)
         VALUES (
                 #{allocationNumber},
                 #{salesOrderId.value},
@@ -61,14 +61,14 @@
 
     <select id="singleAllocationsOf" resultMap="SingleAllocation">
         SELECT 個別商品引当.引当番号 AS "引当番号",
-               受注番号,
+               受注ID,
                受注明細番号,
                商品コード,
                倉庫コード,
                引当数量
         FROM 引当.個別商品引当
                  INNER JOIN 引当.個別商品引当明細 ON 個別商品引当.引当番号 = 個別商品引当明細.引当番号
-        WHERE 受注番号 = #{salesOrderId.value}
+        WHERE 受注ID = #{salesOrderId.value}
     </select>
 
     <resultMap id="BundleAllocation" type="guide.tm.domain.model.allocation.bundle.BundleAllocation">

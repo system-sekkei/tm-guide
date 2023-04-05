@@ -1,11 +1,10 @@
-package guide.tm.infrastructure.datasource.shipping;
+package guide.tm.infrastructure.datasource.shipping.instruction;
 
 import guide.tm.domain.model.allocation.bundle.BundleAllocation;
 import guide.tm.domain.model.allocation.single.SingleAllocation;
 import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.shipping.content.ShippingInstructionContent;
 import guide.tm.domain.model.shipping.content.ShippingInstructionSummary;
-import guide.tm.domain.model.shipping.content.ShippingNumber;
 import guide.tm.domain.model.shipping.summary.ShippingInstructionCriteria;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -28,14 +27,8 @@ interface ShippingInstructionMapper {
             @Param("shippingNumber") UUID shippingNumber,
             @Param("bundleAllocation") BundleAllocation bundleAllocation);
 
-    void markShipping(
-            @Param("shippingNumber") ShippingNumber shippingNumber);
-
     void recordUnshippingSate(
             @Param("shippingNumber") UUID shippingNumber);
-
-    void deleteUnshippingState(
-            @Param("shippingNumber") ShippingNumber shippingNumber);
 
     void markAsInstructed(
             @Param("salesOrderId") SalesOrderId salesOrderId);

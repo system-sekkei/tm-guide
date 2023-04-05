@@ -145,11 +145,11 @@ CREATE SCHEMA 引当;
 CREATE TABLE 引当.個別商品引当
 (
     引当番号 UUID NOT NULL,
-    受注番号 UUID NOT NULL,
+    受注ID UUID NOT NULL,
     受注明細番号 UUID NOT NULL,
     商品コード VARCHAR(10) NOT NULL,
     PRIMARY KEY (引当番号),
-    FOREIGN KEY (受注番号, 受注明細番号) REFERENCES 受注.受注明細 (受注ID, 受注明細番号),
+    FOREIGN KEY (受注ID, 受注明細番号) REFERENCES 受注.受注明細 (受注ID, 受注明細番号),
     FOREIGN KEY (商品コード) REFERENCES 商品.商品 (商品コード),
     作成日時 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="guide.tm.infrastructure.datasource.shipping.ShippingInstructionMapper">
+<mapper namespace="guide.tm.infrastructure.datasource.shipping.instruction.ShippingInstructionMapper">
 
     <insert id="register">
         INSERT INTO 出荷指示.出荷指示 (出荷番号, 受注ID, 出荷日)
@@ -34,19 +34,10 @@
                 )
     </insert>
 
-    <insert id="markShipping">
-        INSERT INTO 出荷指示.出荷済 (出荷番号)
-        VALUES (#{shippingNumber.value})
-    </insert>
-
     <insert id="markAsInstructed">
         INSERT INTO 出荷指示._指示済受注(受注ID)
         VALUES (#{salesOrderId.value})
     </insert>
-
-    <delete id="deleteUnshippingState">
-        DELETE FROM 出荷指示._未出荷 WHERE 出荷番号 = #{shippingNumber.value}
-    </delete>
 
     <select id="searchInstructed" resultType="guide.tm.domain.model.shipping.content.ShippingInstructionSummary">
         SELECT 出荷指示.出荷番号 AS "shippingNumber.value",
