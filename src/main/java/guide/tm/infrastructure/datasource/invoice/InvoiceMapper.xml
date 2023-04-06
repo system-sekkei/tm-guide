@@ -21,6 +21,16 @@
         VALUES (#{invoiceId}, #{salesOrder.salesOrderId.value})
     </insert>
 
+    <insert id="recordUnInvoiced">
+        INSERT INTO 請求._未請求受注(受注ID)
+        VALUES (#{salesOrderId.value})
+    </insert>
+
+    <delete id="deleteUnInvoicedSalesOrder">
+        DELETE FROM 請求._未請求受注
+        WHERE 受注ID = #{salesOrderId.value}
+    </delete>
+
     <select id="newInvoiceNumber" resultType="long">
         SELECT nextval('請求.請求番号')
     </select>
@@ -49,9 +59,10 @@
             date_trunc('month', 受注.受注日)::date AS "orderedYearMonth.value",
             '未請求' AS "invoiceStatus"
         FROM 出荷指示.出荷済
-                 INNER JOIN 出荷指示.出荷指示 ON 出荷指示.出荷番号 = 出荷済.出荷番号
-                 INNER JOIN 受注.受注 ON 出荷指示.受注ID = 受注.受注ID
-                 INNER JOIN 顧客.顧客 ON 受注.顧客ID = 顧客.顧客ID
+            INNER JOIN 出荷指示.出荷指示 ON 出荷指示.出荷番号 = 出荷済.出荷番号
+            INNER JOIN 受注.受注 ON 出荷指示.受注ID = 受注.受注ID
+            INNER JOIN 請求._未請求受注 ON 受注.受注ID = _未請求受注.受注ID
+            INNER JOIN 顧客.顧客 ON 受注.顧客ID = 顧客.顧客ID
         GROUP BY 顧客.顧客ID, "orderedYearMonth.value"
     </select>
 

@@ -1,6 +1,7 @@
 package guide.tm.application.service.invoice;
 
 import guide.tm.domain.model.invoice.*;
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.salesorder.order.SalesOrderIdList;
 import guide.tm.domain.model.salesorder.order.SalesOrders;
 import org.springframework.stereotype.Service;
@@ -40,5 +41,9 @@ public class InvoiceService {
      */
     public SalesOrderIdList salesOrderIdsOf(InvoiceId invoiceId) {
         return invoiceRepository.salesOrderIdsOf(invoiceId);
+    }
+
+    public void recordUnInvoiced(SalesOrderId salesOrderId) {
+        invoiceRepository.recordUnInvoiced(salesOrderId);
     }
 }

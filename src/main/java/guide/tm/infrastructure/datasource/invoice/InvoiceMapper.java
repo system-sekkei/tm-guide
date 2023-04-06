@@ -38,4 +38,10 @@ interface InvoiceMapper {
 
     List<SalesOrderId> salesOrderIdListOf(
             @Param("invoiceId") InvoiceId invoiceId);
+
+    void recordUnInvoiced(
+            @Param("salesOrderId") SalesOrderId salesOrderId);
+
+    void deleteUnInvoicedSalesOrder(
+            @Param("salesOrderId") SalesOrderId salesOrderId);
 }

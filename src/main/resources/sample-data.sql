@@ -154,8 +154,9 @@ VALUES ('dcef1bea-e18f-4558-97f7-2aa0ac52ebef')
 ;
 
 
-
-
+INSERT INTO 請求._未請求受注(受注ID)
+VALUES ('352081d8-b028-4a7e-a278-4cb33c62b7b7')
+;
 
 
 INSERT INTO 在庫._在庫 (商品コード, 倉庫コード, 在庫数量)

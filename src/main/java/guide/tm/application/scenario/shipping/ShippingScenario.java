@@ -2,6 +2,7 @@ package guide.tm.application.scenario.shipping;
 
 import guide.tm.application.scenario.salesorder.SalesOrderScenario;
 import guide.tm.application.service.allocation.AllocationService;
+import guide.tm.application.service.invoice.InvoiceService;
 import guide.tm.application.service.shipping.ShippingItemService;
 import guide.tm.application.service.shipping.ShippingService;
 import guide.tm.domain.model.salesorder.order.SalesOrderId;
@@ -19,16 +20,19 @@ public class ShippingScenario {
     ShippingItemService shippingItemService;
     SalesOrderScenario salesOrderScenario;
     AllocationService allocationService;
+    InvoiceService invoiceService;
 
     ShippingScenario(
             ShippingService shippingService,
             ShippingItemService shippingItemService,
             SalesOrderScenario salesOrderScenario,
-            AllocationService allocationService) {
+            AllocationService allocationService,
+            InvoiceService invoiceService) {
         this.shippingService = shippingService;
         this.shippingItemService = shippingItemService;
         this.salesOrderScenario = salesOrderScenario;
         this.allocationService = allocationService;
+        this.invoiceService = invoiceService;
     }
 
     /**
@@ -53,6 +57,7 @@ public class ShippingScenario {
         ShippingInstruction afterInstructed = afterInstructedSalesOrderStatus.create();;
         if (afterInstructedSalesOrderStatus.isAllAllocated() && afterInstructed.isAllInstructed()) {
             shippingService.markAsInstructed(salesOrderId);
+            invoiceService.recordUnInvoiced(salesOrderId);
         }
 
     }
