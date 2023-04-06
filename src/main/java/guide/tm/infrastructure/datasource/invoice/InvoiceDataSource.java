@@ -1,8 +1,8 @@
 package guide.tm.infrastructure.datasource.invoice;
 
 import guide.tm.application.service.invoice.InvoiceRepository;
-import guide.tm.domain.model.customer.CustomerId;
 import guide.tm.domain.model.invoice.*;
+import guide.tm.domain.model.salesorder.order.SalesOrderIdList;
 import guide.tm.domain.model.salesorder.order.SalesOrders;
 import org.springframework.stereotype.Repository;
 
@@ -32,10 +32,22 @@ public class InvoiceDataSource implements InvoiceRepository {
     }
 
     @Override
-    public void register(CustomerId customerId, OrderedYearMonth orderedYearMonth, InvoiceDate invoiceDate, SalesOrders salesOrders) {
+    public void register(InvoiceContent invoiceContent, SalesOrders salesOrders) {
         UUID invoiceId = UUID.randomUUID();
         InvoiceNumber invoiceNumber = new InvoiceNumber(String.valueOf(invoiceMapper.newInvoiceNumber()));
-        invoiceMapper.register(invoiceId, invoiceNumber, customerId, orderedYearMonth.startOfOrderedYearMonth(), invoiceDate);
+        invoiceMapper.register(invoiceId, invoiceNumber, invoiceContent.customerId(), invoiceContent.orderedYearMonth().startOfOrderedYearMonth(), invoiceContent.invoiceDate());
         salesOrders.list().forEach(salesOrder -> invoiceMapper.registerInvoicedSalesOrder(invoiceId, salesOrder));
+    }
+
+    @Override
+    public InvoiceDetail invoiceDetailOf(InvoiceId invoiceId) {
+        InvoiceDetail invoiceDetail = invoiceMapper.invoiceDetailOf(invoiceId);
+        return invoiceDetail;
+    }
+
+    @Override
+    public SalesOrderIdList salesOrderIdsOf(InvoiceId invoiceId) {
+        SalesOrderIdList salesOrderIdList = new SalesOrderIdList(invoiceMapper.salesOrderIdListOf(invoiceId));
+        return salesOrderIdList;
     }
 }

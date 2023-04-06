@@ -28,7 +28,7 @@
     <select id="customerSummariesOf" resultType="guide.tm.domain.model.customer.CustomerSummary">
 
         SELECT
-            顧客ID AS "code.value",
+            顧客ID AS "customerId.value",
             顧客姓 AS "name.lastName",
             顧客名 AS "name.firstName",
             顧客姓カナ AS "nameKana.lastName",
@@ -42,5 +42,16 @@
 
     <select id="newCustomerNumber" resultType="long">
         SELECT nextval('顧客.顧客番号')
+    </select>
+
+    <select id="customerOf" resultType="guide.tm.domain.model.customer.Customer">
+        SELECT
+            顧客ID AS "customerId.value",
+            顧客姓 AS "name.lastName",
+            顧客名 AS "name.firstName",
+            顧客姓カナ AS "nameKana.lastName",
+            顧客名カナ AS "nameKana.firstName"
+        FROM 顧客.顧客
+        WHERE 顧客ID = #{customerId.value}
     </select>
 </mapper>

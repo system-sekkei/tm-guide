@@ -28,7 +28,7 @@
     <select id="invoicedSummaries" resultType="guide.tm.domain.model.invoice.InvoiceSummary">
         SELECT
             請求.請求ID AS "invoiceId.value",
-            請求.請求番号 AS "invoiceId.number",
+            請求.請求番号 AS "invoiceNumber.value",
             請求.請求日 AS "invoiceDate.value",
             請求.受注年月 AS "orderedYearMonth.value",
             顧客.顧客ID  AS "customerId.value",
@@ -54,4 +54,29 @@
                  INNER JOIN 顧客.顧客 ON 受注.顧客ID = 顧客.顧客ID
         GROUP BY 顧客.顧客ID, "orderedYearMonth.value"
     </select>
+
+    <select id="invoiceDetailOf" resultType="guide.tm.domain.model.invoice.InvoiceDetail">
+        SELECT
+            請求.請求ID AS "invoiceId.value",
+            請求.請求番号 AS "invoiceNumber.value",
+            請求.請求日 AS "invoiceDate.value",
+            請求.受注年月 AS "orderedYearMonth.value",
+            顧客.顧客ID  AS "customer.customerId.value",
+            顧客.顧客姓  AS "customer.customerName.lastName",
+            顧客.顧客名 AS "customer.customerName.firstName"
+        FROM 請求.請求
+                 INNER JOIN 請求.請求済受注 ON 請求.請求ID = 請求済受注.請求ID
+                 INNER JOIN 顧客.顧客 ON 請求.顧客ID = 顧客.顧客ID
+                 INNER JOIN 受注.受注 ON 請求済受注.受注ID = 受注.受注ID
+        WHERE 請求.請求ID = #{invoiceId.value}
+    </select>
+
+    <select id="salesOrderIdListOf" resultType="guide.tm.domain.model.salesorder.order.SalesOrderId">
+        SELECT 受注.受注ID AS "value"
+        FROM 請求.請求
+                 INNER JOIN 請求.請求済受注 ON 請求.請求ID = 請求済受注.請求ID
+                 INNER JOIN 受注.受注 ON 請求済受注.受注ID = 受注.受注ID
+        WHERE 請求.請求ID = #{invoiceId.value}
+    </select>
+
 </mapper>

@@ -1,10 +1,7 @@
 package guide.tm.infrastructure.datasource.customer;
 
 import guide.tm.application.service.customer.CustomerRepository;
-import guide.tm.domain.model.customer.Customer;
-import guide.tm.domain.model.customer.CustomerNumber;
-import guide.tm.domain.model.customer.CustomerSearchCriteria;
-import guide.tm.domain.model.customer.CustomerSummaries;
+import guide.tm.domain.model.customer.*;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -30,5 +27,11 @@ public class CustomerDataSource implements CustomerRepository {
     @Override
     public CustomerSummaries customerSummariesOf(CustomerSearchCriteria customerSearchCriteria) {
         return new CustomerSummaries(customerMapper.customerSummariesOf(customerSearchCriteria));
+    }
+
+    @Override
+    public Customer customerOf(CustomerId customerId) {
+        Customer customer = customerMapper.customerOf(customerId);
+        return null;
     }
 }

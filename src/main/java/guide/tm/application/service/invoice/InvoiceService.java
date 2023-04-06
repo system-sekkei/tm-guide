@@ -1,10 +1,7 @@
 package guide.tm.application.service.invoice;
 
-import guide.tm.domain.model.customer.CustomerId;
-import guide.tm.domain.model.invoice.InvoiceDate;
-import guide.tm.domain.model.invoice.InvoiceSearchCriteria;
-import guide.tm.domain.model.invoice.InvoiceSummaries;
-import guide.tm.domain.model.invoice.OrderedYearMonth;
+import guide.tm.domain.model.invoice.*;
+import guide.tm.domain.model.salesorder.order.SalesOrderIdList;
 import guide.tm.domain.model.salesorder.order.SalesOrders;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +24,21 @@ public class InvoiceService {
     /**
      * 請求を登録する
      */
-    public void register(CustomerId customerId, OrderedYearMonth orderedYearMonth, InvoiceDate invoiceDate, SalesOrders salesOrders) {
-        invoiceRepository.register(customerId, orderedYearMonth, invoiceDate, salesOrders);
+    public void register(InvoiceContent invoiceContent, SalesOrders salesOrders) {
+        invoiceRepository.register(invoiceContent, salesOrders);
+    }
+
+    /**
+     * 請求を取得する
+     */
+    public InvoiceDetail invoiceDetailOf(InvoiceId invoiceId) {
+        return invoiceRepository.invoiceDetailOf(invoiceId);
+    }
+
+    /**
+     * 請求済の受注リストを取得する
+     */
+    public SalesOrderIdList salesOrderIdsOf(InvoiceId invoiceId) {
+        return invoiceRepository.salesOrderIdsOf(invoiceId);
     }
 }

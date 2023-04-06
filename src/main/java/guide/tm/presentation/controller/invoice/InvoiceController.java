@@ -2,9 +2,7 @@ package guide.tm.presentation.controller.invoice;
 
 import guide.tm.application.scenario.invoice.InvoiceScenario;
 import guide.tm.application.service.invoice.InvoiceService;
-import guide.tm.domain.model.invoice.InvoiceContent;
-import guide.tm.domain.model.invoice.InvoiceSearchCriteria;
-import guide.tm.domain.model.invoice.InvoiceSummaries;
+import guide.tm.domain.model.invoice.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -25,7 +23,7 @@ class InvoiceController {
     @PostMapping
     String register(@ModelAttribute("invoiceContent") InvoiceContent invoiceContent,
                     Model model) {
-//        invoiceScenario.register(invoiceContent);
+        invoiceScenario.register(invoiceContent);
         return "redirect:/invoices";
     }
 
@@ -40,7 +38,10 @@ class InvoiceController {
     }
 
     @GetMapping("{invoiceId}")
-    String detail(@PathVariable String invoiceId) {
+    String detail(@PathVariable InvoiceId invoiceId,
+                  Model model) {
+        Invoice invoice = invoiceScenario.invoiceOf(invoiceId);
+        model.addAttribute("invoice", invoice);
         return "invoice/invoice";
     }
 
@@ -48,7 +49,6 @@ class InvoiceController {
     void bindInvoiceContent(WebDataBinder binder) {
         binder.setAllowedFields(
                 "invoiceDate.value",
-//                "OrderedYearMonth",
                 "orderedYearMonth",
                 "customerId.value"
         );

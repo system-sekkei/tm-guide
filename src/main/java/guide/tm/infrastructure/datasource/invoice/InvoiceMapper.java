@@ -1,12 +1,10 @@
 package guide.tm.infrastructure.datasource.invoice;
 
 import guide.tm.domain.model.customer.CustomerId;
-import guide.tm.domain.model.invoice.InvoiceDate;
-import guide.tm.domain.model.invoice.InvoiceNumber;
-import guide.tm.domain.model.invoice.InvoiceSearchCriteria;
-import guide.tm.domain.model.invoice.InvoiceSummary;
+import guide.tm.domain.model.invoice.*;
 import guide.tm.domain.model.salesorder.content.OrderedDate;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -34,4 +32,10 @@ interface InvoiceMapper {
     void registerInvoicedSalesOrder(
             @Param("invoiceId") UUID invoiceId,
             @Param("salesOrder") SalesOrder salesOrder);
+
+    InvoiceDetail invoiceDetailOf(
+            @Param("invoiceId") InvoiceId invoiceId);
+
+    List<SalesOrderId> salesOrderIdListOf(
+            @Param("invoiceId") InvoiceId invoiceId);
 }

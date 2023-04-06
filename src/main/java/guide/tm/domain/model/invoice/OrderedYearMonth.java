@@ -2,7 +2,6 @@ package guide.tm.domain.model.invoice;
 
 import guide.tm.domain.model.salesorder.content.OrderedDate;
 
-import java.time.LocalDate;
 import java.time.YearMonth;
 
 /**
@@ -10,14 +9,14 @@ import java.time.YearMonth;
  */
 public class OrderedYearMonth {
 
-
-    LocalDate value;
+    YearMonth value;
 
     @Deprecated OrderedYearMonth() {
     }
 
     public OrderedYearMonth(String value) {
-        this.value = LocalDate.parse(value + "-01");
+//        this.value = LocalDate.parse(value + "-01");
+        this.value = YearMonth.parse(value);
     }
 
 

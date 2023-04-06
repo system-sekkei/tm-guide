@@ -21,7 +21,7 @@
           <div class="d-flex gap-2 w-100 justify-content-between">
             <div>
               <h6 class="mb-0 opacity-75">請求番号</h6>
-              <p class="mb-0">7789890</p>
+              <p class="mb-0" th:text="${invoice.invoiceNumber}">7789890</p>
             </div>
           </div>
         </span>
@@ -30,7 +30,7 @@
           <div class="d-flex gap-2 w-100 justify-content-between">
             <div>
               <h6 class="mb-0 opacity-75">請求日</h6>
-              <p class="mb-0" >2023-02-28</p>
+              <p class="mb-0" th:text="${invoice.invoiceDate}">2023-02-28</p>
             </div>
           </div>
         </span>
@@ -40,7 +40,7 @@
           <div class="d-flex gap-2 w-100 justify-content-between">
             <div>
               <h6 class="mb-0 opacity-75">支払ステータス</h6>
-              <p class="mb-0" >支払済</p>
+              <p class="mb-0">未</p>
             </div>
           </div>
         </span>
@@ -50,10 +50,11 @@
           <div class="d-flex gap-2 w-100 justify-content-between">
             <div>
               <h6 class="mb-0 opacity-75">請求金額</h6>
-              <p class="mb-0" >8,900</p>
+              <p class="mb-0" th:text="${invoice.salesOrders.totalAmount}">8,900</p>
             </div>
           </div>
         </span>
+        <!--/*
         <span class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
           <i class="bi bi-currency-yen" style="font-size: 1.5rem; color: cornflowerblue;"></i>
           <div class="d-flex gap-2 w-100 justify-content-between">
@@ -81,12 +82,14 @@
             </div>
           </div>
         </span>
+        */-->
       </div>
     </span>
 
 
     <span class="col-6">
       <div class="list-group w-auto">
+        <!--/*
         <span class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
           <i class="bi bi-building" style="font-size: 1.5rem; color: cornflowerblue;"></i>
           <div class="d-flex gap-2 w-100 justify-content-between">
@@ -96,6 +99,7 @@
             </div>
           </div>
         </span>
+        */-->
         <span class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
           <i class="bi bi-person" style="font-size: 1.5rem; color: cornflowerblue;"></i>
           <div class="d-flex gap-2 w-100 justify-content-between">
@@ -124,24 +128,6 @@
           </div>
         </span>
         <span class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-          <i class="bi bi-123" style="font-size: 1.5rem; color: cornflowerblue;"></i>
-          <div class="d-flex gap-2 w-100 justify-content-between">
-            <div>
-              <h6 class="mb-0 opacity-75">受注番号</h6>
-              <p class="mb-0"><a href="" th:href="@{/sales-orders/e6707ec5-d767-42f7-bd45-5ebfb4555be5}">8989890</a></p>
-            </div>
-          </div>
-        </span>
-        <span class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-          <i class="bi bi-calendar-event" style="font-size: 1.5rem; color: cornflowerblue;"></i>
-          <div class="d-flex gap-2 w-100 justify-content-between">
-            <div>
-              <h6 class="mb-0 opacity-75">受注日</h6>
-              <p class="mb-0" >2023-01-01</p>
-            </div>
-          </div>
-        </span>
-        <span class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
           <i class="bi bi-house" style="font-size: 1.5rem; color: cornflowerblue;"></i>
           <div class="d-flex gap-2 w-100 justify-content-between">
             <div>
@@ -163,28 +149,27 @@
       <th></th>
       <th>受注番号</th>
       <th>受注日</th>
+      <th>受注金額</th>
     </tr>
     </thead>
     <tbody>
-<!--    <tr th:each="salesOrderSummary : ${salesOrderSummaries.list}">-->
-<!--      <td class="text-center">-->
-<!--        <a href="" th:href="@{|/sales-orders/${salesOrderSummary.salesOrderNumber}|}">-->
-<!--          <i class="bi bi-bag-check" style="font-size: 1.5rem;"></i>-->
-<!--        </a>-->
-<!--      </td>-->
-<!--      <td class="align-middle"><a th:href="@{|/sales-orders/${salesOrderSummary.salesOrderId}|}" th:text="${salesOrderSummary.salesOrderNumber}">12345678978</a></td>-->
-<!--      <td th:text="${salesOrderSummary.orderedDate}" class="align-middle">2022-12-22</td>-->
-<!--      <td th:text="${salesOrderSummary.customer.name}" class="align-middle">本田正勝</td>-->
-<!--      <td>-->
-<!--        <a th:href="@{|sales-orders/${salesOrderSummary.salesOrderId}/allocations|}"-->
-<!--           class="btn btn-outline-primary ">-->
-<!--          引当状況-->
-<!--        </a>-->
-<!--      </td>-->
-<!--    </tr>-->
+    <tr th:each="salesOrder : ${invoice.salesOrders.list}">
+      <td class="text-center">
+        <a href="" th:href="@{|/sales-orders/${salesOrder.salesOrderContent.salesOrderNumber}|}">
+          <i class="bi bi-bag-check" style="font-size: 1.5rem;"></i>
+        </a>
+      </td>
+      <td class="align-middle">
+        <a th:href="@{|/sales-orders/${salesOrder.salesOrderId}|}"
+           th:text="${salesOrder.salesOrderContent.salesOrderNumber}">12345678978</a>
+      </td>
+      <td th:text="${salesOrder.salesOrderContent.orderedDate}" class="align-middle">2022-12-22</td>
+      <td>
+        <span th:text="${salesOrder.totalAmount}"></span>
+      </td>
+    </tr>
     </tbody>
   </table>
-
 
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"

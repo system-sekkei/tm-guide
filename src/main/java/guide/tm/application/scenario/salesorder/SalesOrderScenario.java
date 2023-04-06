@@ -60,6 +60,14 @@ public class SalesOrderScenario {
     }
 
     /**
+     * 受注IDリストの受注を取得する
+     */
+    public SalesOrders salesOrdersOf(SalesOrderIdList salesOrderIdList) {
+        return new SalesOrders(salesOrderIdList.list().stream().map(this::salesOrderOf).toList());
+    }
+
+
+    /**
      * 受注の状態を取得する
      */
     public SalesOrderStatus status(SalesOrderId salesOrderId) {

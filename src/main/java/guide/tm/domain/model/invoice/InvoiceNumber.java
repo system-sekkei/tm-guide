@@ -6,6 +6,9 @@ package guide.tm.domain.model.invoice;
 public class InvoiceNumber {
     String value;
 
+    @Deprecated InvoiceNumber() {
+    }
+
     public InvoiceNumber(String value) {
         this.value = value;
     }
