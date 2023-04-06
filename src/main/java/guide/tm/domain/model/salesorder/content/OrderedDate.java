@@ -16,6 +16,10 @@ public class OrderedDate {
         this.value = LocalDate.parse(value);
     }
 
+    public OrderedDate(LocalDate value) {
+        this.value = value;
+    }
+
     @Override
     public String toString() {
         if (value == null) return "";

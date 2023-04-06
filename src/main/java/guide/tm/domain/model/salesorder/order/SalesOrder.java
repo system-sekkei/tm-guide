@@ -11,16 +11,19 @@ import guide.tm.domain.primitive.Amount;
  * 受注
  */
 public class SalesOrder {
+    SalesOrderId salesOrderId;
     SalesOrderContent salesOrderContent;
     TaxSumType taxSumType;
     SingleProductOrderItems singleProductOrderItems;
     BundleProductOrderItems bundleProductOrderItems;
 
     public SalesOrder(
+            SalesOrderId salesOrderId,
             SalesOrderContent salesOrderContent,
             TaxSumType taxSumType,
             SingleProductOrderItems singleProductOrderItems,
             BundleProductOrderItems bundleProductOrderItems) {
+        this.salesOrderId = salesOrderId;
         this.salesOrderContent = salesOrderContent;
         this.taxSumType = taxSumType;
         this.singleProductOrderItems = singleProductOrderItems;
@@ -66,6 +69,10 @@ public class SalesOrder {
      */
     public Amount totalAmount() {
         return amountIncludingTax().add(shippingFee().amount());
+    }
+
+    public SalesOrderId salesOrderId() {
+        return salesOrderId;
     }
 
     public SalesOrderContent salesOrderContent() {

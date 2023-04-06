@@ -84,4 +84,23 @@
         SELECT nextval('受注.受注明細番号')
     </select>
 
+    <select id="salesOrderIdsOf" resultType="guide.tm.domain.model.salesorder.order.SalesOrderId">
+        <![CDATA[
+        SELECT 受注ID      AS "value",
+
+               受注番号    AS "salesOrderNumber.value",
+               受注.顧客ID AS "customer.code.value",
+               顧客姓        AS "customer.name.lastName",
+               顧客名        AS "customer.name.firstName",
+               顧客姓カナ      AS "customer.nameKana.lastName",
+               顧客名カナ      AS "customer.nameKana.firstName",
+               受注日        AS "orderedDate.value"
+        FROM 受注.受注
+                 INNER JOIN 顧客.顧客 ON 受注.顧客ID = 顧客.顧客ID
+        WHERE 顧客.顧客ID = #{customerId.value}
+          AND 受注日 >= #{startOfOrderedMonth.value}
+          AND 受注日 <= #{endOfOrderedMonth.value}
+        ]]>
+    </select>
+
 </mapper>

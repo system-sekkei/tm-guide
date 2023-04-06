@@ -4,6 +4,27 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="guide.tm.infrastructure.datasource.invoice.InvoiceMapper">
 
+    <insert id="register">
+        INSERT INTO 請求.請求 (請求ID, 請求番号, 請求日, 顧客ID, 受注年月)
+        VALUES (
+                #{invoiceId},
+                #{invoiceNumber.value},
+                #{invoiceDate.value},
+                #{customerId.value},
+                #{orderedYearMonth.value}
+                )
+
+    </insert>
+
+    <insert id="registerInvoicedSalesOrder">
+        INSERT INTO 請求.請求済受注(請求ID, 受注ID)
+        VALUES (#{invoiceId}, #{salesOrder.salesOrderId.value})
+    </insert>
+
+    <select id="newInvoiceNumber" resultType="long">
+        SELECT nextval('請求.請求番号')
+    </select>
+
     <select id="invoicedSummaries" resultType="guide.tm.domain.model.invoice.InvoiceSummary">
         SELECT
             請求.請求ID AS "invoiceId.value",

@@ -98,8 +98,20 @@
       <td class="align-middle"><a href="" th:text="${invoiceSummary.invoiceNumber}" th:href="@{|invoice/${invoiceSummary.invoiceId}|}"></a></td>
       <td class="align-middle"><span th:text="${invoiceSummary.invoiceDate}"></span></td>
       <td class="align-middle"><span th:text="${invoiceSummary.customerName}">大岡 睦</span></td>
-      <td class="align-middle"><span th:text="${invoiceSummary.orderedYearMonth}">2023-03</span></td>
-      <td><button class="btn btn-primary" th:unless="${invoiceSummary.invoiceStatus.isInvoiced}">請求書発行</button></td>
+      <td class="align-middle">
+        <span th:if="${invoiceSummary.invoiceStatus.isInvoiced}" th:text="${invoiceSummary.orderedYearMonth}">2023-03</span>
+        <a th:unless="${invoiceSummary.invoiceStatus.isInvoiced}" th:text="${invoiceSummary.orderedYearMonth}"
+           th:href="@{/sales-orders(from.value=${invoiceSummary.startOfOrderedYearMonth},to.value=${invoiceSummary.endOfOrderedYearMonth},customerName=)}">2023-03</a>
+      </td>
+      <td>
+        <form>
+          <span th:text="${invoiceSummary.orderedYearMonth}"></span>
+          <a th:href="@{/invoice(customerId=__${invoiceSummary.customerId}__,orderedYearMonth='__${invoiceSummary.orderedYearMonth}__')}">
+            請求書発行
+          </a>
+          <button class="btn btn-primary" th:unless="${invoiceSummary.invoiceStatus.isInvoiced}">請求書発行</button>
+        </form>
+      </td>
     </tr>
     </tbody>
   </table>

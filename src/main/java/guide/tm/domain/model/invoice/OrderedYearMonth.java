@@ -1,5 +1,7 @@
 package guide.tm.domain.model.invoice;
 
+import guide.tm.domain.model.salesorder.content.OrderedDate;
+
 import java.time.LocalDate;
 import java.time.YearMonth;
 
@@ -8,10 +10,27 @@ import java.time.YearMonth;
  */
 public class OrderedYearMonth {
 
+
     LocalDate value;
+
+    @Deprecated OrderedYearMonth() {
+    }
+
+    public OrderedYearMonth(String value) {
+        this.value = LocalDate.parse(value + "-01");
+    }
+
 
     YearMonth yearMonth() {
         return YearMonth.from(value);
+    }
+
+    public OrderedDate startOfOrderedYearMonth() {
+        return new OrderedDate(yearMonth().atDay(1));
+    }
+
+    public OrderedDate endOfOrderedYearMonth() {
+        return new OrderedDate(yearMonth().atEndOfMonth());
     }
 
     @Override

@@ -1,11 +1,10 @@
 package guide.tm.infrastructure.datasource.salesorder;
 
 import guide.tm.application.service.salesorder.SalesOrderRepository;
+import guide.tm.domain.model.customer.CustomerId;
+import guide.tm.domain.model.invoice.OrderedYearMonth;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
-import guide.tm.domain.model.salesorder.order.SalesOrderId;
-import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
-import guide.tm.domain.model.salesorder.order.SalesOrderSearchCriteria;
-import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
+import guide.tm.domain.model.salesorder.order.*;
 import guide.tm.domain.model.tax.context.TaxSumType;
 import org.springframework.stereotype.Repository;
 
@@ -41,6 +40,11 @@ public class SalesOrderDataSource implements SalesOrderRepository {
     @Override
     public TaxSumType taxSumTypeOf(SalesOrderId salesOrderId) {
         return salesOrderMapper.taxSumTypeOf(salesOrderId);
+    }
+
+    @Override
+    public SalesOrderIdList salesOrderIdsOf(CustomerId customerId, OrderedYearMonth orderedYearMonth) {
+        return new SalesOrderIdList(salesOrderMapper.salesOrderIdsOf(customerId, orderedYearMonth.startOfOrderedYearMonth(), orderedYearMonth.endOfOrderedYearMonth()));
     }
 
     @Override

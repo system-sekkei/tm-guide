@@ -1,7 +1,10 @@
 package guide.tm.application.service.salesorder;
 
+import guide.tm.domain.model.customer.CustomerId;
+import guide.tm.domain.model.invoice.OrderedYearMonth;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.order.SalesOrderId;
+import guide.tm.domain.model.salesorder.order.SalesOrderIdList;
 import guide.tm.domain.model.salesorder.order.SalesOrderSearchCriteria;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
 import guide.tm.domain.model.tax.context.TaxSumType;
@@ -16,4 +19,6 @@ public interface SalesOrderRepository {
     void registerTax(TaxSumType taxSumType, SalesOrderId salesOrderId);
 
     TaxSumType taxSumTypeOf(SalesOrderId salesOrderId);
+
+    SalesOrderIdList salesOrderIdsOf(CustomerId customerId, OrderedYearMonth orderedYearMonth);
 }
