@@ -67,7 +67,7 @@
     <tbody>
     <tr class="align-middle" th:each="instructionSummary: ${shippingInstructionSummaries.list}">
       <td class="text-center">
-        <a th:href="@{|/sales-orders/${instructionSummary.salesOrderId}/allocations|}" th:text="${instructionSummary.shippingInstructionContent.salesOrderNumber}">受注番号12345678978</a>
+        <a th:href="@{|/allocations/sales-orders/${instructionSummary.salesOrderId}|}" th:text="${instructionSummary.shippingInstructionContent.salesOrderNumber}">受注番号12345678978</a>
       </td>
       <td class="text-center" th:text="${instructionSummary.orderedDate}">受注日</td>
       <td class="text-center" th:text="${instructionSummary.customer.name}">顧客名称</td>

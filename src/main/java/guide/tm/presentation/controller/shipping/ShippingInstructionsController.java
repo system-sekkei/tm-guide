@@ -1,6 +1,8 @@
 package guide.tm.presentation.controller.shipping;
 
-import guide.tm.application.service.shipping.ShippingService;
+import guide.tm.application.scenario.shipping.ShippingInstructionScenario;
+import guide.tm.application.service.shipping.ShippingInstructionService;
+import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.shipping.content.ShippingInstructionSummaries;
 import guide.tm.domain.model.shipping.content.ShippingNumber;
 import guide.tm.domain.model.shipping.summary.ShippingInstructionCriteria;
@@ -9,17 +11,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("shipping/instructions")
 class ShippingInstructionsController {
 
-    ShippingService shippingService;
+    ShippingInstructionService shippingInstructionService;
+    ShippingInstructionScenario shippingInstructionScenario;
 
-    ShippingInstructionsController(ShippingService shippingService) {
-        this.shippingService = shippingService;
+    ShippingInstructionsController(
+            ShippingInstructionService shippingInstructionService, ShippingInstructionScenario shippingInstructionScenario) {
+        this.shippingInstructionService = shippingInstructionService;
+        this.shippingInstructionScenario = shippingInstructionScenario;
     }
-
 
     @ModelAttribute("shippingInstructionStatuses")
     ShippingInstructionStatus[] shippingInstructionStatuses() {
@@ -31,15 +36,24 @@ class ShippingInstructionsController {
     String list(
             @ModelAttribute("shippingInstructionCriteria") ShippingInstructionCriteria shippingInstructionCriteria,
             Model model) {
-        ShippingInstructionSummaries shippingInstructionSummaries = shippingService.shippingInstructionSummaries(shippingInstructionCriteria);
+        ShippingInstructionSummaries shippingInstructionSummaries = shippingInstructionService.shippingInstructionSummaries(shippingInstructionCriteria);
         model.addAttribute("shippingInstructionSummaries", shippingInstructionSummaries);
         return "shipping/shipping-instructions";
     }
 
     @PostMapping
     String markAsShipped(@ModelAttribute("shippingNumber") ShippingNumber shippingNumber) {
-        shippingService.markAsShipped(shippingNumber);
+        shippingInstructionService.markAsShipped(shippingNumber);
         return "redirect:/shipping/instructions";
+    }
+
+    @PostMapping("sales-order/{salesOrderId}")
+    String registerShippingInstruction(
+            @PathVariable("salesOrderId") SalesOrderId salesOrderId,
+            RedirectAttributes redirectAttributes) {
+        shippingInstructionScenario.registerShippingOf(salesOrderId);
+        redirectAttributes.addFlashAttribute("message", "出荷指示を登録しました");
+        return "redirect:/allocations/sales-orders/{salesOrderId}";
     }
 
     @InitBinder({"shippingNumber"})

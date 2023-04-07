@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
  * 出荷指示サービス
  */
 @Service
-public class ShippingService {
+public class ShippingInstructionService {
     ShippingInstructionRepository shippingInstructionRepository;
     ShippingRepository shippingRepository;
 
-    ShippingService(
+    ShippingInstructionService(
             ShippingInstructionRepository shippingInstructionRepository,
             ShippingRepository shippingRepository) {
         this.shippingInstructionRepository = shippingInstructionRepository;

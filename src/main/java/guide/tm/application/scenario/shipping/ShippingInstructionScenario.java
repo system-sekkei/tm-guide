@@ -3,8 +3,8 @@ package guide.tm.application.scenario.shipping;
 import guide.tm.application.scenario.salesorder.SalesOrderScenario;
 import guide.tm.application.service.allocation.AllocationService;
 import guide.tm.application.service.invoice.InvoiceService;
+import guide.tm.application.service.shipping.ShippingInstructionService;
 import guide.tm.application.service.shipping.ShippingItemService;
-import guide.tm.application.service.shipping.ShippingService;
 import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.shipping.content.ShippingInstruction;
 import guide.tm.domain.model.status.orderstatus.SalesOrderStatus;
@@ -14,21 +14,21 @@ import org.springframework.stereotype.Service;
  * 出荷指示シナリオ
  */
 @Service
-public class ShippingScenario {
+public class ShippingInstructionScenario {
 
-    ShippingService shippingService;
+    ShippingInstructionService shippingInstructionService;
     ShippingItemService shippingItemService;
     SalesOrderScenario salesOrderScenario;
     AllocationService allocationService;
     InvoiceService invoiceService;
 
-    ShippingScenario(
-            ShippingService shippingService,
+    ShippingInstructionScenario(
+            ShippingInstructionService shippingInstructionService,
             ShippingItemService shippingItemService,
             SalesOrderScenario salesOrderScenario,
             AllocationService allocationService,
             InvoiceService invoiceService) {
-        this.shippingService = shippingService;
+        this.shippingInstructionService = shippingInstructionService;
         this.shippingItemService = shippingItemService;
         this.salesOrderScenario = salesOrderScenario;
         this.allocationService = allocationService;
@@ -50,13 +50,13 @@ public class ShippingScenario {
         // 出荷指示する引当がない
         if (shippingInstruction.isAllInstructed()) return;
 
-        shippingService.register(shippingInstruction);
+        shippingInstructionService.register(shippingInstruction);
 
         // 全受注明細が出荷指示済
         SalesOrderStatus afterInstructedSalesOrderStatus = salesOrderScenario.status(salesOrderId);
         ShippingInstruction afterInstructed = afterInstructedSalesOrderStatus.create();;
         if (afterInstructedSalesOrderStatus.isAllAllocated() && afterInstructed.isAllInstructed()) {
-            shippingService.markAsInstructed(salesOrderId);
+            shippingInstructionService.markAsInstructed(salesOrderId);
             invoiceService.recordUnInvoiced(salesOrderId);
         }
 
