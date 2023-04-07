@@ -40,7 +40,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -89,7 +88,7 @@ class 出荷指示明細サービスTest {
     SalesOrderItemService 受注明細Service;
 
     @Autowired
-    ShippingService 出荷サービス;
+    ShippingInstructionService 出荷サービス;
 
     CustomerId 顧客番号 = new CustomerId("39d3f994-6cd3-4a56-a2b5-d493f030cbc8");
     Customer 顧客 = new Customer(顧客番号, new CustomerName("留美", "梅宮"), new CustomerName("ルミ", "ウメミヤ"), CustomerType.個人);
@@ -129,11 +128,7 @@ class 出荷指示明細サービスTest {
 
     @Test
     void 出荷明細を登録する() {
-        // given:
-        ShippingDate 出荷日 = new ShippingDate(LocalDate.of(2023, Month.MARCH, 2));
-        ShippingInstructionContent 出荷 = new ShippingInstructionContent(受注ID, 出荷日);
-
-        // and: "引当して、結果を登録する"
+        // given: "引当して、結果を登録する"
         SalesOrderStatus 受注明細状況 = salesOrderScenario.status(受注ID);
         allocationService.allocateSalesOrder(受注明細状況, 受注ID);
 
@@ -143,7 +138,7 @@ class 出荷指示明細サービスTest {
 
         ShippingNumber 出荷番号 = 出荷サービス.register(
                 new ShippingInstruction(
-                        new ShippingInstructionContent(受注ID, new ShippingDate(LocalDate.of(2023, 3, 1))),
+                        new ShippingInstructionContent(受注ID, new SalesOrderNumber("xxx12345"), new ShippingDate(LocalDate.of(2023, 3, 1))),
                         個別商品引当結果,
                         セット商品引当結果
                 ));

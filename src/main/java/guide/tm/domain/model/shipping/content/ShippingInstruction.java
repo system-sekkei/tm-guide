@@ -12,7 +12,8 @@ public class ShippingInstruction {
     SingleAllocations singleAllocations;
     BundleAllocations bundleAllocations;
 
-    public ShippingInstruction(ShippingInstructionContent shippingInstructionContent, SingleAllocations singleAllocations, BundleAllocations bundleAllocations) {
+    public ShippingInstruction(
+            ShippingInstructionContent shippingInstructionContent, SingleAllocations singleAllocations, BundleAllocations bundleAllocations) {
         this.shippingInstructionContent = shippingInstructionContent;
         this.singleAllocations = singleAllocations;
         this.bundleAllocations = bundleAllocations;
