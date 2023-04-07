@@ -19,7 +19,7 @@
 
     <select id="summaries" resultType="guide.tm.domain.model.customer.CustomerSummary">
         SELECT
-            顧客ID AS "code.value",
+            顧客ID AS "customerId.value",
             顧客姓 AS "name.value",
             顧客名
         FROM 顧客.顧客

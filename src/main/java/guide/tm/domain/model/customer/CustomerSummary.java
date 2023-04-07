@@ -4,21 +4,21 @@ package guide.tm.domain.model.customer;
  * 顧客サマリー
  */
 public class CustomerSummary {
-    CustomerId code;
+    CustomerId customerId;
     CustomerName name;
     CustomerName nameKana;
 
     @Deprecated CustomerSummary() {
     }
 
-    public CustomerSummary(CustomerId code, CustomerName name, CustomerName nameKana) {
-        this.code = code;
+    public CustomerSummary(CustomerId customerId, CustomerName name, CustomerName nameKana) {
+        this.customerId = customerId;
         this.name = name;
         this.nameKana = nameKana;
     }
 
     public CustomerId code() {
-        return code;
+        return customerId;
     }
 
     public CustomerName name() {

@@ -81,7 +81,7 @@ class SalesOrderRegisterController {
                 "customer.name.firstName",
                 "shippingAddress.prefecture",
                 "shippingAddress.addressLine",
-                "orderedDate"
+                "orderedDate.value"
         );
     }
 }

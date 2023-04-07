@@ -61,7 +61,7 @@
     <tbody>
     <tr th:each="salesOrderSummary : ${salesOrderSummaries.list}">
       <td class="text-center">
-        <a href="" th:href="@{|/sales-orders/${salesOrderSummary.salesOrderNumber}|}">
+        <a href="" th:href="@{|/sales-orders/${salesOrderSummary.salesOrderId}|}">
           <i class="bi bi-bag-check" style="font-size: 1.5rem;"></i>
         </a>
       </td>
