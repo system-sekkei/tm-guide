@@ -144,7 +144,10 @@
     </tfoot>
   </table>
 
-  <form method="post" th:action="@{/shipping/sales-order/__${salesOrderId}__}">
+  <form method="post" th:action="@{|/allocations/sales-orders/${salesOrderId}|}">
+    <button type="submit" class="btn btn-primary">引当</button>
+  </form>
+  <form method="post" th:action="@{/shipping/sales-order/__${salesOrderId}__}" class="mt-2">
     <button type="submit" class="btn btn-primary">出荷指示</button>
     <a href="" th:href="@{/shipping/instructions}" class="btn btn-outline-primary">出荷状況</a>
   </form>

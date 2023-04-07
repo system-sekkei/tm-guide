@@ -69,7 +69,7 @@
       <td th:text="${salesOrderSummary.orderedDate}" class="align-middle">2022-12-22</td>
       <td th:text="${salesOrderSummary.customer.name}" class="align-middle">本田正勝</td>
       <td>
-        <a th:href="@{|sales-orders/${salesOrderSummary.salesOrderId}/allocations|}"
+        <a th:href="@{|allocations/sales-orders/${salesOrderSummary.salesOrderId}|}"
            class="btn btn-outline-primary ">
           引当状況
         </a>

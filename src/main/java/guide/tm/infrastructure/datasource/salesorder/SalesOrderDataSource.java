@@ -48,6 +48,19 @@ public class SalesOrderDataSource implements SalesOrderRepository {
     }
 
     @Override
+    public void markAsOrdered(SalesOrderId salesOrderId) {
+        salesOrderMapper.markAsOrdered(salesOrderId);
+    }
+
+    @Override
+    public SalesOrderedType orderedStatusOf(SalesOrderId salesOrderId) {
+        if (salesOrderMapper.completedOrderOf(salesOrderId) == null) {
+            return SalesOrderedType.受注未完了;
+        }
+        return SalesOrderedType.受注完了;
+    }
+
+    @Override
     public void registerTax(TaxSumType taxSumType, SalesOrderId salesOrderId) {
         salesOrderMapper.registerTax(taxSumType, salesOrderId);
     }

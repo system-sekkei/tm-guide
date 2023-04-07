@@ -8,10 +8,7 @@ import guide.tm.domain.model.allocation.content.Allocations;
 import guide.tm.domain.model.customer.CustomerId;
 import guide.tm.domain.model.invoice.OrderedYearMonth;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
-import guide.tm.domain.model.salesorder.order.SalesOrder;
-import guide.tm.domain.model.salesorder.order.SalesOrderId;
-import guide.tm.domain.model.salesorder.order.SalesOrderIdList;
-import guide.tm.domain.model.salesorder.order.SalesOrders;
+import guide.tm.domain.model.salesorder.order.*;
 import guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItems;
 import guide.tm.domain.model.salesorder.orderitem.single.SingleProductOrderItems;
 import guide.tm.domain.model.shipping.item.ShippingItems;
@@ -48,7 +45,8 @@ public class SalesOrderScenario {
         TaxSumType taxSumType  = salesOrderService.taxSumTypeOf(salesOrderId);
         SingleProductOrderItems singleProductOrderItems = salesOrderItemService.singleProductOrderItemsOf(salesOrderId);
         BundleProductOrderItems bundleProductOrderItems = salesOrderItemService.bundleProductOrderItemsOf(salesOrderId);
-        return new SalesOrder(salesOrderId, salesOrderContent, taxSumType, singleProductOrderItems, bundleProductOrderItems);
+        SalesOrderedType status = salesOrderService.orderedStatusOf(salesOrderId);
+        return new SalesOrder(salesOrderId, salesOrderContent, taxSumType, singleProductOrderItems, bundleProductOrderItems, status);
     }
 
     /**

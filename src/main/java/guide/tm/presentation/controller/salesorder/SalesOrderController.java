@@ -7,7 +7,6 @@ import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.salesorder.order.SalesOrderSearchCriteria;
 import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
 import guide.tm.domain.model.salesorder.orderitem.request.SalesOrderItemRequest;
-import guide.tm.domain.model.status.orderstatus.SalesOrderStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -46,12 +45,10 @@ class SalesOrderController {
         return "sales-order/sales-order";
     }
 
-    @GetMapping("{salesOrderId}/allocations")
-    String allocations(@PathVariable("salesOrderId") SalesOrderId salesOrderId,
-                       Model model) {
-        SalesOrderStatus status = salesOrderScenario.status(salesOrderId);
-        model.addAttribute("salesOrderStatus", status);
-        return "sales-order/allocations";
+    @PostMapping("{salesOrderId}")
+    String complete(@PathVariable("salesOrderId") SalesOrderId salesOrderId) {
+        salesOrderService.markAsOrdered(salesOrderId);
+        return "redirect:/sales-orders";
     }
 
     @InitBinder("salesOrderSearchCriteria")

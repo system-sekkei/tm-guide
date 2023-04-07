@@ -3,10 +3,7 @@ package guide.tm.application.service.salesorder;
 import guide.tm.domain.model.customer.CustomerId;
 import guide.tm.domain.model.invoice.OrderedYearMonth;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
-import guide.tm.domain.model.salesorder.order.SalesOrderId;
-import guide.tm.domain.model.salesorder.order.SalesOrderIdList;
-import guide.tm.domain.model.salesorder.order.SalesOrderSearchCriteria;
-import guide.tm.domain.model.salesorder.order.SalesOrderSummaries;
+import guide.tm.domain.model.salesorder.order.*;
 import guide.tm.domain.model.tax.context.TaxSumType;
 import org.springframework.stereotype.Service;
 
@@ -56,7 +53,26 @@ public class SalesOrderService {
         salesOrderRepository.registerTax(taxSumType, salesOrderId);
     }
 
+    /**
+     * 受注IDのリストを取得
+     *
+     * 顧客、受注年月の指定で、受注IDのリストを取得する
+     */
     public SalesOrderIdList salesOrderIdsOf(CustomerId customerId, OrderedYearMonth orderedYearMonth) {
         return salesOrderRepository.salesOrderIdsOf(customerId, orderedYearMonth);
+    }
+
+    /**
+     * 受注完了を記録する
+     */
+    public void markAsOrdered(SalesOrderId salesOrderId) {
+        salesOrderRepository.markAsOrdered(salesOrderId);
+    }
+
+    /**
+     * 受注完了区分を取得する
+     */
+    public SalesOrderedType orderedStatusOf(SalesOrderId salesOrderId) {
+        return salesOrderRepository.orderedStatusOf(salesOrderId);
     }
 }

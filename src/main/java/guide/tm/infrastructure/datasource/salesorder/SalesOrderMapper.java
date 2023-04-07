@@ -40,4 +40,9 @@ interface SalesOrderMapper {
             @Param("customerId") CustomerId customerId,
             @Param("startOfOrderedMonth") OrderedDate startOfOrderedMonth,
             @Param("endOfOrderedMonth") OrderedDate endOfOrderedMonth);
+
+    void markAsOrdered(
+            @Param("salesOrderId") SalesOrderId salesOrderId);
+
+    SalesOrderId completedOrderOf(@Param("salesOrderId") SalesOrderId salesOrderId);
 }

@@ -16,18 +16,21 @@ public class SalesOrder {
     TaxSumType taxSumType;
     SingleProductOrderItems singleProductOrderItems;
     BundleProductOrderItems bundleProductOrderItems;
+    SalesOrderedType salesOrderedType;
 
     public SalesOrder(
             SalesOrderId salesOrderId,
             SalesOrderContent salesOrderContent,
             TaxSumType taxSumType,
             SingleProductOrderItems singleProductOrderItems,
-            BundleProductOrderItems bundleProductOrderItems) {
+            BundleProductOrderItems bundleProductOrderItems,
+            SalesOrderedType salesOrderedType) {
         this.salesOrderId = salesOrderId;
         this.salesOrderContent = salesOrderContent;
         this.taxSumType = taxSumType;
         this.singleProductOrderItems = singleProductOrderItems;
         this.bundleProductOrderItems = bundleProductOrderItems;
+        this.salesOrderedType = salesOrderedType;
     }
 
     /**
@@ -89,5 +92,9 @@ public class SalesOrder {
 
     public BundleProductOrderItems bundleProductOrderItems() {
         return bundleProductOrderItems;
+    }
+
+    public SalesOrderedType salesOrderedType() {
+        return salesOrderedType;
     }
 }

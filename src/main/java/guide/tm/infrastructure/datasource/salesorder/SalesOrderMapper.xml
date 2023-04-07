@@ -69,15 +69,20 @@
         SELECT
             計算方式 AS "taxSumType"
         FROM 受注.消費税計算方式
-        WHERE 受注番号 = #{salesOrderId.value}
+        WHERE 受注ID = #{salesOrderId.value}
     </select>
 
     <insert id="registerTax">
-        INSERT INTO 受注.消費税計算方式 (受注番号, 計算方式)
+        INSERT INTO 受注.消費税計算方式 (受注ID, 計算方式)
         VALUES (
                 #{salesOrderId.value},
                 #{taxSumType}
                )
+    </insert>
+
+    <insert id="markAsOrdered">
+        INSERT INTO 受注.受注済 (受注ID)
+        VALUES (#{salesOrderId.value})
     </insert>
 
     <select id="newSaleOrderNumber" resultType="long">
@@ -102,5 +107,13 @@
           AND 受注日 <= #{endOfOrderedMonth.value}
         ]]>
     </select>
+
+    <select id="completedOrderOf" resultType="guide.tm.domain.model.salesorder.order.SalesOrderId">
+        SELECT
+            受注ID AS "value"
+        FROM 受注.受注済
+        WHERE 受注ID = #{salesOrderId.value}
+    </select>
+
 
 </mapper>

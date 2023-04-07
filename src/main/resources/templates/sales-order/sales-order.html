@@ -145,7 +145,7 @@
          th:if="${#fields.hasErrors('*')}">
       error messages
     </div>
-  <div class="row">
+  <div class="row" th:unless="${salesOrder.salesOrderedType.isCompleted}">
     <span class="col-4">
       <input type="text" class="form-control" id="product-name" th:field="*{productName.value}" readonly
              th:classappend="${#fields.hasErrors('productSpecified*')}? 'is-invalid'"
@@ -171,8 +171,8 @@
 
   <hr>
 
-  <form method="post" th:action="@{/allocate/sales-orders/__${salesOrderId}__}">
-    <button type="submit" class="btn btn-primary">引当（受注登録完了）</button>
+  <form method="post" th:action="@{/sales-orders/__${salesOrderId}__}" th:unless="${salesOrder.salesOrderedType.isCompleted}">
+    <button type="submit" class="btn btn-primary">受注登録完了</button>
   </form>
 
 
