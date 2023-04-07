@@ -26,4 +26,8 @@ public class InvoiceDate {
         if (value == null) return "";
         return value.format(DateTimeFormatter.ISO_DATE);
     }
+
+    public boolean isEmpty() {
+        return value == null;
+    }
 }

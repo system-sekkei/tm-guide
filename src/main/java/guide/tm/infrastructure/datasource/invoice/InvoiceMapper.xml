@@ -49,6 +49,18 @@
             INNER JOIN 請求.請求済受注 ON 請求.請求ID = 請求済受注.請求ID
                  INNER JOIN 顧客.顧客 ON 請求.顧客ID = 顧客.顧客ID
                  INNER JOIN 受注.受注 ON 請求済受注.受注ID = 受注.受注ID
+        <where>
+            <if test="!invoiceSearchCriteria.from.isEmpty()">
+                <![CDATA[
+                  #{invoiceSearchCriteria.from.value} <= 受注日
+                ]]>
+            </if>
+            <if test="!invoiceSearchCriteria.to.isEmpty()">
+                <![CDATA[
+                  AND 受注日 <= #{invoiceSearchCriteria.to.value}
+                ]]>
+            </if>
+        </where>
     </select>
 
     <select id="notInvoicedSummaries" resultType="guide.tm.domain.model.invoice.InvoiceSummary">
@@ -63,6 +75,18 @@
             INNER JOIN 受注.受注 ON 出荷指示.受注ID = 受注.受注ID
             INNER JOIN 請求._未請求受注 ON 受注.受注ID = _未請求受注.受注ID
             INNER JOIN 顧客.顧客 ON 受注.顧客ID = 顧客.顧客ID
+        <where>
+            <if test="!invoiceSearchCriteria.from.isEmpty()">
+                <![CDATA[
+                  #{invoiceSearchCriteria.from.value} <= 受注日
+                ]]>
+            </if>
+            <if test="!invoiceSearchCriteria.to.isEmpty()">
+                <![CDATA[
+                  AND 受注日 <= #{invoiceSearchCriteria.to.value}
+                ]]>
+            </if>
+        </where>
         GROUP BY 顧客.顧客ID, "orderedYearMonth.value"
     </select>
 

@@ -12,12 +12,14 @@
 
 <div class="container">
 
-  <form method="get" th:action="@{/invoices}" class="mt-3">
+  <form method="get" th:action="@{/invoices}" th:object="${invoiceSearchCriteria}" class="mt-3">
     <div class="mb-3 row">
       <div class="row">
         <span class="col-2">
         <label for="orderedDateFrom" class="form-label">受注日From</label>
-          <input type="date" class="form-control" id="orderedDateFrom">
+           <input type="date" class="form-control" id="orderedDateFrom"
+                  th:classappend="${#fields.hasErrors('orderedDate*')}? 'is-invalid'"
+                  th:name="from.value" th:value="*{from}">
         </span>
         <span class="col-1  text-center">
         <label for="orderedDateFrom" class="form-label">&nbsp;</label>
@@ -27,20 +29,16 @@
         </span>
         <span class="col-2">
         <label for="orderedDateFrom" class="form-label">受注日To</label>
-            <input type="date" class="form-control" id="orderedDateTo">
+            <input type="date" class="form-control" id="orderedDateTo"
+                   th:classappend="${#fields.hasErrors('orderedDate*')}? 'is-invalid'"
+                   th:name="to.value" th:value="*{to}">
         </span>
         <div class="col-md-4">
-          <label for="flexCheckDefault" class="form-label">請求状況</label>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              請求済
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-            <label class="form-check-label" for="flexCheckDefault">
-              未請求
+          <label class="form-label">請求状況</label>
+          <div class="form-check" th:each="invoiceStatus: ${invoiceStatuses}">
+            <input class="form-check-input" type="checkbox" th:field="*{invoiceStatusList}" th:value="${invoiceStatus}" />
+            <label  th:for="${#ids.prev('invoiceStatusList')}"
+                    th:text="${invoiceStatus.name}">引当済
             </label>
           </div>
         </div>
@@ -66,6 +64,7 @@
     </tr>
     </thead>
     <tbody>
+    <!--/*
     <tr>
       <td class="align-middle"><a href="" th:href="@{invoices/98234567}">98234567</a></td>
       <td class="align-middle">2023-03-31</td>
@@ -94,6 +93,7 @@
       <td class="align-middle">2023-03</td>
       <td><button class="btn btn-primary">請求書発行</button></td>
     </tr>
+    */-->
     <tr th:each="invoiceSummary : ${invoiceSummaries.list}">
       <td class="align-middle"><a href="" th:text="${invoiceSummary.invoiceNumber}" th:href="@{|invoices/${invoiceSummary.invoiceId}|}"></a></td>
       <td class="align-middle"><span th:text="${invoiceSummary.invoiceDate}"></span></td>

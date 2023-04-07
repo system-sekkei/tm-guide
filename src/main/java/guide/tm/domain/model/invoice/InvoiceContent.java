@@ -1,6 +1,7 @@
 package guide.tm.domain.model.invoice;
 
 import guide.tm.domain.model.customer.CustomerId;
+import jakarta.validation.constraints.AssertFalse;
 
 /**
  * 請求内容
@@ -20,5 +21,10 @@ public class InvoiceContent {
 
     public OrderedYearMonth orderedYearMonth() {
         return orderedYearMonth;
+    }
+
+    @AssertFalse(message = "請求日を入力してください")
+    boolean isInvoiceDateEmpty() {
+        return invoiceDate.isEmpty();
     }
 }

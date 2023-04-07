@@ -22,12 +22,17 @@ public class InvoiceDataSource implements InvoiceRepository {
 
     @Override
     public InvoiceSummaries invoiceSummariesOf(InvoiceSearchCriteria invoiceSearchCriteria) {
-        List<InvoiceSummary> invoiced = invoiceMapper.invoicedSummaries(invoiceSearchCriteria);
-        List<InvoiceSummary> notInvoiced = invoiceMapper.notInvoicedSummaries(invoiceSearchCriteria);
-
         List<InvoiceSummary> result = new ArrayList<>();
-        result.addAll(invoiced);
-        result.addAll(notInvoiced);
+
+        if (invoiceSearchCriteria.containsInvoiced()) {
+            List<InvoiceSummary> invoiced = invoiceMapper.invoicedSummaries(invoiceSearchCriteria);
+            result.addAll(invoiced);
+        }
+
+        if (invoiceSearchCriteria.containsUnInvoiced()) {
+            List<InvoiceSummary> UnInvoiced = invoiceMapper.notInvoicedSummaries(invoiceSearchCriteria);
+            result.addAll(UnInvoiced);
+        }
 
         return new InvoiceSummaries(result);
     }
