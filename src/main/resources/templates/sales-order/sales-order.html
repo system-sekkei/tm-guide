@@ -139,17 +139,14 @@
   </table>
 
   <form method="post" th:action="@{/sales-orders/__${salesOrderId}__/items}" th:object="${salesOrderItemRequest}">
-    <div th:each="err : ${#fields.errors('*')}"
-         th:text="${err}"
-         th:class="text-danger"
-         th:if="${#fields.hasErrors('*')}">
-      error messages
-    </div>
   <div class="row" th:unless="${salesOrder.salesOrderedType.isCompleted}">
     <span class="col-4">
       <input type="text" class="form-control" id="product-name" th:field="*{productName.value}" readonly
              th:classappend="${#fields.hasErrors('productSpecified*')}? 'is-invalid'"
       >
+      <ul class="invalid-feedback" th:if="${#fields.hasErrors('productSpecified*')}">
+        <li th:each="err : ${#fields.errors('productSpecified*')}" th:text="${err}" class="error"></li>
+      </ul>
       <input type="hidden" class="form-control" id="product-code" th:field="*{productCode.value}">
       <input type="hidden" class="form-control" id="product-type" th:field="*{productType}">
     </span>
@@ -162,6 +159,9 @@
       <input type="number" class="form-control text-center" name="quantity.value"
              th:classappend="${#fields.hasErrors('quantity*')}? 'is-invalid'"
       >
+      <ul class="invalid-feedback" th:if="${#fields.hasErrors('quantity*')}">
+        <li th:each="err : ${#fields.errors('quantity*')}" th:text="${err}" class="error"></li>
+      </ul>
     </span>
     <span class="col-2">
       <button type="submit" class="btn btn-primary">商品追加</button>

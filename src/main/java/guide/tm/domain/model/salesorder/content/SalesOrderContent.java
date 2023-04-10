@@ -42,7 +42,7 @@ public class SalesOrderContent {
         return shippingAddress;
     }
 
-    @AssertFalse(message = "顧客名称を入力してください")
+    @AssertFalse(message = "顧客を選択してください")
     boolean isCustomerEmpty() {
         return customer.customerId().isEmpty();
     }

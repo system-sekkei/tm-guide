@@ -41,9 +41,9 @@
             <input type="date" class="form-control" id="orderedDate"
                th:classappend="${#fields.hasErrors('orderedDate*')}? 'is-invalid'"
                name="orderedDate.value" th:value="*{orderedDate}">
-              <ul class="invalid-feedback" th:if="${#fields.hasErrors('orderedDate*')}">
-            <li th:each="err : ${#fields.errors('orderedDate*')}" th:text="${err}" class="error"></li>
-          </ul>
+            <ul class="invalid-feedback" th:if="${#fields.hasErrors('orderedDate*')}">
+              <li th:each="err : ${#fields.errors('orderedDate*')}" th:text="${err}" class="error"></li>
+            </ul>
           </span>
 
         </div>
