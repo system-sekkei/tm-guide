@@ -64,7 +64,7 @@
     </thead>
     <tbody>
     <tr th:each="allocationSummary : ${allocationSummaries.list}">
-      <td class="align-middle"><a th:href="@{|/sales-orders/${allocationSummary.salesOrderSummary.salesOrderId}/allocations|}" th:text="${allocationSummary.salesOrderSummary.salesOrderNumber}">12345678978</a></td>
+      <td class="align-middle"><a th:href="@{|/allocations/sales-orders/${allocationSummary.salesOrderSummary.salesOrderId}|}" th:text="${allocationSummary.salesOrderSummary.salesOrderNumber}">12345678978</a></td>
       <td th:text="${allocationSummary.salesOrderSummary.orderedDate}" class="align-middle">2022-12-22</td>
       <td th:text="${allocationSummary.salesOrderSummary.customer.name}" class="align-middle">本田正勝</td>
       <td>
