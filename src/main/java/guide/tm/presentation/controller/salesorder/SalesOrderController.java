@@ -56,7 +56,8 @@ class SalesOrderController {
         binder.setAllowedFields(
                 "from.value",
                 "to.value",
-                "customerName"
+                "customerName",
+                "customerId"
         );
     }
 }

@@ -1,5 +1,6 @@
 package guide.tm.domain.model.salesorder.order;
 
+import guide.tm.domain.model.customer.CustomerId;
 import guide.tm.domain.model.salesorder.content.OrderedDate;
 
 /**
@@ -10,10 +11,13 @@ public class SalesOrderSearchCriteria {
     OrderedDate to;
     String customerName;
 
+    CustomerId customerId;
+
     public SalesOrderSearchCriteria() {
         from = new OrderedDate();
         to = new OrderedDate();
         customerName = "";
+        customerId = new CustomerId();
     }
 
     public OrderedDate from() {
@@ -26,5 +30,9 @@ public class SalesOrderSearchCriteria {
 
     public String customerName() {
         return customerName;
+    }
+
+    public CustomerId customerId() {
+        return customerId;
     }
 }

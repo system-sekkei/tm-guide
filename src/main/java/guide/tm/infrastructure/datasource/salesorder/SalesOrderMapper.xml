@@ -61,6 +61,12 @@
                   AND 受注日 <= #{salesOrderSearchCriteria.to.value}
                 ]]>
             </if>
+            <if test="!salesOrderSearchCriteria.customerId.isEmpty()">
+                <![CDATA[
+                  AND 顧客.顧客ID <= #{salesOrderSearchCriteria.customerId.value}
+                ]]>
+            </if>
+
         </where>
 
     </select>

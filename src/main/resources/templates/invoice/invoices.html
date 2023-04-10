@@ -101,7 +101,7 @@
       <td class="align-middle">
         <span th:if="${invoiceSummary.invoiceStatus.isInvoiced}" th:text="${invoiceSummary.orderedYearMonth}">2023-03</span>
         <a th:unless="${invoiceSummary.invoiceStatus.isInvoiced}" th:text="${invoiceSummary.orderedYearMonth}"
-           th:href="@{/sales-orders(from.value=${invoiceSummary.startOfOrderedYearMonth},to.value=${invoiceSummary.endOfOrderedYearMonth},customerName=)}">2023-03</a>
+           th:href="@{/sales-orders(from.value=${invoiceSummary.startOfOrderedYearMonth},to.value=${invoiceSummary.endOfOrderedYearMonth},customerId=${invoiceSummary.customerId})}">2023-03</a>
       </td>
       <td>
         <form>
