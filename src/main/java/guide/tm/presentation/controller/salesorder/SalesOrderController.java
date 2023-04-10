@@ -48,7 +48,7 @@ class SalesOrderController {
     @PostMapping("{salesOrderId}")
     String complete(@PathVariable("salesOrderId") SalesOrderId salesOrderId) {
         salesOrderService.markAsOrdered(salesOrderId);
-        return "redirect:/sales-orders";
+        return "redirect:/allocations/sales-orders/{salesOrderId}";
     }
 
     @InitBinder("salesOrderSearchCriteria")
