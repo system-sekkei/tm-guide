@@ -128,14 +128,18 @@
       <td class="text-end" th:text="${bundleOrderItemStatus.bundleProductOrderItem.bundleProduct.unitPrice}">879</td>
       <td class="text-end" th:text="${bundleOrderItemStatus.bundleProductOrderItem.quantity}">2</td>
       <td class="text-center">
-        <span class="btn btn-info" th:if="${bundleOrderItemStatus.isAllAllocated}">引当済み</span>
-        <span class="btn btn-warning" th:unless="${bundleOrderItemStatus.isAllAllocated}">引当残あり</span>
+        <h4>
+          <span class="badge bg-info" th:if="${bundleOrderItemStatus.isAllAllocated}">引当済み</span>
+          <span class="badge bg-warning" th:unless="${bundleOrderItemStatus.isAllAllocated}">引当残あり</span>
+        </h4>
       </td>
       <td class="text-end" th:text="${bundleOrderItemStatus.allocatedQuantity}">2</td>
       <td class="text-end" th:text="${bundleOrderItemStatus.remainingQuantity}">2</td>
       <td class="text-center align-middle">
-        <span class="badge bg-info" th:if="${bundleOrderItemStatus.shippingStatus.isInstructed}">指示済</span>
-        <span class="badge bg-warning " th:unless="${bundleOrderItemStatus.shippingStatus.isInstructed}">未指示</span>
+        <h4>
+          <span class="badge bg-info" th:if="${bundleOrderItemStatus.shippingStatus.isInstructed}">指示済</span>
+          <span class="badge bg-warning " th:unless="${bundleOrderItemStatus.shippingStatus.isInstructed}">未指示</span>
+        </h4>
       </td>
     </tr>
 
