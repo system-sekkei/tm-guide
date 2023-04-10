@@ -51,4 +51,8 @@ public class BundleOrderItemStatusList {
     public boolean isAllAllocated() {
         return list.stream().allMatch(BundleOrderItemStatus::isAllAllocated);
     }
+
+    public boolean isAllShippingInstructed() {
+        return list.stream().allMatch(BundleOrderItemStatus::isShippingInstructed);
+    }
 }

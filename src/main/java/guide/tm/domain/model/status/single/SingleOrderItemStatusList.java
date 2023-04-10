@@ -51,4 +51,8 @@ public class SingleOrderItemStatusList {
     public boolean isAllAllocated() {
         return list.stream().allMatch(SingleOrderItemStatus::isAllAllocated);
     }
+
+    public boolean isAllShippingInstructed() {
+        return list.stream().allMatch(SingleOrderItemStatus::isShippingInstructed);
+    }
 }

@@ -91,4 +91,8 @@ public class SalesOrderStatus {
     public boolean isAllAllocated() {
         return singleOrderItemStatusList().isAllAllocated() && bundleOrderItemStatusList().isAllAllocated();
     }
+
+    public boolean isAllShippingInstructed() {
+        return singleOrderItemStatusList().isAllShippingInstructed() && bundleOrderItemStatusList().isAllShippingInstructed();
+    }
 }
