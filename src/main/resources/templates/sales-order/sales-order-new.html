@@ -20,17 +20,25 @@
            th:if="${#fields.hasErrors('*')}">
         error messages
       </div>
-      <div class="mb-3">
+      <div class="row">
         <label class="form-label">顧客名称</label>
-        <div class="row">
-          <input type="hidden" class="form-control" id="customer-code" th:field="*{customer.customerId}" readonly>
-
-          <span class="col-2">
-            <span id="customer-name" class="mr-3"></span>
-            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#customerModal">
-              顧客検索
-            </button>
+        <span class="col-1">
+            <input type="text" class="form-control " id="customer-last-name" th:field="*{customer.name.lastName}"
+                   style="border: none"
+                   readonly>
+        </span>
+        <span class="col-1">
+            <input type="text" class="form-control " id="customer-first-name" th:field="*{customer.name.firstName}"
+                   style="border: none"
+                   readonly>
           </span>
+        <div class="col">
+          <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#customerModal">
+            顧客検索
+          </button>
+        </div>
+        <div class="col-2">
+          <input type="hidden" class="form-control" id="customer-code" th:field="*{customer.customerId}" readonly>
         </div>
       </div>
 
@@ -187,7 +195,9 @@
 
       clone.querySelector('.select').addEventListener('click', () => {
         document.getElementById("customer-code").value = customers[i].customer_id.value
-        document.getElementById("customer-name").innerText = customers[i].name.last_name + " " + customers[i].name.first_name
+
+        document.getElementById("customer-last-name").value = customers[i].name.last_name
+        document.getElementById("customer-first-name").value = customers[i].name.first_name
       })
 
       // div#containerの中に追加
