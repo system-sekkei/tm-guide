@@ -97,4 +97,8 @@ public class SalesOrder {
     public SalesOrderedType salesOrderedType() {
         return salesOrderedType;
     }
+
+    public boolean hasItems() {
+        return !singleProductOrderItems.isEmpty() || !bundleProductOrderItems.isEmpty();
+    }
 }

@@ -171,7 +171,8 @@
 
   <hr>
 
-  <form method="post" th:action="@{/sales-orders/__${salesOrderId}__}" th:unless="${salesOrder.salesOrderedType.isCompleted}">
+  <form method="post" th:action="@{/sales-orders/__${salesOrderId}__}"
+        th:if="${!salesOrder.salesOrderedType.isCompleted and salesOrder.hasItems}">
     <button type="submit" class="btn btn-primary">受注登録完了</button>
   </form>
 

@@ -83,4 +83,8 @@ public class BundleProductOrderItems {
         return list;
     }
 
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+
 }
