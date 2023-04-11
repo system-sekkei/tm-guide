@@ -6,6 +6,9 @@ import guide.tm.domain.model.product.summary.ProductType;
 import guide.tm.domain.primitive.Quantity;
 import jakarta.validation.constraints.AssertTrue;
 
+/**
+ * 受注明細登録内容
+ */
 public class SalesOrderItemRequest {
 
     ProductName productName;

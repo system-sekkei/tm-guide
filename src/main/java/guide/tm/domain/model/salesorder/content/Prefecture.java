@@ -2,6 +2,9 @@ package guide.tm.domain.model.salesorder.content;
 
 import static guide.tm.domain.model.salesorder.content.Region.*;
 
+/**
+ * 都道府県
+ */
 public enum Prefecture {
     北海道(Region.北海道),
     青森県(東北), 岩手県(東北), 秋田県(東北), 宮城県(東北), 山形県(東北), 福島県(東北),

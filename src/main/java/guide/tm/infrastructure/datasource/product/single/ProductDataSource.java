@@ -2,7 +2,6 @@ package guide.tm.infrastructure.datasource.product.single;
 
 import guide.tm.application.service.product.single.ProductRepository;
 import guide.tm.domain.model.product.single.SingleProduct;
-import guide.tm.domain.model.product.single.SingleProducts;
 import guide.tm.domain.model.product.summary.ProductSearchCriteria;
 import guide.tm.domain.model.product.summary.ProductSummaries;
 import org.springframework.stereotype.Repository;
@@ -19,11 +18,6 @@ public class ProductDataSource implements ProductRepository {
     @Override
     public void register(SingleProduct singleProduct) {
         productMapper.register(singleProduct);
-    }
-
-    @Override
-    public SingleProducts products() {
-        return new SingleProducts(productMapper.products());
     }
 
     @Override

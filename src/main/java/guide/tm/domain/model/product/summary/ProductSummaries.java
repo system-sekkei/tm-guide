@@ -3,6 +3,9 @@ package guide.tm.domain.model.product.summary;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 商品サマリー一覧
+ */
 public class ProductSummaries {
     List<ProductSummary> list;
 

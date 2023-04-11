@@ -5,6 +5,9 @@ import guide.tm.domain.model.salesorder.content.OrderedDate;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 引当検索条件
+ */
 public class AllocationCriteria {
 
     OrderedDate from;

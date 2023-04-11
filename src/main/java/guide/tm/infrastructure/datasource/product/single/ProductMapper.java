@@ -12,8 +12,6 @@ import java.util.List;
 interface ProductMapper {
     void register(@Param("product") SingleProduct singleProduct);
 
-    List<SingleProduct> products();
-
     List<ProductSummary> searchSingleProducts(
             @Param("productSearchCriteria") ProductSearchCriteria productSearchCriteria);
 

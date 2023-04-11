@@ -2,6 +2,9 @@ package guide.tm.domain.model.allocation.summary;
 
 import java.util.List;
 
+/**
+ * 引当サマリー一覧
+ */
 public class AllocationSummaries {
     List<AllocationSummary> list;
 

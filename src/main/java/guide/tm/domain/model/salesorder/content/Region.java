@@ -1,5 +1,8 @@
 package guide.tm.domain.model.salesorder.content;
 
+/**
+ * 地域
+ */
 public enum Region {
     北海道,
     東北,

@@ -6,6 +6,9 @@ import guide.tm.domain.model.salesorder.order.SalesOrderIdList;
 import guide.tm.domain.model.salesorder.order.SalesOrders;
 import org.springframework.stereotype.Service;
 
+/**
+ * 請求サービス
+ */
 @Service
 public class InvoiceService {
 
@@ -43,6 +46,9 @@ public class InvoiceService {
         return invoiceRepository.salesOrderIdsOf(invoiceId);
     }
 
+    /**
+     * 未請求を記録する
+     */
     public void recordUnInvoiced(SalesOrderId salesOrderId) {
         invoiceRepository.recordUnInvoiced(salesOrderId);
     }

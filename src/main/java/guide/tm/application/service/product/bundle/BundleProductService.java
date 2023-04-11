@@ -15,12 +15,15 @@ public class BundleProductService {
         this.bundleProductRepository = bundleProductRepository;
     }
 
+    /**
+     * セット商品を取得する
+     */
     public BundleProducts bundleProducts() {
         return bundleProductRepository.bundleProducts();
     }
 
     /**
-     * 商品を登録する
+     * セット商品を登録する
      */
     public void register(BundleProduct bundleProduct) {
         bundleProductRepository.register(bundleProduct);

@@ -12,6 +12,9 @@ import guide.tm.domain.model.salesorder.order.SalesOrderIdList;
 import guide.tm.domain.model.salesorder.order.SalesOrders;
 import org.springframework.stereotype.Service;
 
+/**
+ * 請求シナリオ
+ */
 @Service
 public class InvoiceScenario {
 
@@ -26,6 +29,12 @@ public class InvoiceScenario {
         this.customerService = customerService;
     }
 
+    /**
+     * 請求を登録する
+     *
+     * 1. 請求対象の受注を取得する
+     * 2. 請求を登録する
+     */
     public void register(InvoiceContent invoiceContent) {
         SalesOrders salesOrders = salesOrderScenario.salesOrdersOf(invoiceContent.customerId(), invoiceContent.orderedYearMonth());
         invoiceService.register(invoiceContent, salesOrders);

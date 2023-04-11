@@ -2,6 +2,9 @@ package guide.tm.domain.model.invoice;
 
 import guide.tm.domain.model.customer.CustomerId;
 
+/**
+ * 請求詳細
+ */
 public class InvoiceDetail {
     InvoiceNumber invoiceNumber;
     InvoiceDate invoiceDate;

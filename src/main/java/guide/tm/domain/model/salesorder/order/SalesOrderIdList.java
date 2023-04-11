@@ -2,6 +2,9 @@ package guide.tm.domain.model.salesorder.order;
 
 import java.util.List;
 
+/**
+ * 受注IDリスト
+ */
 public class SalesOrderIdList {
 
     List<SalesOrderId> list;

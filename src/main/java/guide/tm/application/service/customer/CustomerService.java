@@ -38,6 +38,9 @@ public class CustomerService {
         return customerRepository.customerSummariesOf(customerSearchCriteria);
     }
 
+    /**
+     * 顧客を取得する
+     */
     public Customer customerOf(CustomerId customerId) {
         return customerRepository.customerOf(customerId);
     }
