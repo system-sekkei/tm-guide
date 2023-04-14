@@ -38,10 +38,15 @@
 
     <select id="customerOf" resultType="guide.tm.domain.model.customer.Customer">
         SELECT
-            顧客ID AS "customerId.value",
+            顧客.顧客ID AS "customerId.value",
             顧客名 AS "customerName.name.value",
-            顧客名カナ AS "customerName.nameKana.value"
+            顧客名カナ AS "customerName.nameKana.value",
+            連絡先.都道府県 AS "contact.address.prefecture",
+            連絡先.住所 AS "contact.address.addressLine",
+            連絡先.電話番号 AS "contact.phoneNumber.value",
+            連絡先.担当者名 AS "contact.personInCharge"
         FROM 顧客.顧客
-        WHERE 顧客ID = #{customerId.value}
+        INNER JOIN 顧客.連絡先 ON 顧客.顧客ID = 連絡先.顧客ID
+        WHERE 顧客.顧客ID = #{customerId.value}
     </select>
 </mapper>

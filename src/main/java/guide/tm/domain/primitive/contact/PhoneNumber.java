@@ -5,4 +5,9 @@ package guide.tm.domain.primitive.contact;
  */
 public class PhoneNumber {
     String value;
+
+    @Override
+    public String toString() {
+        return value;
+    }
 }

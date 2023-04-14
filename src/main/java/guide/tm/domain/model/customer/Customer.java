@@ -32,6 +32,10 @@ public class Customer {
         return customerName.name;
     }
 
+    public Contact contact() {
+        return contact;
+    }
+
     public boolean isSame(Customer other) {
         return customerId.isSame(other.customerId);
     }

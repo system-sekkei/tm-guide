@@ -11,4 +11,15 @@ public class Contact {
     PhoneNumber phoneNumber;
     String personInCharge;
 
+    public Address address() {
+        return address;
+    }
+
+    public PhoneNumber phoneNumber() {
+        return phoneNumber;
+    }
+
+    public String personInCharge() {
+        return personInCharge;
+    }
 }
