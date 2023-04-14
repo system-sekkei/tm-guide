@@ -7,17 +7,14 @@ public class Customer {
     CustomerId customerId;
     CustomerName name;
     CustomerName nameKana;
-    CustomerType type;
-
     public Customer() {
-        this(new CustomerId(), new CustomerName(), new CustomerName() ,CustomerType.個人);
+        this(new CustomerId(), new CustomerName(), new CustomerName());
     }
 
-    public Customer(CustomerId customerId, CustomerName name, CustomerName nameKana, CustomerType type) {
+    public Customer(CustomerId customerId, CustomerName name, CustomerName nameKana) {
         this.customerId = customerId;
         this.name = name;
         this.nameKana = nameKana;
-        this.type = type;
     }
 
     public CustomerId customerId() {
@@ -26,10 +23,6 @@ public class Customer {
 
     public CustomerName name() {
         return name;
-    }
-
-    public CustomerType type() {
-        return type;
     }
 
     public boolean isSame(Customer other) {

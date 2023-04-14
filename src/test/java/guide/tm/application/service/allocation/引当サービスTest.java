@@ -10,7 +10,6 @@ import guide.tm.domain.model.allocation.warehouse.WareHouseCode;
 import guide.tm.domain.model.customer.Customer;
 import guide.tm.domain.model.customer.CustomerId;
 import guide.tm.domain.model.customer.CustomerName;
-import guide.tm.domain.model.customer.CustomerType;
 import guide.tm.domain.model.product.detail.ProductCode;
 import guide.tm.domain.model.product.detail.ProductName;
 import guide.tm.domain.model.product.price.UnitPrice;
@@ -72,7 +71,7 @@ class 引当サービスTest {
 
     @BeforeEach
     void setup() {
-        Customer 顧客 = new Customer(new CustomerId("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"), new CustomerName("留美", "梅宮"), new CustomerName("ルミ", "ウメミヤ"), CustomerType.個人);
+        Customer 顧客 = new Customer(new CustomerId("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"), new CustomerName("クィントン株式会社"), new CustomerName("クィントンカブシキカイシャ"));
         顧客準備.顧客のテストデータの準備(顧客);
 
         WareHouse 東日本倉庫 = new WareHouse(new WareHouseCode("654321"), "東日本倉庫", "千葉県");

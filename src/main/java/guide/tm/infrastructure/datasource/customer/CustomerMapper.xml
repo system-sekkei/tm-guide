@@ -5,23 +5,19 @@
 <mapper namespace="guide.tm.infrastructure.datasource.customer.CustomerMapper">
 
     <insert id="register">
-        INSERT INTO 顧客.顧客 (顧客ID, 顧客番号, 顧客姓, 顧客名, 顧客姓カナ, 顧客名カナ, 個人法人区分)
+        INSERT INTO 顧客.顧客 (顧客ID, 顧客番号, 顧客名, 顧客名カナ)
         VALUES (
                 #{customer.customerId.value},
                 #{customerNumber.value},
-                #{customer.name.lastName},
-                #{customer.name.firstName},
-                #{customer.name.lastName},
-                #{customer.name.firstName},
-                #{customer.type}
+                #{customer.name.value},
+                #{customer.nameKana.value}
                 )
     </insert>
 
     <select id="summaries" resultType="guide.tm.domain.model.customer.CustomerSummary">
         SELECT
             顧客ID AS "customerId.value",
-            顧客姓 AS "name.value",
-            顧客名
+            顧客名 AS "name.value"
         FROM 顧客.顧客
     </select>
 
@@ -29,14 +25,10 @@
 
         SELECT
             顧客ID AS "customerId.value",
-            顧客姓 AS "name.lastName",
-            顧客名 AS "name.firstName",
-            顧客姓カナ AS "nameKana.lastName",
-            顧客名カナ AS "nameKana.firstName"
+            顧客名 AS "name.value",
+            顧客名カナ AS "nameKana.value"
         FROM 顧客.顧客
-        WHERE 顧客姓 LIKE CONCAT('%', #{customerSearchCriteria.customerName}, '%')
-           OR 顧客名 LIKE CONCAT('%', #{customerSearchCriteria.customerName}, '%')
-           OR 顧客姓カナ LIKE CONCAT('%', #{customerSearchCriteria.customerName}, '%')
+        WHERE 顧客名 LIKE CONCAT('%', #{customerSearchCriteria.customerName}, '%')
            OR 顧客名カナ LIKE CONCAT('%', #{customerSearchCriteria.customerName}, '%')
     </select>
 
@@ -47,10 +39,8 @@
     <select id="customerOf" resultType="guide.tm.domain.model.customer.Customer">
         SELECT
             顧客ID AS "customerId.value",
-            顧客姓 AS "name.lastName",
-            顧客名 AS "name.firstName",
-            顧客姓カナ AS "nameKana.lastName",
-            顧客名カナ AS "nameKana.firstName"
+            顧客名 AS "name.value",
+            顧客名カナ AS "nameKana.value"
         FROM 顧客.顧客
         WHERE 顧客ID = #{customerId.value}
     </select>

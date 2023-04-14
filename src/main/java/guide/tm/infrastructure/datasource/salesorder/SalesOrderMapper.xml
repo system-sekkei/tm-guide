@@ -21,10 +21,8 @@
             受注ID,
             受注番号    AS "salesOrderNumber.value",
             受注.顧客ID AS "customer.customerId.value",
-            顧客姓 AS "customer.name.lastName",
-            顧客名 AS "customer.name.firstName",
-            顧客姓カナ AS "customer.nameKana.lastName",
-            顧客名カナ AS "customer.nameKana.firstName",
+            顧客名 AS "customer.name.value",
+            顧客名カナ AS "customer.nameKana.value",
             受注日 AS "orderedDate.value",
             都道府県 AS "shippingAddress.prefecture",
             住所 AS "shippingAddress.addressLine"
@@ -37,19 +35,15 @@
         SELECT 受注ID      AS "salesOrderId.value",
                受注番号    AS "salesOrderNumber.value",
                受注.顧客ID AS "customer.code.value",
-               顧客姓        AS "customer.name.lastName",
-               顧客名        AS "customer.name.firstName",
-               顧客姓カナ      AS "customer.nameKana.lastName",
-               顧客名カナ      AS "customer.nameKana.firstName",
+               顧客名        AS "customer.name.value",
+               顧客名カナ      AS "customer.nameKana.value",
                受注日        AS "orderedDate.value"
         FROM 受注.受注
                  INNER JOIN 顧客.顧客 ON 受注.顧客ID = 顧客.顧客ID
         <where>
               (
-                  顧客姓 LIKE CONCAT('%', #{salesOrderSearchCriteria.customerName}, '%')
-                      OR 顧客名 LIKE CONCAT('%', #{salesOrderSearchCriteria.customerName}, '%')
-                      OR 顧客姓カナ LIKE CONCAT('%', #{salesOrderSearchCriteria.customerName}, '%')
-                      OR 顧客名カナ LIKE CONCAT('%', #{salesOrderSearchCriteria.customerName}, '%')
+                  顧客名 LIKE CONCAT('%', #{salesOrderSearchCriteria.customerName}, '%')
+                  OR 顧客名カナ LIKE CONCAT('%', #{salesOrderSearchCriteria.customerName}, '%')
               )
             <if test="!salesOrderSearchCriteria.from.isEmpty()">
                 <![CDATA[
@@ -101,10 +95,8 @@
 
                受注番号    AS "salesOrderNumber.value",
                受注.顧客ID AS "customer.code.value",
-               顧客姓        AS "customer.name.lastName",
-               顧客名        AS "customer.name.firstName",
-               顧客姓カナ      AS "customer.nameKana.lastName",
-               顧客名カナ      AS "customer.nameKana.firstName",
+               顧客名        AS "customer.name.value",
+               顧客名カナ      AS "customer.nameKana.value",
                受注日        AS "orderedDate.value"
         FROM 受注.受注
                  INNER JOIN 顧客.顧客 ON 受注.顧客ID = 顧客.顧客ID

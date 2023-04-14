@@ -3,7 +3,6 @@ package guide.tm.application.service.salesorder;
 import guide.tm.domain.model.customer.Customer;
 import guide.tm.domain.model.customer.CustomerId;
 import guide.tm.domain.model.customer.CustomerName;
-import guide.tm.domain.model.customer.CustomerType;
 import guide.tm.domain.model.product.bundle.BundleProduct;
 import guide.tm.domain.model.product.bundle.BundleProductItems;
 import guide.tm.domain.model.product.detail.ProductCode;
@@ -71,8 +70,7 @@ class 受注明細サービスTest {
 
         Customer 顧客 = new Customer(
                 new CustomerId("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"),
-                new CustomerName("留美", "梅宮"), new CustomerName("ルミ", "ウメミヤ"),
-                CustomerType.個人);
+                new CustomerName("チーサネト飲料"), new CustomerName("チーサネトインリョウ"));
 
 
         @BeforeEach
@@ -148,8 +146,7 @@ class 受注明細サービスTest {
 
         Customer 顧客 = new Customer(
                 new CustomerId("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"),
-                new CustomerName("留美", "梅宮"), new CustomerName("ルミ", "ウメミヤ"),
-                CustomerType.個人);
+                new CustomerName("伝農航空"), new CustomerName("デンノウコウクウ"));
 
         @BeforeEach
         void setup() {

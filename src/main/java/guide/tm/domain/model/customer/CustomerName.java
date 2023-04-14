@@ -4,28 +4,19 @@ package guide.tm.domain.model.customer;
  * 顧客名称
  */
 public class CustomerName {
-    String firstName;
-    String lastName;
+    String value;
 
     CustomerName() {
-        this("", "");
+        this("");
     }
 
-    public CustomerName(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public CustomerName(String value) {
+        this.value = value;
     }
 
     @Override
     public String toString() {
-        return "%s %s".formatted(lastName, firstName);
+        return value;
     }
 
-    public String firstName() {
-        return firstName;
-    }
-
-    public String lastName() {
-        return lastName;
-    }
 }
