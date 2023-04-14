@@ -31,7 +31,6 @@ public class CustomerDataSource implements CustomerRepository {
 
     @Override
     public Customer customerOf(CustomerId customerId) {
-        Customer customer = customerMapper.customerOf(customerId);
-        return null;
+        return customerMapper.customerOf(customerId);
     }
 }

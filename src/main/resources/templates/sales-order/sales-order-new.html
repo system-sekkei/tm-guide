@@ -21,22 +21,17 @@
         error messages
       </div>
       <div class="row">
-        <label class="form-label">顧客名称</label>
-        <span class="col-1">
-            <input type="text" class="form-control " id="customer-last-name" th:field="*{customer.name.lastName}"
+        <span>
+          <label class="form-label">顧客名称</label>
+          <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#customerModal">
+            検索
+          </button>
+        </span>
+        <span class="col-3">
+            <input type="text" class="form-control " id="customer-name" th:field="*{customer.name}"
                    style="border: none"
                    readonly>
         </span>
-        <span class="col-1">
-            <input type="text" class="form-control " id="customer-first-name" th:field="*{customer.name.firstName}"
-                   style="border: none"
-                   readonly>
-          </span>
-        <div class="col">
-          <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#customerModal">
-            顧客検索
-          </button>
-        </div>
         <div class="col-2">
           <input type="hidden" class="form-control" id="customer-code" th:field="*{customer.customerId}" readonly>
         </div>
@@ -130,7 +125,6 @@
         <table class="table table-striped table-hover">
           <thead>
           <tr>
-            <th>顧客姓</th>
             <th>顧客名</th>
             <th></th>
           </tr>
@@ -152,7 +146,7 @@
   <!-- テンプレート -->
   <template id="template">
     <tr>
-      <td class="last-name"></td>
+      <td class="customer-name"></td>
       <td class="first-name"></td>
       <td>
         <input type="hidden" name="customer-code" class="customer-code">
@@ -187,8 +181,7 @@
 
       // 複製したtemplate要素にデータを挿入
       // console.log(customers[i].name.first_name)
-      clone.querySelector('.last-name').textContent = customers[i].name.last_name;
-      clone.querySelector('.first-name').textContent = customers[i].name.first_name;
+      clone.querySelector('.customer-name').textContent = customers[i].name.value;
       clone.querySelector('.customer-code').textContent = customers[i].customer_id.value;
       clone.querySelector('.select').value = i;
       clone.querySelector('.select').id = `select-button-${i}`;
@@ -196,8 +189,7 @@
       clone.querySelector('.select').addEventListener('click', () => {
         document.getElementById("customer-code").value = customers[i].customer_id.value
 
-        document.getElementById("customer-last-name").value = customers[i].name.last_name
-        document.getElementById("customer-first-name").value = customers[i].name.first_name
+        document.getElementById("customer-name").value = customers[i].name.value
       })
 
       // div#containerの中に追加

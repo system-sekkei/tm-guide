@@ -94,8 +94,8 @@
             請求.請求番号 AS "invoiceNumber.value",
             請求.請求日 AS "invoiceDate.value",
             請求.受注年月 AS "orderedYearMonth.value",
-            顧客.顧客ID  AS "customer.customerId.value",
-            顧客.顧客名 AS "customer.customerName.value"
+            顧客.顧客ID  AS "customerId.value",
+            顧客.顧客名
         FROM 請求.請求
                  INNER JOIN 請求.請求済受注 ON 請求.請求ID = 請求済受注.請求ID
                  INNER JOIN 顧客.顧客 ON 請求.顧客ID = 顧客.顧客ID
