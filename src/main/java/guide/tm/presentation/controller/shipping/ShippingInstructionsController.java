@@ -36,7 +36,8 @@ class ShippingInstructionsController {
     String list(
             @ModelAttribute("shippingInstructionCriteria") ShippingInstructionCriteria shippingInstructionCriteria,
             Model model) {
-        ShippingInstructionSummaries shippingInstructionSummaries = shippingInstructionService.shippingInstructionSummaries(shippingInstructionCriteria);
+        ShippingInstructionSummaries shippingInstructionSummaries =
+                shippingInstructionService.shippingInstructionSummaries(shippingInstructionCriteria);
         model.addAttribute("shippingInstructionSummaries", shippingInstructionSummaries);
         return "shipping/shipping-instructions";
     }

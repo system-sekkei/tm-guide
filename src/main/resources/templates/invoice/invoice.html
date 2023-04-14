@@ -54,35 +54,6 @@
             </div>
           </div>
         </span>
-        <!--/*
-        <span class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-          <i class="bi bi-currency-yen" style="font-size: 1.5rem; color: cornflowerblue;"></i>
-          <div class="d-flex gap-2 w-100 justify-content-between">
-            <div>
-              <h6 class="mb-0 opacity-75">税抜き金額</h6>
-              <p class="mb-0" >8,700</p>
-            </div>
-          </div>
-        </span>
-        <span href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-          <i class="bi bi-tag" style="font-size: 1.5rem; color: cornflowerblue;"></i>
-          <div class="d-flex gap-2 w-100 justify-content-between">
-            <div>
-              <h6 class="mb-0 opacity-75">消費税</h6>
-              <p class="mb-0" >870</p>
-            </div>
-          </div>
-        </span>
-        <span href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-          <i class="bi bi-box" style="font-size: 1.5rem; color: cornflowerblue;"></i>
-          <div class="d-flex gap-2 w-100 justify-content-between">
-            <div>
-              <h6 class="mb-0 opacity-75">送料</h6>
-              <p class="mb-0" >1050</p>
-            </div>
-          </div>
-        </span>
-        */-->
       </div>
     </span>
 
@@ -112,7 +83,7 @@
           <div class="d-flex gap-2 w-100 justify-content-between">
             <div>
               <h6 class="mb-0 opacity-75">顧客電話番号</h6>
-              <p class="mb-0" th:text="${invoice.salesOrders.list.get(0).salesOrderContent.customer.name}">アナハイムファーム</p>
+              <p class="mb-0" th:text="${invoice.customer.name}">アナハイムファーム</p>
               <p class="mb-0" >03-1234-2345</p>
             </div>
           </div>

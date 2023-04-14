@@ -10,13 +10,14 @@ import guide.tm.domain.model.allocation.warehouse.WareHouseCode;
 import guide.tm.domain.model.customer.Customer;
 import guide.tm.domain.model.customer.CustomerId;
 import guide.tm.domain.model.customer.CustomerName;
+import guide.tm.domain.model.customer.Name;
+import guide.tm.domain.model.customer.contact.Contact;
 import guide.tm.domain.model.product.detail.ProductCode;
 import guide.tm.domain.model.product.detail.ProductName;
 import guide.tm.domain.model.product.price.UnitPrice;
 import guide.tm.domain.model.product.single.SingleProduct;
 import guide.tm.domain.model.product.summary.ProductType;
 import guide.tm.domain.model.salesorder.content.OrderedDate;
-import guide.tm.domain.model.salesorder.content.Prefecture;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.content.ShippingAddress;
 import guide.tm.domain.model.salesorder.order.SalesOrderId;
@@ -27,6 +28,7 @@ import guide.tm.domain.model.shipping.status.ShippingStatus;
 import guide.tm.domain.model.status.single.SingleOrderItemStatus;
 import guide.tm.domain.model.tax.context.TaxRateType;
 import guide.tm.domain.primitive.Quantity;
+import guide.tm.domain.primitive.contact.Prefecture;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +73,10 @@ class 引当サービスTest {
 
     @BeforeEach
     void setup() {
-        Customer 顧客 = new Customer(new CustomerId("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"), new CustomerName("クィントン株式会社"), new CustomerName("クィントンカブシキカイシャ"));
+        Customer 顧客 = new Customer(
+                new CustomerId("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"),
+                new CustomerName(new Name("クィントン株式会社"), new Name("クィントンカブシキカイシャ")),
+                new Contact());
         顧客準備.顧客のテストデータの準備(顧客);
 
         WareHouse 東日本倉庫 = new WareHouse(new WareHouseCode("654321"), "東日本倉庫", "千葉県");
@@ -87,7 +92,8 @@ class 引当サービスTest {
                         new Stock(new ProductCode("821009"), new WareHouseCode("254i66"), Prefecture.奈良県, new Quantity(13))
                 )
         );
-        SalesOrderContent 受注 = new SalesOrderContent(new SalesOrderNumber("78789898"), 顧客, new OrderedDate("2023-01-12"), new ShippingAddress(Prefecture.三重県, "津"));
+        SalesOrderContent 受注 = new SalesOrderContent(
+                new SalesOrderNumber("78789898"), 顧客.customerId(), 顧客.customerName(), new OrderedDate("2023-01-12"), new ShippingAddress(Prefecture.三重県, "津"));
         受注ID = 受注Service.registerSalesOrder(受注);
         SalesOrderItemRequest 受注明細_専用ボトル登録リクエスト =
                 new SalesOrderItemRequest(new ProductName("専用ボトル"), new ProductCode("821009"),  new Quantity(42), ProductType.個別);

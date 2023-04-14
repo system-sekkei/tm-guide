@@ -102,8 +102,8 @@
         SELECT 受注.受注ID      AS "salesOrderSummary.salesOrderId.value",
                受注番号    AS "salesOrderSummary.salesOrderNumber.value",
                受注.顧客ID AS "salesOrderSummary.customer.code.value",
-               顧客名        AS "salesOrderSummary.customer.name.value",
-               顧客名カナ      AS "salesOrderSummary.customer.nameKana.value",
+               顧客名        AS "salesOrderSummary.customer.customerName.name.value",
+               顧客名カナ      AS "salesOrderSummary.customer.customerName.nameKana.value",
                受注日        AS "salesOrderSummary.orderedDate.value",
                '引当済' AS "allocatedStatus"
         FROM 受注.受注
@@ -127,8 +127,8 @@
         SELECT 受注.受注ID      AS "salesOrderSummary.salesOrderId.value",
                受注番号    AS "salesOrderSummary.salesOrderNumber.value",
                受注.顧客ID AS "salesOrderSummary.customer.code.value",
-               顧客名        AS "salesOrderSummary.customer.name.value",
-               顧客名カナ      AS "salesOrderSummary.customer.nameKana.value",
+               顧客名        AS "salesOrderSummary.customer.customerName.name.value",
+               顧客名カナ      AS "salesOrderSummary.customer.customerName.nameKana.value",
                受注日        AS "salesOrderSummary.orderedDate.value",
                '引当残あり' AS "allocatedStatus"
         FROM 受注.受注

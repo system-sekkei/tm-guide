@@ -1,22 +1,23 @@
 package guide.tm.domain.model.customer;
 
-/**
- * 顧客名称
- */
 public class CustomerName {
-    String value;
+    Name name;
+    Name nameKana;
 
-    CustomerName() {
-        this("");
+    public CustomerName() {
+        this(new Name(""), new Name(""));
     }
 
-    public CustomerName(String value) {
-        this.value = value;
+    public CustomerName(Name name, Name nameKana) {
+        this.name = name;
+        this.nameKana = nameKana;
     }
 
-    @Override
-    public String toString() {
-        return value;
+    public Name name() {
+        return name;
     }
 
+    public Name nameKana() {
+        return nameKana;
+    }
 }

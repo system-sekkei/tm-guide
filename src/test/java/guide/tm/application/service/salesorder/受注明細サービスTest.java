@@ -3,6 +3,8 @@ package guide.tm.application.service.salesorder;
 import guide.tm.domain.model.customer.Customer;
 import guide.tm.domain.model.customer.CustomerId;
 import guide.tm.domain.model.customer.CustomerName;
+import guide.tm.domain.model.customer.Name;
+import guide.tm.domain.model.customer.contact.Contact;
 import guide.tm.domain.model.product.bundle.BundleProduct;
 import guide.tm.domain.model.product.bundle.BundleProductItems;
 import guide.tm.domain.model.product.detail.ProductCode;
@@ -11,7 +13,6 @@ import guide.tm.domain.model.product.price.UnitPrice;
 import guide.tm.domain.model.product.single.SingleProduct;
 import guide.tm.domain.model.product.summary.ProductType;
 import guide.tm.domain.model.salesorder.content.OrderedDate;
-import guide.tm.domain.model.salesorder.content.Prefecture;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.content.ShippingAddress;
 import guide.tm.domain.model.salesorder.order.SalesOrderId;
@@ -23,6 +24,7 @@ import guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItemContent;
 import guide.tm.domain.model.salesorder.orderitem.single.SingleProductOrderItems;
 import guide.tm.domain.model.tax.context.TaxRateType;
 import guide.tm.domain.primitive.Quantity;
+import guide.tm.domain.primitive.contact.Prefecture;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -70,7 +72,9 @@ class 受注明細サービスTest {
 
         Customer 顧客 = new Customer(
                 new CustomerId("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"),
-                new CustomerName("チーサネト飲料"), new CustomerName("チーサネトインリョウ"));
+                new CustomerName(new Name("チーサネト飲料"), new Name("チーサネトインリョウ")),
+                new Contact()
+        );
 
 
         @BeforeEach
@@ -82,7 +86,8 @@ class 受注明細サービスTest {
         @Test
         void 受注明細を登録する() {
             // given:
-            SalesOrderContent 受注 = new SalesOrderContent(new SalesOrderNumber("77779898"), 顧客, new OrderedDate("2023-01-12"), new ShippingAddress(Prefecture.埼玉県, "さいたま市"));
+            SalesOrderContent 受注 = new SalesOrderContent(
+                    new SalesOrderNumber("77779898"), 顧客.customerId(), 顧客.customerName(), new OrderedDate("2023-01-12"), new ShippingAddress(Prefecture.埼玉県, "さいたま市"));
 
             SalesOrderItemRequest 受注明細_専用ボトル登録リクエスト =
                     new SalesOrderItemRequest(専用ボトル.name(), 専用ボトル.code(),  new Quantity(1), ProductType.個別);
@@ -146,7 +151,8 @@ class 受注明細サービスTest {
 
         Customer 顧客 = new Customer(
                 new CustomerId("39d3f994-6cd3-4a56-a2b5-d493f030cbc8"),
-                new CustomerName("伝農航空"), new CustomerName("デンノウコウクウ"));
+                new CustomerName(new Name("伝農航空"), new Name("デンノウコウクウ")),
+                new Contact());
 
         @BeforeEach
         void setup() {
@@ -158,7 +164,8 @@ class 受注明細サービスTest {
         @Test
         void セット品受注明細を登録する() {
             //given:
-            SalesOrderContent 受注 = new SalesOrderContent(new SalesOrderNumber("88889898"), 顧客, new OrderedDate("2023-01-12"), new ShippingAddress(Prefecture.大分県, "別府"));
+            SalesOrderContent 受注 = new SalesOrderContent(
+                    new SalesOrderNumber("88889898"), 顧客.customerId(), 顧客.customerName(), new OrderedDate("2023-01-12"), new ShippingAddress(Prefecture.大分県, "別府"));
 
             SalesOrderItemRequest 受注明細_専用ボトルキャップ登録リクエスト =
                     new SalesOrderItemRequest(非常食セット.name(), 非常食セット.code(),  new Quantity(1), ProductType.セット);

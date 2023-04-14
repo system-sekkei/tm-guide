@@ -70,7 +70,7 @@
         <a th:href="@{|/allocations/sales-orders/${instructionSummary.salesOrderId}|}" th:text="${instructionSummary.shippingInstructionContent.salesOrderNumber}">受注番号12345678978</a>
       </td>
       <td class="text-center" th:text="${instructionSummary.orderedDate}">受注日</td>
-      <td class="text-center" th:text="${instructionSummary.customer.name}">顧客名称</td>
+      <td class="text-center" th:text="${instructionSummary.customer.customerName.name}">顧客名称</td>
       <td class="text-center" th:text="${instructionSummary.shippingInstructionContent.shippingDate}">出荷指示日</td>
       <td class="text-center ">
         <h5 th:unless="${instructionSummary.shippingInstructionStatus.isInstructed}"><span class="badge bg-warning" th:text="${instructionSummary.shippingInstructionStatus}">出荷指示残あり</span></h5>

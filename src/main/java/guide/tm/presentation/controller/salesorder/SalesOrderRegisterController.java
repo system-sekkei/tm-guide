@@ -3,12 +3,12 @@ package guide.tm.presentation.controller.salesorder;
 import guide.tm.application.service.customer.CustomerService;
 import guide.tm.application.service.salesorder.SalesOrderService;
 import guide.tm.domain.model.customer.CustomerSummaries;
-import guide.tm.domain.model.salesorder.content.Prefecture;
 import guide.tm.domain.model.salesorder.content.SalesOrderContent;
 import guide.tm.domain.model.salesorder.order.SalesOrderId;
 import guide.tm.domain.model.tax.context.TaxContext;
 import guide.tm.domain.model.tax.context.TaxRateType;
 import guide.tm.domain.model.tax.context.TaxSumType;
+import guide.tm.domain.primitive.contact.Prefecture;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -76,9 +76,8 @@ class SalesOrderRegisterController {
     @InitBinder("salesOrderContent")
     void bindSalesOrderContent(WebDataBinder binder) {
         binder.setAllowedFields(
-                "customer.customerId",
-                "customer.name.lastName",
-                "customer.name.firstName",
+                "customerId",
+                "customerName.name",
                 "shippingAddress.prefecture",
                 "shippingAddress.addressLine",
                 "orderedDate.value"

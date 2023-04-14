@@ -1,6 +1,6 @@
-package guide.tm.domain.model.salesorder.content;
+package guide.tm.domain.primitive.contact;
 
-import static guide.tm.domain.model.salesorder.content.Region.*;
+import static guide.tm.domain.primitive.contact.Region.*;
 
 /**
  * 都道府県

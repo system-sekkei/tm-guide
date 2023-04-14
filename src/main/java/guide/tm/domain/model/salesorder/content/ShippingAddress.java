@@ -1,5 +1,6 @@
 package guide.tm.domain.model.salesorder.content;
 
+import guide.tm.domain.primitive.contact.Prefecture;
 import jakarta.validation.constraints.AssertFalse;
 
 /**

@@ -42,7 +42,8 @@
             請求.請求日 AS "invoiceDate.value",
             請求.受注年月 AS "orderedYearMonth.value",
             顧客.顧客ID  AS "customerId.value",
-            顧客.顧客名 AS "customerName.value",
+            顧客.顧客名 AS "customerName.name.value",
+            顧客.顧客名カナ AS "customerName.nameKana.value",
             '請求済' AS "invoiceStatus"
         FROM 請求.請求
             INNER JOIN 請求.請求済受注 ON 請求.請求ID = 請求済受注.請求ID
@@ -65,7 +66,7 @@
     <select id="notInvoicedSummaries" resultType="guide.tm.domain.model.invoice.InvoiceSummary">
         SELECT
             顧客.顧客ID  AS "customerId.value",
-            顧客.顧客名 AS "customerName.value",
+            顧客.顧客名 AS "customerName.name.value",
             date_trunc('month', 受注.受注日)::date AS "orderedYearMonth.value",
             '未請求' AS "invoiceStatus"
         FROM 出荷指示.出荷済

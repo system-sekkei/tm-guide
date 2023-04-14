@@ -64,40 +64,10 @@
     </tr>
     </thead>
     <tbody>
-    <!--/*
-    <tr>
-      <td class="align-middle"><a href="" th:href="@{invoices/98234567}">98234567</a></td>
-      <td class="align-middle">2023-03-31</td>
-      <td class="align-middle">山田 耕作</td>
-      <td class="align-middle">2023-03</td>
-      <td class="align-middle"></td>
-    </tr>
-    <tr>
-      <td class="align-middle"><a href="" th:href="@{invoices/98234567}">98734567</a></td>
-      <td class="align-middle">2023-03-31</td>
-      <td class="align-middle">川村 由香子</td>
-      <td class="align-middle">2023-03</td>
-      <td class="align-middle"></td>
-    </tr>
-    <tr>
-      <td class="align-middle"><a href="" th:href="@{invoices/98234567}">88834578</a></td>
-      <td class="align-middle">2023-03-31</td>
-      <td class="align-middle">古谷 有</td>
-      <td class="align-middle">2023-03</td>
-      <td class="align-middle"></td>
-    </tr>
-    <tr>
-      <td class="align-middle"><a href=""></a></td>
-      <td class="align-middle"></td>
-      <td class="align-middle">大岡 睦</td>
-      <td class="align-middle">2023-03</td>
-      <td><button class="btn btn-primary">請求書発行</button></td>
-    </tr>
-    */-->
     <tr th:each="invoiceSummary : ${invoiceSummaries.list}">
       <td class="align-middle"><a href="" th:text="${invoiceSummary.invoiceNumber}" th:href="@{|invoices/${invoiceSummary.invoiceId}|}"></a></td>
       <td class="align-middle"><span th:text="${invoiceSummary.invoiceDate}"></span></td>
-      <td class="align-middle"><span th:text="${invoiceSummary.customerName}">大岡 睦</span></td>
+      <td class="align-middle"><span th:text="${invoiceSummary.customerName.name}">大岡 睦</span></td>
       <td class="align-middle">
         <span th:if="${invoiceSummary.invoiceStatus.isInvoiced}" th:text="${invoiceSummary.orderedYearMonth}">2023-03</span>
         <a th:unless="${invoiceSummary.invoiceStatus.isInvoiced}" th:text="${invoiceSummary.orderedYearMonth}"

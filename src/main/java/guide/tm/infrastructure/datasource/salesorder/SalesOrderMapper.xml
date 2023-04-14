@@ -9,7 +9,7 @@
         VALUES (
                    #{salesOrderId},
                    #{salesOrderNumber.value},
-                   #{salesOrder.customer.customerId.value},
+                   #{salesOrder.customerId.value},
                    #{salesOrder.orderedDate.value},
                    #{salesOrder.shippingAddress.prefecture},
                    #{salesOrder.shippingAddress.addressLine}
@@ -20,9 +20,9 @@
         SELECT
             受注ID,
             受注番号    AS "salesOrderNumber.value",
-            受注.顧客ID AS "customer.customerId.value",
-            顧客名 AS "customer.name.value",
-            顧客名カナ AS "customer.nameKana.value",
+            受注.顧客ID AS "customerId.value",
+            顧客名 AS "customerName.name.value",
+            顧客名カナ AS "customerName.nameKana.value",
             受注日 AS "orderedDate.value",
             都道府県 AS "shippingAddress.prefecture",
             住所 AS "shippingAddress.addressLine"

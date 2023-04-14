@@ -14,12 +14,6 @@
 
   <form method="post" th:action="@{/sales-orders/new}" class="mt-3">
     <div th:object="${salesOrderContent}">
-      <div th:each="err : ${#fields.errors('*')}"
-           th:text="${err}"
-           th:class="text-danger"
-           th:if="${#fields.hasErrors('*')}">
-        error messages
-      </div>
       <div class="row">
         <span>
           <label class="form-label">顧客名称</label>
@@ -28,12 +22,11 @@
           </button>
         </span>
         <span class="col-3">
-            <input type="text" class="form-control " id="customer-name" th:field="*{customer.name}"
-                   style="border: none"
-                   readonly>
+            <input type="text" class="form-control border border-0" id="customer-name"
+                   th:field="*{customerName.name}" readonly>
         </span>
         <div class="col-2">
-          <input type="hidden" class="form-control" id="customer-code" th:field="*{customer.customerId}" readonly>
+          <input type="hidden" class="form-control" id="customer-code" th:field="*{customerId}" readonly>
         </div>
       </div>
 

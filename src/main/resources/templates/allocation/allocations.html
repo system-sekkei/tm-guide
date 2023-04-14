@@ -66,7 +66,7 @@
     <tr th:each="allocationSummary : ${allocationSummaries.list}">
       <td class="align-middle"><a th:href="@{|/allocations/sales-orders/${allocationSummary.salesOrderSummary.salesOrderId}|}" th:text="${allocationSummary.salesOrderSummary.salesOrderNumber}">12345678978</a></td>
       <td th:text="${allocationSummary.salesOrderSummary.orderedDate}" class="align-middle">2022-12-22</td>
-      <td th:text="${allocationSummary.salesOrderSummary.customer.name}" class="align-middle">本田正勝</td>
+      <td th:text="${allocationSummary.salesOrderSummary.customer.customerName.name}" class="align-middle">本田正勝</td>
       <td>
         <h5 th:unless="${allocationSummary.allocatedStatus.isAllocated}"><span class="badge bg-warning" th:text="${allocationSummary.allocatedStatus}">引当残あり</span></h5>
         <h5 th:if="${allocationSummary.allocatedStatus.isAllocated}"><span class="badge bg-success" th:text="${allocationSummary.allocatedStatus}">引当済</span></h5>

@@ -1,6 +1,7 @@
 package guide.tm.domain.model.salesorder.content;
 
-import guide.tm.domain.model.customer.Customer;
+import guide.tm.domain.model.customer.CustomerId;
+import guide.tm.domain.model.customer.CustomerName;
 import guide.tm.domain.model.salesorder.order.SalesOrderNumber;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.AssertFalse;
@@ -10,18 +11,25 @@ import jakarta.validation.constraints.AssertFalse;
  */
 public class SalesOrderContent {
     SalesOrderNumber salesOrderNumber;
-    Customer customer;
+    CustomerId customerId;
+    CustomerName customerName;
     OrderedDate orderedDate;
     @Valid
     ShippingAddress shippingAddress;
 
     public SalesOrderContent() {
-        this(new SalesOrderNumber(), new Customer(), new OrderedDate(), new ShippingAddress());
+        this(new SalesOrderNumber(), new CustomerId(), new CustomerName(), new OrderedDate(), new ShippingAddress());
     }
 
-    public SalesOrderContent(SalesOrderNumber salesOrderNumber, Customer customer, OrderedDate orderedDate, ShippingAddress shippingAddress) {
+    public SalesOrderContent(
+            SalesOrderNumber salesOrderNumber,
+            CustomerId customerId,
+            CustomerName customerName,
+            OrderedDate orderedDate,
+            ShippingAddress shippingAddress) {
         this.salesOrderNumber = salesOrderNumber;
-        this.customer = customer;
+        this.customerId = customerId;
+        this.customerName = customerName;
         this.orderedDate = orderedDate;
         this.shippingAddress = shippingAddress;
     }
@@ -30,8 +38,12 @@ public class SalesOrderContent {
         return salesOrderNumber;
     }
 
-    public Customer customer() {
-        return customer;
+    public CustomerId customerId() {
+        return customerId;
+    }
+
+    public CustomerName customerName() {
+        return customerName;
     }
 
     public OrderedDate orderedDate() {
@@ -44,7 +56,7 @@ public class SalesOrderContent {
 
     @AssertFalse(message = "顧客を選択してください")
     boolean isCustomerEmpty() {
-        return customer.customerId().isEmpty();
+        return customerId.isEmpty();
     }
 
     @AssertFalse(message = "受注日を入力してください")

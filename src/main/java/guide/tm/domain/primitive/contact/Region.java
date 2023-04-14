@@ -1,4 +1,4 @@
-package guide.tm.domain.model.salesorder.content;
+package guide.tm.domain.primitive.contact;
 
 /**
  * 地域

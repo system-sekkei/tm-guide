@@ -46,8 +46,8 @@
                受注.受注番号 AS "shippingInstructionContent.salesOrderNumber.value",
                受注日 AS "orderedDate.value",
                顧客.顧客ID AS "customer.code.value",
-               顧客名 AS "customer.name.value",
-               顧客名カナ AS "customer.nameKana.value",
+               顧客名 AS "customer.customerName.name.value",
+               顧客名カナ AS "customer.customerName.nameKana.value",
                '出荷指示済' AS "shippingInstructionStatus"
         FROM 出荷指示.出荷指示
         INNER JOIN 受注.受注 ON 出荷指示.受注ID = 受注.受注ID
@@ -77,8 +77,8 @@
             受注.受注番号 AS "shippingInstructionContent.salesOrderNumber.value",
             受注日 AS "orderedDate.value",
             顧客.顧客ID AS "customer.code.value",
-            顧客名 AS "customer.name.value",
-            顧客名カナ AS "customer.nameKana.value",
+            顧客名 AS "customerName.customerName.name.value",
+            顧客名カナ AS "customerName.customerName.nameKana.value",
             '出荷指示残あり' AS "shippingInstructionStatus"
         FROM 出荷指示.出荷指示
         INNER JOIN 受注.受注 ON 出荷指示.受注ID = 受注.受注ID

@@ -27,7 +27,7 @@
 
         <span class="col-2">
           <input type="hidden" name="orderedYearMonth" th:value="${orderedYearMonth}">
-          <input type="hidden" name="customerId.value" th:value="${salesOrders.list.get(0).salesOrderContent.customer.customerId}">
+          <input type="hidden" name="customerId.value" th:value="${salesOrders.list.get(0).salesOrderContent.customerId}">
           <button class="btn btn-primary">請求登録</button>
         </span>
       </div>
@@ -76,7 +76,7 @@
           <div class="d-flex gap-2 w-100 justify-content-between">
             <div>
               <h6 class="mb-0 opacity-75">顧客名</h6>
-              <p class="mb-0" th:text="${salesOrders.list.get(0).salesOrderContent.customer.name}">アナハイムファーム</p>
+              <p class="mb-0" th:text="${salesOrders.list.get(0).salesOrderContent.customerName.name}">アナハイムファーム</p>
             </div>
           </div>
         </span>
@@ -85,7 +85,7 @@
           <div class="d-flex gap-2 w-100 justify-content-between">
             <div>
               <h6 class="mb-0 opacity-75">顧客住所</h6>
-              <p class="mb-0" th:text="${salesOrders.list.get(0).salesOrderContent.customer.name}">アナハイムファーム</p>
+              <p class="mb-0" th:text="${salesOrders.list.get(0).salesOrderContent.customerName.name}">アナハイムファーム</p>
               <p class="mb-0" >目黒区目黒1-1-1</p>
             </div>
           </div>
@@ -95,7 +95,7 @@
           <div class="d-flex gap-2 w-100 justify-content-between">
             <div>
               <h6 class="mb-0 opacity-75">顧客電話番号</h6>
-              <p class="mb-0" th:text="${salesOrders.list.get(0).salesOrderContent.customer.name}">アナハイムファーム</p>
+              <p class="mb-0" th:text="${salesOrders.list.get(0).salesOrderContent.customerName.name}">アナハイムファーム</p>
               <p class="mb-0" >03-1234-2345</p>
             </div>
           </div>
