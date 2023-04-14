@@ -24,10 +24,13 @@
     <select id="customerSummariesOf" resultType="guide.tm.domain.model.customer.CustomerSummary">
 
         SELECT
-            顧客ID AS "customerId.value",
+            顧客.顧客ID AS "customerId.value",
+            顧客番号 AS "customerNumber.value",
             顧客名 AS "name.value",
-            顧客名カナ AS "nameKana.value"
+            顧客名カナ AS "nameKana.value",
+            担当者名 AS "personInCharge"
         FROM 顧客.顧客
+        INNER JOIN 顧客.連絡先 ON 顧客.顧客ID = 連絡先.顧客ID
         WHERE 顧客名 LIKE CONCAT('%', #{customerSearchCriteria.customerName}, '%')
            OR 顧客名カナ LIKE CONCAT('%', #{customerSearchCriteria.customerName}, '%')
     </select>

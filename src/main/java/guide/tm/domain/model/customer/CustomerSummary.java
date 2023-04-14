@@ -5,24 +5,27 @@ package guide.tm.domain.model.customer;
  */
 public class CustomerSummary {
     CustomerId customerId;
+    CustomerNumber customerNumber;
     Name name;
-    Name nameKana;
+    String personInCharge;
 
     @Deprecated CustomerSummary() {
     }
 
-    public CustomerSummary(CustomerId customerId, Name name, Name nameKana) {
-        this.customerId = customerId;
-        this.name = name;
-        this.nameKana = nameKana;
-    }
-
-    public CustomerId code() {
+    public CustomerId customerId() {
         return customerId;
     }
 
     public Name name() {
         return name;
+    }
+
+    public CustomerNumber customerNumber() {
+        return customerNumber;
+    }
+
+    public String personInCharge() {
+        return personInCharge;
     }
 }
 
