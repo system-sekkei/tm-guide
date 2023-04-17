@@ -7,21 +7,27 @@ import guide.tm.domain.model.customer.contact.Contact;
  */
 public class Customer {
     CustomerId customerId;
+    CustomerNumber customerNumber;
     CustomerName customerName;
     Contact contact;
 
     public Customer() {
-        this(new CustomerId(""), new CustomerName(), new Contact());
+        this(new CustomerId(), new CustomerName(), new CustomerNumber(), new Contact());
     }
 
-    public Customer(CustomerId customerId, CustomerName customerName, Contact contact) {
+    public Customer(CustomerId customerId, CustomerName customerName, CustomerNumber customerNumber, Contact contact) {
         this.customerId = customerId;
         this.customerName = customerName;
+        this.customerNumber = customerNumber;
         this.contact = contact;
     }
 
     public CustomerId customerId() {
         return customerId;
+    }
+
+    public CustomerNumber customerNumber() {
+        return customerNumber;
     }
 
     public CustomerName customerName() {

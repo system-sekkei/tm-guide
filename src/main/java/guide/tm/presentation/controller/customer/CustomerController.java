@@ -58,4 +58,22 @@ class CustomerController {
                 "customerName"
         );
     }
+
+    @PostMapping
+    String register(@ModelAttribute Customer customer) {
+        customerService.register(customer);
+        return "redirect:/customers";
+    }
+
+    @InitBinder("customer")
+    void bindCustomer(WebDataBinder binder) {
+        binder.setAllowedFields(
+                "customerName.name.value",
+                "customerName.nameKana.value",
+                "contact.address.prefecture",
+                "contact.address.addressLine",
+                "contact.phoneNumber.value",
+                "contact.personInCharge"
+        );
+    }
 }

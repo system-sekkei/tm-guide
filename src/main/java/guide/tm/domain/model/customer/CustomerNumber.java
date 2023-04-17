@@ -6,7 +6,8 @@ package guide.tm.domain.model.customer;
 public class CustomerNumber {
     String value;
 
-    @Deprecated CustomerNumber() {
+    public CustomerNumber() {
+        this("");
     }
 
     public CustomerNumber(String value) {

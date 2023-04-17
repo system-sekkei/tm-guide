@@ -11,6 +11,16 @@ public class Contact {
     PhoneNumber phoneNumber;
     String personInCharge;
 
+    public Contact() {
+        this(new Address(), new PhoneNumber(), "");
+    }
+
+    public Contact(Address address, PhoneNumber phoneNumber, String personInCharge) {
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.personInCharge = personInCharge;
+    }
+
     public Address address() {
         return address;
     }

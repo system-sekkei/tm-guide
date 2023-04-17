@@ -11,6 +11,7 @@ interface CustomerMapper {
 
     void register(
             @Param("customer") Customer customer,
+            @Param("customerId") CustomerId customerId,
             @Param("customerNumber") CustomerNumber customerNumber);
 
     List<CustomerSummary> summaries();
@@ -21,4 +22,8 @@ interface CustomerMapper {
     long newCustomerNumber();
 
     Customer customerOf(@Param("customerId") CustomerId customerId);
+
+    void registerContact(
+            @Param("customer") Customer customer,
+            @Param("customerId") CustomerId customerId);
 }

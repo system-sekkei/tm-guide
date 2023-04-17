@@ -1,5 +1,7 @@
 package guide.tm.domain.model.customer;
 
+import java.util.UUID;
+
 /**
  * 顧客番号
  */
@@ -12,6 +14,10 @@ public class CustomerId {
 
     public CustomerId(String value) {
         this.value = value;
+    }
+
+    public static CustomerId newId() {
+        return new CustomerId(UUID.randomUUID().toString());
     }
 
     @Override

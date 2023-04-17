@@ -6,6 +6,14 @@ package guide.tm.domain.primitive.contact;
 public class PhoneNumber {
     String value;
 
+    public PhoneNumber() {
+        this("");
+    }
+
+    public PhoneNumber(String value) {
+        this.value = value;
+    }
+
     @Override
     public String toString() {
         return value;

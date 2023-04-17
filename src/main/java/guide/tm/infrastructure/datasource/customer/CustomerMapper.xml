@@ -7,11 +7,22 @@
     <insert id="register">
         INSERT INTO 顧客.顧客 (顧客ID, 顧客番号, 顧客名, 顧客名カナ)
         VALUES (
-                #{customer.customerId.value},
+                #{customerId.value},
                 #{customerNumber.value},
                 #{customer.customerName.name.value},
                 #{customer.customerName.nameKana.value}
                 )
+    </insert>
+
+    <insert id="registerContact">
+        INSERT INTO 顧客.連絡先 (顧客ID, 都道府県, 住所, 電話番号, 担当者名)
+        VALUES (
+                #{customerId.value},
+                #{customer.contact.address.prefecture},
+                #{customer.contact.address.addressLine},
+                #{customer.contact.phoneNumber.value},
+                #{customer.contact.personInCharge}
+               )
     </insert>
 
     <select id="summaries" resultType="guide.tm.domain.model.customer.CustomerSummary">
@@ -42,6 +53,7 @@
     <select id="customerOf" resultType="guide.tm.domain.model.customer.Customer">
         SELECT
             顧客.顧客ID AS "customerId.value",
+            顧客.顧客番号 AS "customerNumber.value",
             顧客名 AS "customerName.name.value",
             顧客名カナ AS "customerName.nameKana.value",
             連絡先.都道府県 AS "contact.address.prefecture",

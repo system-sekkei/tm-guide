@@ -20,8 +20,8 @@ public class CustomerService {
     /**
      * 顧客を登録する
      */
-    public void register(Customer customer) {
-        customerRepository.register(customer);
+    public CustomerId register(Customer customer) {
+        return customerRepository.register(customer);
     }
 
     /**
