@@ -105,7 +105,7 @@
         <th>商品名称</th>
         <th class="text-end">数量</th>
         <th class="text-end">商品単価</th>
-        <th></th>
+        <th th:unless="${salesOrder.salesOrderedType.isCompleted}"></th>
       </tr>
     </thead>
     <tbody>
@@ -116,8 +116,8 @@
         <td th:text="${singleOrderItem.product.name}">個別商品名</td>
         <td class="text-end" th:text="${singleOrderItem.quantity}">2</td>
         <td class="text-end" th:text="${singleOrderItem.product.unitPrice}">879</td>
-        <td class="text-end">
-          <form method="post" th:action="@{|/sales-orders/${salesOrderId}/items/single/${singleOrderItem.salesOrderItemNumber}|}">
+        <td class="text-end" th:unless="${salesOrder.salesOrderedType.isCompleted}">
+          <form method="post" th:action="@{|/sales-orders/${salesOrderId}/items/${singleOrderItem.salesOrderItemNumber}|}">
             <button type="submit" class="btn btn-danger">削除</button>
           </form>
         </td>
@@ -130,11 +130,17 @@
           <td th:text="${bundleProductOrderItem.bundleProduct.name}">セット商品名</td>
           <td class="text-end" th:text="${bundleProductOrderItem.quantity}">2</td>
           <td class="text-end" th:text="${bundleProductOrderItem.bundleProduct.unitPrice}">879</td>
+          <td class="text-end" th:unless="${salesOrder.salesOrderedType.isCompleted}">
+            <form method="post" th:action="@{|/sales-orders/${salesOrderId}/items/${bundleProductOrderItem.salesOrderItemNumber}|}">
+              <button type="submit" class="btn btn-danger">削除</button>
+            </form>
+          </td>
         </tr>
         <tr th:each="product: ${bundleProductOrderItem.bundleProduct.bundleProductItems.list}">
           <td class="text-center">
           </td>
-          <td th:text="|&nbsp;&nbsp;${product.name}|">個別商品名</td>
+          <td><span th:text="${product.name}" class="ps-3"></span></td>
+          <td class="text-end">--</td>
           <td class="text-end">--</td>
           <td class="text-end">--</td>
         </tr>

@@ -1,5 +1,6 @@
 package guide.tm.domain.model.salesorder.orderitem.single;
 
+import guide.tm.domain.model.salesorder.orderitem.number.SalesOrderItemNumber;
 import guide.tm.domain.model.tax.context.TaxContext;
 import guide.tm.domain.model.tax.context.TaxRateType;
 import guide.tm.domain.model.tax.context.TaxSumType;
@@ -85,4 +86,8 @@ public class SingleProductOrderItems {
         return list.isEmpty();
     }
 
+    public boolean contains(SalesOrderItemNumber salesOrderItemNumber) {
+        return list.stream()
+                .anyMatch(item -> item.salesOrderItemNumber.isSame(salesOrderItemNumber));
+    }
 }

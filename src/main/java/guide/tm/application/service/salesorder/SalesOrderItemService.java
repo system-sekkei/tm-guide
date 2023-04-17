@@ -47,6 +47,18 @@ public class SalesOrderItemService {
     /**
      * 受注明細を削除する
      */
+    public void deleteOrderItem(SalesOrderId salesOrderId, SalesOrderItemNumber salesOrderItemNumber) {
+        SingleProductOrderItems singleProductOrderItems = salesOrderItemRepository.singleProductOrderItemsOf(salesOrderId);
+        if (singleProductOrderItems.contains(salesOrderItemNumber)) {
+            deleteSingleOrderItem(salesOrderId, salesOrderItemNumber);
+            return;
+        }
+        deleteBundleOrderItem(salesOrderId, salesOrderItemNumber);
+    }
+
+    /**
+     * 個別商品受注明細を削除する
+     */
     public void deleteSingleOrderItem(SalesOrderId salesOrderId, SalesOrderItemNumber salesOrderItemNumber) {
         salesOrderItemRepository.deleteSingleOrderItem(salesOrderId, salesOrderItemNumber);
     }

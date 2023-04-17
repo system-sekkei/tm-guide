@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("sales-orders/{salesOrderId}/items")
-class SalesOrderItemRegisterController {
+class SalesOrderItemController {
 
     SalesOrderScenario salesOrderScenario;
     ProductService productService;
     SalesOrderItemService salesOrderItemService;
 
-    SalesOrderItemRegisterController(
+    SalesOrderItemController(
             SalesOrderScenario salesOrderScenario,
             ProductService productService,
             SalesOrderItemService salesOrderItemService) {
@@ -68,12 +68,12 @@ class SalesOrderItemRegisterController {
         );
     }
 
-    @PostMapping("single/{salesOrderItemNumber}")
+    @PostMapping("{salesOrderItemNumber}")
     String deleteSingleOrderItem(
             @PathVariable("salesOrderId") SalesOrderId salesOrderId,
             @PathVariable("salesOrderItemNumber") SalesOrderItemNumber salesOrderItemNumber
     ) {
-        salesOrderItemService.deleteSingleOrderItem(salesOrderId, salesOrderItemNumber);
+        salesOrderItemService.deleteOrderItem(salesOrderId, salesOrderItemNumber);
         return "redirect:/sales-orders/{salesOrderId}";
     }
 }
