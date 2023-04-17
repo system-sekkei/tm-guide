@@ -6,14 +6,16 @@
 
     <select id="salesOrderItemsOf" resultType="guide.tm.domain.model.salesorder.orderitem.single.SingleOrderItem">
         SELECT
-            受注明細番号 AS "salesOrderItemNumber.value",
+            受注明細.受注明細番号 AS "salesOrderItemNumber.value",
             商品.商品コード AS "singleOrderItemContent.product.code.value",
             商品名称 AS "singleOrderItemContent.product.name.value",
             商品単価 AS "singleOrderItemContent.product.unitPrice.amount.value",
             受注数量 AS "singleOrderItemContent.quantity.value"
         FROM 受注.受注明細
+        INNER JOIN 受注.有効な受注明細
+            ON 受注明細.受注ID = 有効な受注明細.受注ID AND 受注明細.受注明細番号 = 有効な受注明細.受注明細番号
         INNER JOIN 商品.商品 ON 商品.商品コード = 受注明細.商品コード
-        WHERE 受注ID = #{salesOrderId.value}
+        WHERE 受注明細.受注ID = #{salesOrderId.value}
     </select>
 
     <insert id="registerSingleProductOrder">
@@ -27,7 +29,7 @@
     </insert>
 
     <insert id="registerBundleProductOrder">
-        INSERT INTO 受注.セット商品受注明細 (受注番号, 受注明細番号, 商品コード, 受注数量)
+        INSERT INTO 受注.セット商品受注明細 (受注ID, 受注明細番号, 商品コード, 受注数量)
         VALUES (
                    #{salesOrderId.value},
                    #{saleOrderItemNumber},
@@ -35,6 +37,28 @@
                    #{salesOrderItemRequest.quantity.value}
                )
     </insert>
+
+    <insert id="registerActiveSingleProductOrder">
+        INSERT INTO 受注.有効な受注明細 (受注ID, 受注明細番号)
+        VALUES (#{salesOrderId.value}, #{saleOrderItemNumber})
+    </insert>
+
+    <insert id="registerActiveBundleProductOrder">
+        INSERT INTO 受注.有効なセット商品受注明細 (受注ID, 受注明細番号)
+        VALUES (#{salesOrderId.value}, #{saleOrderItemNumber})
+    </insert>
+
+    <delete id="deleteSingleOrderItem">
+        DELETE FROM 受注.有効な受注明細
+        WHERE 受注ID = #{salesOrderId.value}
+        AND 受注明細番号 =#{salesOrderItemNumber.value}
+    </delete>
+
+    <delete id="deleteBundleOrderItem">
+        DELETE FROM 受注.有効なセット商品受注明細
+        WHERE 受注ID = #{salesOrderId.value}
+          AND 受注明細番号 =#{salesOrderItemNumber.value}
+    </delete>
 
     <resultMap id="BundleProductOrderItem" type="guide.tm.domain.model.salesorder.orderitem.bundle.BundleProductOrderItem">
         <id property="salesOrderItemNumber.value" column="受注明細番号"/>
@@ -52,7 +76,7 @@
 
     <select id="bundleProductOrderItemsOf" resultMap="BundleProductOrderItem">
         SELECT
-            受注明細番号,
+            セット商品受注明細.受注明細番号,
             セット商品.商品コード AS "セット商品コード",
             セット商品.商品名称 AS "セット商品名称",
             セット商品.商品単価 AS "セット商品単価",
@@ -61,7 +85,9 @@
             商品.商品単価 AS "個別商品単価",
             受注数量
         FROM 受注.セット商品受注明細
-        INNER JOIN 受注.受注 ON 受注.受注ID = セット商品受注明細.受注番号
+        INNER JOIN 受注.有効なセット商品受注明細
+            ON セット商品受注明細.受注ID = 有効なセット商品受注明細.受注ID AND セット商品受注明細.受注明細番号 = 有効なセット商品受注明細.受注明細番号
+        INNER JOIN 受注.受注 ON 受注.受注ID = セット商品受注明細.受注ID
         INNER JOIN 商品.セット商品 ON セット商品受注明細.商品コード = セット商品.商品コード
         INNER JOIN 商品.セット商品組合せ ON セット商品.商品コード = セット商品組合せ.セット商品コード
         INNER JOIN 商品.商品 ON 商品.商品コード = セット商品組合せ.商品コード

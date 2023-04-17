@@ -5,6 +5,7 @@ import guide.tm.application.service.product.single.ProductService;
 import guide.tm.application.service.salesorder.SalesOrderItemService;
 import guide.tm.domain.model.salesorder.order.SalesOrder;
 import guide.tm.domain.model.salesorder.order.SalesOrderId;
+import guide.tm.domain.model.salesorder.orderitem.number.SalesOrderItemNumber;
 import guide.tm.domain.model.salesorder.orderitem.request.SalesOrderItemRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -67,4 +68,12 @@ class SalesOrderItemRegisterController {
         );
     }
 
+    @PostMapping("single/{salesOrderItemNumber}")
+    String deleteSingleOrderItem(
+            @PathVariable("salesOrderId") SalesOrderId salesOrderId,
+            @PathVariable("salesOrderItemNumber") SalesOrderItemNumber salesOrderItemNumber
+    ) {
+        salesOrderItemService.deleteSingleOrderItem(salesOrderId, salesOrderItemNumber);
+        return "redirect:/sales-orders/{salesOrderId}";
+    }
 }

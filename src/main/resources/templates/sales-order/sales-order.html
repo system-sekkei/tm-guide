@@ -105,16 +105,22 @@
         <th>商品名称</th>
         <th class="text-end">数量</th>
         <th class="text-end">商品単価</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr th:each="singleOrderItem: ${salesOrder.singleProductOrderItems.list}">
+      <tr th:each="singleOrderItem: ${salesOrder.singleProductOrderItems.list}" class="align-middle">
         <td class="text-center">
           <i class="bi bi-bag-check"></i>
         </td>
         <td th:text="${singleOrderItem.product.name}">個別商品名</td>
         <td class="text-end" th:text="${singleOrderItem.quantity}">2</td>
         <td class="text-end" th:text="${singleOrderItem.product.unitPrice}">879</td>
+        <td class="text-end">
+          <form method="post" th:action="@{|/sales-orders/${salesOrderId}/items/single/${singleOrderItem.salesOrderItemNumber}|}">
+            <button type="submit" class="btn btn-danger">削除</button>
+          </form>
+        </td>
       </tr>
       <th:block th:each="bundleProductOrderItem: ${salesOrder.bundleProductOrderItems.list}">
         <tr>

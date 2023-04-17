@@ -17,4 +17,9 @@ public class SalesOrderItemNumber {
     public boolean isSame(SalesOrderItemNumber other) {
         return value.equals(other.value);
     }
+
+    @Override
+    public String toString() {
+        return value;
+    }
 }
